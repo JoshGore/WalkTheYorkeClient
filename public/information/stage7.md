@@ -1,1 +1,1 @@
-# Stage 7
+placeholder for stage description

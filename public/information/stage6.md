@@ -1,1 +1,1 @@
-# Stage 6
+placeholder for stage description

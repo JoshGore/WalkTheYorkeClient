@@ -1,4 +1,3 @@
-# Stage 1: Port Wakefield to Port Clinton
 Start your walk from the Port Wakefield Caravan Park, following the signs towards the north and along the edge of the Clinton Conservation Park.
 
 The Port Wakefield to Port Clinton section of Walk The Yorke is designed to be walked as one section (32.8km).  It can also be broken down into 2 sections Port Wakefield to Port Arthur 15km (3 hours 45 mins), and Port Arthur to Port Clinton 17.8km (4 hours 27 mins).

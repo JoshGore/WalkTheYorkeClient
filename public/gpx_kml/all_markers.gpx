@@ -1,0 +1,4342 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="GDAL 2.3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata><bounds minlat="-35.285302999999999" minlon="136.832425000000001" maxlat="-34.059932000000003" maxlon="138.136977000000002"/></metadata>              
+<wpt lat="-34.667648" lon="137.493837">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.669897" lon="137.494523">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.756238" lon="137.48459">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.756238" lon="137.48459">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.756238" lon="137.48459">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.756238" lon="137.48459">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.756238" lon="137.48459">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.78328" lon="137.475422">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.783582" lon="137.473192">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.783585" lon="137.473188">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.783585" lon="137.473188">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.783585" lon="137.473188">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.783585" lon="137.473188">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.783585" lon="137.473188">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.798413" lon="137.465662">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.79842" lon="137.465658">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.805633" lon="137.46215">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.808973" lon="137.461138">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.808788" lon="137.461183">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.808788" lon="137.461183">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.808788" lon="137.461183">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.819113" lon="137.45984">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.827155" lon="137.45921">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.827165" lon="137.459212">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.828655" lon="137.459137">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.828655" lon="137.459137">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.828655" lon="137.459137">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.828655" lon="137.459137">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.844683" lon="137.458997">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.847798" lon="137.459607">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.847792" lon="137.459588">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.847792" lon="137.459588">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.847792" lon="137.459588">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.847792" lon="137.459588">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.86477" lon="137.457043">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.86477" lon="137.457043">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.900053" lon="137.453497">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.902867" lon="137.452207">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.902932" lon="137.452243">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.902932" lon="137.452243">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.915275" lon="137.444583">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.915262" lon="137.444592">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.915262" lon="137.444592">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.923862" lon="137.436183">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.923862" lon="137.436183">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.931193" lon="137.427067">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.931193" lon="137.427067">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.940878" lon="137.411488">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.940865" lon="137.411498">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.943692" lon="137.406015">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.943692" lon="137.406015">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.943692" lon="137.406015">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.943692" lon="137.406015">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.943692" lon="137.406015">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.953982" lon="137.374357">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.953997" lon="137.374298">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.95319" lon="137.370253">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.953192" lon="137.370258">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.95316" lon="137.360978">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.95316" lon="137.360978">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.955638" lon="137.36881">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.960718" lon="137.385152">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.960702" lon="137.385153">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.960702" lon="137.385153">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.960702" lon="137.385153">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.960702" lon="137.385153">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.960702" lon="137.385153">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.960702" lon="137.385153">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.960702" lon="137.385153">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.960702" lon="137.385153">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.95197" lon="137.411187">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.95197" lon="137.411187">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.95197" lon="137.411187">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.95197" lon="137.411187">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.937338" lon="137.438522">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.937338" lon="137.438522">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.929715" lon="137.448315">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.920957" lon="137.453415">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.920887" lon="137.453382">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.916098" lon="137.453008">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.93287" lon="137.34803">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.930497" lon="137.345888">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.93032" lon="137.346608">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.930225" lon="137.346748">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.930787" lon="137.337572">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.930867" lon="137.337532">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.931395" lon="137.329475">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.931395" lon="137.329475">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.931395" lon="137.329475">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.931192" lon="137.317503">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.931245" lon="137.31747">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.929068" lon="137.310185">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.926862" lon="137.307462">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.926862" lon="137.307462">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.926862" lon="137.307462">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.92209" lon="137.301378">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.92209" lon="137.301378">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.92209" lon="137.301378">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.918542" lon="137.299613">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.918542" lon="137.299613">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.918557" lon="137.299605">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.915915" lon="137.296448">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.915915" lon="137.296448">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.915915" lon="137.296448">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.915915" lon="137.296448">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.915915" lon="137.296448">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.915915" lon="137.296448">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.915915" lon="137.296448">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.915915" lon="137.296448">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.896185" lon="137.27892">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.894642" lon="137.27648">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.89431" lon="137.273003">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.894318" lon="137.27301">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897123" lon="137.264542">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897067" lon="137.264387">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897413" lon="137.261405">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897413" lon="137.261405">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897413" lon="137.261405">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897767" lon="137.250545">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.899173" lon="137.247567">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.927748" lon="137.134597">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.927748" lon="137.134597">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.918547" lon="137.067633">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.923453" lon="137.078043">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.923467" lon="137.078032">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.923467" lon="137.078032">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.92568" lon="137.095473">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.92568" lon="137.095473">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.924378" lon="137.100783">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.925325" lon="137.111975">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.925303" lon="137.11197">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.92712" lon="137.12429">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.927083" lon="137.124257">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.927083" lon="137.124257">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.928863" lon="137.141738">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.928832" lon="137.141717">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.928832" lon="137.141717">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.928832" lon="137.141717">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.928832" lon="137.141717">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.928832" lon="137.141717">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.928832" lon="137.141717">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.928832" lon="137.141717">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.930745" lon="137.185598">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.930768" lon="137.185628">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.928717" lon="137.193753">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.926125" lon="137.199652">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.926125" lon="137.199652">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.926125" lon="137.199652">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.926125" lon="137.199652">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.916973" lon="137.220488">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.914675" lon="137.225475">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.91469" lon="137.225495">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.91469" lon="137.225495">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897078" lon="137.260997">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897017" lon="137.26092">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897017" lon="137.26092">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897017" lon="137.26092">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.89639" lon="137.247802">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.896387" lon="137.247805">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.896387" lon="137.247805">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919483" lon="137.085648">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919483" lon="137.085648">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919483" lon="137.085648">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919483" lon="137.085648">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.917748" lon="137.075493">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.917748" lon="137.075493">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.917748" lon="137.075493">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.908648" lon="137.053247">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.908607" lon="137.05322">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-35.009048" lon="136.959457">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.95171" lon="137.02233">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951647" lon="137.008453">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.946138" lon="136.978627">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.946133" lon="136.97862">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.946133" lon="136.97862">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.937508" lon="136.994003">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.937508" lon="136.994003">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930338" lon="137.001667">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930322" lon="137.001658">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930322" lon="137.001658">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930322" lon="137.001658">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930322" lon="137.001658">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-35.11913" lon="137.747175">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.119143" lon="137.747175">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.119143" lon="137.747175">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.119143" lon="137.747175">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.119143" lon="137.747175">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.119143" lon="137.747175">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.128803" lon="137.734465">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13047" lon="137.732145">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13047" lon="137.732145">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13048" lon="137.732138">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13048" lon="137.732138">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13048" lon="137.732138">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13048" lon="137.732138">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13048" lon="137.732138">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13048" lon="137.732138">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13048" lon="137.732138">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13048" lon="137.732138">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.13048" lon="137.732138">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.107612" lon="137.74908">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.107608" lon="137.749072">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.135" lon="137.711053">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.135" lon="137.711053">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.135" lon="137.711053">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.135" lon="137.711053">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.135" lon="137.711053">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.135" lon="137.711053">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.147367" lon="137.687042">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.147367" lon="137.687042">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.147367" lon="137.687042">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.147367" lon="137.687042">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.147367" lon="137.687042">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.154507" lon="137.685055">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.154507" lon="137.685055">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.154507" lon="137.685055">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.154507" lon="137.685055">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.154507" lon="137.685055">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.166388" lon="137.679862">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.16632" lon="137.680017">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.16632" lon="137.680017">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.16632" lon="137.680017">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.16632" lon="137.680017">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.16632" lon="137.680017">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167573" lon="137.663795">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167573" lon="137.663795">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167573" lon="137.663795">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167573" lon="137.663795">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167573" lon="137.663795">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167573" lon="137.663795">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167573" lon="137.663795">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167573" lon="137.663795">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.167138" lon="137.640367">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-34.059932" lon="137.559445">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.89654" lon="137.458408">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.896482" lon="137.458448">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.896482" lon="137.458448">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.896482" lon="137.458448">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.896482" lon="137.458448">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.896482" lon="137.458448">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.896482" lon="137.458448">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.896482" lon="137.458448">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.896482" lon="137.458448">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.896482" lon="137.458448">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.887668" lon="137.45844">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.887668" lon="137.45844">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.88754" lon="137.45846">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.88754" lon="137.45846">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.88754" lon="137.45846">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.88754" lon="137.45846">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.88754" lon="137.45846">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.88754" lon="137.45846">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.88754" lon="137.45846">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.9164" lon="137.452747">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.916423" lon="137.452735">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.916423" lon="137.452735">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.916423" lon="137.452735">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.94561" lon="137.35513">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.945602" lon="137.355135">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.945602" lon="137.355135">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.900305" lon="137.01984">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.90031" lon="137.019838">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.90031" lon="137.019838">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.8965" lon="137.016802">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.895153" lon="137.015008">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.89688" lon="137.0104">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.901545" lon="137.011615">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.901517" lon="137.011622">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.901488" lon="137.011662">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.905317" lon="137.013322">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.921155" lon="137.01197">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.921155" lon="137.01197">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.93452" lon="136.996117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.93452" lon="136.996117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.93452" lon="136.996117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.216728" lon="138.021443">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.216728" lon="138.021443">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.21676" lon="138.021447">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.21798" lon="138.021465">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.21798" lon="138.021465">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.220875" lon="138.02063">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.22086" lon="138.020643">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.221797" lon="138.020753">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.222128" lon="138.020765">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.222197" lon="138.020778">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.222293" lon="138.020733">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.223315" lon="138.020708">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.223862" lon="138.020688">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.223957" lon="138.020192">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.224062" lon="138.020165">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.22528" lon="138.020497">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.22544" lon="138.020483">
+  <name>Bollard: Stage 1</name>
+</wpt>
+<wpt lat="-34.225608" lon="138.020223">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.225608" lon="138.020223">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.22772" lon="138.016255">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.22772" lon="138.016255">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.22772" lon="138.016255">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.22772" lon="138.016255">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.2329" lon="138.010283">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.232663" lon="138.009795">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.232712" lon="138.009798">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.232712" lon="138.009798">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.233518" lon="138.009453">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.233352" lon="138.009763">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.241177" lon="138.00516">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.241172" lon="138.005125">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.241172" lon="138.005125">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.241172" lon="138.005125">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.250675" lon="138.000792">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.250598" lon="138.001098">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.253055" lon="138.000502">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.25622" lon="137.999978">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.260188" lon="137.998957">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.260188" lon="137.998957">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.266935" lon="137.999838">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.266945" lon="137.999852">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.275343" lon="137.999008">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.275352" lon="137.99901">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.275352" lon="137.99901">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.275352" lon="137.99901">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.2358" lon="138.008158">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.235818" lon="138.008138">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.238515" lon="138.006833">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.238537" lon="138.006852">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.285498" lon="137.998168">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.285975" lon="137.997553">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.286593" lon="137.99727">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.287502" lon="137.996412">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.287632" lon="137.996257">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.287593" lon="137.996277">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.28908" lon="137.994727">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.289237" lon="137.994538">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.289237" lon="137.994542">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.289478" lon="137.991517">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.294198" lon="137.987502">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.296105" lon="137.985863">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.296138" lon="137.985843">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.298588" lon="137.985863">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.302478" lon="137.985855">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.30586" lon="137.984652">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.308143" lon="137.982867">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.310215" lon="137.981448">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.310215" lon="137.981448">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.310215" lon="137.981448">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.310215" lon="137.981448">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.310215" lon="137.981448">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.310215" lon="137.981448">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.32067" lon="137.972683">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.32067" lon="137.972683">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.32067" lon="137.972683">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.32067" lon="137.972683">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.32067" lon="137.972683">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.32067" lon="137.972683">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.32067" lon="137.972683">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.32067" lon="137.972683">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.32067" lon="137.972683">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.335998" lon="137.972675">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.335998" lon="137.972675">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.335998" lon="137.972675">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.335998" lon="137.972675">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.343292" lon="137.972803">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.346833" lon="137.972732">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.348818" lon="137.97298">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.34882" lon="137.972875">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.352728" lon="137.972748">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.352688" lon="137.973028">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.352837" lon="137.972673">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.35293" lon="137.972757">
+  <name>Bollard: Stage 2</name>
+</wpt>
+<wpt lat="-34.352923" lon="137.972757">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.354555" lon="137.976158">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.357598" lon="137.98208">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.359095" lon="137.985098">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.360225" lon="137.98745">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.360198" lon="137.987422">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.364488" lon="137.969298">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.35473" lon="137.972025">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.35475" lon="137.97205">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.364407" lon="137.969305">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.364407" lon="137.969305">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.374087" lon="137.966552">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.374075" lon="137.966578">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.378305" lon="137.965348">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.380098" lon="137.96352">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.380413" lon="137.963418">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.381567" lon="137.96183">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.384082" lon="137.95865">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.384148" lon="137.95862">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.384148" lon="137.95862">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.38644" lon="137.955627">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.389168" lon="137.952417">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.389173" lon="137.95241">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.390568" lon="137.950952">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.390568" lon="137.950952">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.390568" lon="137.950952">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.396017" lon="137.945365">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.396028" lon="137.945357">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.396028" lon="137.945357">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.39882" lon="137.942798">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.398797" lon="137.942703">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.398797" lon="137.942703">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.403098" lon="137.939017">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.403098" lon="137.939017">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.403098" lon="137.939017">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.403098" lon="137.939017">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.403098" lon="137.939017">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.409572" lon="137.934262">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.409572" lon="137.934262">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.409572" lon="137.934262">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.409572" lon="137.934262">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.417667" lon="137.926583">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.417667" lon="137.926583">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.417667" lon="137.926583">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.417667" lon="137.926583">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.422658" lon="137.921987">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.422688" lon="137.92194">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.422688" lon="137.92194">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.422328" lon="137.921685">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.42488" lon="137.920508">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.424978" lon="137.920382">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.429677" lon="137.916218">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.429677" lon="137.916218">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.430803" lon="137.915073">
+  <name>Bollard: Stage 3</name>
+</wpt>
+<wpt lat="-34.430603" lon="137.914685">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.430623" lon="137.914717">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.43531" lon="137.907835">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.435302" lon="137.90781">
+  <name>Bollard: Stage 3</name>
+</wpt>
+<wpt lat="-34.436427" lon="137.906415">
+  <name>Bollard: Stage 3</name>
+</wpt>
+<wpt lat="-34.296053" lon="137.985945">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.391055" lon="137.95046">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.44859" lon="137.903338">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.45122" lon="137.902553">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.453815" lon="137.902068">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.45586" lon="137.902212">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.456413" lon="137.905325">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.45693" lon="137.908848">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.457092" lon="137.909937">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.457597" lon="137.910217">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.459635" lon="137.909513">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.461148" lon="137.908135">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.461803" lon="137.907737">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.462718" lon="137.907027">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.4655" lon="137.905268">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.468265" lon="137.904167">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.471187" lon="137.903562">
+  <name>Bollard: Stage 3</name>
+</wpt>
+<wpt lat="-34.471142" lon="137.903585">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.481322" lon="137.89762">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.483025" lon="137.898198">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.487157" lon="137.897073">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.48974" lon="137.896567">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.49245" lon="137.896948">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.494223" lon="137.896238">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.495973" lon="137.894413">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.49562" lon="137.89467">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.566905" lon="137.881737">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.567602" lon="137.881515">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.569895" lon="137.881">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.569895" lon="137.881">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.572162" lon="137.87953">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.572162" lon="137.87953">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.576592" lon="137.877327">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.578505" lon="137.876232">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.580417" lon="137.875187">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.580417" lon="137.875187">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.609882" lon="137.88521">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.609773" lon="137.885217">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.618033" lon="137.903902">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.618033" lon="137.903895">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.616502" lon="137.904557">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.61639" lon="137.903387">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.616312" lon="137.901665">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.615258" lon="137.894733">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.615807" lon="137.898073">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.616628" lon="137.900828">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.589527" lon="137.87187">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.600025" lon="137.868982">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.600067" lon="137.868978">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.619027" lon="137.863713">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.628845" lon="137.861373">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.628788" lon="137.861352">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.648812" lon="137.861503">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.658582" lon="137.861543">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.6594" lon="137.862402">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.662543" lon="137.8739">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.664117" lon="137.875865">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.663987" lon="137.875812">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.665473" lon="137.877822">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.664058" lon="137.879302">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.663972" lon="137.879435">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.663928" lon="137.879608">
+  <name>Bollard: Stage 4</name>
+</wpt>
+<wpt lat="-34.663928" lon="137.879608">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.663928" lon="137.879608">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.663928" lon="137.879608">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.75269" lon="137.864573">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.755197" lon="137.863577">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.755235" lon="137.863638">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.759737" lon="137.862038">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.759838" lon="137.861973">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.761743" lon="137.86116">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.761743" lon="137.86116">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.763438" lon="137.859528">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.764925" lon="137.858327">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.766947" lon="137.857267">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.766647" lon="137.857207">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.765842" lon="137.856373">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.767822" lon="137.85872">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.770232" lon="137.857672">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.77023" lon="137.857722">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.77823" lon="137.862985">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.78135" lon="137.861478">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.782548" lon="137.859325">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.782947" lon="137.859568">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.785442" lon="137.85683">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.786607" lon="137.855762">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.787852" lon="137.854678">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.805445" lon="137.8396">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.805445" lon="137.8396">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.805445" lon="137.8396">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.800123" lon="137.845718">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.800123" lon="137.845718">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.800123" lon="137.845718">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.800123" lon="137.845718">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.845815" lon="137.81343">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.845815" lon="137.81343">
+  <name>Bollard: Stage 6</name>
+</wpt>
+<wpt lat="-34.84584" lon="137.813132">
+  <name>Bollard: Stage 6</name>
+</wpt>
+<wpt lat="-34.845922" lon="137.812872">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.84593" lon="137.812908">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.849582" lon="137.810218">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.849582" lon="137.810218">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.849582" lon="137.810218">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.849582" lon="137.810218">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.849582" lon="137.810218">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.849582" lon="137.810218">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.849582" lon="137.810218">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.870112" lon="137.797157">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.873353" lon="137.796598">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.873308" lon="137.796645">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.876878" lon="137.79591">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.876878" lon="137.79591">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.884908" lon="137.794518">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.884895" lon="137.79449">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.88812" lon="137.793958">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.891155" lon="137.79336">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.891155" lon="137.79336">
+  <name>Bollard: Stage 6</name>
+</wpt>
+<wpt lat="-34.893773" lon="137.793082">
+  <name>Bollard: Stage 6</name>
+</wpt>
+<wpt lat="-34.893773" lon="137.793082">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.893885" lon="137.793262">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.895517" lon="137.793117">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.901062" lon="137.794107">
+  <name>Bollard: Stage 6</name>
+</wpt>
+<wpt lat="-34.902483" lon="137.794338">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.902563" lon="137.794355">
+  <name>Bollard: Stage 6</name>
+</wpt>
+<wpt lat="-34.902838" lon="137.794485">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.903922" lon="137.794777">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.903952" lon="137.795655">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.903947" lon="137.796027">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.903952" lon="137.796032">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.903952" lon="137.796032">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.906835" lon="137.796185">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.906817" lon="137.796137">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.906817" lon="137.796137">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.906817" lon="137.796137">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.906817" lon="137.796137">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.906817" lon="137.796137">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.91315" lon="137.80335">
+  <name>Bollard: Stage 6</name>
+</wpt>
+<wpt lat="-34.91315" lon="137.80335">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.913337" lon="137.803345">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.914958" lon="137.800817">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.914958" lon="137.800817">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.918392" lon="137.794938">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.918392" lon="137.794938">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.941005" lon="137.779222">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.941005" lon="137.779213">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.941005" lon="137.779213">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.941005" lon="137.779213">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.941103" lon="137.76229">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.941087" lon="137.762312">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.941122" lon="137.754338">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.941107" lon="137.7498">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.941167" lon="137.746492">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.984707" lon="137.756397">
+  <name>Bollard: Stage 6</name>
+</wpt>
+<wpt lat="-34.984705" lon="137.760792">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.988938" lon="137.759667">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.989035" lon="137.759905">
+  <name>Bollard: Stage 6</name>
+</wpt>
+<wpt lat="-34.989035" lon="137.759905">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.992223" lon="137.758182">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.992218" lon="137.758175">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.992218" lon="137.758175">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.992218" lon="137.758175">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.992218" lon="137.758175">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.992218" lon="137.758175">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.040848" lon="137.76307">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.040857" lon="137.76301">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.04419" lon="137.758947">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.044202" lon="137.758965">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.043365" lon="137.750635">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.042352" lon="137.748088">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.042335" lon="137.748062">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.042335" lon="137.748062">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.042335" lon="137.748062">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.042335" lon="137.748062">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.042335" lon="137.748062">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.042335" lon="137.748062">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.042335" lon="137.748062">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.042335" lon="137.748062">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.050118" lon="137.726972">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.050118" lon="137.726972">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.05215" lon="137.724997">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.055343" lon="137.72676">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.055308" lon="137.726795">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.054618" lon="137.727888">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.054618" lon="137.727888">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.054618" lon="137.727888">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.054618" lon="137.727888">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.063525" lon="137.733902">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.065642" lon="137.734713">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.067938" lon="137.73623">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.067938" lon="137.73623">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.070868" lon="137.741162">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.07711" lon="137.745958">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.077123" lon="137.745952">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.073257" lon="137.743747">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.08225" lon="137.748273">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.08225" lon="137.748273">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.082242" lon="137.748217">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.082242" lon="137.748217">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.082242" lon="137.748217">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.082242" lon="137.748217">
+  <name>Bollard: Stage 7</name>
+</wpt>
+<wpt lat="-35.088865" lon="137.747103">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.088907" lon="137.746052">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.088908" lon="137.74605">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.088892" lon="137.746035">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.088892" lon="137.746035">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.094632" lon="137.7445">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.097147" lon="137.74316">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.099795" lon="137.742527">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.101392" lon="137.74263">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.101392" lon="137.74263">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-34.984687" lon="137.756347">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.901014" lon="137.794065">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.435297" lon="137.90775">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.384082" lon="137.95865">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.384148" lon="137.95862">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.403098" lon="137.939017">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.403098" lon="137.939017">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.409572" lon="137.934262">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.409572" lon="137.934262">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.409572" lon="137.934262">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.417667" lon="137.926583">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.422688" lon="137.92194">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.422328" lon="137.921685">
+  <name>Marker: Stage 2</name>
+</wpt>
+<wpt lat="-34.471142" lon="137.903585">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.479463" lon="137.898445">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.481322" lon="137.89762">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.483025" lon="137.898198">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.487157" lon="137.897073">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.48974" lon="137.896567">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.49245" lon="137.896948">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.494223" lon="137.896238">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.495973" lon="137.894413">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.49562" lon="137.89467">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.566905" lon="137.881737">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.567602" lon="137.881515">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.569895" lon="137.881">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.569895" lon="137.881">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.572162" lon="137.87953">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.572162" lon="137.87953">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.576592" lon="137.877327">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.578505" lon="137.876232">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.580417" lon="137.875187">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.580417" lon="137.875187">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.609773" lon="137.885217">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.618033" lon="137.903895">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.616628" lon="137.900828">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.667648" lon="137.493837">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.669897" lon="137.494523">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.671633" lon="137.494705">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.672715" lon="137.494345">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.672715" lon="137.494345">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.672715" lon="137.494345">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.674262" lon="137.496187">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.674277" lon="137.496127">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.682283" lon="137.496298">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.68269" lon="137.496012">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.715182" lon="137.48841">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.715158" lon="137.488415">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716265" lon="137.490103">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716237" lon="137.496567">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716227" lon="137.502492">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716067" lon="137.519233">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716377" lon="137.519615">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716377" lon="137.519615">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716377" lon="137.519615">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.731058" lon="137.519323">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.73239" lon="137.479365">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.732462" lon="137.47934">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.732462" lon="137.47934">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.732462" lon="137.47934">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.732077" lon="137.480537">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.732077" lon="137.480537">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.732602" lon="137.480413">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750442" lon="137.477982">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750577" lon="137.48098">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750577" lon="137.48098">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750577" lon="137.48098">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.75062" lon="137.486033">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750583" lon="137.485855">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750583" lon="137.485855">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750488" lon="137.497748">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750558" lon="137.503885">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750553" lon="137.511833">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750525" lon="137.518537">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.750107" lon="137.519198">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.809088" lon="137.461205">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.809102" lon="137.461185">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.812653" lon="137.461053">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.81264" lon="137.461052">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.81264" lon="137.461052">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.81264" lon="137.461052">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.822425" lon="137.461302">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.828005" lon="137.460388">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.83407" lon="137.459817">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.838365" lon="137.459473">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.83831" lon="137.4595">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.843368" lon="137.46048">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.852008" lon="137.460142">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.852002" lon="137.460122">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.852002" lon="137.460122">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.852002" lon="137.460122">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.86231" lon="137.45895">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.87303" lon="137.459067">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.873025" lon="137.459065">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.873025" lon="137.459065">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.747722" lon="137.519207">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.747568" lon="137.519193">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.730993" lon="137.519275">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.726017" lon="137.519402">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.726017" lon="137.519402">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.726017" lon="137.519402">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716103" lon="137.519303">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716157" lon="137.514538">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716207" lon="137.508677">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716218" lon="137.496382">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.716223" lon="137.496373">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.71544" lon="137.488223">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.715397" lon="137.48821">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.714508" lon="137.487357">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.682705" lon="137.496057">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.682362" lon="137.496157">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.6752" lon="137.49626">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.674362" lon="137.496107">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.672517" lon="137.49496">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.672753" lon="137.494282">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.672753" lon="137.494282">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.66996" lon="137.494538">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.667682" lon="137.493758">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.666887" lon="137.49507">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.524263" lon="137.480695">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.524265" lon="137.480708">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.523427" lon="137.480352">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.524887" lon="137.481242">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.524875" lon="137.481237">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.524875" lon="137.481237">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.5298" lon="137.484278">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.52981" lon="137.48428">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.536022" lon="137.486043">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.536003" lon="137.486042">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.536003" lon="137.486042">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.541477" lon="137.488177">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.541477" lon="137.488177">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.552903" lon="137.491212">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.552903" lon="137.491212">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.559908" lon="137.496917">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.559908" lon="137.496917">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.572305" lon="137.50202">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.572305" lon="137.50202">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.595872" lon="137.508405">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.595872" lon="137.508405">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.595872" lon="137.508405">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.595872" lon="137.508405">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.612875" lon="137.509333">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.624527" lon="137.509612">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.624572" lon="137.509605">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.63529" lon="137.507558">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.635455" lon="137.507842">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.66738" lon="137.494063">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.66738" lon="137.494063">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.66738" lon="137.494063">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.66738" lon="137.494063">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.66738" lon="137.494063">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.66738" lon="137.494063">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.66738" lon="137.494063">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.66738" lon="137.494063">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.665002" lon="137.496677">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.665002" lon="137.496677">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.665002" lon="137.496677">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.665002" lon="137.496677">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.6737" lon="137.494102">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.675583" lon="137.49287">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.675552" lon="137.492878">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.679558" lon="137.491167">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.679558" lon="137.491167">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.679558" lon="137.491167">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.682365" lon="137.494275">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.682365" lon="137.494275">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.682623" lon="137.496045">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.682623" lon="137.496045">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.682623" lon="137.496045">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.682623" lon="137.496045">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.69551" lon="137.494472">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.69551" lon="137.494472">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.69551" lon="137.494472">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.69551" lon="137.494472">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.69551" lon="137.494472">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.714572" lon="137.487415">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.714365" lon="137.487407">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.715433" lon="137.486147">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.715438" lon="137.486165">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.719363" lon="137.484752">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.729713" lon="137.481297">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.72969" lon="137.481285">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.732742" lon="137.479642">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.732742" lon="137.479642">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.732742" lon="137.479642">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.73997" lon="137.478563">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.73997" lon="137.478563">
+  <name>Marker: Stage 13</name>
+</wpt>
+<wpt lat="-34.897078" lon="137.260997">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897017" lon="137.26092">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897017" lon="137.26092">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.897017" lon="137.26092">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.89639" lon="137.247802">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.896387" lon="137.247805">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.896387" lon="137.247805">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.908328" lon="137.17961">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919483" lon="137.085648">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919483" lon="137.085648">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919483" lon="137.085648">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919483" lon="137.085648">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.919432" lon="137.108153">
+  <name>Marker: Stage 12</name>
+</wpt>
+<wpt lat="-34.917748" lon="137.075493">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.917748" lon="137.075493">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.917748" lon="137.075493">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.908648" lon="137.053247">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.908607" lon="137.05322">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-35.009048" lon="136.959457">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.005778" lon="136.973265">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.999265" lon="137.016117">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.95171" lon="137.02233">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951647" lon="137.008453">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.951653" lon="137.008455">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.946138" lon="136.978627">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.946133" lon="136.97862">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.946133" lon="136.97862">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.937508" lon="136.994003">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.937508" lon="136.994003">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930338" lon="137.001667">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930322" lon="137.001658">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930322" lon="137.001658">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930322" lon="137.001658">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.930322" lon="137.001658">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.918678" lon="137.01585">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902022" lon="137.025818">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.58422" lon="137.874883">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.58426" lon="137.874748">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.585412" lon="137.873978">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.585463" lon="137.874">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.587058" lon="137.872658">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.587152" lon="137.872628">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.587283" lon="137.872552">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.587283" lon="137.872552">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.590515" lon="137.874037">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.590515" lon="137.874037">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.590515" lon="137.874037">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.590515" lon="137.874037">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.590515" lon="137.874037">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.603825" lon="137.878113">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.606648" lon="137.881362">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.6071" lon="137.881777">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.608402" lon="137.88324">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.608377" lon="137.883205">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.608377" lon="137.883205">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.608377" lon="137.883205">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.659983" lon="137.881437">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.663115" lon="137.877558">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.662825" lon="137.8798">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.662825" lon="137.8798">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.662833" lon="137.879822">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.662833" lon="137.879822">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.662833" lon="137.879822">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.662833" lon="137.879822">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.673448" lon="137.876722">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.696233" lon="137.877203">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.697978" lon="137.876545">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.697978" lon="137.876533">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.697978" lon="137.876533">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.70204" lon="137.875162">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.70204" lon="137.875162">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.702452" lon="137.876447">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.70245" lon="137.876507">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.70245" lon="137.876507">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.705868" lon="137.874028">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.70589" lon="137.874025">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.712022" lon="137.87157">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.715757" lon="137.87157">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.7158" lon="137.87157">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.719858" lon="137.869648">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.72169" lon="137.868608">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.722563" lon="137.868058">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.722558" lon="137.868067">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.722558" lon="137.868067">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.726633" lon="137.869522">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.72665" lon="137.869498">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.72665" lon="137.869498">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.72665" lon="137.869498">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.73058" lon="137.867892">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.73058" lon="137.867892">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.73058" lon="137.867892">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.734513" lon="137.867102">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.736063" lon="137.867072">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.738987" lon="137.866367">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.738938" lon="137.86638">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.740875" lon="137.866552">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.743763" lon="137.86655">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.745047" lon="137.866707">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.745047" lon="137.866707">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.745047" lon="137.866707">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.750532" lon="137.86518">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.750532" lon="137.86518">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.750532" lon="137.86518">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.777075" lon="137.861162">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.777085" lon="137.861165">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.777085" lon="137.861165">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.111392" lon="137.53397">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.110773" lon="137.53392">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.111678" lon="137.531388">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.111752" lon="137.529673">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.112352" lon="137.527527">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.112537" lon="137.527403">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.11198" lon="137.52214">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.112178" lon="137.521632">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.111998" lon="137.520758">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.110375" lon="137.517157">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.110338" lon="137.516465">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.108287" lon="137.511183">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.10508" lon="137.505402">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.101898" lon="137.499003">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.101655" lon="137.498575">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.104252" lon="137.498875">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.106877" lon="137.499767">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.108863" lon="137.500093">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.111677" lon="137.499357">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.099652" lon="137.497095">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.098877" lon="137.494955">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.093188" lon="137.485662">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.089673" lon="137.478978">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.089767" lon="137.472452">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.092267" lon="137.46829">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.09201" lon="137.463247">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.091697" lon="137.459875">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.091665" lon="137.458307">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.092183" lon="137.452675">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.092185" lon="137.444948">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.092862" lon="137.436317">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.094105" lon="137.429353">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.096413" lon="137.42062">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.097745" lon="137.416455">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.102033" lon="137.40771">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.105083" lon="137.402395">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.107922" lon="137.395528">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.110808" lon="137.387903">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.112513" lon="137.383013">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.115882" lon="137.375275">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.117435" lon="137.367587">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.117705" lon="137.36251">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.119728" lon="137.353592">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.162307" lon="137.240493">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.179652" lon="137.211242">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.179693" lon="137.211275">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.181002" lon="137.212463">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.181002" lon="137.212463">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.181002" lon="137.212463">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-34.212817" lon="138.018872">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.212802" lon="138.01888">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.207822" lon="138.013775">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.207822" lon="138.013772">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.207822" lon="138.013772">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.200947" lon="138.006247">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.199267" lon="138.002785">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.199245" lon="138.00279">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.1946" lon="137.99671">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.192357" lon="137.994667">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.191457" lon="137.995355">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.189618" lon="137.998785">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.187082" lon="138.001368">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.186987" lon="138.001413">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.181085" lon="138.003338">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.18107" lon="138.0034">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.18107" lon="138.0034">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.170505" lon="138.003148">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.166153" lon="138.003262">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.162555" lon="138.003257">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.159998" lon="138.004475">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.156012" lon="138.005248">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.15275" lon="138.005858">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.15272" lon="138.005913">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.15272" lon="138.005913">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.142935" lon="138.008555">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.142957" lon="138.008637">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.136028" lon="138.008687">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.132647" lon="138.009105">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.13039" lon="138.011125">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.130922" lon="138.015">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.13128" lon="138.019872">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.131665" lon="138.025852">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.132633" lon="138.0304">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.134282" lon="138.033925">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.133337" lon="138.037597">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.133325" lon="138.03758">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.129582" lon="138.042483">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.129582" lon="138.042483">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.129582" lon="138.042483">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.129582" lon="138.042483">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.129582" lon="138.042483">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.142603" lon="138.056465">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.142607" lon="138.056472">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.14811" lon="138.062632">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.14812" lon="138.062643">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.14812" lon="138.062643">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.14812" lon="138.062643">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.14812" lon="138.062643">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.14812" lon="138.062643">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.14812" lon="138.062643">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.124548" lon="138.111417">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.130842" lon="138.115597">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.134418" lon="138.117852">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.134405" lon="138.117883">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.142963" lon="138.123477">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.142955" lon="138.123465">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.149977" lon="138.128087">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.149988" lon="138.128082">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.149988" lon="138.128082">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.149988" lon="138.128082">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.160233" lon="138.134832">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.163618" lon="138.136977">
+  <name>Marker: Stage 1</name>
+</wpt>
+<wpt lat="-34.555655" lon="137.881092">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.553432" lon="137.882017">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.55343" lon="137.882018">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.55343" lon="137.882018">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.55343" lon="137.882018">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.544868" lon="137.884697">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.544945" lon="137.884722">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.544945" lon="137.884722">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.544945" lon="137.884722">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.544945" lon="137.884722">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.535857" lon="137.885342">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.534353" lon="137.885622">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-35.142993" lon="137.606998">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.142993" lon="137.606998">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.142993" lon="137.606998">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.140662" lon="137.610248">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.140662" lon="137.610248">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.140662" lon="137.610248">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.140662" lon="137.610248">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.140662" lon="137.610248">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.140662" lon="137.610248">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.140662" lon="137.610248">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.131693" lon="137.589527">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.133398" lon="137.589722">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.133398" lon="137.589722">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.133398" lon="137.589722">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.133398" lon="137.589722">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.129815" lon="137.583463">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.129815" lon="137.583463">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.129808" lon="137.582202">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.129808" lon="137.582202">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126223" lon="137.581473">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126532" lon="137.581597">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126532" lon="137.581597">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126625" lon="137.58166">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.128667" lon="137.579705">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.128667" lon="137.579705">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.127642" lon="137.580352">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126967" lon="137.581272">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126967" lon="137.581272">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126967" lon="137.581272">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126967" lon="137.581272">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126967" lon="137.581272">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126967" lon="137.581272">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.126967" lon="137.581272">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.115243" lon="137.557212">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.115243" lon="137.557212">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.112478" lon="137.549335">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.112478" lon="137.549335">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.112478" lon="137.549335">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.111278" lon="137.540198">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.111278" lon="137.540198">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.111278" lon="137.540198">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.111278" lon="137.540198">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.111278" lon="137.540198">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.112625" lon="137.52095">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.112615" lon="137.52096">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.115672" lon="137.516343">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.115675" lon="137.516348">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.151287" lon="136.915452">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.147978" lon="136.918075">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.148125" lon="136.91808">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.141885" lon="136.925567">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.14174" lon="136.925372">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.14174" lon="136.925372">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.14174" lon="136.925372">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.14581" lon="136.92006">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.14581" lon="136.92006">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.14581" lon="136.92006">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.157213" lon="136.947945">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.118447" lon="137.511362">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.118465" lon="137.51136">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.118465" lon="137.51136">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.118465" lon="137.51136">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.118465" lon="137.51136">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.118465" lon="137.51136">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.1109" lon="137.500575">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.110882" lon="137.50052">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.106382" lon="137.508807">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.106382" lon="137.508807">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.106382" lon="137.508807">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.176205" lon="137.218213">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.17592" lon="137.21838">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.17592" lon="137.21838">
+  <name>Marker: Stage 8</name>
+</wpt>
+<wpt lat="-35.181732" lon="137.212995">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.181705" lon="137.212997">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.18332" lon="137.211203">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.18337" lon="137.211152">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.185187" lon="137.209005">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.185187" lon="137.209005">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-35.185187" lon="137.209005">
+  <name>Marker: Stage 9</name>
+</wpt>
+<wpt lat="-34.45885" lon="137.495712">
+  <name>Marker: Stage 15</name>
+</wpt>
+<wpt lat="-34.560162" lon="137.88255">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.557232" lon="137.88215">
+  <name>Marker: Stage 3</name>
+</wpt>
+<wpt lat="-34.705203" lon="137.876708">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.705203" lon="137.876708">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.705203" lon="137.876708">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.705203" lon="137.876708">
+  <name>Marker: Stage 4</name>
+</wpt>
+<wpt lat="-34.82494" lon="137.825838">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.825513" lon="137.825442">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.928663" lon="137.788093">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.92935" lon="137.788088">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-34.929293" lon="137.787455">
+  <name>Marker: Stage 6</name>
+</wpt>
+<wpt lat="-35.14517" lon="137.60996">
+  <name>Marker: Stage 7</name>
+</wpt>
+<wpt lat="-35.259558" lon="136.965607">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.259558" lon="136.965607">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.259558" lon="136.965607">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.259558" lon="136.965607">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.266463" lon="136.953317">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.266375" lon="136.953312">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.266375" lon="136.953312">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.26774" lon="136.945878">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.267787" lon="136.945897">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.270257" lon="136.942352">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.270912" lon="136.94465">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.270923" lon="136.944638">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.272723" lon="136.94381">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.274487" lon="136.942312">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.277565" lon="136.942302">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.277565" lon="136.942302">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.275773" lon="136.939258">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.275773" lon="136.939258">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.275773" lon="136.939258">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.275942" lon="136.93707">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.275935" lon="136.937138">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.275935" lon="136.937138">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.275935" lon="136.937138">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.275935" lon="136.937138">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.277262" lon="136.927828">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.277262" lon="136.927828">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.277262" lon="136.927828">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.277262" lon="136.927828">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.277262" lon="136.927828">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.277262" lon="136.927828">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.276385" lon="136.903593">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.276382" lon="136.903583">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.276382" lon="136.903583">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.276382" lon="136.903583">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.276382" lon="136.903583">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.267807" lon="136.888262">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.267807" lon="136.888262">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.267807" lon="136.888262">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.273438" lon="136.893532">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.273438" lon="136.893532">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27298" lon="136.895973">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27298" lon="136.895973">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.18249" lon="136.893165">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.187282" lon="136.896698">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.187282" lon="136.896698">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.187282" lon="136.896698">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.191682" lon="136.88469">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.192407" lon="136.883182">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.192407" lon="136.883182">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.196497" lon="136.876415">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.196497" lon="136.876415">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.197907" lon="136.870343">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.197907" lon="136.870343">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.197907" lon="136.870343">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.197907" lon="136.870343">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.197907" lon="136.870343">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.197907" lon="136.870343">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.197907" lon="136.870343">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.197907" lon="136.870343">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.221145" lon="136.862842">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.221145" lon="136.862842">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.221145" lon="136.862842">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.221145" lon="136.862842">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.221145" lon="136.862842">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.226888" lon="136.847255">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.228988" lon="136.851487">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.22899" lon="136.851478">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.22899" lon="136.851478">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.22899" lon="136.851478">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.22899" lon="136.851478">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.22899" lon="136.851478">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.22899" lon="136.851478">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.22899" lon="136.851478">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.251518" lon="136.845937">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.25659" lon="136.847595">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.264048" lon="136.850962">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.268755" lon="136.845072">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.270585" lon="136.864085">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.270467" lon="136.863883">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.270467" lon="136.863883">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.270467" lon="136.863883">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.270467" lon="136.863883">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.270213" lon="136.867743">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.27027" lon="136.867513">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.271312" lon="136.883747">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.271312" lon="136.883747">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.271312" lon="136.883747">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-34.130931" lon="137.521378">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.146589" lon="137.491994">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.146589" lon="137.491994">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.146628" lon="137.491978">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.145492" lon="137.485467">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.144611" lon="137.478719">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.143264" lon="137.472811">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.142372" lon="137.467056">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.140383" lon="137.462703">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.141331" lon="137.463408">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.141331" lon="137.463408">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.135672" lon="137.519294">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.136458" lon="137.513436">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.136547" lon="137.513333">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.140711" lon="137.499017">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-35.272025" lon="136.885953">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.278131" lon="136.890439">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.2817" lon="136.894547">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.284681" lon="136.900314">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.285303" lon="136.906686">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.285128" lon="136.915153">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.284936" lon="136.921078">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.281294" lon="136.928217">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.278283" lon="136.9337">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.240314" lon="136.841722">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.240486" lon="136.841689">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.240408" lon="136.842225">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.237603" lon="136.838667">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.237644" lon="136.838153">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.237244" lon="136.837869">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.237461" lon="136.836956">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.237553" lon="136.836911">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.236697" lon="136.835208">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.235356" lon="136.834092">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.238311" lon="136.840972">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.235217" lon="136.832425">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.238053" lon="136.841131">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.238053" lon="136.841131">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.238053" lon="136.841131">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.238561" lon="136.842114">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.238561" lon="136.842114">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.238561" lon="136.842114">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.238561" lon="136.842114">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.025167" lon="136.935972">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.025517" lon="136.935094">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.027406" lon="136.933978">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.029742" lon="136.932158">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.030075" lon="136.934539">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.030542" lon="136.936511">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.01515" lon="136.946744">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-35.013439" lon="136.948131">
+  <name>Marker: Stage 10</name>
+</wpt>
+<wpt lat="-34.906319" lon="137.050525">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902064" lon="137.033194">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.906686" lon="137.050342">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902781" lon="137.037811">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902417" lon="137.034358">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.900589" lon="137.029483">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.901706" lon="137.032892">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.901017" lon="137.032553">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.902372" lon="137.033028">
+  <name>Marker: Stage 11</name>
+</wpt>
+<wpt lat="-34.674431" lon="137.504431">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.656239" lon="137.525269">
+  <name>Marker: Stage 14</name>
+</wpt>
+<wpt lat="-34.137631" lon="137.556644">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.136422" lon="137.568433">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.130297" lon="137.576447">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.122153" lon="137.582503">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.099261" lon="137.601039">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.097775" lon="137.601931">
+  <name>Marker: Stage 16</name>
+</wpt>
+<wpt lat="-34.092906" lon="137.600728">
+  <name>Marker: Stage 16</name>
+</wpt>
+</gpx>

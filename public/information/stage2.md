@@ -1,4 +1,3 @@
-# Stage 2: Port Clinton to Ardrossan
 Starting from Port Clinton, follow the Walk The Yorke signs south out of town and towards Price.
 
 The Port Clinton to Ardrossan section of Walk The Yorke is designed to be walked as one section (27.8km), but can be walked in 2 sections  The 2 sections are Port Clinton to Price 7.8km (1 hour 57 mins), and Price to Ardrossan 20km (5 hours).

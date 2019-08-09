@@ -1,4 +1,5 @@
 //@format
+import 'typeface-roboto';
 import React, { useState, useEffect } from 'react';
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom';
@@ -20,9 +21,9 @@ const Home: React.FC<RouteComponentProps> = () => {
   // store current walk/stage type and id (map retreives spatial, menu textual)
   // if no walk/stage selected then type 'all' and id null
   const [trailSection, setTrailSection] = useState<{
-    type: string;
+    type: string | undefined;
     id: number | undefined;
-  }>({ type: 'all', id: undefined });
+  }>({ type: undefined, id: undefined });
   // store selected object (POI/Issue etc), null and null if none
   const [trailObject, setTrailObject] = useState<{
     type: string | undefined;
