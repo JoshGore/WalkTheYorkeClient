@@ -120,10 +120,6 @@ const Home: React.FC<RouteComponentProps<any>> = ({ match }) => {
     </div>
   );
 };
-/*
- */
-/*
- */
 
 const App: React.FC = () => {
   return (
