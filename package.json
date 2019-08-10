@@ -1,6 +1,5 @@
 {
   "name": "walk-the-yorke-client",
-  "homepage": "joshgore.github.io/WalkTheYorkeClient",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
