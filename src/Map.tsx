@@ -40,19 +40,22 @@ const Map: React.FC<MapProps> = ({
     [136.585109, -35.314486],
     [138.366868, -33.99099],
   ]);
+  const [mapLoading, setMapLoading] = useState(true);
+  const [jsonLoading, setJsonLoading] = useState(true);
   // fetch trail geojson data
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(stages);
       const json = await result.json();
-      setStagesData(json);
+      await setStagesData(json);
+      await setJsonLoading(false);
     };
     fetchData();
   }, []);
   // set map when component loads
   const onStyleLoad = (map: any) => {
     setMap(map);
-    // map.fitBounds(initialBounds, { animate: false });
+    setMapLoading(false);
   };
   // resize map on container size change
   useEffect(() => {
@@ -90,9 +93,11 @@ const Map: React.FC<MapProps> = ({
   // zoom to stage if stage selected
   useEffect(() => {
     map &&
+      !mapLoading &&
+      !jsonLoading &&
       map.fitBounds(
         trailSection.type === undefined
-          ? map.fitBounds(initialBounds)
+          ? initialBounds
           : bbox(
               featureCollection(
                 trailSection.type === 'stage' &&
@@ -104,7 +109,7 @@ const Map: React.FC<MapProps> = ({
             ),
         { padding: 100 }
       );
-  }, [trailSection]);
+  }, [trailSection.id, trailSection.type, mapLoading, jsonLoading]);
 
   return (
     <div

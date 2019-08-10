@@ -2,10 +2,19 @@
 import 'typeface-roboto';
 import React, { useState, useEffect } from 'react';
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { render } from 'react-dom';
-import { Router, Link, RouteComponentProps } from '@reach/router';
+// import { render } from 'react-dom';
+// import { Router, Link, RouteComponentProps } from '@reach/router';
+import {
+  BrowserRouter as Router,
+  Route,
+  // Link,
+  Redirect,
+  RouteComponentProps,
+} from 'react-router-dom';
+// import { AutoRotatingCarousel } from 'material-auto-rotating-carousel';
 import Map from './Map';
 import Menu from './Menu';
+const { AutoRotatingCarousel } = require('material-auto-rotating-carousel');
 
 interface User {
   id: number | null;
@@ -17,13 +26,23 @@ function getPortrait() {
   return window.innerHeight > window.innerWidth;
 }
 
-const Home: React.FC<RouteComponentProps> = () => {
+const Home: React.FC<RouteComponentProps<any>> = ({
+  match: {
+    params: { type, id },
+  },
+}) => {
+  /*
+const Home: React.FC<RouteComponentProps<any>> = ({ match }) => {
+   */
+  // console.log(match, location, history);
+  // console.log(match);
   // store current walk/stage type and id (map retreives spatial, menu textual)
   // if no walk/stage selected then type 'all' and id null
   const [trailSection, setTrailSection] = useState<{
     type: string | undefined;
     id: number | undefined;
-  }>({ type: undefined, id: undefined });
+    // }>({ type: undefined, id: undefined });
+  }>({ type: type, id: parseInt(id) });
   // store selected object (POI/Issue etc), null and null if none
   const [trailObject, setTrailObject] = useState<{
     type: string | undefined;
@@ -43,6 +62,9 @@ const Home: React.FC<RouteComponentProps> = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  useEffect(() => {
+    setTrailSection({ type: type, id: parseInt(id) });
+  }, [type, id]);
   return (
     <div
       style={{
@@ -76,14 +98,42 @@ const Home: React.FC<RouteComponentProps> = () => {
         setUser={setUser}
         portrait={portrait}
       />
+      <AutoRotatingCarousel open={false}>
+        <div
+          style={{
+            height: '100%',
+            width: '100%',
+            background: 'rgba(10,0,0,0.2)',
+          }}
+        />
+        <div />
+      </AutoRotatingCarousel>
+      <Redirect
+        push
+        to={
+          '/' +
+          (trailSection.type !== undefined
+            ? trailSection.type + '/' + trailSection.id
+            : '')
+        }
+      />
     </div>
   );
 };
+/*
+ */
+/*
+ */
 
-const App: React.FC = () => (
-  <Router>
-    <Home path='/' />
-  </Router>
-);
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Route
+        path='/:type?/:id(\d+)?'
+        render={RouteProps => <Home {...RouteProps} />}
+      />
+    </Router>
+  );
+};
 
 export default App;

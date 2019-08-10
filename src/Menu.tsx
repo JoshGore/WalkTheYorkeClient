@@ -1,24 +1,32 @@
 //@format
 import React, { useEffect, useState } from 'react';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 // import Input from '@material-ui/core/Input';
-import ReactMarkdown from 'react-markdown';
+// import ReactMarkdown from 'react-markdown';
 // import { useTransition, animated } from 'react-spring';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+// import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
 import Scrollbars from 'react-custom-scrollbars';
-/*
-const {
-  MDBCarousel,
-  MDBCarouselCaption,
-  MDBCarouselInner,
-  MDBCarouselItem,
-  MDBView,
-  MDBMask,
-  MDBContainer,
-} = require('mdbreact');
- */
+import Markdown from './Markdown';
 
 const infoLinks = require('./data/information/infolinks.json');
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    margin: {
+      margin: theme.spacing(1),
+    },
+    extendedIcon: {
+      marginRight: theme.spacing(1),
+    },
+    markdown: {
+      ...theme.typography.body2,
+      padding: theme.spacing(3, 0),
+    },
+  })
+);
 
 interface MenuProps {
   trailSection: any;
@@ -39,12 +47,15 @@ const Menu: React.FC<MenuProps> = ({
   setUser,
   portrait,
 }) => {
+  const classes = useStyles();
   // store retrieved current description text
   const [description, setDescription] = useState<string | undefined>(undefined);
   const [images, setImages] = useState([]);
   // retreive json object descriptions which link to markdown and image files
   useEffect(() => {
     const fetchData = async () => {
+      // set description to none to prevent rendering for wrong object
+      setDescription('');
       // find stage with id of trailSection.id then fetch
       let result: any;
       let text: string = '';
@@ -72,7 +83,7 @@ const Menu: React.FC<MenuProps> = ({
       await setDescription(text);
     };
     fetchData();
-  }, [trailSection, trailObject]);
+  }, [trailSection.id, trailSection.type, trailObject.id, trailObject.type]);
   return (
     <Scrollbars
       style={{
@@ -87,12 +98,13 @@ const Menu: React.FC<MenuProps> = ({
     >
       {/* replace with image carosel */}
       <img
+        alt=''
         className='d-block w-100'
         style={{ width: '100%' }}
         src={images[0]}
       />
       <div style={{ padding: 10 }}>
-        <h1>
+        <Typography variant='h4' gutterBottom>
           {
             (trailSection.type === undefined
               ? infoLinks.default
@@ -101,15 +113,10 @@ const Menu: React.FC<MenuProps> = ({
                 )
             ).name
           }
-        </h1>
+        </Typography>
         {(trailSection.type === undefined || trailSection.type === 'stage') &&
           trailObject.type === undefined && (
-            <ButtonGroup
-              variant='contained'
-              size='small'
-              aria-label='small contained button group'
-              style={{ display: 'inline-block' }}
-            >
+            <div style={{ display: 'inline-block' }}>
               {(trailSection.type === undefined
                 ? infoLinks.default
                 : infoLinks.stages.find(
@@ -117,15 +124,34 @@ const Menu: React.FC<MenuProps> = ({
                   )
               ).gpx.map((file: any) => (
                 <Button
+                  className={classes.margin}
+                  size='small'
+                  variant='contained'
                   key={file.name}
                   href={process.env.PUBLIC_URL + file.link}
                 >
                   GPX: {file.name}
                 </Button>
               ))}
-            </ButtonGroup>
+            </div>
           )}
-        <ReactMarkdown source={description} />
+        {/*<ReactMarkdown source={description} />*/}
+        {description !== undefined && (
+          <Markdown className={classes.markdown}>{description}</Markdown>
+        )}
+        {trailSection.type === 'stage' && trailObject.type === undefined && (
+          <div>
+            {infoLinks.stages
+              .find((stage: any) => stage.id === trailSection.id)
+              .reviews.map((review: any) => (
+                <div key={review.title}>
+                  <Rating value={review.rating} size='small' readOnly />
+                  <Typography variant='h6'>{review.title}</Typography>
+                  <Typography variant='body2'>{review.body}</Typography>
+                </div>
+              ))}
+          </div>
+        )}
       </div>
     </Scrollbars>
   );

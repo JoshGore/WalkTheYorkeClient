@@ -1,4 +1,5 @@
 *With more than 500 kilometres of continuous shared walking & cycling leisure trail, you can explore Yorke Peninsula's coastline from Port Wakefield to Moonta Bay.*
+
 With coastal trails & town walks, Walk the Yorke showcases Yorke Peninsula’s spectacular coastline, diverse coastal communities and environments unique to ‘Yorkes’.
 Choose from short walks or a day walk, or why not try a multi-day walk?  The hero walks of Walk The Yorke are those recommended by the designers and developers of this 500km trail, and have some of the best scenery & walking experiences.
 
