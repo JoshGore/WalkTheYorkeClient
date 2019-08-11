@@ -42,7 +42,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({ match }) => {
     type: string | undefined;
     id: number | undefined;
     // }>({ type: undefined, id: undefined });
-  }>({ type: type, id: parseInt(id) });
+  }>({ type: type, id: isNaN(id) ? undefined : parseInt(id) });
   // store selected object (POI/Issue etc), null and null if none
   const [trailObject, setTrailObject] = useState<{
     type: string | undefined;
@@ -63,7 +63,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({ match }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   useEffect(() => {
-    setTrailSection({ type: type, id: parseInt(id) });
+    setTrailSection({ type: type, id: isNaN(id) ? undefined : parseInt(id) });
   }, [type, id]);
   return (
     <div
@@ -74,7 +74,8 @@ const Home: React.FC<RouteComponentProps<any>> = ({ match }) => {
         left: 0,
         right: 0,
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: portrait ? 'nowrap' : 'wrap',
+        overflow: 'hidden',
         flexDirection: portrait ? 'column' : 'row',
       }}
     >

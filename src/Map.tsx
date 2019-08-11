@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapboxGl, { Source, Layer, Image } from 'react-mapbox-gl';
 // (possibly update to actual typescript swizec)
-import useDimensions from 'react-use-dimensions';
+import ReactResizeDetector from 'react-resize-detector';
 import shelter from './icons/custom-shelter-15.png';
 import bbox from '@turf/bbox';
 import { featureCollection } from '@turf/helpers';
@@ -10,6 +10,7 @@ let shelters = require('./data/walktheyorke_oldcouncil_shelters.geojson');
 
 const MapComponent = ReactMapboxGl({
   accessToken: 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A',
+  trackResize: false,
 });
 
 interface MapProps {
@@ -32,7 +33,6 @@ const Map: React.FC<MapProps> = ({
   portrait,
 }) => {
   const [map, setMap] = useState<any>(false);
-  const [ref, { width, height }] = useDimensions();
   const [selectedFeature, setSelectedFeature] = useState<any>(null);
   const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
   const [stagesData, setStagesData] = useState<any>({});
@@ -57,12 +57,10 @@ const Map: React.FC<MapProps> = ({
     setMap(map);
     setMapLoading(false);
   };
-  // resize map on container size change
-  useEffect(() => {
-    map && map.resize();
-  }, [width, height]);
-  // }, [width, height, map]);
   // handle map click/tap events
+  const handleResize = () => {
+    map && map.resize();
+  };
   const mapClick = (map: any, evt: any) => {
     setMapClickCoordinates({
       point: [evt.point.x, evt.point.y],
@@ -113,9 +111,16 @@ const Map: React.FC<MapProps> = ({
 
   return (
     <div
-      style={{ display: 'flex', alignItems: 'stretch', flexGrow: 1, order: 10 }}
-      ref={ref}
+      style={{
+        display: 'flex',
+        alignItems: 'stretch',
+        flexGrow: 1,
+        order: 10,
+        minWidth: 0,
+        minHeight: 0,
+      }}
     >
+      <ReactResizeDetector handleWidth handleHeight onResize={handleResize} />
       <MapComponent
         style={'mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2'}
         containerStyle={{ flex: 1 }}
