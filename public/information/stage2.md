@@ -13,6 +13,7 @@ Continue heading south from Price, and join up with the CH Smith Trail at Tiddy 
 There are plenty of accommodation options in Ardrossan, including caravan parks, motel & hotel units, and self-contained holiday houses.   You can choose to spend the night or a few days, and don’t forget to try your hand at catching Blue Swimmer crabs; best in the months with an ‘r’ when the waters are warmer.
 
 While in Ardrossan, don’t forget to visit the Ardrossan Museum, home of the Stump Jump Plough, invented by local farmers in 1876.  The Ardrossan Museum is the former factory of the plough, and has a wealth of history.
+
 ## Walking Distances & Times
 Total length 27.8km (6 hours 57 minutes); or broken into 2 smaller sections:
 - Port Clinton to Price 7.8km (1 hour 57 minutes)
