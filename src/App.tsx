@@ -11,10 +11,8 @@ import {
   Redirect,
   RouteComponentProps,
 } from 'react-router-dom';
-// import { AutoRotatingCarousel } from 'material-auto-rotating-carousel';
 import Map from './Map';
 import Menu from './Menu';
-const { AutoRotatingCarousel } = require('material-auto-rotating-carousel');
 
 interface User {
   id: number | null;
@@ -99,16 +97,6 @@ const Home: React.FC<RouteComponentProps<any>> = ({ match }) => {
         setUser={setUser}
         portrait={portrait}
       />
-      <AutoRotatingCarousel open={false}>
-        <div
-          style={{
-            height: '100%',
-            width: '100%',
-            background: 'rgba(10,0,0,0.2)',
-          }}
-        />
-        <div />
-      </AutoRotatingCarousel>
       <Redirect
         push
         to={

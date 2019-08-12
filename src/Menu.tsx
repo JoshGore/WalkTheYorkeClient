@@ -6,6 +6,10 @@ import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Markdown from './Markdown';
 import MenuContainer from './MenuContainer';
+const {
+  AutoRotatingCarousel,
+  Slide,
+} = require('material-auto-rotating-carousel');
 
 const infoLinks = require('./data/information/infolinks.json');
 
@@ -157,6 +161,42 @@ const Menu: React.FC<MenuProps> = ({
           </div>
         )}
       </div>
+      <AutoRotatingCarousel
+        open={false}
+        mobile={window.innerWidth < 600}
+        autoplay={false}
+      >
+        <div
+          style={{ height: '100%', width: '100%', backgroundColor: 'white' }}
+        >
+          About this map
+        </div>
+        <div
+          style={{ height: '100%', width: '100%', backgroundColor: 'white' }}
+        >
+          Options
+        </div>
+        {/*
+      <Slide
+        media=''
+        mediaBackgroundStyle={{
+          display: 'none',
+            background: 'rgba(10,0,0,0.2)',
+        }}
+        title='About this map'
+        subtitle=''
+      />
+      <Slide
+        media=''
+        mediaBackgroundStyle={{
+          display: 'none',
+            background: 'rgba(10,0,0,0.2)',
+        }}
+        title='Options'
+        subtitle=''
+      />
+        */}
+      </AutoRotatingCarousel>
     </MenuContainer>
   );
 };
