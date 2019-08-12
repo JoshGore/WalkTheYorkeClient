@@ -129,168 +129,229 @@ const Map: React.FC<MapProps> = ({
         onClick={(map, evt) => mapClick(map, evt)}
       >
         {/* sources for trail lines, short walk lines, day walk lines, hero walk lines */}
-        <Source
-          id='trail_line_all'
-          geoJsonSource={{ type: 'geojson', data: stagesData }}
-        />
-        {/* sources for trail assets */}
-        <Source
-          id='trail_point_shelters'
-          geoJsonSource={{ type: 'geojson', data: shelters }}
-        />
-        <Image
-          id={'custom-shelter-icon'}
-          url={shelter}
-          onError={() => console.log('image loading error')}
-        />
-        {/* data-stack-placeholder is a placeholder in mapbox styles placing data under existing labels */}
-        <Layer
-          id='trail_shelters'
-          type='symbol'
-          sourceId='trail_point_shelters'
-          layout={{
-            'icon-image': 'custom-shelter-icon',
-            'icon-size': 0.8,
-            'icon-allow-overlap': true,
-            'text-allow-overlap': false,
-            'icon-optional': false,
-            'text-optional': true,
-            'text-field': '{NAME}',
-            'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-            'text-size': 10,
-            'text-anchor': 'right',
-            'text-justify': 'right',
-            'text-max-width': 12,
-            'text-offset': [-1, 0],
-          }}
-          paint={{
-            'icon-opacity': 1,
-            'text-color': 'hsl(131, 83%, 19%)',
-          }}
-        />
-        {/* layer showing trail selections */}
-        {/* case layer showing trail selections */}
-        {/* layer showing trail */}
-        {/* case layer showing trail */}
-        {/* layer showing trail highlights */}
-        {/* case layer showing trail highlights */}
-        <Layer
-          id='trail_line_all_target'
-          before='data-stack-placeholder'
-          type='line'
-          sourceId='trail_line_all'
-          onMouseMove={(evt: any) => {
-            evt.target.getCanvas().style.cursor = 'pointer';
-          }}
-          onMouseLeave={(evt: any) => {
-            evt.target.getCanvas().style.cursor = '';
-          }}
-          paint={{
-            'line-width': 40,
-            'line-opacity': 0,
-          }}
-        />
-        <Layer
-          id='trail_line_all_highlight'
-          before='trail_line_all_target'
-          type='line'
-          sourceId='trail_line_all'
-          layout={{
-            'line-join': 'round',
-            'line-cap': 'round',
-          }}
-          paint={{
-            'line-color': [
-              'case',
-              ['match', ['get', 'TRAILTYPE'], ['', 'WALKING'], true, false],
-              'hsl(33, 100%, 64%)',
-              ['match', ['get', 'TRAILTYPE'], ['', 'CYCLING'], true, false],
-              'hsl(0, 100%, 69%)',
-              [
-                'match',
-                ['get', 'TRAILTYPE'],
-                ['', 'SU:WALK,BIKE'],
-                true,
-                false,
-              ],
-              'hsl(82, 100%, 41%)',
-              'hsl(46, 98%, 30%)',
-            ],
-            'line-width': ['interpolate', ['linear'], ['zoom'], 4, 2, 22, 10],
-          }}
-          filter={[
-            'in',
-            'STAGE',
-            selectedFeature != undefined &&
-              selectedFeature.layer.id === 'trail_line_all_target' &&
-              selectedFeature.properties.STAGE,
-          ]}
-        />
-        <Layer
-          id='trail_line_all_highlight_case'
-          before='trail_line_all_highlight'
-          type='line'
-          sourceId='trail_line_all'
-          layout={{
-            'line-join': 'round',
-            'line-cap': 'round',
-          }}
-          paint={{
-            'line-color': 'white',
-            'line-width': ['interpolate', ['linear'], ['zoom'], 4, 4, 22, 20],
-          }}
-          filter={[
-            'in',
-            'STAGE',
-            selectedFeature != undefined &&
-              selectedFeature.layer.id === 'trail_line_all_target' &&
-              selectedFeature.properties.STAGE,
-          ]}
-        />
-        ]} />
-        <Layer
-          id='trail_line_all'
-          before='trail_line_all_highlight_case'
-          type='line'
-          sourceId='trail_line_all'
-          layout={{
-            'line-join': 'round',
-            'line-cap': 'round',
-          }}
-          paint={{
-            'line-color': [
-              'case',
-              ['match', ['get', 'TRAILTYPE'], ['', 'WALKING'], true, false],
-              'hsl(33, 100%, 64%)',
-              ['match', ['get', 'TRAILTYPE'], ['', 'CYCLING'], true, false],
-              'hsl(0, 100%, 69%)',
-              [
-                'match',
-                ['get', 'TRAILTYPE'],
-                ['', 'SU:WALK,BIKE'],
-                true,
-                false,
-              ],
-              'hsl(82, 100%, 41%)',
-              'hsl(46, 98%, 30%)',
-            ],
-            'line-width': ['interpolate', ['linear'], ['zoom'], 4, 1, 22, 5],
-          }}
-        />
-        <Layer
-          id='trail_line_all_case'
-          before='trail_line_all'
-          type='line'
-          sourceId='trail_line_all'
-          layout={{
-            'line-join': 'round',
-            'line-cap': 'round',
-          }}
-          paint={{
-            'line-color': 'white',
-            'line-width': ['interpolate', ['linear'], ['zoom'], 4, 2, 22, 10],
-          }}
-        />
+        {Object.entries(shelters).length !== 0 &&
+          Object.entries(stagesData).length !== 0 && (
+            <>
+              <Source
+                id='trail_line_all'
+                geoJsonSource={{ type: 'geojson', data: stagesData }}
+              />
+              {/* sources for trail assets */}
+              <Source
+                id='trail_point_shelters'
+                geoJsonSource={{ type: 'geojson', data: shelters }}
+              />
+              <Image
+                id={'custom-shelter-icon'}
+                url={shelter}
+                onError={() => console.log('image loading error')}
+              />
+              {/* data-stack-placeholder is a placeholder in mapbox styles placing data under existing labels */}
+              <Layer
+                id='trail_shelters'
+                type='symbol'
+                sourceId='trail_point_shelters'
+                layout={{
+                  'icon-image': 'custom-shelter-icon',
+                  'icon-size': 0.8,
+                  'icon-allow-overlap': true,
+                  'text-allow-overlap': false,
+                  'icon-optional': false,
+                  'text-optional': true,
+                  'text-field': '{NAME}',
+                  'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
+                  'text-size': 10,
+                  'text-anchor': 'right',
+                  'text-justify': 'right',
+                  'text-max-width': 12,
+                  'text-offset': [-1, 0],
+                }}
+                paint={{
+                  'icon-opacity': 1,
+                  'text-color': 'hsl(131, 83%, 19%)',
+                }}
+              />
+              {/* layer showing trail selections */}
+              {/* case layer showing trail selections */}
+              {/* layer showing trail */}
+              {/* case layer showing trail */}
+              {/* layer showing trail highlights */}
+              {/* case layer showing trail highlights */}
+              <Layer
+                id='trail_line_all_target'
+                before='data-stack-placeholder'
+                type='line'
+                sourceId='trail_line_all'
+                onMouseMove={(evt: any) => {
+                  evt.target.getCanvas().style.cursor = 'pointer';
+                }}
+                onMouseLeave={(evt: any) => {
+                  evt.target.getCanvas().style.cursor = '';
+                }}
+                paint={{
+                  'line-width': 40,
+                  'line-opacity': 0,
+                }}
+              />
+              <Layer
+                id='trail_line_all_highlight'
+                before='trail_line_all_target'
+                type='line'
+                sourceId='trail_line_all'
+                layout={{
+                  'line-join': 'round',
+                  'line-cap': 'round',
+                }}
+                paint={{
+                  'line-color': [
+                    'case',
+                    [
+                      'match',
+                      ['get', 'TRAILTYPE'],
+                      ['', 'WALKING'],
+                      true,
+                      false,
+                    ],
+                    'hsl(33, 100%, 64%)',
+                    [
+                      'match',
+                      ['get', 'TRAILTYPE'],
+                      ['', 'CYCLING'],
+                      true,
+                      false,
+                    ],
+                    'hsl(0, 100%, 69%)',
+                    [
+                      'match',
+                      ['get', 'TRAILTYPE'],
+                      ['', 'SU:WALK,BIKE'],
+                      true,
+                      false,
+                    ],
+                    'hsl(82, 100%, 41%)',
+                    'hsl(46, 98%, 30%)',
+                  ],
+                  'line-width': [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    4,
+                    2,
+                    22,
+                    10,
+                  ],
+                }}
+                filter={[
+                  'in',
+                  'STAGE',
+                  selectedFeature != undefined &&
+                    selectedFeature.layer.id === 'trail_line_all_target' &&
+                    selectedFeature.properties.STAGE,
+                ]}
+              />
+              <Layer
+                id='trail_line_all_highlight_case'
+                before='trail_line_all_highlight'
+                type='line'
+                sourceId='trail_line_all'
+                layout={{
+                  'line-join': 'round',
+                  'line-cap': 'round',
+                }}
+                paint={{
+                  'line-color': 'white',
+                  'line-width': [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    4,
+                    4,
+                    22,
+                    20,
+                  ],
+                }}
+                filter={[
+                  'in',
+                  'STAGE',
+                  selectedFeature != undefined &&
+                    selectedFeature.layer.id === 'trail_line_all_target' &&
+                    selectedFeature.properties.STAGE,
+                ]}
+              />
+              ]} />
+              <Layer
+                id='trail_line_all'
+                before='trail_line_all_highlight_case'
+                type='line'
+                sourceId='trail_line_all'
+                layout={{
+                  'line-join': 'round',
+                  'line-cap': 'round',
+                }}
+                paint={{
+                  'line-color': [
+                    'case',
+                    [
+                      'match',
+                      ['get', 'TRAILTYPE'],
+                      ['', 'WALKING'],
+                      true,
+                      false,
+                    ],
+                    'hsl(33, 100%, 64%)',
+                    [
+                      'match',
+                      ['get', 'TRAILTYPE'],
+                      ['', 'CYCLING'],
+                      true,
+                      false,
+                    ],
+                    'hsl(0, 100%, 69%)',
+                    [
+                      'match',
+                      ['get', 'TRAILTYPE'],
+                      ['', 'SU:WALK,BIKE'],
+                      true,
+                      false,
+                    ],
+                    'hsl(82, 100%, 41%)',
+                    'hsl(46, 98%, 30%)',
+                  ],
+                  'line-width': [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    4,
+                    1,
+                    22,
+                    5,
+                  ],
+                }}
+              />
+              <Layer
+                id='trail_line_all_case'
+                before='trail_line_all'
+                type='line'
+                sourceId='trail_line_all'
+                layout={{
+                  'line-join': 'round',
+                  'line-cap': 'round',
+                }}
+                paint={{
+                  'line-color': 'white',
+                  'line-width': [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    4,
+                    2,
+                    22,
+                    10,
+                  ],
+                }}
+              />
+            </>
+          )}
       </MapComponent>
     </div>
   );
