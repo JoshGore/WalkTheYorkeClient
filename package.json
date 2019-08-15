@@ -28,6 +28,7 @@
     "react": "^16.8.6",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8.6",
+    "react-facebook": "^8.0.4",
     "react-mapbox-gl": "^4.6.0",
     "react-markdown": "^4.1.0",
     "react-measure": "^2.3.0",

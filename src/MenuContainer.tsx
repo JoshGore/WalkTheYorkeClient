@@ -10,8 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link as RouterLink } from 'react-router-dom';
 import Scrollbars from 'react-custom-scrollbars';
 
-const infoLinks = require('./data/information/infolinks.json');
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     margin: {
@@ -32,18 +30,22 @@ interface MenuContainerProps {
   portrait: boolean;
   links: Array<{ name: string; link: string }>;
   children: any;
+  newSelection: boolean;
+  setNewSelection: any;
 }
 
 const MenuContainer: React.FC<MenuContainerProps> = ({
   portrait,
   links,
   children,
+  newSelection,
+  setNewSelection,
 }) => {
   const classes = useStyles();
   // store retrieved current description text
-  const [menuShown, setMenuShown] = useState(1);
+  const [menuShown, setMenuShown] = useState(2);
   const handleMenuToggle = () => {
-    menuShown === 1 ? setMenuShown(2) : setMenuShown(1);
+    menuShown === 0 ? setMenuShown(1) : setMenuShown(0);
   };
   const [breadcrumbLinks, setBreadcrumbLinks] = useState<
     MenuContainerProps['links']
@@ -56,17 +58,23 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
     setBreadcrumbCurent(templinks.pop());
     setBreadcrumbLinks(templinks);
   }, [links]);
+  useEffect(() => {
+    if (newSelection) {
+      setNewSelection(false);
+      setMenuShown(3);
+    }
+  }, [newSelection]);
   return (
     <div
       style={{
         transition: 'width 0.25s, height 0.25s',
-        width: portrait ? '100vw' : menuShown === 2 ? '100vw' : '33vw',
+        width: portrait ? '100vw' : menuShown === 1 ? '100vw' : '33vw',
         height: portrait
           ? menuShown === 0
-            ? ''
+            ? 'fit-content'
             : menuShown === 1
-            ? '33%'
-            : '100%'
+            ? '100%'
+            : '33%'
           : '100%',
         order: window.innerWidth < window.innerHeight ? 15 : 5,
         boxShadow: '0px 0px 30px 10px rgba(0,0,0,0.2)',
@@ -106,7 +114,13 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
               verticalAlign: 'middle',
               float: 'right',
               transform: `rotate(${
-                menuShown === 1 ? (portrait ? 180 : 270) : portrait ? 0 : 90
+                portrait
+                  ? menuShown === 0
+                    ? 180
+                    : 0
+                  : menuShown === 0
+                  ? 270
+                  : 90
               }deg)`,
               transition: 'transform 0.25s',
             }}
@@ -115,7 +129,11 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
           </IconButton>
         </Paper>
       </div>
-      <Scrollbars>{children}</Scrollbars>
+      <Scrollbars
+        onScroll={() => portrait && menuShown !== 1 && setMenuShown(1)}
+      >
+        {children}
+      </Scrollbars>
     </div>
   );
 };
