@@ -4,11 +4,12 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import Markdown from './Markdown';
 import MenuContainer from './MenuContainer';
+import DownloadMenu from './DownloadMenu';
+import Markdown from './Markdown';
 import Reviews from './Reviews';
 import ReviewSummary from './ReviewSummary';
-import DownloadMenu from './DownloadMenu';
+import Chat from './Chat';
 
 const { FacebookProvider, Comments } = require('react-facebook');
 
@@ -74,6 +75,7 @@ const Menu: React.FC<any> = ({
         )}
         <div>
           <Reviews reviews={reviews} />
+          <Chat comments={comments} />
         </div>
       </div>
     </>
