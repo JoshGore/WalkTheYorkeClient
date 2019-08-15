@@ -103,7 +103,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({
         (trailSection.type === undefined
           ? infoLinks.default
           : infoLinks.stages.find((stage: any) => stage.id === trailSection.id)
-        ).gpx
+        ).downloads
       );
       await setTitle(
         (trailSection.type === undefined

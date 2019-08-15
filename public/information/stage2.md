@@ -16,5 +16,6 @@ While in Ardrossan, don’t forget to visit the Ardrossan Museum, home of the St
 
 ## Walking Distances & Times
 Total length 27.8km (6 hours 57 minutes); or broken into 2 smaller sections:
+
 - Port Clinton to Price 7.8km (1 hour 57 minutes)
 - Price to Ardrossan 20km (5 hours)

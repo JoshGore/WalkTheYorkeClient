@@ -61,7 +61,7 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
   useEffect(() => {
     if (newSelection) {
       setNewSelection(false);
-      setMenuShown(3);
+      menuShown === 0 && setMenuShown(3);
     }
   }, [newSelection]);
   return (

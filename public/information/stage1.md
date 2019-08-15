@@ -12,5 +12,6 @@ The trail takes you inland from the highway, and a shelter provides an opportuni
 
 ## Walking Distances & Times
 Total length 32.8km, 8 hours 12 minutes; or broken into 2 smaller sections:
+
 - Port Wakefield to Port Arthur 15km (3 hours 45 minutes)
 - Port Arthur to Port Clinton 17.8km (4 hours 27 minutes)

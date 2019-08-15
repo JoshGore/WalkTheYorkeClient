@@ -2,10 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
+
 import Markdown from './Markdown';
 import MenuContainer from './MenuContainer';
+import Reviews from './Reviews';
+import ReviewSummary from './ReviewSummary';
+import DownloadMenu from './DownloadMenu';
+
 const { FacebookProvider, Comments } = require('react-facebook');
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -18,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     markdown: {
       ...theme.typography.body2,
-      padding: theme.spacing(3, 0),
+      padding: theme.spacing(1, 0),
     },
     breadcrumbs: {
       padding: theme.spacing(1, 2),
@@ -47,6 +51,7 @@ const Menu: React.FC<any> = ({
   reviews,
 }) => {
   const classes = useStyles();
+
   return (
     <>
       {/* replace with image carosel */}
@@ -56,36 +61,19 @@ const Menu: React.FC<any> = ({
         style={{ width: '100%' }}
         src={multimedia[0]}
       />
-      <div style={{ padding: 10 }}>
+      <div style={{ padding: 12 }}>
         <Typography variant='h4' gutterBottom>
           {title}
         </Typography>
-        {/* display links to GPX files - replace with menu */}
-        <div style={{ display: 'inline-block' }}>
-          {fileLinks.map((file: any) => (
-            <Button
-              className={classes.margin}
-              size='small'
-              variant='contained'
-              key={file.name}
-              href={process.env.PUBLIC_URL + file.link}
-            >
-              {file.name}
-            </Button>
-          ))}
-        </div>
         {/*<ReactMarkdown source={description} />*/}
-        {description !== undefined && (
+        {/* display links to GPX files - replace with menu */}
+        <DownloadMenu links={fileLinks} />
+        <ReviewSummary reviews={reviews} />
+        {description && (
           <Markdown className={classes.markdown}>{description}</Markdown>
         )}
         <div>
-          {reviews.map((review: any) => (
-            <div key={review.title}>
-              <Rating value={review.rating} size='small' readOnly />
-              <Typography variant='h6'>{review.title}</Typography>
-              <Typography variant='body2'>{review.body}</Typography>
-            </div>
-          ))}
+          <Reviews reviews={reviews} />
         </div>
       </div>
     </>
