@@ -20,9 +20,13 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
     },
+    messageFromAvatar: {
+      backgroundColor: theme.palette.primary.main,
+    },
     messageTo: {
       borderRadius: '1px 15px 15px 15px',
-      padding: theme.spacing(1),
+      padding: theme.spacing(2),
+      paddingTop: theme.spacing(0.5),
       marginBottom: theme.spacing(2),
     },
     textField: {
@@ -36,7 +40,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Message: React.FC<any> = ({ fromUser, message }) => {
+const Message: React.FC<any> = ({
+  fromUser,
+  message,
+  user: { firstName, lastName },
+}) => {
   const classes = useStyles();
   return (
     <Grid
@@ -46,11 +54,19 @@ const Message: React.FC<any> = ({ fromUser, message }) => {
       direction={fromUser ? 'row-reverse' : 'row'}
     >
       <Grid item>
-        <Avatar>JG</Avatar>
+        <Avatar
+          className={fromUser && classes.messageFromAvatar}
+        >{`${firstName.charAt(0)}${lastName.charAt(0)}`}</Avatar>
       </Grid>
       <Grid item>
         <Paper className={fromUser ? classes.messageFrom : classes.messageTo}>
-          {message}
+          {!fromUser && (
+            <Typography
+              variant='caption'
+              color='textSecondary'
+            >{`${firstName} ${lastName}`}</Typography>
+          )}
+          <Typography variant='body1'>{message}</Typography>
         </Paper>
       </Grid>
     </Grid>
@@ -60,16 +76,26 @@ const Message: React.FC<any> = ({ fromUser, message }) => {
 const Messages: React.FC<any> = ({}) => {
   return (
     <>
-      <Message fromUser={false} message={'test message 1'} />
-      <Message fromUser={true} message={'test message 2 from me'} />
       <Message
         fromUser={false}
+        message={'test message 1'}
+        user={{ firstName: 'Brian', lastName: 'Cumin' }}
+      />
+      <Message
+        fromUser={true}
+        message={'test message 2 from me'}
+        user={{ firstName: 'Archibald', lastName: 'Northbottom' }}
+      />
+      <Message
+        fromUser={false}
+        user={{ firstName: 'Hans', lastName: 'Down' }}
         message={
           'Molestie a iaculis at erat pellentesque adipiscing commodo elit. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus et.'
         }
       />
       <Message
         fromUser={true}
+        user={{ firstName: 'Archibald', lastName: 'Northbottom' }}
         message={
           'Arcu vitae elementum curabitur vitae nunc. Nunc sed id semper risus in hendrerit gravida rutrum. Id venenatis a condimentum vitae. Neque ornare aenean euismod elementum. Habitant morbi tristique senectus et netus et malesuada. Senectus et netus et malesuada fames ac turpis egestas maecenas. Luctus venenatis lectus magna fringilla urna.'
         }

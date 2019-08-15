@@ -45,7 +45,11 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
   // store retrieved current description text
   const [menuShown, setMenuShown] = useState(2);
   const handleMenuToggle = () => {
-    menuShown === 0 ? setMenuShown(1) : setMenuShown(0);
+    menuShown === 0
+      ? setMenuShown(1)
+      : !portrait && menuShown === 2
+      ? setMenuShown(1)
+      : setMenuShown(0);
   };
   const [breadcrumbLinks, setBreadcrumbLinks] = useState<
     MenuContainerProps['links']
@@ -61,7 +65,7 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
   useEffect(() => {
     if (newSelection) {
       setNewSelection(false);
-      menuShown === 0 && setMenuShown(3);
+      menuShown === 0 && setMenuShown(2);
     }
   }, [newSelection]);
   return (
@@ -118,7 +122,7 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
                   ? menuShown === 0
                     ? 180
                     : 0
-                  : menuShown === 0
+                  : menuShown === 0 || menuShown === 2
                   ? 270
                   : 90
               }deg)`,
