@@ -9,8 +9,7 @@ import {
 } from 'react-router-dom';
 import Home from './Home';
 import ReactGA from 'react-ga';
-ReactGA.initialize('G-9XWGSG5VCC');
-ReactGA.pageview(window.location.pathname + window.location.search);
+ReactGA.initialize('G-9XWGSG5VCC', { standardImplementation: true });
 
 const App: React.FC = () => {
   return (
