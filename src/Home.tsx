@@ -45,6 +45,13 @@ const Home: React.FC<RouteComponentProps<any>> = ({
   });
   const [portrait, setPortrait] = useState(getPortrait);
   useEffect(() => {
+    document.title =
+      trailSection.type !== undefined
+        ? `${trailSection.type.charAt(0).toUpperCase() +
+            trailSection.type.slice(1)} ${trailSection.id}`
+        : 'Home';
+  });
+  useEffect(() => {
     function handleResize() {
       setPortrait(getPortrait());
     }
@@ -63,14 +70,9 @@ const Home: React.FC<RouteComponentProps<any>> = ({
   const [reviews, setReviews] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [newSelection, setNewSelection] = useState(false);
+
   // retreive json object descriptions which link to markdown and image files
   useEffect(() => {
-    /*
-  const [title, setTitle] = useState('');
-  const [fileLinks, setFileLinks] = useState<any>([]);
-  const [comments, setComments] = useState<any>([]);
-  const [reviews, setReviews] = useState<any>([]);
-     */
     const fetchData = async () => {
       // set description to none to prevent rendering for wrong object
       setDescription('');
@@ -141,12 +143,13 @@ const Home: React.FC<RouteComponentProps<any>> = ({
         portrait={portrait}
         links={
           trailSection.id === undefined
-            ? [{ link: '/', name: 'home' }]
+            ? [{ link: '/', name: 'Home' }]
             : [
-                { link: '/', name: 'home' },
+                { link: '/', name: 'Home' },
                 {
                   link: `/${trailSection.type}/${trailSection.id}`,
-                  name: `${trailSection.type} ${trailSection.id}`,
+                  name: `${trailSection.type!.charAt(0).toUpperCase() +
+                    trailSection.type!.slice(1)} ${trailSection.id}`,
                 },
               ]
         }
@@ -176,10 +179,9 @@ const Home: React.FC<RouteComponentProps<any>> = ({
       <Redirect
         push
         to={
-          '/' +
-          (trailSection.type !== undefined
-            ? trailSection.type + '/' + trailSection.id
-            : '')
+          trailSection.type !== undefined
+            ? `/${trailSection.type}/${trailSection.id}`
+            : '/'
         }
       />
       <AutoRotatingCarousel
