@@ -55,11 +55,8 @@ const Home: React.FC<RouteComponentProps<any>> = ({
     setTrailSection({ type: type, id: isNaN(id) ? undefined : parseInt(id) });
   }, [type, id]);
   // store retrieved current description text
-  const [title, setTitle] = useState('Home');
-  const [shortTitle, setShortTitle] = useState('Home');
   const [multimedia, setMultimedia] = useState<any>([]);
   const [fileLinks, setFileLinks] = useState<any>([]);
-  const [description, setDescription] = useState<string | undefined>(undefined);
   const [comments, setComments] = useState<any>([]);
   const [reviews, setReviews] = useState<any>([]);
   const [newSelection, setNewSelection] = useState(false);
@@ -85,9 +82,9 @@ const Home: React.FC<RouteComponentProps<any>> = ({
       variables: { id: trailSection.id },
       onCompleted: () => {
         console.log(data);
-        setTitle(data.routes_by_pk.title);
-        setShortTitle(data.routes_by_pk.short_title);
-        setDescription(data.routes_by_pk.body);
+        // setTitle(data.routes_by_pk.title);
+        // setShortTitle(data.routes_by_pk.short_title);
+        // setDescription(data.routes_by_pk.body);
       },
     }
   );
@@ -171,7 +168,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({
                 { link: '/', name: 'Home' },
                 {
                   link: `/stage/${trailSection.id}`,
-                  name: shortTitle,
+                  name: loading ? '' : data.routes_by_pk.short_title,
                 },
               ]
         }
@@ -179,10 +176,10 @@ const Home: React.FC<RouteComponentProps<any>> = ({
         setNewSelection={setNewSelection}
       >
         <Menu
-          title={title}
+          title={loading ? '' : data.routes_by_pk.title}
           multimedia={multimedia}
           fileLinks={fileLinks}
-          description={description}
+          description={loading ? '' : data.routes_by_pk.body}
           comments={comments}
           reviews={reviews}
           loading={loading}
