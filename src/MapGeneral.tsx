@@ -90,11 +90,11 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         paint={{
           'line-color': [
             'case',
-            ['match', ['get', 'TRAILTYPE'], ['', 'WALKING'], true, false],
+            ['match', ['get', 'routeType'], ['', 'walk'], true, false],
             'hsl(33, 100%, 64%)',
-            ['match', ['get', 'TRAILTYPE'], ['', 'CYCLING'], true, false],
+            ['match', ['get', 'routeType'], ['', 'bike'], true, false],
             'hsl(0, 100%, 69%)',
-            ['match', ['get', 'TRAILTYPE'], ['', 'SU:WALK,BIKE'], true, false],
+            ['match', ['get', 'routeType'], ['', 'shared'], true, false],
             'hsl(82, 100%, 41%)',
             'hsl(46, 98%, 30%)',
           ],
@@ -105,7 +105,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
           'STAGE',
           selectedFeature != undefined &&
             selectedFeature.layer.id === 'trail_line_all_target' &&
-            selectedFeature.properties.STAGE,
+            selectedFeature.properties.routeId,
         ]}
       />
       <Layer
@@ -126,7 +126,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
           'STAGE',
           selectedFeature != undefined &&
             selectedFeature.layer.id === 'trail_line_all_target' &&
-            selectedFeature.properties.STAGE,
+            selectedFeature.properties.routeId,
         ]}
       />
       ]} />
@@ -142,11 +142,11 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         paint={{
           'line-color': [
             'case',
-            ['match', ['get', 'TRAILTYPE'], ['', 'WALKING'], true, false],
+            ['match', ['get', 'routeType'], ['', 'walk'], true, false],
             'hsl(33, 100%, 64%)',
-            ['match', ['get', 'TRAILTYPE'], ['', 'CYCLING'], true, false],
+            ['match', ['get', 'routeType'], ['', 'bike'], true, false],
             'hsl(0, 100%, 69%)',
-            ['match', ['get', 'TRAILTYPE'], ['', 'SU:WALK,BIKE'], true, false],
+            ['match', ['get', 'routeType'], ['', 'shared'], true, false],
             'hsl(82, 100%, 41%)',
             'hsl(46, 98%, 30%)',
           ],

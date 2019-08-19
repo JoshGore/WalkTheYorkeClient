@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ReactMapboxGl from 'react-mapbox-gl';
 import ReactResizeDetector from 'react-resize-detector';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { featureCollection } from '@turf/helpers';
 import MapGeneral from './MapGeneral';
-let stages = require('./data/walktheyorke_naturemaps_stages_simplified2.geojson');
 let shelters = require('./data/walktheyorke_oldcouncil_shelters.geojson');
 
 const MapComponent = ReactMapboxGl({
@@ -34,24 +35,54 @@ const Map: React.FC<MapProps> = ({
   const [map, setMap] = useState<any>(false);
   const [selectedFeature, setSelectedFeature] = useState<any>(null);
   const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
-  const [stagesData, setStagesData] = useState<any>({});
   // prevents reloading on map changes
   const [initialBounds] = useState<[[number, number], [number, number]]>([
     [136.585109, -35.314486],
     [138.366868, -33.99099],
   ]);
   const [mapLoading, setMapLoading] = useState(true);
-  const [jsonLoading, setJsonLoading] = useState(true);
-  // fetch trail geojson data
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(stages);
-      const json = await result.json();
-      await setStagesData(json);
-      await setJsonLoading(false);
+  const {
+    loading: linesLoading,
+    error: linesError,
+    data: linesQueryData,
+  } = useQuery(
+    gql`
+      {
+        lines(
+          where: {
+            line_routes: { route: { typeByType: { name: { _eq: "stage" } } } }
+          }
+        ) {
+          geom
+          line_routes(
+            where: { route: { typeByType: { name: { _eq: "stage" } } } }
+          ) {
+            route_id
+          }
+          line_types {
+            type {
+              name
+            }
+          }
+        }
+      }
+    `
+  );
+  const geoJsonLines = (lines: any) => {
+    return {
+      type: 'FeatureCollection',
+      features: lines.map((line: any) => {
+        return {
+          type: 'Feature',
+          properties: {
+            routeId: line.line_routes[0].route_id,
+            routeType: line.line_types[0].type.name,
+          },
+          geometry: line.geom,
+        };
+      }),
     };
-    fetchData();
-  }, []);
+  };
   // set map when component loads
   const onStyleLoad = (map: any) => {
     setMap(map);
@@ -79,7 +110,7 @@ const Map: React.FC<MapProps> = ({
       if (feature) {
         // if trail section selected and currently in all mode then update trailSection
         if (feature.layer.id === 'trail_line_all_target') {
-          setTrailSection({ type: 'stage', id: feature.properties.STAGE });
+          setTrailSection({ type: 'stage', id: feature.properties.routeId });
         }
       } else {
         // if no interactive features returned then set trailObject to none
@@ -92,22 +123,22 @@ const Map: React.FC<MapProps> = ({
   useEffect(() => {
     map &&
       !mapLoading &&
-      !jsonLoading &&
+      !linesLoading &&
       map.fitBounds(
         trailSection.type === undefined
           ? initialBounds
           : bbox(
               featureCollection(
                 trailSection.type === 'stage' &&
-                  stagesData.features.filter(
+                  geoJsonLines(linesQueryData.lines).features.filter(
                     (feature: any) =>
-                      feature.properties.STAGE === trailSection.id
+                      feature.properties.routeId === trailSection.id
                   )
               )
             ),
         { padding: 100 }
       );
-  }, [trailSection.id, trailSection.type, mapLoading, jsonLoading]);
+  }, [trailSection.id, trailSection.type, mapLoading, linesLoading]);
 
   return (
     <div
@@ -129,16 +160,15 @@ const Map: React.FC<MapProps> = ({
         onClick={(map, evt) => mapClick(map, evt)}
       >
         {/* sources for trail lines, short walk lines, day walk lines, hero walk lines */}
-        {Object.entries(shelters).length !== 0 &&
-          Object.entries(stagesData).length !== 0 && (
-            <MapGeneral
-              trailSection={trailSection}
-              trailObject={trailObject}
-              selectedFeature={selectedFeature}
-              stagesData={stagesData}
-              shelters={shelters}
-            />
-          )}
+        {Object.entries(shelters).length !== 0 && !linesLoading && (
+          <MapGeneral
+            trailSection={trailSection}
+            trailObject={trailObject}
+            selectedFeature={selectedFeature}
+            stagesData={geoJsonLines(linesQueryData.lines)}
+            shelters={shelters}
+          />
+        )}
       </MapComponent>
     </div>
   );

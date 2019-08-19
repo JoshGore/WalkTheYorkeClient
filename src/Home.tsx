@@ -2,6 +2,8 @@
 import 'typeface-roboto';
 import React, { useState, useEffect } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 import Map from './Map';
 import Menu from './Menu';
 import MenuContainer from './MenuContainer';
@@ -9,8 +11,6 @@ const {
   AutoRotatingCarousel,
   Slide,
 } = require('material-auto-rotating-carousel');
-
-const infoLinks = require('./data/information/infolinks.json');
 
 interface User {
   id: number | null;
@@ -45,13 +45,6 @@ const Home: React.FC<RouteComponentProps<any>> = ({
   });
   const [portrait, setPortrait] = useState(getPortrait);
   useEffect(() => {
-    document.title =
-      trailSection.type !== undefined
-        ? `${trailSection.type.charAt(0).toUpperCase() +
-            trailSection.type.slice(1)} ${trailSection.id}`
-        : 'Home';
-  });
-  useEffect(() => {
     function handleResize() {
       setPortrait(getPortrait());
     }
@@ -62,16 +55,45 @@ const Home: React.FC<RouteComponentProps<any>> = ({
     setTrailSection({ type: type, id: isNaN(id) ? undefined : parseInt(id) });
   }, [type, id]);
   // store retrieved current description text
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState('Home');
+  const [shortTitle, setShortTitle] = useState('Home');
   const [multimedia, setMultimedia] = useState<any>([]);
   const [fileLinks, setFileLinks] = useState<any>([]);
   const [description, setDescription] = useState<string | undefined>(undefined);
   const [comments, setComments] = useState<any>([]);
   const [reviews, setReviews] = useState<any>([]);
-  const [loading, setLoading] = useState(true);
   const [newSelection, setNewSelection] = useState(false);
 
+  useEffect(() => {
+    document.title =
+      trailSection.type !== undefined
+        ? `${trailSection.type.charAt(0).toUpperCase() +
+            trailSection.type.slice(1)} ${trailSection.id}`
+        : 'Home';
+  });
+  const { loading, error, data } = useQuery(
+    gql`
+      query($id: Int!) {
+        routes_by_pk(id: $id) {
+          short_title
+          title
+          body
+        }
+      }
+    `,
+    {
+      variables: { id: trailSection.id },
+      onCompleted: () => {
+        console.log(data);
+        setTitle(data.routes_by_pk.title);
+        setShortTitle(data.routes_by_pk.short_title);
+        setDescription(data.routes_by_pk.body);
+      },
+    }
+  );
+
   // retreive json object descriptions which link to markdown and image files
+  /*
   useEffect(() => {
     const fetchData = async () => {
       // set description to none to prevent rendering for wrong object
@@ -124,6 +146,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({
     };
     fetchData();
   }, [trailSection.id, trailSection.type, trailObject.id, trailObject.type]);
+   */
   return (
     <div
       style={{
@@ -147,9 +170,8 @@ const Home: React.FC<RouteComponentProps<any>> = ({
             : [
                 { link: '/', name: 'Home' },
                 {
-                  link: `/${trailSection.type}/${trailSection.id}`,
-                  name: `${trailSection.type!.charAt(0).toUpperCase() +
-                    trailSection.type!.slice(1)} ${trailSection.id}`,
+                  link: `/stage/${trailSection.id}`,
+                  name: shortTitle,
                 },
               ]
         }
