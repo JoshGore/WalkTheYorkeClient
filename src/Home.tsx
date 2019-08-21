@@ -1,4 +1,3 @@
-//@format
 import 'typeface-roboto';
 import React, { useState, useEffect } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
@@ -7,9 +6,10 @@ import { useQuery } from '@apollo/react-hooks';
 import Map from './Map';
 import Menu from './Menu';
 import MenuContainer from './MenuContainer';
+
 const {
   AutoRotatingCarousel,
-  Slide,
+  // Slide,
 } = require('material-auto-rotating-carousel');
 
 interface User {
@@ -31,7 +31,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({
     type: string | undefined;
     id: number | undefined;
     // }>({ type: undefined, id: undefined });
-  }>({ type: type, id: isNaN(id) ? undefined : parseInt(id) });
+  }>({ type, id: isNaN(id) ? undefined : parseInt(id) });
   // store selected object (POI/Issue etc), null and null if none
   const [trailObject, setTrailObject] = useState<{
     type: string | undefined;
@@ -52,7 +52,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   useEffect(() => {
-    setTrailSection({ type: type, id: isNaN(id) ? undefined : parseInt(id) });
+    setTrailSection({ type, id: isNaN(id) ? undefined : parseInt(id) });
   }, [type, id]);
   // store retrieved current description text
   const [multimedia, setMultimedia] = useState<any>([]);
@@ -86,7 +86,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({
         // setShortTitle(data.routes_by_pk.short_title);
         // setDescription(data.routes_by_pk.body);
       },
-    }
+    },
   );
 
   // retreive json object descriptions which link to markdown and image files
@@ -158,19 +158,19 @@ const Home: React.FC<RouteComponentProps<any>> = ({
         flexDirection: portrait ? 'column' : 'row',
       }}
     >
-      {/*menu - whether horizontal overlay or vertical side bar depends on orientation. order > 10 to place after, < 10 to place before*/}
+      {/* menu - whether horizontal overlay or vertical side bar depends on orientation. order > 10 to place after, < 10 to place before */}
       <MenuContainer
         portrait={portrait}
         links={
           trailSection.id === undefined
             ? [{ link: '/', name: 'Home' }]
             : [
-                { link: '/', name: 'Home' },
-                {
-                  link: `/stage/${trailSection.id}`,
-                  name: loading ? '' : data.routes_by_pk.short_title,
-                },
-              ]
+              { link: '/', name: 'Home' },
+              {
+                link: `/stage/${trailSection.id}`,
+                name: loading ? '' : data.routes_by_pk.short_title,
+              },
+            ]
         }
         newSelection={newSelection}
         setNewSelection={setNewSelection}
@@ -185,7 +185,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({
           loading={loading}
         />
       </MenuContainer>
-      {/*map - order = 10*/}
+      {/* map - order = 10 */}
       <Map
         trailSection={trailSection}
         setTrailSection={setTrailSection}

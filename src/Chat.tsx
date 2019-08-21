@@ -30,14 +30,14 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: theme.spacing(2),
     },
     textField: {
-      [`& fieldset`]: {
+      '& fieldset': {
         borderRadius: '15px 15px 15px 15px',
       },
     },
     dense: {
       marginTop: theme.spacing(2),
     },
-  })
+  }),
 );
 
 const Message: React.FC<any> = ({
@@ -49,78 +49,71 @@ const Message: React.FC<any> = ({
   return (
     <Grid
       container
-      wrap='nowrap'
+      wrap="nowrap"
       spacing={2}
       direction={fromUser ? 'row-reverse' : 'row'}
     >
       <Grid item>
-        <Avatar
-          className={fromUser && classes.messageFromAvatar}
-        >{`${firstName.charAt(0)}${lastName.charAt(0)}`}</Avatar>
+        <Avatar className={fromUser ? classes.messageFromAvatar : ''}>
+          {`${firstName.charAt(0)}${lastName.charAt(0)}`}
+        </Avatar>
       </Grid>
       <Grid item>
         <Paper className={fromUser ? classes.messageFrom : classes.messageTo}>
           {!fromUser && (
-            <Typography
-              variant='caption'
-              color='textSecondary'
-            >{`${firstName} ${lastName}`}</Typography>
+            <Typography variant="caption" color="textSecondary">
+              {`${firstName} ${lastName}`}
+            </Typography>
           )}
-          <Typography variant='body1'>{message}</Typography>
+          <Typography variant="body1">{message}</Typography>
         </Paper>
       </Grid>
     </Grid>
   );
 };
 
-const Messages: React.FC<any> = ({}) => {
-  return (
-    <>
-      <Message
-        fromUser={false}
-        message={'test message 1'}
-        user={{ firstName: 'Brian', lastName: 'Cumin' }}
-      />
-      <Message
-        fromUser={true}
-        message={'test message 2 from me'}
-        user={{ firstName: 'Archibald', lastName: 'Northbottom' }}
-      />
-      <Message
-        fromUser={false}
-        user={{ firstName: 'Hans', lastName: 'Down' }}
-        message={
-          'Molestie a iaculis at erat pellentesque adipiscing commodo elit. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus et.'
-        }
-      />
-      <Message
-        fromUser={true}
-        user={{ firstName: 'Archibald', lastName: 'Northbottom' }}
-        message={
-          'Arcu vitae elementum curabitur vitae nunc. Nunc sed id semper risus in hendrerit gravida rutrum. Id venenatis a condimentum vitae. Neque ornare aenean euismod elementum. Habitant morbi tristique senectus et netus et malesuada. Senectus et netus et malesuada fames ac turpis egestas maecenas. Luctus venenatis lectus magna fringilla urna.'
-        }
-      />
-    </>
-  );
-};
+const Messages: React.FC<any> = () => (
+  <>
+    <Message
+      fromUser={false}
+      message="test message 1"
+      user={{ firstName: 'Brian', lastName: 'Cumin' }}
+    />
+    <Message
+      fromUser
+      message="test message 2 from me"
+      user={{ firstName: 'Archibald', lastName: 'Northbottom' }}
+    />
+    <Message
+      fromUser={false}
+      user={{ firstName: 'Hans', lastName: 'Down' }}
+      message="Molestie a iaculis at erat pellentesque adipiscing commodo elit. Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus et."
+    />
+    <Message
+      fromUser
+      user={{ firstName: 'Archibald', lastName: 'Northbottom' }}
+      message="Arcu vitae elementum curabitur vitae nunc. Nunc sed id semper risus in hendrerit gravida rutrum. Id venenatis a condimentum vitae. Neque ornare aenean euismod elementum. Habitant morbi tristique senectus et netus et malesuada. Senectus et netus et malesuada fames ac turpis egestas maecenas. Luctus venenatis lectus magna fringilla urna."
+    />
+  </>
+);
 
-const MessageForm: React.FC<any> = ({}) => {
+const MessageForm: React.FC<any> = () => {
   const classes = useStyles();
   return (
     <TextField
-      id='outlined-dense-multiline'
-      label='start with @issue to submit issue'
+      id="outlined-dense-multiline"
+      label="start with @issue to submit issue"
       className={clsx(classes.textField, classes.dense)}
-      margin='dense'
-      variant='outlined'
+      margin="dense"
+      variant="outlined"
       multiline
-      rowsMax='4'
+      rowsMax="4"
       fullWidth
     />
   );
 };
 
-const Chat: React.FC<any> = ({ comments }) => {
+const Chat: React.FC<any> = () => {
   const classes = useStyles();
   return (
     <Grid className={classes.root} container>

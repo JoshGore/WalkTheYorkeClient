@@ -1,4 +1,3 @@
-//@format
 import React, { useEffect, useState } from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -10,21 +9,19 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link as RouterLink } from 'react-router-dom';
 import Scrollbars from 'react-custom-scrollbars';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    margin: {
-      margin: theme.spacing(1),
-    },
-    extendedIcon: {
-      marginRight: theme.spacing(1),
-    },
-    breadcrumbs: {
-      padding: theme.spacing(1, 2),
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-    },
-  })
-);
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  margin: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+  breadcrumbs: {
+    padding: theme.spacing(1, 2),
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  },
+}));
 
 interface MenuContainerProps {
   portrait: boolean;
@@ -48,14 +45,14 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
     menuShown === 0
       ? setMenuShown(1)
       : !portrait && menuShown === 2
-      ? setMenuShown(1)
-      : setMenuShown(0);
+        ? setMenuShown(1)
+        : setMenuShown(0);
   };
   const [breadcrumbLinks, setBreadcrumbLinks] = useState<
-    MenuContainerProps['links']
+  MenuContainerProps['links']
   >([]);
   const [breadcrumbCurrent, setBreadcrumbCurent] = useState<
-    undefined | { name: string; link: string }
+  undefined | { name: string; link: string }
   >();
   useEffect(() => {
     const templinks = links;
@@ -77,8 +74,8 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
           ? menuShown === 0
             ? 'fit-content'
             : menuShown === 1
-            ? '100%'
-            : '33%'
+              ? '100%'
+              : '33%'
           : '100%',
         order: window.innerWidth < window.innerHeight ? 15 : 5,
         boxShadow: '0px 0px 30px 10px rgba(0,0,0,0.2)',
@@ -105,13 +102,13 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
               </Link>
             ))}
             {breadcrumbCurrent !== undefined && (
-              <Typography color='textPrimary'>
+              <Typography color="textPrimary">
                 {breadcrumbCurrent.name}
               </Typography>
             )}
           </Breadcrumbs>
           <IconButton
-            size='small'
+            size="small"
             onClick={handleMenuToggle}
             style={{
               display: 'inline-block',
@@ -123,8 +120,8 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
                     ? 180
                     : 0
                   : menuShown === 0 || menuShown === 2
-                  ? 270
-                  : 90
+                    ? 270
+                    : 90
               }deg)`,
               transition: 'transform 0.25s',
             }}

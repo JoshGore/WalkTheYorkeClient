@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Link from '@material-ui/core/Link';
 
 const DownloadMenu: React.FC<any> = ({ links }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -18,16 +17,16 @@ const DownloadMenu: React.FC<any> = ({ links }) => {
   return (
     <div>
       <Button
-        aria-controls='simple-menu'
-        aria-haspopup='true'
-        variant='outlined'
-        size='small'
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        variant="outlined"
+        size="small"
         onClick={handleClick}
       >
         Downloads
       </Button>
       <Menu
-        id='simple-menu'
+        id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
@@ -37,7 +36,7 @@ const DownloadMenu: React.FC<any> = ({ links }) => {
           <MenuItem
             key={link.link}
             onClick={handleClose}
-            component='a'
+            component="a"
             href={link.link}
           >
             {link.name}

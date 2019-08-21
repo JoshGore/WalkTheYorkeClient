@@ -6,7 +6,8 @@ import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { featureCollection } from '@turf/helpers';
 import MapGeneral from './MapGeneral';
-let shelters = require('./data/walktheyorke_oldcouncil_shelters.geojson');
+
+const shelters = require('./data/walktheyorke_oldcouncil_shelters.geojson');
 
 const MapComponent = ReactMapboxGl({
   accessToken: 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A',
@@ -66,32 +67,26 @@ const Map: React.FC<MapProps> = ({
           }
         }
       }
-    `
+    `,
   );
-  const geoJsonLines = (lines: any) => {
-    return {
-      type: 'FeatureCollection',
-      features: lines.map((line: any) => {
-        return {
-          type: 'Feature',
-          properties: {
-            routeId: line.line_routes[0].route_id,
-            routeType: line.line_types[0].type.name,
-          },
-          geometry: line.geom,
-        };
-      }),
-    };
-  };
+  const geoJsonLines = (lines: any) => ({
+    type: 'FeatureCollection',
+    features: lines.map((line: any) => ({
+      type: 'Feature',
+      properties: {
+        routeId: line.line_routes[0].route_id,
+        routeType: line.line_types[0].type.name,
+      },
+      geometry: line.geom,
+    })),
+  });
   // set map when component loads
   const onStyleLoad = (map: any) => {
     setMap(map);
     setMapLoading(false);
   };
   // handle map click/tap events
-  const handleResize = () => {
-    map && map.resize();
-  };
+  const handleResize = () => map && map.resize();
   const mapClick = (map: any, evt: any) => {
     setMapClickCoordinates({
       point: [evt.point.x, evt.point.y],
@@ -105,7 +100,7 @@ const Map: React.FC<MapProps> = ({
       const feature = map
         .queryRenderedFeatures(mapClickCoordinates.point)
         .filter(
-          (feature: any) => feature.layer.id === 'trail_line_all_target'
+          (feature: any) => feature.layer.id === 'trail_line_all_target',
         )[0];
       if (feature) {
         // if trail section selected and currently in all mode then update trailSection
@@ -121,22 +116,21 @@ const Map: React.FC<MapProps> = ({
 
   // zoom to stage if stage selected
   useEffect(() => {
-    map &&
-      !mapLoading &&
-      !linesLoading &&
-      map.fitBounds(
+    map
+      && !mapLoading
+      && !linesLoading
+      && map.fitBounds(
         trailSection.type === undefined
           ? initialBounds
           : bbox(
-              featureCollection(
-                trailSection.type === 'stage' &&
-                  geoJsonLines(linesQueryData.lines).features.filter(
-                    (feature: any) =>
-                      feature.properties.routeId === trailSection.id
-                  )
-              )
+            featureCollection(
+              trailSection.type === 'stage'
+                  && geoJsonLines(linesQueryData.lines).features.filter(
+                    (feature: any) => feature.properties.routeId === trailSection.id,
+                  ),
             ),
-        { padding: 100 }
+          ),
+        { padding: 100 },
       );
   }, [trailSection.id, trailSection.type, mapLoading, linesLoading]);
 
@@ -153,7 +147,7 @@ const Map: React.FC<MapProps> = ({
     >
       <ReactResizeDetector handleWidth handleHeight onResize={handleResize} />
       <MapComponent
-        style={'mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2'}
+        style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
         containerStyle={{ flex: 1 }}
         fitBounds={initialBounds}
         onStyleLoad={onStyleLoad}
