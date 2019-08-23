@@ -34,12 +34,12 @@ const DownloadMenu: React.FC<any> = ({ links }) => {
       >
         {links.map((link: any) => (
           <MenuItem
-            key={link.link}
+            key={link.file.link}
             onClick={handleClose}
             component="a"
-            href={link.link}
+            href={link.file.link}
           >
-            {link.name}
+            {link.file.name}
           </MenuItem>
         ))}
       </Menu>

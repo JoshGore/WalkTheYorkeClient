@@ -9,26 +9,27 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link as RouterLink } from 'react-router-dom';
 import Scrollbars from 'react-custom-scrollbars';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  margin: {
-    margin: theme.spacing(1),
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
-  breadcrumbs: {
-    padding: theme.spacing(1, 2),
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    margin: {
+      margin: theme.spacing(1),
+    },
+    extendedIcon: {
+      marginRight: theme.spacing(1),
+    },
+    breadcrumbs: {
+      padding: theme.spacing(1, 2),
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+    },
+  }),
+);
 
 interface MenuContainerProps {
   portrait: boolean;
   links: Array<{ name: string; link: string }>;
   children: any;
   newSelection: boolean;
-  setNewSelection: any;
 }
 
 const MenuContainer: React.FC<MenuContainerProps> = ({
@@ -36,10 +37,10 @@ const MenuContainer: React.FC<MenuContainerProps> = ({
   links,
   children,
   newSelection,
-  setNewSelection,
 }) => {
   const classes = useStyles();
   // store retrieved current description text
+  const [selection, setNewSelection] = useState(false);
   const [menuShown, setMenuShown] = useState(2);
   const handleMenuToggle = () => {
     menuShown === 0

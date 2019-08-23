@@ -14,6 +14,8 @@ const MapComponent = ReactMapboxGl({
   trackResize: false,
 });
 
+const TRAILID = 15;
+
 interface MapProps {
   trailSection: any;
   setTrailSection: any;
@@ -68,6 +70,38 @@ const Map: React.FC<MapProps> = ({
         }
       }
     `,
+  );
+  const {
+    loading: WTYLinesLoading,
+    error: WTYLinesError,
+    data: WTYLinesData,
+  } = useQuery(
+    gql`
+      query($WTYID: Int!) {
+        routes_by_pk(id: $WTYID) {
+          routes(where: { typeByType: { name: { _eq: "stage" } } }) {
+            id
+            line_routes {
+              line {
+                id
+                geom
+                line_types {
+                  type {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    {
+      variables: { WTYID: TRAILID },
+      onCompleted: () => {
+        // console.log(WTYLinesData);
+      },
+    },
   );
   const geoJsonLines = (lines: any) => ({
     type: 'FeatureCollection',

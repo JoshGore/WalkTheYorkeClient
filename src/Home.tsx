@@ -6,16 +6,19 @@ import { useQuery } from '@apollo/react-hooks';
 import Map from './Map';
 import Menu from './Menu';
 import MenuContainer from './MenuContainer';
+import SignupLogin from './SignupLogin';
 
-const {
-  AutoRotatingCarousel,
-  // Slide,
-} = require('material-auto-rotating-carousel');
+const WTYTrailID = 18;
 
 interface User {
   id: number | null;
   name: string | null;
   preferences: { activity: string };
+}
+
+interface Selection {
+  type: string | undefined;
+  id: number | undefined;
 }
 
 function getPortrait() {
@@ -27,23 +30,28 @@ const Home: React.FC<RouteComponentProps<any>> = ({
     params: { type, id },
   },
 }) => {
-  const [trailSection, setTrailSection] = useState<{
-    type: string | undefined;
-    id: number | undefined;
-    // }>({ type: undefined, id: undefined });
-  }>({ type, id: isNaN(id) ? undefined : parseInt(id) });
-  // store selected object (POI/Issue etc), null and null if none
-  const [trailObject, setTrailObject] = useState<{
-    type: string | undefined;
-    id: number | undefined;
-  }>({ type: undefined, id: undefined });
+  const [trail, setTrail] = useState(WTYTrailID);
+
   // store user (general/casual/hiker/cyclist)
   const [user, setUser] = useState({
     id: null,
     name: null,
     preferences: { activity: 'general' },
   });
+
+  const [trailSection, setTrailSection] = useState<Selection>({
+    type,
+    id: isNaN(id) ? undefined : parseInt(id, 10),
+  });
+
+  // store selected object (POI/Issue etc), null and null if none
+  const [trailObject, setTrailObject] = useState<Selection>({
+    type: undefined,
+    id: undefined,
+  });
+
   const [portrait, setPortrait] = useState(getPortrait);
+
   useEffect(() => {
     function handleResize() {
       setPortrait(getPortrait());
@@ -51,99 +59,18 @@ const Home: React.FC<RouteComponentProps<any>> = ({
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
   useEffect(() => {
     setTrailSection({ type, id: isNaN(id) ? undefined : parseInt(id) });
   }, [type, id]);
-  // store retrieved current description text
-  const [multimedia, setMultimedia] = useState<any>([]);
-  const [fileLinks, setFileLinks] = useState<any>([]);
-  const [comments, setComments] = useState<any>([]);
-  const [reviews, setReviews] = useState<any>([]);
-  const [newSelection, setNewSelection] = useState(false);
 
   useEffect(() => {
-    document.title =
-      trailSection.type !== undefined
-        ? `${trailSection.type.charAt(0).toUpperCase() +
-            trailSection.type.slice(1)} ${trailSection.id}`
-        : 'Home';
+    document.title = trailSection.type !== undefined
+      ? `${trailSection.type.charAt(0).toUpperCase()
+            + trailSection.type.slice(1)} ${trailSection.id}`
+      : 'Home';
   });
-  const { loading, error, data } = useQuery(
-    gql`
-      query($id: Int!) {
-        routes_by_pk(id: $id) {
-          short_title
-          title
-          body
-        }
-      }
-    `,
-    {
-      variables: { id: trailSection.id },
-      onCompleted: () => {
-        console.log(data);
-        // setTitle(data.routes_by_pk.title);
-        // setShortTitle(data.routes_by_pk.short_title);
-        // setDescription(data.routes_by_pk.body);
-      },
-    },
-  );
 
-  // retreive json object descriptions which link to markdown and image files
-  /*
-  useEffect(() => {
-    const fetchData = async () => {
-      // set description to none to prevent rendering for wrong object
-      setDescription('');
-      // find stage with id of trailSection.id then fetch
-      let result: any;
-      let text: string = '';
-      if (trailSection.type === undefined && trailObject.type === undefined) {
-        setMultimedia(infoLinks.default.images);
-        result = await fetch(
-          process.env.PUBLIC_URL + infoLinks.default.description.link
-        );
-        text = await result.text();
-      } else if (
-        trailSection.type === 'stage' &&
-        trailObject.type === undefined
-      ) {
-        setMultimedia(
-          infoLinks.stages.find((stage: any) => stage.id === trailSection.id)
-            .images
-        );
-        result = await fetch(
-          process.env.PUBLIC_URL +
-            infoLinks.stages.find((stage: any) => stage.id === trailSection.id)
-              .description.link
-        );
-        text = await result.text();
-      }
-      await setDescription(text);
-      await setFileLinks(
-        (trailSection.type === undefined
-          ? infoLinks.default
-          : infoLinks.stages.find((stage: any) => stage.id === trailSection.id)
-        ).downloads
-      );
-      await setTitle(
-        (trailSection.type === undefined
-          ? infoLinks.default
-          : infoLinks.stages.find((stage: any) => stage.id === trailSection.id)
-        ).name
-      );
-      await setReviews(
-        trailSection.type !== undefined
-          ? infoLinks.stages.find((stage: any) => stage.id === trailSection.id)
-              .reviews
-          : []
-      );
-      await setLoading(false);
-      await setNewSelection(true);
-    };
-    fetchData();
-  }, [trailSection.id, trailSection.type, trailObject.id, trailObject.type]);
-   */
   return (
     <div
       style={{
@@ -159,33 +86,15 @@ const Home: React.FC<RouteComponentProps<any>> = ({
       }}
     >
       {/* menu - whether horizontal overlay or vertical side bar depends on orientation. order > 10 to place after, < 10 to place before */}
-      <MenuContainer
+      <Menu
         portrait={portrait}
-        links={
-          trailSection.id === undefined
-            ? [{ link: '/', name: 'Home' }]
-            : [
-              { link: '/', name: 'Home' },
-              {
-                link: `/stage/${trailSection.id}`,
-                name: loading ? '' : data.routes_by_pk.short_title,
-              },
-            ]
-        }
-        newSelection={newSelection}
-        setNewSelection={setNewSelection}
-      >
-        <Menu
-          title={loading ? '' : data.routes_by_pk.title}
-          multimedia={multimedia}
-          fileLinks={fileLinks}
-          description={loading ? '' : data.routes_by_pk.body}
-          comments={comments}
-          reviews={reviews}
-          loading={loading}
-        />
-      </MenuContainer>
-      {/* map - order = 10 */}
+        trail={trail}
+        setTrail={setTrail}
+        trailSection={trailSection}
+        setTrailSection={setTrailSection}
+        trailObject={trailObject}
+        setTrailObject={setTrailObject}
+      />
       <Map
         trailSection={trailSection}
         setTrailSection={setTrailSection}
@@ -195,6 +104,7 @@ const Home: React.FC<RouteComponentProps<any>> = ({
         setUser={setUser}
         portrait={portrait}
       />
+      <SignupLogin />
       <Redirect
         push
         to={
@@ -203,42 +113,6 @@ const Home: React.FC<RouteComponentProps<any>> = ({
             : '/'
         }
       />
-      <AutoRotatingCarousel
-        open={false}
-        mobile={window.innerWidth < 600}
-        autoplay={false}
-      >
-        <div
-          style={{ height: '100%', width: '100%', backgroundColor: 'white' }}
-        >
-          About this map
-        </div>
-        <div
-          style={{ height: '100%', width: '100%', backgroundColor: 'white' }}
-        >
-          Options
-        </div>
-        {/*
-      <Slide
-        media=''
-        mediaBackgroundStyle={{
-          display: 'none',
-            background: 'rgba(10,0,0,0.2)',
-        }}
-        title='About this map'
-        subtitle=''
-      />
-      <Slide
-        media=''
-        mediaBackgroundStyle={{
-          display: 'none',
-            background: 'rgba(10,0,0,0.2)',
-        }}
-        title='Options'
-        subtitle=''
-      />
-        */}
-      </AutoRotatingCarousel>
     </div>
   );
 };
