@@ -1,12 +1,17 @@
 import 'typeface-roboto';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { Avatar, IconButton } from '@material-ui/core';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import Fab from '@material-ui/core/Fab';
+import TouchRipple from '@material-ui/core/ButtonBase/TouchRipple';
 import Map from './Map';
 import Menu from './Menu';
 import MenuContainer from './MenuContainer';
 import SignupLogin from './SignupLogin';
+import UserContext from './UserContext';
 
 const WTYTrailID = 18;
 
@@ -30,6 +35,8 @@ const Home: React.FC<RouteComponentProps<any>> = ({
     params: { type, id },
   },
 }) => {
+  const User = useContext<any>(UserContext);
+
   const [trail, setTrail] = useState(WTYTrailID);
 
   // store user (general/casual/hiker/cyclist)
@@ -71,6 +78,10 @@ const Home: React.FC<RouteComponentProps<any>> = ({
       : 'Home';
   });
 
+  const handleLoginToggle = () => {
+    User.setShowLoginMenu(!User.showLoginMenu);
+  };
+
   return (
     <div
       style={{
@@ -105,6 +116,27 @@ const Home: React.FC<RouteComponentProps<any>> = ({
         portrait={portrait}
       />
       <SignupLogin />
+      <IconButton
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          margin: 4,
+          boxShadow: '4px 4px 10px -5px rgba(0,0,0,0.75)',
+          padding: 0,
+        }}
+        onClick={handleLoginToggle}
+      >
+        <Avatar
+          style={{
+            backgroundColor: User.loggedIn ? '#3f51b5' : '',
+          }}
+        >
+          {User.loggedIn
+
+            ? `${User.firstname.charAt(0)}${User.lastname.charAt(0)}` : <PersonAddIcon />}
+        </Avatar>
+      </IconButton>
       <Redirect
         push
         to={

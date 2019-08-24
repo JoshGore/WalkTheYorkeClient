@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 // list stuff
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
+import {
+  List, ListItem, ListItemText, ListItemAvatar, Avatar, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, TextField, CircularProgress,
+} from '@material-ui/core';
+
+import CreateIcon from '@material-ui/icons/Create';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -21,6 +21,87 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
+const ReviewForm: React.FC<any> = () => {
+  const [submitReview, { data }] = useMutation(gql`
+    mutation ($route_id: Int!, $user_id: Int!, $rating: Int!, $review: String!) {
+      insert_route_review(objects: {route_id: $route_id, review: {data: {body: $review, rating: $rating, user_id: $user_id}}}) {
+        returning {
+          review {
+            rating
+            body
+          }
+        }
+      }
+    }
+  `);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const handleAddReview = () => {
+    setShowReviewForm(true);
+  };
+  const [rating, setRating] = useState(3);
+  const [review, setReview] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const handleRatingChange = (event: React.ChangeEvent<any>, value: number) => {
+    setRating(value);
+  };
+  const handleReviewChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setReview(event.target.value);
+  };
+  const handleClose = () => {
+    setShowReviewForm(false);
+    setRating(3);
+    setReview('');
+  };
+  const handleSubmit = () => {
+    setSubmitting(true);
+    submitReview({
+      variables: {
+        route_id: 10,
+        user_id: localStorage.getItem('userId'),
+        rating,
+        review,
+      },
+    }).then(() => {
+      setSubmitting(false);
+    });
+  };
+  return (
+    <>
+      <Button variant="outlined" onClick={handleAddReview}>
+        <CreateIcon style={{ marginRight: 4 }} />
+          Write review
+      </Button>
+      <Dialog open={showReviewForm}>
+        <DialogTitle>
+            Add Review
+        </DialogTitle>
+        <DialogContent>
+          <Rating value={rating} onChange={handleRatingChange} />
+          <TextField onChange={handleReviewChange} id="review" placeholder="Share the details of your experiences" multiline rows="5" variant="filled" fullWidth />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>
+            Cancel
+          </Button>
+          <div style={{ position: 'relative' }}>
+            <Button color="primary" disabled={submitting} onClick={handleSubmit}>
+            Submit
+            </Button>
+            {submitting && (
+            <CircularProgress
+              size={24}
+              style={{
+                position: 'absolute', top: '50%', left: '50%', marginTop: -12, marginLeft: -12,
+              }}
+            />
+            )}
+          </div>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+};
+
 const Reviews: React.FC<any> = ({ id }) => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(
@@ -31,6 +112,10 @@ const Reviews: React.FC<any> = ({ id }) => {
           body
           id
           created_at
+          user {
+            firstname
+            lastname
+          }
         }
       }
     `,
@@ -44,30 +129,25 @@ const Reviews: React.FC<any> = ({ id }) => {
     <>
       {!loading && data.reviews.length > 0 && (
         <>
-          <Typography variant="h4">Reviews</Typography>
+          <span>
+            <Typography variant="h4">Reviews</Typography>
+            <ReviewForm />
+          </span>
           <List className={classes.root}>
             {data.reviews.map((review: any) => (
               <ListItem alignItems="flex-start" key={review.id}>
                 <ListItemAvatar>
                   <Avatar>
-                    FP
-                  </Avatar>
-                </ListItemAvatar>
-                { /*
-                <ListItemAvatar>
-                  <Avatar>
-                    {`${review.user.firstName.charAt(
+                    {`${review.user.firstname.charAt(
                       0,
-                    )}${review.user.lastName.charAt(0)}`}
+                    )}${review.user.lastname.charAt(0)}`}
                   </Avatar>
                 </ListItemAvatar>
-                     */ }
                 <ListItemText
                   disableTypography
                   primary={(
                     <Typography className="MuiListItemText-primary">
-                      { /* {`${review.user.firstName} ${review.user.lastName}`} */ }
-                        Frontend Placeholder
+                      {`${review.user.firstname} ${review.user.lastname}`}
                     </Typography>
                   )}
                   secondary={(

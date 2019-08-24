@@ -1,5 +1,5 @@
 // @format
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import gql from 'graphql-tag';
@@ -10,6 +10,7 @@ import Markdown from './Markdown';
 import Reviews from './Reviews';
 import ReviewSummary from './ReviewSummary';
 import Chat from './Chat';
+import UserContext from './UserContext';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   margin: {
@@ -41,6 +42,7 @@ interface MenuProps {
 }
 
 const Menu: React.FC<any> = ({ portrait, trail, trailSection }) => {
+  const User = useContext(UserContext);
   const classes = useStyles();
   const [newSelection, setNewSelection] = useState(true);
   const { loading, error, data } = useQuery(
@@ -129,7 +131,7 @@ const Menu: React.FC<any> = ({ portrait, trail, trailSection }) => {
         </>
       )}
       <div style={{ padding: 12 }}>
-        <Reviews id={trailSection.id | trail} />
+        <Reviews id={trailSection.id || trail} />
         <Chat id={trailSection.id} />
       </div>
     </MenuContainer>

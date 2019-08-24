@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {
-  Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, TextField, useMediaQuery, Button, CircularProgress, Avatar,
+  Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, TextField, useMediaQuery, Button, CircularProgress,
 } from '@material-ui/core';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useTheme } from '@material-ui/core/styles';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
@@ -55,14 +53,13 @@ const Signup: React.FC<any> = ({ setNewUser, setOpen }) => {
           setSignupFailed(false);
           setSubmitting(false);
           response.json().then(json => {
+            console.log(json);
             localStorage.setItem('authToken', json.token);
             localStorage.setItem('userId', json.id);
             User.setUserId(json.id);
             User.setUsername(json.username);
             User.setFirstname(json.firstname);
             User.setLastname(json.lastname);
-            User.setLoggedIn(true);
-            User.setShowLoginMenu(false);
           });
         }
       },
@@ -90,7 +87,7 @@ const Signup: React.FC<any> = ({ setNewUser, setOpen }) => {
         <DialogContentText>
             Create an account to submit issues, reviews, and comments.
         </DialogContentText>
-        <form onSubmit={handleSubmit}>
+        <form>
           <Grid container spacing={2}>
             <Grid item sm={6} xs={12}>
               <TextField
@@ -227,6 +224,7 @@ const Login: React.FC<any> = ({ setNewUser, setOpen }) => {
         if (!response.ok) {
           response.json().then(json => {
             const jsonErrors: any = {};
+            console.log(json);
             json.errors && json.errors.forEach((error: any) => {
               jsonErrors[error.param] = error.msg;
             });
@@ -256,8 +254,6 @@ const Login: React.FC<any> = ({ setNewUser, setOpen }) => {
             User.setUsername(json.username);
             User.setFirstname(json.firstname);
             User.setLastname(json.lastname);
-            User.setLoggedIn(true);
-            User.setShowLoginMenu(false);
           });
         }
       },
@@ -272,7 +268,7 @@ const Login: React.FC<any> = ({ setNewUser, setOpen }) => {
         <DialogContentText>
         Sign in to submit issues, reviews, and comments.
         </DialogContentText>
-        <form onSubmit={handleSubmit}>
+        <form>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -332,43 +328,15 @@ const Login: React.FC<any> = ({ setNewUser, setOpen }) => {
   );
 };
 
-const UserDetails: React.FC<any> = () => {
-  const User = useContext<any>(UserContext);
-  return (
-    <>
-      <DialogTitle>
-        <Avatar style={{ marginRight: 'auto', marginLeft: 'auto' }}>
-          <LockOpenIcon />
-        </Avatar>
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText style={{ textAlign: 'center', marginBottom: 0 }}>
-          {`${User.firstname} ${User.lastname}`}
-          <br />
-          <i>
-            {`${User.username}`}
-          </i>
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={User.signOut} style={{ margin: 'auto', color: '#bdbdbd' }}>
-            Sign Out
-          <ExitToAppIcon style={{ marginLeft: 4 }} />
-        </Button>
-      </DialogActions>
-    </>
-  );
-};
-
 const SignupLogin: React.FC<any> = () => {
-  const User = useContext<any>(UserContext);
+  const User = useContext(UserContext);
   const [loadDetails, setLoadDetails] = useState(false);
+  // const [open, setOpen] = useState(false);
   const setUserVariables = ({ users_by_pk: data } : any) => {
     User.setUsername(data.username);
     User.setFirstname(data.firstname);
     User.setLastname(data.lastname);
     User.setLoggedIn(true);
-    User.setShowLoginMenu(false);
   };
   const { error: userError, data: userData } = useQuery(gql`
     query ($userId: Int!) {
@@ -396,10 +364,8 @@ const SignupLogin: React.FC<any> = () => {
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
   const [newUser, setNewUser] = useState(true);
   return (
-    <Dialog open={User.showLoginMenu} fullScreen={fullScreen} onClose={() => User.setShowLoginMenu(false)}>
-      {User.loggedIn && <UserDetails />}
-      {!User.loggedIn && newUser && <Signup setNewUser={setNewUser} />}
-      {!User.loggedIn && !newUser && <Login setNewUser={setNewUser} />}
+    <Dialog open={User.showLoginMenu} fullScreen={fullScreen}>
+      {newUser ? <Signup setNewUser={setNewUser} /> : <Login setNewUser={setNewUser} />}
     </Dialog>
   );
 };
