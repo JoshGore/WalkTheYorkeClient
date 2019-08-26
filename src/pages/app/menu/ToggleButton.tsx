@@ -13,7 +13,6 @@ interface ToggleButtonProps {
 const ToggleButton: React.FC<ToggleButtonProps> = ({ mode, menuState, setMenuState }) => {
   // point down: 0, point left: 90, point up: 180, point right: 270
   const getTransform = (): 0 | 90 | 180 | 270 => {
-    console.log('getting transform');
     if (mode === 'side' && (menuState === 'collapsed' || menuState === 'visible')) {
       return 270;
     }

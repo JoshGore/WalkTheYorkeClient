@@ -73,7 +73,6 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({ header, body, mode 
   };
 
   const getMenuHeight = ():number => {
-    console.log('getting menu height');
     if (mode === 'bottom' && menuState === 'collapsed') {
       return headerSize.height;
     }
