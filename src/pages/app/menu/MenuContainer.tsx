@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import Measure, { ContentRect } from 'react-measure';
 import useWindowSize from '../../../utils/WindowSize';
-import ToggleButton from './ToggleButton';
+import ToggleButton from './menuContainer/ToggleButton';
 
 type MenuStates = 'fullscreen' | 'visible' | 'collapsed';
 type MenuModes = 'side' | 'bottom';
@@ -175,8 +175,14 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({ header, body, mode 
           {
             ({ measureRef }) => (
               <div ref={measureRef} style={{ background: 'cream', width: '100%' }}>
-                {header}
-                <ToggleButton mode={mode} menuState={menuState} setMenuState={setMenuState} />
+                <Grid container>
+                  <Grid item>
+                    {header}
+                  </Grid>
+                  <Grid item style={{ marginLeft: 'auto' }}>
+                    <ToggleButton mode={mode} menuState={menuState} setMenuState={setMenuState} />
+                  </Grid>
+                </Grid>
               </div>
             )
           }
