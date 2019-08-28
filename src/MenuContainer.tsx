@@ -4,26 +4,24 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from 'react-router-dom';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
-import { Link as RouterLink } from 'react-router-dom';
 import Scrollbars from 'react-custom-scrollbars';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    margin: {
-      margin: theme.spacing(1),
-    },
-    extendedIcon: {
-      marginRight: theme.spacing(1),
-    },
-    breadcrumbs: {
-      padding: theme.spacing(1, 2),
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-    },
-  }),
-);
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  margin: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+  breadcrumbs: {
+    padding: theme.spacing(1, 2),
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  },
+}));
 
 interface MenuContainerProps {
   portrait: boolean;

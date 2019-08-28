@@ -31,9 +31,12 @@ interface Dimensions {
 
 type PositionDimensions = Position & Dimensions;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => createStyles({
   content: {
     position: 'absolute',
+    zIndex: 10,
+    boxShadow: '0px 0px 30px 10px rgba(0,0,0,0.2)',
+    backgroundColor: '#fff',
   },
   placeholder: {
     position: 'relative',
@@ -44,7 +47,12 @@ const useStyles = makeStyles({
   placeholderSide: {
     order: 5,
   },
-});
+  header: {
+    padding: theme.spacing(1, 2),
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  },
+}));
 
 const VISIBLE_OFFSET = 100;
 
@@ -79,34 +87,19 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({ header, body, mode 
     if (mode === 'bottom' && menuState === 'visible') {
       return headerSize.height + VISIBLE_OFFSET;
     }
-    if (mode === 'bottom' && menuState === 'fullscreen') {
-      return windowSize.innerHeight;
-    }
-    if (mode === 'side') {
-      return windowSize.innerHeight;
-    }
-    return 0;
+    return windowSize.innerHeight;
   };
 
   const getMenuWidth = ():number => {
     if (mode === 'side' && (menuState === 'collapsed' || menuState === 'visible')) {
       return VISIBLE_OFFSET;
     }
-    if (mode === 'side' && menuState === 'fullscreen') {
-      return windowSize.innerWidth;
-    }
-    if (mode === 'bottom') {
-      return windowSize.innerWidth;
-    }
-    return 0;
+    return windowSize.innerWidth;
   };
 
   const getMenuTop = ():number => {
     if (mode === 'bottom' && (menuState === 'collapsed' || menuState === 'visible')) {
       return placeholderSizePosition.offsetTop;
-    }
-    if (mode === 'bottom' && menuState === 'fullscreen') {
-      return windowSize.innerHeight - (placeholderSizePosition.offsetTop + placeholderSizePosition.height);
     }
     return 0;
   };
@@ -127,20 +120,14 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({ header, body, mode 
     if (mode === 'bottom' && (menuState === 'visible' || menuState === 'fullscreen')) {
       return headerSize.height + VISIBLE_OFFSET;
     }
-    if (mode === 'side') {
-      return windowSize.innerHeight;
-    }
-    return 0;
+    return windowSize.innerHeight;
   };
 
   const getPlaceholderWidth = ():number => {
-    if (mode === 'bottom') {
-      return windowSize.innerWidth;
-    }
     if (mode === 'side') {
       return VISIBLE_OFFSET;
     }
-    return 0;
+    return windowSize.innerWidth;
   };
 
   const getPlaceholderDimensions = ():Dimensions => ({
@@ -165,17 +152,17 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({ header, body, mode 
           )
         }
       </Measure>
-      <div style={{
-        position: 'absolute',
-        background: 'pink',
-        ...getMenuPositionDimensions(),
-      }}
+      <div
+        style={{
+          ...getMenuPositionDimensions(),
+        }}
+        className={classes.content}
       >
         <Measure bounds onResize={contentRect => handleHeaderSizeChange(contentRect)}>
           {
             ({ measureRef }) => (
               <div ref={measureRef} style={{ background: 'cream', width: '100%' }}>
-                <Grid container>
+                <Grid container className={classes.header}>
                   <Grid item>
                     {header}
                   </Grid>

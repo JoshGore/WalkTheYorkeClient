@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import {
   Grid, makeStyles, createStyles, Theme,
 } from '@material-ui/core';
@@ -30,7 +31,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const App: React.FC = () => {
+interface AppProps {
+  RouteProps: RouteComponentProps<{id: string, type: string}>;
+}
+
+const App: React.FC<AppProps> = ({ RouteProps }) => {
   const classes = useStyles();
   const [portrait, setPortrait] = useState(true);
   const [trailSection, setTrailSection] = useState<TrailSectionProps>({
@@ -39,6 +44,18 @@ const App: React.FC = () => {
   const [trailObject, setTrailObject] = useState<TrailObjectProps>({
     name: undefined, id: undefined, type: undefined,
   });
+  const [trailId, setTrailId] = useState(WTY_TRAIL_ID);
+  useEffect(() => {
+    console.log('should be blinkin mounted');
+    RouteProps.history.listen(() => {
+      if (RouteProps.match.params.id !== undefined) {
+        setTrailSection({ ...trailSection, id: parseInt(RouteProps.match.params.id, 10) });
+      } else {
+        setTrailSection({ ...trailSection, id: trailId });
+      }
+      console.log(`Trail Section is :${trailSection.id}`);
+    });
+  }, []);
   return (
     <Grid container className={`${classes.root} ${portrait ? classes.portrait : classes.landscape}`}>
       <Map
@@ -46,8 +63,16 @@ const App: React.FC = () => {
         setTrailSection={setTrailSection}
         trailObject={trailObject}
         setTrailObject={setTrailObject}
+        trailId={trailId}
       />
-      <Menu menuMode={portrait ? 'bottom' : 'side'} />
+      <Menu
+        menuMode={portrait ? 'bottom' : 'side'}
+        trailSection={trailSection}
+        setTrailSection={setTrailSection}
+        trailObject={trailObject}
+        setTrailObject={setTrailObject}
+        trailId={trailId}
+      />
     </Grid>
   );
 };

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface TrailSectionProps {
   name: string;
   shortName: string;
@@ -19,3 +21,7 @@ interface TrailContextProps {
   setTrailObject: (trailObject: TrailObjectProps) => void;
   trail: number;
 }
+
+const TrailContext = React.createContext<TrailContextProps>();
+
+export default TrailContext;

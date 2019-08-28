@@ -27,6 +27,7 @@ interface MapProps {
   setTrailSection: (trailSection: TrailSectionProps) => void;
   trailObject: TrailObjectProps;
   setTrailObject: (trailObject: TrailObjectProps) => void;
+  trailId: number;
 }
 
 const Map: React.FC<MapProps> = ({

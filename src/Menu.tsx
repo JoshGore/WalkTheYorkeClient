@@ -80,8 +80,6 @@ const Menu: React.FC<any> = ({ portrait, trail, trailSection }) => {
     `,
     {
       variables: { id: trailSection.id || trail },
-      onCompleted: () => {
-      },
     },
   );
 
