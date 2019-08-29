@@ -38,7 +38,8 @@ type PositionDimensions = Position & Dimensions;
 const useStyles = makeStyles((theme: Theme) => createStyles({
   content: {
     position: 'absolute',
-    zIndex: 10,
+    maxWidth: '100vw',
+    zIndex: 999,
     boxShadow: '0px 0px 30px 10px rgba(0,0,0,0.2)',
     backgroundColor: '#fff',
     display: 'flex',
@@ -86,24 +87,29 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
   const [menuState, setMenuState] = useState<MenuStates>('collapsed');
   const windowSize = useWindowSize();
   const [headerSize, setHeaderSize] = useState({ width: -1, height: -1 });
+  const [offset, setOffset] = useState(VISIBLE_OFFSET);
   const contentLeft = 0;
   const contentBottom = 0;
-  const contentRightVisible = ():number => (mode === 'side' ? windowSize.innerWidth - VISIBLE_OFFSET : 0);
+  const contentRightVisible = ():number => (mode === 'side' ? windowSize.innerWidth - offset : 0);
   const contentRightFullscreen = 0;
   const contentTopCollapsed = ():number => (mode === 'bottom' ? windowSize.innerHeight - headerSize.height : 0);
-  const contentTopVisible = ():number => (mode === 'bottom' ? windowSize.innerHeight - VISIBLE_OFFSET : 0);
+  const contentTopVisible = ():number => (mode === 'bottom' ? windowSize.innerHeight - offset : 0);
   const contentTopFullscreen = 0;
   const [contentTopRight, setContentTopRight] = useSpring(() => ({ top: contentTopCollapsed(), right: contentRightVisible() }));
-  setContentTopRight({
-    top: menuState === 'collapsed' ? contentTopCollapsed() : menuState === 'visible' ? contentTopVisible() : contentTopFullscreen,
-    right: menuState === 'fullscreen' ? contentRightFullscreen : contentRightVisible(),
+  useEffect(() => {
+    setContentTopRight({
+      top: menuState === 'collapsed' ? contentTopCollapsed() : menuState === 'visible' ? contentTopVisible() : contentTopFullscreen,
+      right: menuState === 'fullscreen' ? contentRightFullscreen : contentRightVisible(),
+    });
   });
-  const placeholderWidth = (): number | string => (mode === 'side' ? VISIBLE_OFFSET : windowSize.innerWidth);
+  const placeholderWidth = (): number | string => (mode === 'side' ? offset : windowSize.innerWidth);
   const placeholderHeightCollapsed = ():number => (mode === 'side' ? windowSize.innerHeight : headerSize.height);
-  const placeholderHeightVisible = ():number => (mode === 'side' ? windowSize.innerHeight : VISIBLE_OFFSET);
+  const placeholderHeightVisible = ():number => (mode === 'side' ? windowSize.innerHeight : offset);
   const [placeholderHeight, setPlaceholderHeight] = useSpring(() => ({ height: placeholderHeightCollapsed() }));
-  setPlaceholderHeight({
-    height: menuState === 'collapsed' ? placeholderHeightCollapsed() : placeholderHeightVisible(),
+  useEffect(() => {
+    setPlaceholderHeight({
+      height: menuState === 'collapsed' ? placeholderHeightCollapsed() : placeholderHeightVisible(),
+    });
   });
 
   return (

@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { featureCollection } from '@turf/helpers';
-import MapGeneral from '../../MapGeneral';
+import MapGeneral from './map/MapGeneral';
 
 import { TrailSectionProps, TrailObjectProps } from '../types';
 

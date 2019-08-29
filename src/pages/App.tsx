@@ -5,23 +5,34 @@ import {
   RouteComponentProps, Link as RouterLink, BrowserRouter as Router, Route,
 } from 'react-router-dom';
 import {
-  Breadcrumbs, Typography, Grid, makeStyles, createStyles, Theme, IconButton, Avatar,
+  Breadcrumbs, Typography, makeStyles, createStyles, Theme,
 } from '@material-ui/core';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 import Skeleton from '@material-ui/lab/Skeleton';
+import useWindowSize from '../utils/WindowSize';
 import Map from './app/Map';
 import { TrailSectionProps, TrailObjectProps } from './types';
 import MenuContainer from './app/menu/MenuContainer';
-import DownloadMenu from '../DownloadMenu';
-import Markdown from '../Markdown';
-import Reviews from '../Reviews';
-import ReviewSummary from '../ReviewSummary';
-import Chat from '../Chat';
-import UserContext from '../UserContext';
-import SignupLogin from '../SignupLogin';
+import DownloadMenu from './app/DownloadMenu';
+import Markdown from '../components/Markdown';
+import Reviews from './app/Reviews';
+import ReviewSummary from './app/reviews/ReviewSummary';
+import Chat from './app/Chat';
+import UserContext from '../contexts/UserContext';
+import SignupLogin from './SignupLogin';
+import Carousel from '../components/Carousel';
+import CornerAvatar from './signupLogin/CornerAvatar';
+
+const WTY_TRAIL_ID = 18;
+const WTY_NAME = 'Walk the Yorke';
+const WTY_SHORT_NAME = 'Home';
 
 type MenuModes = 'side' | 'bottom';
+
+interface AppProps {
+  RouteProps: RouteComponentProps<{id: string, type: string}>;
+}
+
 interface MenuProps {
   menuMode: MenuModes;
   trailSection: TrailSectionProps;
@@ -29,6 +40,16 @@ interface MenuProps {
   trailObject: TrailObjectProps;
   setTrailObject: (trailObject: TrailObjectProps) => void;
   trailId: number;
+}
+
+interface BodyProps {
+  loading: boolean;
+  title: string | undefined;
+  body: string | undefined;
+  multimedia: Multimedium[] | undefined;
+  files: Files[] | undefined;
+  count: number | undefined;
+  avgRating: number | undefined;
 }
 
 interface Multimedium {
@@ -64,6 +85,30 @@ interface RouteDetails {
   };
 }
 
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  root: {
+    position: 'fixed',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    display: 'flex',
+    overflow: 'hidden',
+  },
+  portrait: {
+    flexWrap: 'nowrap',
+    flexDirection: 'column',
+  },
+  landscape: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+  },
+  markdown: {
+    ...theme.typography.body2,
+    padding: theme.spacing(1, 0),
+  },
+}));
+
 const ROUTE_QUERY = gql`
   query($id: Int!) {
     routes_by_pk(id: $id) {
@@ -97,133 +142,55 @@ const ROUTE_QUERY = gql`
   }
 `;
 
-/*
-        trailSection.id === undefined
-          ? [{ link: '/', name: 'Home' }]
-          : [
-            { link: '/', name: 'Home' },
-            {
-              link: `/stage/${trailSection.id}`,
-              name: loading ? '' : data.routes_by_pk.short_title,
-            },
-          ]
-*/
-// header and body render downloaded content
-
-interface BodyProps {
+interface BodyTextProps {
   loading: boolean;
-  title: string | undefined;
   body: string | undefined;
-  multimedia: Multimedium[] | undefined;
-  files: Files[] | undefined;
-  count: number | undefined;
-  avgRating: number | undefined;
 }
 
-interface MultimediaCarouselProps {
-  multimedia: Multimedium[] | undefined;
-  loading: boolean;
-}
-
-const MultimediaCarousel: React.FC<MultimediaCarouselProps> = ({ multimedia, loading }) => (
-  <div style={{ width: '100%' }}>
-    {!loading ? (multimedia!.length ? (
-      <img
-        alt=""
-        className="d-block w-100"
-        style={{ width: '100%' }}
-        src={multimedia![0].multimedium.link}
-      />
-    ) : ('no images')
-
+const BodyText: React.FC<BodyTextProps> = ({ loading, body }) => {
+  const classes = useStyles();
+  return (
+    loading ? (
+      <>
+        <Skeleton width="90%" height={10} />
+        <Skeleton width="95%" height={10} />
+        <Skeleton width="80%" height={10} />
+        <Skeleton width="90%" height={10} />
+        <Skeleton width="40%" height={10} />
+      </>
     ) : (
-      <div style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-        <div style={{ maxWidth: 'calc(90vh * 9 / 16)' }}>
-          <div style={{ width: '100%', paddingTop: '56.25%', position: 'relative' }}>
-            <div style={{
-              position: 'absolute', top: 0, left: 0, bottom: 0, right: 0,
-            }}
-            >
-              <Skeleton variant="rect" width="100%" height="100%" />
-            </div>
-          </div>
-        </div>
-      </div>
-    )}
-  </div>
-);
+      <Markdown className={classes.markdown}>{body}</Markdown>
+    )
+  );
+};
 
 const Body: React.FC<BodyProps> = ({
   loading, title, body, multimedia, files, count, avgRating,
 }) => (
   <>
-    <MultimediaCarousel multimedia={multimedia} loading={loading} />
+    <Carousel multimedia={multimedia} loading={loading} />
     <div style={{ padding: 12 }}>
-      {!loading ? (
-        <Typography variant="h4" gutterBottom>
-          {title}
-        </Typography>
-      ) : (
+      {loading ? (
         <Skeleton width="70%" height={30} />
-      )}
-      {!loading && files && <DownloadMenu links={files} />}
-      {!loading
-        && (
-        <ReviewSummary
-          type="route"
-          count={count}
-          average={avgRating}
-        />
-        )}
-      {/* <Markdown className={classes.markdown}> */}
-      {!loading ? (
-        <Markdown>
-          {body}
-        </Markdown>
       ) : (
-        <>
-          <Skeleton width="90%" height={10} />
-          <Skeleton width="95%" height={10} />
-          <Skeleton width="80%" height={10} />
-          <Skeleton width="90%" height={10} />
-          <Skeleton width="40%" height={10} />
-        </>
+        <Typography variant="h4" gutterBottom>{title}</Typography>
       )}
+      {!loading && !!files!.length && <DownloadMenu links={files} />}
+      {!loading && (
+        <ReviewSummary
+          count={count !== undefined ? count : 0}
+          average={count !== undefined ? count : 0}
+        />
+      )}
+      <BodyText loading={loading} body={body} />
     </div>
   </>
 );
 
-const WTY_TRAIL_ID = 18;
-const WTY_NAME = 'Walk the Yorke';
-const WTY_SHORT_NAME = 'Home';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    position: 'fixed',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    display: 'flex',
-    overflow: 'hidden',
-  },
-  portrait: {
-    flexWrap: 'nowrap',
-    flexDirection: 'column',
-  },
-  landscape: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-  },
-}));
-
-interface AppProps {
-  RouteProps: RouteComponentProps<{id: string, type: string}>;
-}
-
 const App: React.FC<AppProps> = ({ RouteProps }) => {
   const classes = useStyles();
-  const [portrait, setPortrait] = useState(false);
+  const windowSize = useWindowSize();
+  const User = useContext<any>(UserContext);
   const [menuMode, setMenuMode] = useState<MenuModes>('side');
   const [trailSection, setTrailSection] = useState<TrailSectionProps>({
     name: WTY_NAME, shortName: WTY_SHORT_NAME, id: WTY_TRAIL_ID, type: 'trail',
@@ -249,10 +216,13 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
       console.log(`Trail Section is :${trailSection.id}`);
     });
   }, []);
-  const User = useContext<any>(UserContext);
-  const handleLoginToggle = () => {
-    User.setShowLoginMenu(!User.showLoginMenu);
-  };
+  useEffect(() => {
+    if (windowSize.innerHeight > windowSize.innerWidth) {
+      setMenuMode('bottom');
+    } else {
+      setMenuMode('side');
+    }
+  });
   return (
     <MenuContainer
       header={(
@@ -286,28 +256,7 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
       mainContent={(
         <>
           <SignupLogin />
-          <IconButton
-            style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              margin: 4,
-              boxShadow: '4px 4px 10px -5px rgba(0,0,0,0.75)',
-              padding: 0,
-              zIndex: 999,
-            }}
-            onClick={handleLoginToggle}
-          >
-            <Avatar
-              style={{
-                backgroundColor: User.loggedIn ? '#3f51b5' : '',
-              }}
-            >
-              {User.loggedIn
-
-                ? `${User.firstname.charAt(0)}${User.lastname.charAt(0)}` : <PersonAddIcon />}
-            </Avatar>
-          </IconButton>
+          <CornerAvatar />
           <Map
             trailSection={trailSection}
             setTrailSection={setTrailSection}
@@ -316,7 +265,7 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
             trailId={trailId}
           />
         </>
-)}
+      )}
     />
   );
 };

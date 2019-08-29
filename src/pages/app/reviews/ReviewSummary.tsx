@@ -2,7 +2,12 @@ import React from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 
-const ReviewSummary: React.FC<any> = ({ count, average }) => {
+interface ReviewSummaryProps {
+  count: number;
+  average: number;
+}
+
+const ReviewSummary: React.FC<ReviewSummaryProps> = ({ count, average }) => {
   const fixedPlaces: any = (value: any) => Math.round(value * 10) / 10;
   return (
     <>

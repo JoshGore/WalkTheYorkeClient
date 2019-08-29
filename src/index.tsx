@@ -6,7 +6,7 @@ import ApolloClient from 'apollo-boost';
 import App from './pages/App';
 import './index.css';
 import 'typeface-roboto';
-import UserProvider from './UserProvider';
+import UserProvider from './contexts/UserProvider';
 import * as serviceWorker from './serviceWorker';
 
 const client = new ApolloClient({
