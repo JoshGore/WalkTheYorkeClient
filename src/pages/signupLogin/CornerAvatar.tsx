@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   makeStyles, createStyles, Theme, IconButton, Avatar,
 } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import UserContext from '../../contexts/UserContext';
+import UserContext, { UserProps } from '../../contexts/UserContext';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   button: {
@@ -26,23 +26,25 @@ interface BodyTextProps {
 }
 
 const CornerAvatar: React.FC = () => {
-  const User = useContext<any>(UserContext);
   const classes = useStyles();
+  const User = useContext<UserProps>(UserContext);
   const handleLoginToggle = () => {
-    User.setShowLoginMenu(!User.showLoginMenu);
+    User.setLoginMenuOpen(!User.loginMenuOpen);
   };
   return (
-    <IconButton
-      className={classes.button}
-      onClick={handleLoginToggle}
-    >
-      <Avatar
-        className={User.loggedIn && classes.loggedIn}
+    <>
+      <IconButton
+        className={classes.button}
+        onClick={handleLoginToggle}
       >
-        {User.loggedIn
-          ? `${User.firstname.charAt(0)}${User.lastname.charAt(0)}` : <PersonAddIcon />}
-      </Avatar>
-    </IconButton>
+        <Avatar
+          className={User.loggedIn ? classes.loggedIn : undefined}
+        >
+          {User.loggedIn
+            ? `${User.firstname!.charAt(0)}${User.lastname!.charAt(0)}` : <PersonAddIcon />}
+        </Avatar>
+      </IconButton>
+    </>
   );
 };
 

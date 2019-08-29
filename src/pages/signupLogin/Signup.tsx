@@ -6,21 +6,41 @@ import {
   DialogActions,
   Grid, TextField, Button, CircularProgress,
 } from '@material-ui/core';
-import UserContext from '../../contexts/UserContext';
+import UserContext, { UserProps } from '../../contexts/UserContext';
 
-interface State {
+interface Inputs {
+  firstname: string;
+  lastname: string;
   username: string;
   password: string;
   confirmPassword: string;
-  firstname: string;
-  lastname: string;
 }
 
-const Signup: React.FC<any> = ({ setNewUser, setOpen }) => {
-  const User = useContext<any>(UserContext);
+interface SignupProps {
+  setNewUser: (newUser: boolean) => void;
+}
+
+interface SubmissionError {
+  location: string;
+  param: string;
+  msg: string;
+  value: string;
+}
+
+interface SubmissionErrors {
+  firstname?: string;
+  lastname?: string;
+  username?: string;
+  password?: string;
+  confirmPassword?: string;
+  [key:string]: string | undefined;
+}
+
+const Signup: React.FC<SignupProps> = ({ setNewUser }) => {
+  const User = useContext<UserProps>(UserContext);
   const [signupFailed, setSignupFailed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [errors, setErrors] = useState<any>({
+  const [errors, setErrors] = useState<SubmissionErrors>({
     firstname: '',
     lastname: '',
     username: '',
@@ -28,7 +48,7 @@ const Signup: React.FC<any> = ({ setNewUser, setOpen }) => {
     confirmPassword: '',
   });
   const handleClose = () => {
-    User.setShowLoginMenu(false);
+    User.setLoginMenuOpen(false);
   };
   const handleSubmit = () => {
     setSubmitting(true);
@@ -42,11 +62,11 @@ const Signup: React.FC<any> = ({ setNewUser, setOpen }) => {
       response => {
         if (!response.ok) {
           response.json().then(json => {
-            const jsonErrors: any = {};
-            json.errors && json.errors.forEach((error: any) => {
-              jsonErrors[error.param] = error.msg;
+            const submissionErrors: SubmissionErrors = {};
+            json.errors && json.errors.forEach((error: SubmissionError) => {
+              submissionErrors[error.param] = error.msg;
             });
-            setErrors({ ...jsonErrors });
+            setErrors({ ...submissionErrors });
           });
           setSubmitting(false);
           setSignupFailed(true);
@@ -61,13 +81,13 @@ const Signup: React.FC<any> = ({ setNewUser, setOpen }) => {
             User.setFirstname(json.firstname);
             User.setLastname(json.lastname);
             User.setLoggedIn(true);
-            User.setShowLoginMenu(false);
+            User.setLoginMenuOpen(false);
           });
         }
       },
     );
   };
-  const handleChange = (name: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (name: keyof Inputs) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [name]: event.target.value });
   };
   const handleNewUser = () => {

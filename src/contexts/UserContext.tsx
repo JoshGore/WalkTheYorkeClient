@@ -1,6 +1,22 @@
 import React from 'react';
 
-const UserContext = React.createContext<any>({
+export interface UserProps {
+  loggedIn: boolean;
+  setLoggedIn: (loggedIn: boolean) => void;
+  userId: number | undefined;
+  setUserId: (userId: number) => void;
+  username: string | undefined;
+  setUsername: (username: string) => void;
+  firstname: string | undefined;
+  setFirstname: (firstname: string) => void;
+  lastname: string | undefined;
+  setLastname: (lastname: string) => void;
+  signOut: () => void;
+  loginMenuOpen: boolean;
+  setLoginMenuOpen: (loginMenuOpen: boolean) => void;
+}
+
+const UserContext = React.createContext<UserProps>({
   loggedIn: false,
   setLoggedIn: () => {},
   userId: undefined,
@@ -11,8 +27,9 @@ const UserContext = React.createContext<any>({
   setFirstname: () => {},
   lastname: undefined,
   setLastname: () => {},
-  showLoginMenu: false,
-  setShowLoginMenu: () => {},
+  signOut: () => {},
+  loginMenuOpen: false,
+  setLoginMenuOpen: () => {},
 });
 
 export default UserContext;

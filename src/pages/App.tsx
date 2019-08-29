@@ -18,7 +18,7 @@ import Markdown from '../components/Markdown';
 import Reviews from './app/Reviews';
 import ReviewSummary from './app/reviews/ReviewSummary';
 import Chat from './app/Chat';
-import UserContext from '../contexts/UserContext';
+import UserContext, { UserProps } from '../contexts/UserContext';
 import SignupLogin from './SignupLogin';
 import Carousel from '../components/Carousel';
 import CornerAvatar from './signupLogin/CornerAvatar';
@@ -190,7 +190,7 @@ const Body: React.FC<BodyProps> = ({
 const App: React.FC<AppProps> = ({ RouteProps }) => {
   const classes = useStyles();
   const windowSize = useWindowSize();
-  const User = useContext<any>(UserContext);
+  const User = useContext<UserProps>(UserContext);
   const [menuMode, setMenuMode] = useState<MenuModes>('side');
   const [trailSection, setTrailSection] = useState<TrailSectionProps>({
     name: WTY_NAME, shortName: WTY_SHORT_NAME, id: WTY_TRAIL_ID, type: 'trail',

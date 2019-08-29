@@ -1,13 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {
-  Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, TextField, useMediaQuery, Button, CircularProgress, Avatar,
+  DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, TextField, Button, CircularProgress, 
 } from '@material-ui/core';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { useTheme } from '@material-ui/core/styles';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
-import UserContext from '../../contexts/UserContext';
+import UserContext, { UserProps } from '../../contexts/UserContext';
 
 interface State {
   username: string;
@@ -17,11 +12,31 @@ interface State {
   lastname: string;
 }
 
-const Login: React.FC<any> = ({ setNewUser, setOpen }) => {
-  const User = useContext<any>(UserContext);
+interface LoginProps {
+  setNewUser: (newUser: boolean) => void;
+}
+
+interface SubmissionError {
+  location: string;
+  param: string;
+  msg: string;
+  value: string;
+}
+
+interface SubmissionErrors {
+  firstname?: string;
+  lastname?: string;
+  username?: string;
+  password?: string;
+  confirmPassword?: string;
+  [key:string]: string | undefined;
+}
+
+const Login: React.FC<LoginProps> = ({ setNewUser }) => {
+  const User = useContext<UserProps>(UserContext);
   const [authFailed, setAuthFailed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [errors, setErrors] = useState<any>({
+  const [errors, setErrors] = useState<SubmissionErrors>({
     username: '',
     password: '',
   });
@@ -36,7 +51,7 @@ const Login: React.FC<any> = ({ setNewUser, setOpen }) => {
     setValues({ ...values, [name]: event.target.value });
   };
   const handleClose = () => {
-    User.setShowLoginMenu(false);
+    User.setLoginMenuOpen(false);
   };
   const handleSubmit = () => {
     setSubmitting(true);
@@ -50,11 +65,11 @@ const Login: React.FC<any> = ({ setNewUser, setOpen }) => {
       response => {
         if (!response.ok) {
           response.json().then(json => {
-            const jsonErrors: any = {};
-            json.errors && json.errors.forEach((error: any) => {
-              jsonErrors[error.param] = error.msg;
+            const submissionErrors: SubmissionErrors = {};
+            json.errors && json.errors.forEach((error: SubmissionError) => {
+              submissionErrors[error.param] = error.msg;
             });
-            setErrors({ ...jsonErrors });
+            setErrors({ ...submissionErrors });
             if (json.error) {
               switch (json.error) {
                 default:
@@ -81,7 +96,7 @@ const Login: React.FC<any> = ({ setNewUser, setOpen }) => {
             User.setFirstname(json.firstname);
             User.setLastname(json.lastname);
             User.setLoggedIn(true);
-            User.setShowLoginMenu(false);
+            User.setLoginMenuOpen(false);
           });
         }
       },
