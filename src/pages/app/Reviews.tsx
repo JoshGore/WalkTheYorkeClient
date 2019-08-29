@@ -20,7 +20,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const Reviews: React.FC<any> = ({ id }) => {
+interface ReviewsProps {
+  id: number;
+}
+
+const Reviews: React.FC<ReviewsProps> = ({ id }) => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(
     gql`

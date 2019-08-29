@@ -55,7 +55,11 @@ const MessageForm: React.FC = () => {
   );
 };
 
-const Chat: React.FC = () => {
+interface ChatProps {
+  id: number;
+}
+
+const Chat: React.FC<ChatProps> = () => {
   const classes = useStyles();
   return (
     <Grid className={classes.root} container>

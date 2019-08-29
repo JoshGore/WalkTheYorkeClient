@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const ReviewForm: React.FC<any> = () => {
+const ReviewForm: React.FC = () => {
   const [submitReview, { data }] = useMutation(gql`
     mutation ($route_id: Int!, $user_id: Int!, $rating: Int!, $review: String!) {
       insert_route_review(objects: {route_id: $route_id, review: {data: {body: $review, rating: $rating, user_id: $user_id}}}) {
