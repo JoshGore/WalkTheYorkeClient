@@ -16,7 +16,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ mode, menuState, setMenuSta
     if (mode === 'side' && (menuState === 'collapsed' || menuState === 'visible')) {
       return 270;
     }
-    if (mode === 'side' && menuState === 'visible') {
+    if (mode === 'side' && menuState === 'fullscreen') {
       return 90;
     }
     if (mode === 'bottom' && (menuState === 'visible' || menuState === 'fullscreen')) {
@@ -27,7 +27,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ mode, menuState, setMenuSta
     }
     return 0;
   };
-  const handleMenuToggle = () => {
+  const toggleMenu = () => {
     if (mode === 'side' && (menuState === 'collapsed' || menuState === 'visible')) {
       setMenuState('fullscreen');
     } else if (mode === 'side' && menuState === 'fullscreen') {
@@ -41,7 +41,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ mode, menuState, setMenuSta
   return (
     <IconButton
       size="small"
-      onClick={handleMenuToggle}
+      onClick={toggleMenu}
     >
       <ExpandMore style={{
         transform: `rotate(${getTransform()}deg)`,

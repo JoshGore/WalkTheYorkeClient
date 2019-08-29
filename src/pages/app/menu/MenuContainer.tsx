@@ -1,8 +1,10 @@
 import React, { useState, useEffect, cloneElement } from 'react';
+import { useSpring, animated } from 'react-spring';
 import {
   Grid, makeStyles, createStyles, Theme,
 } from '@material-ui/core';
 import Measure, { ContentRect } from 'react-measure';
+import Scrollbars from 'react-custom-scrollbars';
 import useWindowSize from '../../../utils/WindowSize';
 import ToggleButton from './menuContainer/ToggleButton';
 
@@ -13,7 +15,9 @@ interface MenuProps {
   header: JSX.Element;
   body: JSX.Element;
   mode: MenuModes;
+  mainContent: JSX.Element;
 }
+
 interface SizePosition {
   offsetTop: number;
   offsetLeft: number;
@@ -37,6 +41,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     zIndex: 10,
     boxShadow: '0px 0px 30px 10px rgba(0,0,0,0.2)',
     backgroundColor: '#fff',
+    display: 'flex',
+    flexFlow: 'column',
   },
   placeholder: {
     position: 'relative',
@@ -52,116 +58,75 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
   },
+  root: {
+    position: 'fixed',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    display: 'flex',
+    overflow: 'hidden',
+  },
+  portrait: {
+    flexWrap: 'nowrap',
+    flexDirection: 'column',
+  },
+  landscape: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+  },
 }));
 
-const VISIBLE_OFFSET = 100;
+const VISIBLE_OFFSET = 500;
 
-const MenuContainer: React.FunctionComponent<MenuProps> = ({ header, body, mode }) => {
+const MenuContainer: React.FunctionComponent<MenuProps> = ({
+  header, body, mainContent, mode,
+}) => {
   const classes = useStyles();
-  const [placeholderSizePosition, setPlaceholderSizePosition] = useState<SizePosition>({
-    width: -1, height: -1, offsetTop: -1, offsetLeft: -1,
-  });
   const [menuState, setMenuState] = useState<MenuStates>('collapsed');
-  const [headerSize, setHeaderSize] = useState({ width: -1, height: -1 });
   const windowSize = useWindowSize();
-
-  const handlePlaceholderSizePositionChange = (contentRect: ContentRect) => {
-    setPlaceholderSizePosition({
-      width: contentRect.bounds!.width,
-      height: contentRect.bounds!.height,
-      offsetTop: contentRect.offset!.top,
-      offsetLeft: contentRect.offset!.left,
-    });
-  };
-  const handleHeaderSizeChange = (contentRect: ContentRect) => {
-    setHeaderSize({
-      width: contentRect.bounds!.width,
-      height: contentRect.bounds!.height,
-    });
-  };
-
-  const getMenuHeight = ():number => {
-    if (mode === 'bottom' && menuState === 'collapsed') {
-      return headerSize.height;
-    }
-    if (mode === 'bottom' && menuState === 'visible') {
-      return headerSize.height + VISIBLE_OFFSET;
-    }
-    return windowSize.innerHeight;
-  };
-
-  const getMenuWidth = ():number => {
-    if (mode === 'side' && (menuState === 'collapsed' || menuState === 'visible')) {
-      return VISIBLE_OFFSET;
-    }
-    return windowSize.innerWidth;
-  };
-
-  const getMenuTop = ():number => {
-    if (mode === 'bottom' && (menuState === 'collapsed' || menuState === 'visible')) {
-      return placeholderSizePosition.offsetTop;
-    }
-    return 0;
-  };
-
-  const getMenuLeft = ():number => placeholderSizePosition.offsetLeft;
-
-  const getMenuPositionDimensions = ():PositionDimensions => ({
-    top: getMenuTop(),
-    left: getMenuLeft(),
-    height: getMenuHeight(),
-    width: getMenuWidth(),
+  const [headerSize, setHeaderSize] = useState({ width: -1, height: -1 });
+  const contentLeft = 0;
+  const contentBottom = 0;
+  const contentRightVisible = ():number => (mode === 'side' ? windowSize.innerWidth - VISIBLE_OFFSET : 0);
+  const contentRightFullscreen = 0;
+  const contentTopCollapsed = ():number => (mode === 'bottom' ? windowSize.innerHeight - headerSize.height : 0);
+  const contentTopVisible = ():number => (mode === 'bottom' ? windowSize.innerHeight - VISIBLE_OFFSET : 0);
+  const contentTopFullscreen = 0;
+  const [contentTopRight, setContentTopRight] = useSpring(() => ({ top: contentTopCollapsed(), right: contentRightVisible() }));
+  setContentTopRight({
+    top: menuState === 'collapsed' ? contentTopCollapsed() : menuState === 'visible' ? contentTopVisible() : contentTopFullscreen,
+    right: menuState === 'fullscreen' ? contentRightFullscreen : contentRightVisible(),
   });
-
-  const getPlaceholderHeight = ():number => {
-    if (mode === 'bottom' && menuState === 'collapsed') {
-      return headerSize.height;
-    }
-    if (mode === 'bottom' && (menuState === 'visible' || menuState === 'fullscreen')) {
-      return headerSize.height + VISIBLE_OFFSET;
-    }
-    return windowSize.innerHeight;
-  };
-
-  const getPlaceholderWidth = ():number => {
-    if (mode === 'side') {
-      return VISIBLE_OFFSET;
-    }
-    return windowSize.innerWidth;
-  };
-
-  const getPlaceholderDimensions = ():Dimensions => ({
-    height: getPlaceholderHeight(),
-    width: getPlaceholderWidth(),
+  const placeholderWidth = (): number | string => (mode === 'side' ? VISIBLE_OFFSET : windowSize.innerWidth);
+  const placeholderHeightCollapsed = ():number => (mode === 'side' ? windowSize.innerHeight : headerSize.height);
+  const placeholderHeightVisible = ():number => (mode === 'side' ? windowSize.innerHeight : VISIBLE_OFFSET);
+  const [placeholderHeight, setPlaceholderHeight] = useSpring(() => ({ height: placeholderHeightCollapsed() }));
+  setPlaceholderHeight({
+    height: menuState === 'collapsed' ? placeholderHeightCollapsed() : placeholderHeightVisible(),
   });
 
   return (
-    <>
-      <Measure
-        bounds
-        offset
-        onResize={contentRect => handlePlaceholderSizePositionChange(contentRect)}
-      >
-        {
-          ({ measureRef }) => (
-            <Grid
-              className={`${classes.placeholder} ${mode === 'bottom' ? classes.placeholderBottom : classes.placeholderSide} `}
-              style={{ ...getPlaceholderDimensions() }}
-              ref={measureRef}
-            />
-          )
-        }
-      </Measure>
-      <div
+    <Grid container className={`${classes.root} ${mode === 'bottom' ? classes.portrait : classes.landscape}`}>
+      <animated.div
+        className={`${classes.placeholder} ${mode === 'bottom' ? classes.placeholderBottom : classes.placeholderSide} `}
         style={{
-          ...getMenuPositionDimensions(),
+          width: placeholderWidth(),
+          ...placeholderHeight,
+        }}
+      />
+      <animated.div
+        style={{
+          ...contentTopRight,
+          left: contentLeft,
+          bottom: contentBottom,
         }}
         className={classes.content}
       >
-        <Measure bounds onResize={contentRect => handleHeaderSizeChange(contentRect)}>
+        <Measure bounds onResize={contentRect => setHeaderSize({ width: contentRect.bounds!.width, height: contentRect.bounds!.height })}>
           {
             ({ measureRef }) => (
-              <div ref={measureRef} style={{ background: 'cream', width: '100%' }}>
+              <div ref={measureRef} style={{ width: '100%', flex: '0 1 auto' }}>
                 <Grid container className={classes.header}>
                   <Grid item>
                     {header}
@@ -174,9 +139,21 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({ header, body, mode 
             )
           }
         </Measure>
-        <div>{body}</div>
+        <Scrollbars style={{ flex: '1 1 auto' }}>{body}</Scrollbars>
+      </animated.div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'stretch',
+          flexGrow: 1,
+          order: 10,
+          minWidth: 0,
+          minHeight: 0,
+        }}
+      >
+        {mainContent}
       </div>
-    </>
+    </Grid>
   );
 };
 
