@@ -36,7 +36,16 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const Message: React.FC<any> = ({
+interface MessageProps {
+  fromUser: boolean;
+  message: string;
+  user: {
+    firstName: string,
+    lastName: string
+  };
+}
+
+const Message: React.FC<MessageProps> = ({
   fromUser,
   message,
   user: { firstName, lastName },

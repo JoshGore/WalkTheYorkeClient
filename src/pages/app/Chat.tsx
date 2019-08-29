@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const MessageForm: React.FC<any> = () => {
+const MessageForm: React.FC = () => {
   const classes = useStyles();
   return (
     <TextField
@@ -55,7 +55,7 @@ const MessageForm: React.FC<any> = () => {
   );
 };
 
-const Chat: React.FC<any> = () => {
+const Chat: React.FC = () => {
   const classes = useStyles();
   return (
     <Grid className={classes.root} container>

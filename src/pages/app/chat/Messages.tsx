@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const Messages: React.FC<any> = () => (
+const Messages: React.FC = () => (
   <>
     <Message
       fromUser={false}
