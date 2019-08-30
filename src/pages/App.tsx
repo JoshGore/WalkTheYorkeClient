@@ -47,7 +47,7 @@ interface BodyProps {
   title: string | undefined;
   body: string | undefined;
   multimedia: Multimedium[] | undefined;
-  files: Files[] | undefined;
+  files: File[] | undefined;
   count: number | undefined;
   avgRating: number | undefined;
 }
@@ -60,10 +60,12 @@ interface Multimedium {
   }
 }
 
-interface Files {
-  id: number;
-  name: string;
-  link: string;
+interface File {
+    file: {
+        id: number,
+        name: string,
+        link: string
+    }
 }
 
 interface RouteDetails {
@@ -73,7 +75,7 @@ interface RouteDetails {
     title: string;
     body: string
     route_multimedia: Multimedium[]
-    route_files: Files[]
+    route_files: File[]
   };
   reviews_aggregate: {
     aggregate: {
@@ -175,7 +177,7 @@ const Body: React.FC<BodyProps> = ({
       ) : (
         <Typography variant="h4" gutterBottom>{title}</Typography>
       )}
-      {!loading && !!files!.length && <DownloadMenu links={files} />}
+      {!loading && !!files!.length && <DownloadMenu links={files!} />}
       {!loading && (
         <ReviewSummary
           count={count !== undefined ? count : 0}

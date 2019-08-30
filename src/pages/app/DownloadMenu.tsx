@@ -3,7 +3,19 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-const DownloadMenu: React.FC<any> = ({ links }) => {
+interface File {
+    file: {
+        id: number,
+        name: string,
+        link: string,
+    }
+}
+
+interface DownloadMenuProps {
+    links: File []
+}
+
+const DownloadMenu: React.FC<DownloadMenuProps> = ({ links }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,7 +44,7 @@ const DownloadMenu: React.FC<any> = ({ links }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {links.map((link: any) => (
+        {links.map((link: File) => (
           <MenuItem
             key={link.file.link}
             onClick={handleClose}
