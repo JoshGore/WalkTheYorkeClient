@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
 import Messages from './chat/Messages';
+import TrailContext, { TrailProps } from '../../contexts/TrailContext';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -55,11 +56,7 @@ const MessageForm: React.FC = () => {
   );
 };
 
-interface ChatProps {
-  id: number;
-}
-
-const Chat: React.FC<ChatProps> = () => {
+const Chat: React.FC = () => {
   const classes = useStyles();
   return (
     <Grid className={classes.root} container>

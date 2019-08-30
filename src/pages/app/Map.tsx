@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactMapboxGl from 'react-mapbox-gl';
 import mapboxgl from 'mapbox-gl';
 import ReactResizeDetector from 'react-resize-detector';
@@ -6,7 +6,9 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { featureCollection } from '@turf/helpers';
+import { Feature, FeatureCollection, LineString, GeoJsonProperties } from 'geojson';
 import MapGeneral from './map/MapGeneral';
+import TrailContext, { TrailProps } from '../../contexts/TrailContext';
 
 import { TrailSectionProps, TrailObjectProps } from '../types';
 
@@ -22,32 +24,48 @@ const WTY_TRAIL_BOUNDS: mapboxgl.LngLatBoundsLike = [
   [138.366868, -33.99099],
 ];
 
-interface MapProps {
-  trailSection: TrailSectionProps;
-  setTrailSection: (trailSection: TrailSectionProps) => void;
-  trailObject: TrailObjectProps;
-  setTrailObject: (trailObject: TrailObjectProps) => void;
-  trailId: number;
+interface LineFeatureProps {
+    routeId: number;
+    routeType: string;
 }
 
-const Map: React.FC<MapProps> = ({
-  trailSection,
-  setTrailSection,
-  trailObject,
-  setTrailObject,
-}) => {
-  const WTY_TRAIL_ID = trailSection.id;
+interface LinesQueryData {
+    routes_by_bk: {
+        routes: {
+            id: number,
+            line_routes: {
+                line: {
+                    id: number,
+                    geom: any,
+                    line_types: {
+                        type: {
+                            name: string
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+interface LinesQueryVars {
+    id: number
+}
+
+const Map: React.FC = () => {
+  const Trail = useContext<TrailProps>(TrailContext);
   const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
-  const [selectedFeature, setSelectedFeature] = useState<any>(null);
+  const [selectedFeature, setSelectedFeature] = useState<any>(undefined);
   const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
   // in state prevents reloading on map changes
   // <[[number, number], [number, number]]>
   const [initialBounds] = useState<mapboxgl.LngLatBoundsLike>(WTY_TRAIL_BOUNDS);
   const [mapLoading, setMapLoading] = useState(true);
+
   const {
     loading: linesLoading,
     error: linesError,
-    data: linesQueryData,
+    data: linesData,
   } = useQuery(
     gql`
       {
@@ -71,14 +89,16 @@ const Map: React.FC<MapProps> = ({
       }
     `,
   );
+
+  /*
   const {
-    loading: WTYLinesLoading,
-    error: WTYLinesError,
-    data: WTYLinesData,
-  } = useQuery(
+    loading: linesLoading,
+    error: linesError,
+    data: linesData,
+  } = useQuery<LinesQueryData,LinesQueryVars>(
     gql`
       query($trailId: Int!) {
-        routes_by_pk(id: $trailId) {
+        routes_by_pk(id: $id) {
           routes(where: { typeByType: { name: { _eq: "stage" } } }) {
             id
             line_routes {
@@ -97,10 +117,12 @@ const Map: React.FC<MapProps> = ({
       }
     `,
     {
-      variables: { trailId: WTY_TRAIL_ID },
+      variables: { id: Trail.trailId! },
+      skip: !!!Trail.trailSection.id
     },
   );
-  const geoJsonLines = (lines: any) => ({
+  */
+  const geoJsonLines = (lines: any) : FeatureCollection<LineString, LineFeatureProps> => ({
     type: 'FeatureCollection',
     features: lines.map((line: any) => ({
       type: 'Feature',
@@ -136,25 +158,24 @@ const Map: React.FC<MapProps> = ({
       if (feature) {
         // if trail section selected and currently in all mode then update trailSection
         if (feature.layer.id === 'trail_line_all_target') {
-          setTrailSection({
-            ...trailSection, type: 'stage', id: feature.properties!.routeId,
+          Trail.setTrailSection({
+            ...Trail.trailSection, type: 'stage', id: feature.properties!.routeId,
           });
         }
       } else {
         // if no interactive features returned then set trailObject to none
-        setTrailObject({ name: 'undefined', type: undefined, id: undefined });
+        Trail.setTrailObject({ name: 'undefined', type: undefined, id: undefined });
       }
     }
   }, [mapClickCoordinates]);
 
   // zoom to stage if stage selected
-  const calculateExtent = (): mapboxgl.LngLatBoundsLike => (trailSection.type === 'trail'
+  const calculateExtent = (): mapboxgl.LngLatBoundsLike => (Trail.trailSection.type === 'trail'
     ? initialBounds
     : bbox(
       featureCollection(
-        trailSection.type === 'stage'
-          && geoJsonLines(linesQueryData.lines).features.filter(
-            (feature: any) => feature.properties.routeId === trailSection.id,
+          geoJsonLines(linesData.lines).features.filter(
+            (feature) => feature.properties.routeId === Trail.trailSection.id,
           ),
       ),
     )
@@ -168,7 +189,7 @@ const Map: React.FC<MapProps> = ({
     if (map && !mapLoading && !linesLoading) {
       zoomToExtent();
     }
-  }, [trailSection.id, trailSection.type, mapLoading, linesLoading]);
+  }, [Trail.trailSection.id, Trail.trailSection.type, mapLoading, linesLoading]);
 
   return (
     <>
@@ -181,13 +202,12 @@ const Map: React.FC<MapProps> = ({
         onClick={(map, evt) => mapClick(map, evt)}
       >
         {/* sources for trail lines, short walk lines, day walk lines, hero walk lines */}
-        {!linesLoading && (
+        {!linesLoading && !!linesData.lines && (
           <MapGeneral
-            trailSection={trailSection}
-            trailObject={trailObject}
+            trailSection={Trail.trailSection}
+            trailObject={Trail.trailObject}
             selectedFeature={selectedFeature}
-            stagesData={geoJsonLines(linesQueryData.lines)}
-            shelters={undefined}
+            stagesData={geoJsonLines(linesData.lines)}
           />
         )}
       </MapComponent>
