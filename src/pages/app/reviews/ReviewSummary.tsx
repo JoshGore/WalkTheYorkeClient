@@ -8,7 +8,7 @@ interface ReviewSummaryProps {
 }
 
 const ReviewSummary: React.FC<ReviewSummaryProps> = ({ count, average }) => {
-  const fixedPlaces: any = (value: any) => Math.round(value * 10) / 10;
+  const fixedPlaces = (value: number) => Math.round(value * 10) / 10;
   return (
     <>
       <Typography variant="caption">{`${count} reviews`}</Typography>
