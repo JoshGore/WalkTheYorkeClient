@@ -41,7 +41,6 @@ const Map: React.FC<MapProps> = ({
   const [selectedFeature, setSelectedFeature] = useState<any>(null);
   const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
   // in state prevents reloading on map changes
-  // <[[number, number], [number, number]]>
   const [initialBounds] = useState<mapboxgl.LngLatBoundsLike>(WTY_TRAIL_BOUNDS);
   const [mapLoading, setMapLoading] = useState(true);
   const {
@@ -172,7 +171,7 @@ const Map: React.FC<MapProps> = ({
 
   return (
     <>
-      <ReactResizeDetector handleWidth handleHeight onResize={handleResize} />
+      <ReactResizeDetector handleWidth handleHeight refreshMode="throttle" refreshRate={100} onResize={handleResize} />
       <MapComponent
         style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
         containerStyle={{ flex: 1 }}

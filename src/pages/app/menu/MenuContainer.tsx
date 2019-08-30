@@ -1,4 +1,6 @@
-import React, { useState, useEffect, cloneElement } from 'react';
+import React, {
+  useState, useEffect, useLayoutEffect, cloneElement,
+} from 'react';
 import { useSpring, animated } from 'react-spring';
 import {
   Grid, makeStyles, createStyles, Theme,
@@ -81,8 +83,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 const VISIBLE_OFFSET = 500;
 
 const MenuContainer: React.FunctionComponent<MenuProps> = ({
-  header, body, mainContent, mode,
+  // header, body, mainContent, mode,
+  header, body, mainContent,
 }) => {
+  const [mode, setMode] = useState<MenuModes>(window.innerHeight > window.innerWidth ? 'bottom' : 'side');
+  const [animationDisabled, setAnimationDisabled] = useState(false);
+  useLayoutEffect(() => {
+    windowSize.innerHeight > windowSize.innerWidth ? setMode('bottom') : setMode('side');
+  });
   const classes = useStyles();
   const [menuState, setMenuState] = useState<MenuStates>('collapsed');
   const windowSize = useWindowSize();
@@ -95,7 +103,10 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
   const contentTopCollapsed = ():number => (mode === 'bottom' ? windowSize.innerHeight - headerSize.height : 0);
   const contentTopVisible = ():number => (mode === 'bottom' ? windowSize.innerHeight - offset : 0);
   const contentTopFullscreen = 0;
-  const [contentTopRight, setContentTopRight] = useSpring(() => ({ top: contentTopCollapsed(), right: contentRightVisible() }));
+  // const [contentTopRight, setContentTopRight] = useSpring(() => ({ top: contentTopCollapsed(), right: contentRightVisible(), immediate: animationDisabled }));
+  const [contentTopRight, setContentTopRight] = useSpring(() => ({
+    top: contentTopCollapsed(), right: contentRightVisible(),
+  }));
   useEffect(() => {
     setContentTopRight({
       top: menuState === 'collapsed' ? contentTopCollapsed() : menuState === 'visible' ? contentTopVisible() : contentTopFullscreen,
@@ -105,7 +116,7 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
   const placeholderWidth = (): number | string => (mode === 'side' ? offset : windowSize.innerWidth);
   const placeholderHeightCollapsed = ():number => (mode === 'side' ? windowSize.innerHeight : headerSize.height);
   const placeholderHeightVisible = ():number => (mode === 'side' ? windowSize.innerHeight : offset);
-  const [placeholderHeight, setPlaceholderHeight] = useSpring(() => ({ height: placeholderHeightCollapsed() }));
+  const [placeholderHeight, setPlaceholderHeight] = useSpring(() => ({ height: placeholderHeightCollapsed(), immediate: animationDisabled }));
   useEffect(() => {
     setPlaceholderHeight({
       height: menuState === 'collapsed' ? placeholderHeightCollapsed() : placeholderHeightVisible(),

@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+  useState, useEffect, useLayoutEffect, useContext,
+} from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import {
   RouteComponentProps, Link as RouterLink, BrowserRouter as Router, Route,
 } from 'react-router-dom';
 import {
-  Breadcrumbs, Typography, makeStyles, createStyles, Theme,
+  Breadcrumbs, Typography, makeStyles, createStyles, Theme, Link,
 } from '@material-ui/core';
 
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -28,6 +30,11 @@ const WTY_NAME = 'Walk the Yorke';
 const WTY_SHORT_NAME = 'Home';
 
 type MenuModes = 'side' | 'bottom';
+
+interface BreadcrumbsLink {
+  name: string;
+  url: string;
+}
 
 interface AppProps {
   RouteProps: RouteComponentProps<{id: string, type: string}>;
@@ -61,11 +68,11 @@ interface Multimedium {
 }
 
 interface File {
-    file: {
-        id: number,
-        name: string,
-        link: string
-    }
+  file: {
+    id: number,
+    name: string,
+    link: string
+  }
 }
 
 interface RouteDetails {
@@ -193,7 +200,6 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
   const classes = useStyles();
   const windowSize = useWindowSize();
   const User = useContext<UserProps>(UserContext);
-  const [menuMode, setMenuMode] = useState<MenuModes>('side');
   const [trailSection, setTrailSection] = useState<TrailSectionProps>({
     name: WTY_NAME, shortName: WTY_SHORT_NAME, id: WTY_TRAIL_ID, type: 'trail',
   });
@@ -218,7 +224,8 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
       console.log(`Trail Section is :${trailSection.id}`);
     });
   }, []);
-  useEffect(() => {
+  const [menuMode, setMenuMode] = useState<MenuModes>(window.innerHeight > window.innerWidth ? 'bottom' : 'side');
+  useLayoutEffect(() => {
     if (windowSize.innerHeight > windowSize.innerWidth) {
       setMenuMode('bottom');
     } else {
@@ -234,7 +241,10 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
               display: 'inline-block',
               verticalAlign: 'middle',
             }}
-          />
+          >
+            <Link href="/">Home</Link>
+            <Typography color="textPrimary">Current</Typography>
+          </Breadcrumbs>
         </Router>
       )}
       body={(
