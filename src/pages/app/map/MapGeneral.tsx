@@ -1,18 +1,19 @@
 import React from 'react';
 import { Source, Layer, Image } from 'react-mapbox-gl';
 import shelter from './icons/custom-shelter-15.png';
+// import GeoJSON from '@types/geojson';
+import {FeatureCollection} from 'geojson';
+import TrailContext, { TrailProps } from '../../../contexts/TrailContext';
 
 interface MapGeneralProps {
   trailSection: any;
   trailObject: any;
   selectedFeature: any;
-  stagesData: any;
-  shelters: any;
+  stagesData: FeatureCollection;
 }
-
+const shelters = false;
 const MapGeneral: React.FC<MapGeneralProps> = ({
   stagesData,
-  shelters,
   selectedFeature,
 }) => (
   <>

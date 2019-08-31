@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
@@ -9,6 +9,7 @@ import {
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import ReviewForm from './reviews/ReviewForm';
+import TrailContext, { TrailProps } from '../../contexts/TrailContext';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -20,13 +21,29 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-interface ReviewsProps {
-  id: number;
+interface ReviewProps {
+    rating: number;
+    body: string;
+    id: number;
+    created_at: any;
+    user: {
+        firstname: string,
+        lastname: string
+    }
 }
 
-const Reviews: React.FC<ReviewsProps> = ({ id }) => {
+interface ReviewQueryData {
+    reviews: ReviewProps [];
+}
+
+interface ReviewQueryVars {
+    id: number;
+}
+
+const Reviews: React.FC = () => {
+  const Trail = useContext<TrailProps>(TrailContext);
   const classes = useStyles();
-  const { loading, error, data } = useQuery(
+  const { loading, error, data } = useQuery<ReviewQueryData, ReviewQueryVars>(
     gql`
       query($id: Int!) {
         reviews(where: { route_review: { route_id: { _eq: $id } } }) {
@@ -42,12 +59,11 @@ const Reviews: React.FC<ReviewsProps> = ({ id }) => {
       }
     `,
     {
-      variables: { id },
-      onCompleted: () => {
-      },
+      variables: { id: Trail.trailSection.id! },
+      skip: !!!Trail.trailSection.id
     },
   );
-  if (!loading && data.reviews.length > 0) {
+  if (!loading && !!data && !!data.reviews && data.reviews.length > 0) {
     return (
       <>
         <span>

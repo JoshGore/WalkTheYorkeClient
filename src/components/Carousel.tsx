@@ -22,7 +22,7 @@ interface MultimediaCarouselProps {
 
 const Carousel: React.FC<MultimediaCarouselProps> = ({ multimedia, loading }) => (
   <div style={{ width: '100%' }}>
-    {!loading ? (!!multimedia!.length && (
+    {!loading ? (!!multimedia && !!multimedia.length && (
       <img
         alt=""
         className="d-block w-100"

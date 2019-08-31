@@ -21,6 +21,7 @@ import Reviews from './app/Reviews';
 import ReviewSummary from './app/reviews/ReviewSummary';
 import Chat from './app/Chat';
 import UserContext, { UserProps } from '../contexts/UserContext';
+import TrailContext, { TrailProps } from '../contexts/TrailContext';
 import SignupLogin from './SignupLogin';
 import Carousel from '../components/Carousel';
 import CornerAvatar from './signupLogin/CornerAvatar';
@@ -75,7 +76,7 @@ interface File {
   }
 }
 
-interface RouteDetails {
+interface RouteDetailQueryData {
   routes_by_pk: {
     id: number;
     short_title: string;
@@ -92,6 +93,10 @@ interface RouteDetails {
       count: number
     }
   };
+}
+
+interface RouteDetailQueryVars {
+  id: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -168,10 +173,12 @@ const BodyText: React.FC<BodyTextProps> = ({ loading, body }) => {
         <Skeleton width="40%" height={10} />
       </>
     ) : (
-      <Markdown className={classes.markdown}>{body}</Markdown>
+
+      body ? (<Markdown className={classes.markdown}>{body}</Markdown>) : (<div />)
     )
   );
 };
+//! !body && <Markdown className={classes.markdown}>{body}</Markdown>
 
 const Body: React.FC<BodyProps> = ({
   loading, title, body, multimedia, files, count, avgRating,
@@ -184,7 +191,7 @@ const Body: React.FC<BodyProps> = ({
       ) : (
         <Typography variant="h4" gutterBottom>{title}</Typography>
       )}
-      {!loading && !!files!.length && <DownloadMenu links={files!} />}
+      {!loading && !!files && !!files.length && <DownloadMenu links={files!} />}
       {!loading && (
         <ReviewSummary
           count={count !== undefined ? count : 0}
@@ -200,28 +207,30 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
   const classes = useStyles();
   const windowSize = useWindowSize();
   const User = useContext<UserProps>(UserContext);
-  const [trailSection, setTrailSection] = useState<TrailSectionProps>({
-    name: WTY_NAME, shortName: WTY_SHORT_NAME, id: WTY_TRAIL_ID, type: 'trail',
-  });
-  const [trailObject, setTrailObject] = useState<TrailObjectProps>({
-    name: undefined, id: undefined, type: undefined,
-  });
-  const [trailId, setTrailId] = useState(WTY_TRAIL_ID);
+  const Trail = useContext<TrailProps>(TrailContext);
+
+  useEffect(() => {
+    Trail.setTrailSection({
+      name: WTY_NAME, shortName: WTY_SHORT_NAME, id: WTY_TRAIL_ID, type: 'trail',
+    });
+    Trail.setTrailId(WTY_TRAIL_ID);
+  }, []);
   const {
     loading: selectionInfoLoading,
     error: selectionInfoError, data: selectionInfo,
-  } = useQuery<RouteDetails>(ROUTE_QUERY,
-    {
-      variables: { id: trailSection.id },
-    });
+  } = useQuery<RouteDetailQueryData, RouteDetailQueryVars>(ROUTE_QUERY, {
+    variables: { id: Trail.trailSection.id! },
+    skip: !Trail.trailSection.id,
+  });
+
   useEffect(() => {
     RouteProps.history.listen(() => {
       if (RouteProps.match.params.id !== undefined) {
-        setTrailSection({ ...trailSection, id: parseInt(RouteProps.match.params.id, 10) });
+        Trail.setTrailSection({ ...Trail.trailSection, id: parseInt(RouteProps.match.params.id, 10) });
       } else {
-        setTrailSection({ ...trailSection, id: trailId });
+        Trail.setTrailSection({ ...Trail.trailSection, id: Trail.trailId });
       }
-      console.log(`Trail Section is :${trailSection.id}`);
+      console.log(`Trail Section is :${Trail.trailSection.id}`);
     });
   }, []);
   const [menuMode, setMenuMode] = useState<MenuModes>(window.innerHeight > window.innerWidth ? 'bottom' : 'side');
@@ -241,43 +250,34 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
               display: 'inline-block',
               verticalAlign: 'middle',
             }}
-          >
-            <Link href="/">Home</Link>
-            <Typography color="textPrimary">Current</Typography>
-          </Breadcrumbs>
+          />
         </Router>
-      )}
+        )}
       body={(
         <>
           <Body
             loading={selectionInfoLoading}
-            title={!selectionInfoLoading ? selectionInfo!.routes_by_pk.title : undefined}
-            body={!selectionInfoLoading ? selectionInfo!.routes_by_pk.body : undefined}
-            multimedia={!selectionInfoLoading ? selectionInfo!.routes_by_pk.route_multimedia : undefined}
-            files={!selectionInfoLoading ? selectionInfo!.routes_by_pk.route_files : undefined}
-            count={!selectionInfoLoading ? selectionInfo!.reviews_aggregate.aggregate.count : undefined}
-            avgRating={!selectionInfoLoading ? selectionInfo!.reviews_aggregate.aggregate.avg.rating : undefined}
+            title={!selectionInfoLoading && !!selectionInfo ? selectionInfo.routes_by_pk.title : undefined}
+            body={!selectionInfoLoading && !!selectionInfo ? selectionInfo.routes_by_pk.body : undefined}
+            multimedia={!selectionInfoLoading && !!selectionInfo ? selectionInfo.routes_by_pk.route_multimedia : undefined}
+            files={!selectionInfoLoading && !!selectionInfo ? selectionInfo.routes_by_pk.route_files : undefined}
+            count={!selectionInfoLoading && !!selectionInfo ? selectionInfo.reviews_aggregate.aggregate.count : undefined}
+            avgRating={!selectionInfoLoading && !!selectionInfo ? selectionInfo.reviews_aggregate.aggregate.avg.rating : undefined}
           />
           <div style={{ padding: 12 }}>
-            <Reviews id={trailSection.id} />
-            <Chat id={trailSection.id} />
+            <Reviews />
+            <Chat />
           </div>
         </>
-      )}
+        )}
       mode={menuMode}
       mainContent={(
         <>
           <SignupLogin />
           <CornerAvatar />
-          <Map
-            trailSection={trailSection}
-            setTrailSection={setTrailSection}
-            trailObject={trailObject}
-            setTrailObject={setTrailObject}
-            trailId={trailId}
-          />
+          <Map />
         </>
-      )}
+        )}
     />
   );
 };
