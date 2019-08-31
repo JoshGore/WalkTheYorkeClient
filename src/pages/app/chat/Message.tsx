@@ -4,6 +4,19 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+
+const MESSAGE_INSERT_QUERY = gql`
+mutation ($route: Int!, $user: Int!, $body: String) {
+  insert_route_comment(objects: {route_id: $route, comment: {data: {body: $body, user_id: $user}}}) {
+    returning {
+      comment {
+        body
+      }
+    }
+  }
+}`;
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {

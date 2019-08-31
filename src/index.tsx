@@ -1,7 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
+import { WebSocketLink } from 'apollo-link-ws';
 import ApolloClient from 'apollo-boost';
+// Remove the apollo-boost import and change to this:
+/*
+import {ApolloClient} from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { WebSocketLink } from 'apollo-link-ws';
+import { split } from 'apollo-link';
+import { getMainDefinition } from 'apollo-utilities';
+import { setContext } from 'apollo-link-context';
+ */
+
 import App from './pages/App';
 import './index.css';
 import 'typeface-roboto';
@@ -20,13 +32,64 @@ const client = new ApolloClient({
     });
   },
 });
+/*
+interface Definition {
+  kind: string;
+  operation?: string;
+}
+
+const httpLink = new HttpLink({
+  uri: 'ws://wty-dev-hasura.herokuapp.com/v1/graphql',
+  credentials: 'include'
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('authToken');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+ */
+
+/*
+const wsLink = new WebSocketLink({
+  uri: 'ws://wty-dev-hasura.herokuapp.com/v1/graphql',
+  options: {
+    reconnect: true,
+    connectionParams: {
+      headers: {
+        authorization: localStorage.getItem('authToken') ? `Bearer ${localStorage.getItem('authToken')}` : '',
+      },
+    },
+  },
+});
+
+const link = split(
+  ({ query }) => {
+    const { kind, operation }: Definition = getMainDefinition(query);
+    return kind === 'OperationDefinition' && operation === 'subscription';
+  },
+  wsLink,
+  httpLink,
+);
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+ */
 
 ReactDOM.render(
   <UserProvider>
-  <TrailProvider>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <TrailProvider>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
     </TrailProvider>
   </UserProvider>,
   document.getElementById('root'),

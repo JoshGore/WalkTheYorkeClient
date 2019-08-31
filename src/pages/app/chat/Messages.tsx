@@ -1,5 +1,23 @@
 import React from 'react';
+import gql from 'graphql-tag';
+import { useSubscription } from '@apollo/react-hooks';
 import Message from './Message';
+
+const MESSAGE_SUBSCRIPTION_QUERY = gql`
+subscription ($id:Int!) {
+  routes_by_pk(id: $id) {
+    route_comments {
+      comment {
+        user {
+          firstname
+          lastname
+        }
+        created_at
+        body
+      }
+    }
+  }
+}`;
 
 const Messages: React.FC = () => (
   <>
