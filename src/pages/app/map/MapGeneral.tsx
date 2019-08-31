@@ -1,9 +1,7 @@
 import React from 'react';
 import { Source, Layer, Image } from 'react-mapbox-gl';
+import { FeatureCollection } from 'geojson';
 import shelter from './icons/custom-shelter-15.png';
-// import GeoJSON from '@types/geojson';
-import {FeatureCollection} from 'geojson';
-import TrailContext, { TrailProps } from '../../../contexts/TrailContext';
 
 interface MapGeneralProps {
   trailSection: any;
@@ -21,7 +19,6 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
       id="trail_line_all"
       geoJsonSource={{ type: 'geojson', data: stagesData }}
     />
-    {/* sources for trail assets */}
     <Source
       id="trail_point_shelters"
       geoJsonSource={{ type: 'geojson', data: shelters }}

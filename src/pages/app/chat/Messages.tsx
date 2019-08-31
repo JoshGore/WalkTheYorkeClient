@@ -1,43 +1,5 @@
 import React from 'react';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import clsx from 'clsx';
 import Message from './Message';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    backgroundColor: '#F5F5F5',
-    padding: theme.spacing(2),
-  },
-  messageFrom: {
-    borderRadius: '15px 1px 15px 15px',
-    padding: theme.spacing(1),
-    marginBottom: theme.spacing(2),
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-  },
-  messageFromAvatar: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  messageTo: {
-    borderRadius: '1px 15px 15px 15px',
-    padding: theme.spacing(2),
-    paddingTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(2),
-  },
-  textField: {
-    '& fieldset': {
-      borderRadius: '15px 15px 15px 15px',
-    },
-  },
-  dense: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
 const Messages: React.FC = () => (
   <>

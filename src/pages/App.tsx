@@ -4,9 +4,6 @@ import React, {
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import {
-  RouteComponentProps, Link as RouterLink, BrowserRouter as Router, Route,
-} from 'react-router-dom';
-import {
   Breadcrumbs, Typography, makeStyles, createStyles, Theme, Link,
 } from '@material-ui/core';
 
@@ -21,24 +18,16 @@ import Reviews from './app/Reviews';
 import ReviewSummary from './app/reviews/ReviewSummary';
 import Chat from './app/Chat';
 import UserContext, { UserProps } from '../contexts/UserContext';
-import TrailContext, { TrailProps } from '../contexts/TrailContext';
+import TrailContext, { TrailContextProps, TrailEntityTypes } from '../contexts/TrailContext';
 import SignupLogin from './SignupLogin';
 import Carousel from '../components/Carousel';
 import CornerAvatar from './signupLogin/CornerAvatar';
-
-const WTY_TRAIL_ID = 18;
-const WTY_NAME = 'Walk the Yorke';
-const WTY_SHORT_NAME = 'Home';
 
 type MenuModes = 'side' | 'bottom';
 
 interface BreadcrumbsLink {
   name: string;
   url: string;
-}
-
-interface AppProps {
-  RouteProps: RouteComponentProps<{id: string, type: string}>;
 }
 
 interface MenuProps {
@@ -78,12 +67,15 @@ interface File {
 
 interface RouteDetailQueryData {
   routes_by_pk: {
-    id: number;
-    short_title: string;
-    title: string;
-    body: string
-    route_multimedia: Multimedium[]
-    route_files: File[]
+    id: number,
+    short_title: string,
+    title: string,
+    body: string,
+    typeByType: {
+      name: TrailEntityTypes
+    },
+    route_multimedia: Multimedium[],
+    route_files: File[],
   };
   reviews_aggregate: {
     aggregate: {
@@ -130,6 +122,9 @@ const ROUTE_QUERY = gql`
       short_title
       title
       body
+      typeByType {
+        name
+      }
       route_multimedia {
         multimedium {
           id
@@ -178,7 +173,6 @@ const BodyText: React.FC<BodyTextProps> = ({ loading, body }) => {
     )
   );
 };
-//! !body && <Markdown className={classes.markdown}>{body}</Markdown>
 
 const Body: React.FC<BodyProps> = ({
   loading, title, body, multimedia, files, count, avgRating,
@@ -195,7 +189,7 @@ const Body: React.FC<BodyProps> = ({
       {!loading && (
         <ReviewSummary
           count={count !== undefined ? count : 0}
-          average={count !== undefined ? count : 0}
+          average={avgRating !== undefined ? avgRating : 0}
         />
       )}
       <BodyText loading={loading} body={body} />
@@ -203,18 +197,13 @@ const Body: React.FC<BodyProps> = ({
   </>
 );
 
-const App: React.FC<AppProps> = ({ RouteProps }) => {
+const App: React.FC = () => {
   const classes = useStyles();
   const windowSize = useWindowSize();
   const User = useContext<UserProps>(UserContext);
-  const Trail = useContext<TrailProps>(TrailContext);
+  const Trail = useContext<TrailContextProps>(TrailContext);
+  const [menuMode, setMenuMode] = useState<MenuModes>(window.innerHeight > window.innerWidth ? 'bottom' : 'side');
 
-  useEffect(() => {
-    Trail.setTrailSection({
-      name: WTY_NAME, shortName: WTY_SHORT_NAME, id: WTY_TRAIL_ID, type: 'trail',
-    });
-    Trail.setTrailId(WTY_TRAIL_ID);
-  }, []);
   const {
     loading: selectionInfoLoading,
     error: selectionInfoError, data: selectionInfo,
@@ -224,16 +213,20 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
   });
 
   useEffect(() => {
-    RouteProps.history.listen(() => {
-      if (RouteProps.match.params.id !== undefined) {
-        Trail.setTrailSection({ ...Trail.trailSection, id: parseInt(RouteProps.match.params.id, 10) });
-      } else {
-        Trail.setTrailSection({ ...Trail.trailSection, id: Trail.trailId });
-      }
-      console.log(`Trail Section is :${Trail.trailSection.id}`);
-    });
-  }, []);
-  const [menuMode, setMenuMode] = useState<MenuModes>(window.innerHeight > window.innerWidth ? 'bottom' : 'side');
+    if (!selectionInfoLoading && Trail.trailSection.id) {
+      Trail.setTrailSection({
+        id: selectionInfo && selectionInfo.routes_by_pk && selectionInfo.routes_by_pk.id,
+        name: selectionInfo && selectionInfo.routes_by_pk && selectionInfo.routes_by_pk.title,
+        shortName: selectionInfo && selectionInfo.routes_by_pk && selectionInfo.routes_by_pk.short_title,
+        type: selectionInfo && selectionInfo.routes_by_pk && selectionInfo.routes_by_pk.typeByType.name,
+      });
+    } else if (!selectionInfoLoading && !Trail.trailSection.id) {
+      Trail.setTrailSection({
+        ...Trail.trail,
+      });
+    }
+  }, [selectionInfoLoading, Trail.trailSection.id]);
+
   useLayoutEffect(() => {
     if (windowSize.innerHeight > windowSize.innerWidth) {
       setMenuMode('bottom');
@@ -241,23 +234,31 @@ const App: React.FC<AppProps> = ({ RouteProps }) => {
       setMenuMode('side');
     }
   });
+
+  const handleHomeLinkClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    event.preventDefault();
+    Trail.setTrailSection({ ...Trail.trail });
+  };
+
   return (
     <MenuContainer
-      header={(
-        <Router>
-          <Breadcrumbs
-            style={{
-              display: 'inline-block',
-              verticalAlign: 'middle',
-            }}
-          />
-        </Router>
-        )}
+      header={
+        Trail.trailSection.type === 'trail' || Trail.trailSection.type === undefined ? (
+          <Breadcrumbs style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+            <Typography color="textPrimary">Home</Typography>
+          </Breadcrumbs>
+        ) : (
+          <Breadcrumbs style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+            <Link href="/" onClick={handleHomeLinkClick}>Home</Link>
+            <Typography color="textPrimary">{Trail.trailSection.shortName}</Typography>
+          </Breadcrumbs>
+        )
+          }
       body={(
         <>
           <Body
             loading={selectionInfoLoading}
-            title={!selectionInfoLoading && !!selectionInfo ? selectionInfo.routes_by_pk.title : undefined}
+            title={Trail.trailSection.name}
             body={!selectionInfoLoading && !!selectionInfo ? selectionInfo.routes_by_pk.body : undefined}
             multimedia={!selectionInfoLoading && !!selectionInfo ? selectionInfo.routes_by_pk.route_multimedia : undefined}
             files={!selectionInfoLoading && !!selectionInfo ? selectionInfo.routes_by_pk.route_files : undefined}

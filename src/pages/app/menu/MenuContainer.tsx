@@ -1,16 +1,18 @@
 import React, {
-  useState, useEffect, useLayoutEffect, cloneElement,
+  useState, useEffect, useLayoutEffect, cloneElement, useContext, useRef,
 } from 'react';
 import { useSpring, animated } from 'react-spring';
 import {
   Grid, makeStyles, createStyles, Theme,
 } from '@material-ui/core';
-import Measure, { ContentRect } from 'react-measure';
+import Measure from 'react-measure';
 import Scrollbars from 'react-custom-scrollbars';
 import useWindowSize from '../../../utils/WindowSize';
 import ToggleButton from './menuContainer/ToggleButton';
+import TrailContext, { TrailContextProps } from '../../../contexts/TrailContext';
 
 type MenuStates = 'fullscreen' | 'visible' | 'collapsed';
+
 type MenuModes = 'side' | 'bottom';
 
 interface MenuProps {
@@ -20,12 +22,6 @@ interface MenuProps {
   mainContent: JSX.Element;
 }
 
-interface SizePosition {
-  offsetTop: number;
-  offsetLeft: number;
-  height: number;
-  width: number;
-}
 interface Position {
   top: number;
   left: number;
@@ -43,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     maxWidth: '100vw',
     zIndex: 999,
     boxShadow: '0px 0px 30px 10px rgba(0,0,0,0.2)',
-    backgroundColor: '#fff',
+    backgroundColor: theme.palette.background.paper,
     display: 'flex',
     flexFlow: 'column',
   },
@@ -83,9 +79,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 const VISIBLE_OFFSET = 500;
 
 const MenuContainer: React.FunctionComponent<MenuProps> = ({
-  // header, body, mainContent, mode,
   header, body, mainContent,
 }) => {
+  const Trail = useContext<TrailContextProps>(TrailContext);
   const [mode, setMode] = useState<MenuModes>(window.innerHeight > window.innerWidth ? 'bottom' : 'side');
   const [animationDisabled, setAnimationDisabled] = useState(false);
   useLayoutEffect(() => {
@@ -103,7 +99,6 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
   const contentTopCollapsed = ():number => (mode === 'bottom' ? windowSize.innerHeight - headerSize.height : 0);
   const contentTopVisible = ():number => (mode === 'bottom' ? windowSize.innerHeight - offset : 0);
   const contentTopFullscreen = 0;
-  // const [contentTopRight, setContentTopRight] = useSpring(() => ({ top: contentTopCollapsed(), right: contentRightVisible(), immediate: animationDisabled }));
   const [contentTopRight, setContentTopRight] = useSpring(() => ({
     top: contentTopCollapsed(), right: contentRightVisible(),
   }));
@@ -122,6 +117,13 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
       height: menuState === 'collapsed' ? placeholderHeightCollapsed() : placeholderHeightVisible(),
     });
   });
+  useEffect(() => {
+    setMenuState('visible');
+  }, [Trail.trailSection.id, Trail.trailObject.id]);
+
+  const handleBodyScroll = () => {
+    mode === 'bottom' && setMenuState('fullscreen');
+  }
 
   return (
     <Grid container className={`${classes.root} ${mode === 'bottom' ? classes.portrait : classes.landscape}`}>
@@ -156,7 +158,7 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
             )
           }
         </Measure>
-        <Scrollbars style={{ flex: '1 1 auto' }}>{body}</Scrollbars>
+        <Scrollbars style={{ flex: '1 1 auto' }} onScroll={handleBodyScroll}>{body}</Scrollbars>
       </animated.div>
       <div
         style={{

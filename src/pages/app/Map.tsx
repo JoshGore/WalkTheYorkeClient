@@ -5,10 +5,13 @@ import ReactResizeDetector from 'react-resize-detector';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
+import { BBox } from "@turf/helpers";
 import { featureCollection } from '@turf/helpers';
-import { Feature, FeatureCollection, LineString, GeoJsonProperties } from 'geojson';
+import {
+  Feature, FeatureCollection, LineString, GeoJsonProperties,
+} from 'geojson';
 import MapGeneral from './map/MapGeneral';
-import TrailContext, { TrailProps } from '../../contexts/TrailContext';
+import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 
 import { TrailSectionProps, TrailObjectProps } from '../types';
 
@@ -19,46 +22,49 @@ const MapComponent = ReactMapboxGl({
   trackResize: false,
 });
 
-const WTY_TRAIL_BOUNDS: mapboxgl.LngLatBoundsLike = [
-  [136.585109, -35.314486],
-  [138.366868, -33.99099],
+// const WTY_TRAIL_BOUNDS: mapboxgl.LngLatBoundsLike = [
+const WTY_TRAIL_BOUNDS: BBox = [
+  136.585109, -35.314486,
+  138.366868, -33.99099,
 ];
 
 interface LineFeatureProps {
-    routeId: number;
-    routeType: string;
+  routeId: number;
+  routeType: string;
 }
 
 interface LinesQueryData {
-    routes_by_bk: {
-        routes: {
-            id: number,
-            line_routes: {
-                line: {
-                    id: number,
-                    geom: any,
-                    line_types: {
-                        type: {
-                            name: string
-                        }
-                    }
-                }
+  routes_by_bk: {
+    routes: {
+      id: number,
+      line_routes: {
+        line: {
+          id: number,
+          geom: any,
+          line_types: {
+            type: {
+              name: string
             }
+          }
         }
+      }
     }
+  }
 }
 
 interface LinesQueryVars {
-    id: number
+  id: number
 }
 
 const Map: React.FC = () => {
-  const Trail = useContext<TrailProps>(TrailContext);
+  const Trail = useContext<TrailContextProps>(TrailContext);
+
   const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
   const [selectedFeature, setSelectedFeature] = useState<any>(undefined);
   const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
   // in state prevents reloading on map changes
-  const [initialBounds] = useState<mapboxgl.LngLatBoundsLike>(WTY_TRAIL_BOUNDS);
+  const [initialBounds] = useState<BBox>(WTY_TRAIL_BOUNDS);
+  const [transformedInitialBounds] = useState<[[number, number], [number, number]]>([[WTY_TRAIL_BOUNDS[0], WTY_TRAIL_BOUNDS[1]], [WTY_TRAIL_BOUNDS[2], WTY_TRAIL_BOUNDS[3]]]);
   const [mapLoading, setMapLoading] = useState(true);
 
   const {
@@ -163,25 +169,28 @@ const Map: React.FC = () => {
         }
       } else {
         // if no interactive features returned then set trailObject to none
-        Trail.setTrailObject({ name: 'undefined', type: undefined, id: undefined });
+        Trail.setTrailObject({...Trail.trail});
       }
     }
   }, [mapClickCoordinates]);
 
-  // zoom to stage if stage selected
-  const calculateExtent = (): mapboxgl.LngLatBoundsLike => (Trail.trailSection.type === 'trail'
-    ? initialBounds
-    : bbox(
+  const calculateExtent = (): BBox => {
+    const bounds = bbox(
       featureCollection(
-          geoJsonLines(linesData.lines).features.filter(
-            (feature) => feature.properties.routeId === Trail.trailSection.id,
-          ),
+        geoJsonLines(linesData.lines).features.filter(
+          feature => feature.properties.routeId === Trail.trailSection.id,
+        ),
       ),
-    )
-  );
+    );
+    if (bounds[0] === Infinity) {
+      return initialBounds;
+    }
+    return bounds;
+  };
+
   const zoomToExtent = () => {
     map!.fitBounds(
-      calculateExtent(), { padding: 100 },
+      calculateExtent() as mapboxgl.LngLatBoundsLike, { padding: 100 },
     );
   };
   useEffect(() => {
@@ -196,7 +205,7 @@ const Map: React.FC = () => {
       <MapComponent
         style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
         containerStyle={{ flex: 1 }}
-        fitBounds={initialBounds as [[number, number], [number, number]]}
+        fitBounds={transformedInitialBounds}
         onStyleLoad={onStyleLoad}
         onClick={(map, evt) => mapClick(map, evt)}
       >

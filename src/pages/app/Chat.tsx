@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
 import Messages from './chat/Messages';
-import TrailContext, { TrailProps } from '../../contexts/TrailContext';
+import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {

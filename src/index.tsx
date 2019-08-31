@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import App from './pages/App';
@@ -26,9 +25,7 @@ ReactDOM.render(
   <UserProvider>
   <TrailProvider>
     <ApolloProvider client={client}>
-      <Router>
-        <Route path="/:type?/:id(\d+)?" render={RouteProps => <App RouteProps={RouteProps} />} />
-      </Router>
+      <App />
     </ApolloProvider>
     </TrailProvider>
   </UserProvider>,

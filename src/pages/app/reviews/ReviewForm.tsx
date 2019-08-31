@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import {
@@ -8,6 +8,8 @@ import {
 import CreateIcon from '@material-ui/icons/Create';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
+import TrailContext, { TrailContextProps, TrailEntityTypes } from '../../../contexts/TrailContext';
+import { REVIEWS_QUERY } from '../Reviews';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -50,24 +52,29 @@ const ReviewForm: React.FC = () => {
     setRating(3);
     setReview('');
   };
+  const Trail = useContext<TrailContextProps>(TrailContext);
   const handleSubmit = () => {
     setSubmitting(true);
     submitReview({
       variables: {
-        route_id: 10,
+        route_id: Trail.trailSection.id,
         user_id: localStorage.getItem('userId'),
         rating,
         review,
       },
+      refetchQueries: [
+        { query: REVIEWS_QUERY, variables: { id: Trail.trailSection.id! } },
+      ],
     }).then(() => {
       setSubmitting(false);
+      setShowReviewForm(false);
     });
   };
   return (
     <>
-      <Button variant="outlined" onClick={handleAddReview}>
+      <Button variant="outlined" size="small" onClick={handleAddReview}>
         <CreateIcon style={{ marginRight: 4 }} />
-          Write review
+          Write Review
       </Button>
       <Dialog open={showReviewForm}>
         <DialogTitle>

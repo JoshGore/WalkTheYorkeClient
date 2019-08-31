@@ -1,43 +1,53 @@
 import React from 'react';
 
-export interface TrailSectionProps {
+export type TrailEntityTypes = 'trail' | 'stage' | 'short' | undefined;
+
+export interface TrailEntityProps {
   name: string | undefined;
   shortName: string | undefined;
   id: number | undefined;
-  type: 'trail' | 'stage' | 'short' | undefined;
+  type: TrailEntityTypes;
 }
 
-export interface TrailObjectProps {
-  name: string | undefined;
-  id: number | undefined;
-  type: 'issue' | 'campsite' | 'interest' | undefined
+export interface TrailContextProps {
+  trail: TrailEntityProps;
+  setTrail: (trail: TrailEntityProps) => void;
+  trailSection: TrailEntityProps;
+  setTrailSection: (trailSection: TrailEntityProps) => void;
+  trailObject: TrailEntityProps;
+  setTrailObject: (trailObject: TrailEntityProps) => void;
+  currentTrailObject: () => TrailEntityProps;
 }
+const trail = {
+  name: undefined,
+  shortName: undefined,
+  id: undefined,
+  type: undefined,
+};
+const setTrail = () => {};
+const trailSection = {
+  name: undefined,
+  shortName: undefined,
+  id: undefined,
+  type: undefined,
+};
+const setTrailSection = () => {};
+const trailObject = {
+  name: undefined,
+  shortName: undefined,
+  id: undefined,
+  type: undefined,
+};
+const setTrailObject = () => {};
+const currentTrailObject = (): TrailEntityProps => {
+  if (trailObject.id === undefined) {
+    return trailSection;
+  }
+  return trailObject;
+};
 
-export interface TrailProps {
-  trailId: number | undefined;
-  setTrailId: (trailId: number | undefined) => void;
-  trailSection: TrailSectionProps;
-  setTrailSection: (trailSection: TrailSectionProps) => void;
-  trailObject: TrailObjectProps;
-  setTrailObject: (trailObject: TrailObjectProps) => void;
-}
-
-const TrailContext = React.createContext<TrailProps>({
-      trailId: undefined,
-  setTrailId: () => {},
-  trailSection: {
-    name: undefined,
-    shortName: undefined,
-    id: undefined,
-    type: undefined,
-  },
-  setTrailSection: () => {},
-  setTrailObject: () => {},
-    trailObject: {
-    name: undefined,
-    id: undefined,
-    type: undefined,
-  },
+const TrailContext = React.createContext<TrailContextProps>({
+  trail, setTrail, trailSection, setTrailSection, trailObject, setTrailObject, currentTrailObject,
 });
 
 export default TrailContext;
