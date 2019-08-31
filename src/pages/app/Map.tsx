@@ -5,12 +5,13 @@ import ReactResizeDetector from 'react-resize-detector';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
-import { BBox } from "@turf/helpers";
-import { featureCollection } from '@turf/helpers';
+import { BBox, featureCollection } from '@turf/helpers';
+
 import {
   Feature, FeatureCollection, LineString, GeoJsonProperties,
 } from 'geojson';
 import MapGeneral from './map/MapGeneral';
+// import MapOutdoorsAll from './map/MapOutdoorsAll';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 
 import { TrailSectionProps, TrailObjectProps } from '../types';
@@ -169,7 +170,7 @@ const Map: React.FC = () => {
         }
       } else {
         // if no interactive features returned then set trailObject to none
-        Trail.setTrailObject({...Trail.trail});
+        Trail.setTrailObject({ ...Trail.trail });
       }
     }
   }, [mapClickCoordinates]);
@@ -199,15 +200,17 @@ const Map: React.FC = () => {
     }
   }, [Trail.trailSection.id, Trail.trailSection.type, mapLoading, linesLoading]);
 
+
+  // blank style if convert to individual layers style={"mapbox://styles/joshg/cjzzmubza0zw21cuxtrntf6ny"}
   return (
     <>
       <ReactResizeDetector handleWidth handleHeight refreshMode="throttle" refreshRate={100} onResize={handleResize} />
       <MapComponent
-        style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
         containerStyle={{ flex: 1 }}
         fitBounds={transformedInitialBounds}
         onStyleLoad={onStyleLoad}
         onClick={(map, evt) => mapClick(map, evt)}
+        style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
       >
         {/* sources for trail lines, short walk lines, day walk lines, hero walk lines */}
         {!linesLoading && !!linesData.lines && (
