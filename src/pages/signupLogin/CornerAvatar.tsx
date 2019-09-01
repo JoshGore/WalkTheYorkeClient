@@ -3,7 +3,7 @@ import {
   makeStyles, createStyles, Theme, IconButton, Avatar,
 } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import UserContext, { UserProps } from '../../contexts/UserContext';
+import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   button: {
@@ -27,7 +27,7 @@ interface BodyTextProps {
 
 const CornerAvatar: React.FC = () => {
   const classes = useStyles();
-  const User = useContext<UserProps>(UserContext);
+  const User = useContext<UserContextProps>(UserContext);
   const handleLoginToggle = () => {
     User.setLoginMenuOpen(!User.loginMenuOpen);
   };

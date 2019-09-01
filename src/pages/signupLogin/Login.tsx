@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import {
   DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, TextField, Button, CircularProgress, 
 } from '@material-ui/core';
-import UserContext, { UserProps } from '../../contexts/UserContext';
+import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
 interface State {
   username: string;
@@ -33,7 +33,7 @@ interface SubmissionErrors {
 }
 
 const Login: React.FC<LoginProps> = ({ setNewUser }) => {
-  const User = useContext<UserProps>(UserContext);
+  const User = useContext<UserContextProps>(UserContext);
   const [authFailed, setAuthFailed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<SubmissionErrors>({

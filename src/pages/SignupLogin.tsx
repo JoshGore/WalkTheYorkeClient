@@ -6,7 +6,7 @@ import {
 import { useTheme } from '@material-ui/core/styles';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-import UserContext, { UserProps } from '../contexts/UserContext';
+import UserContext, { UserContextProps } from '../contexts/UserContext';
 import Signup from './signupLogin/Signup';
 import Login from './signupLogin/Login';
 import Logout from './signupLogin/Logout';
@@ -20,7 +20,7 @@ interface UserQueryProps {
 }
 
 const SignupLogin: React.FC = () => {
-  const User = useContext<UserProps>(UserContext);
+  const User = useContext<UserContextProps>(UserContext);
   const [loadDetails, setLoadDetails] = useState(false);
   const setUserVariables = ({ users_by_pk: data }: UserQueryProps) => {
     User.setUsername(data.username);

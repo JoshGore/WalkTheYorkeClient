@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import UserContext, { UserProps } from '../../contexts/UserContext';
+import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
 interface State {
   username: string;
@@ -20,7 +20,7 @@ interface State {
 }
 
 const Logout: React.FC = () => {
-  const User = useContext<UserProps>(UserContext);
+  const User = useContext<UserContextProps>(UserContext);
   return (
     <>
       <DialogTitle>

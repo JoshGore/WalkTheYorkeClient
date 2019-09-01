@@ -2,11 +2,9 @@ import React from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import clsx from 'clsx';
-import Messages from './chat/Messages';
+import Comments from './chat/Comments';
+import CommentForm from './chat/CommentForm';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -14,17 +12,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     backgroundColor: '#F5F5F5',
     padding: theme.spacing(2),
   },
-  messageFrom: {
+  commentFrom: {
     borderRadius: '15px 1px 15px 15px',
     padding: theme.spacing(1),
     marginBottom: theme.spacing(2),
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
   },
-  messageFromAvatar: {
+  commentFromAvatar: {
     backgroundColor: theme.palette.primary.main,
   },
-  messageTo: {
+  commentTo: {
     borderRadius: '1px 15px 15px 15px',
     padding: theme.spacing(2),
     paddingTop: theme.spacing(0.5),
@@ -40,31 +38,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const MessageForm: React.FC = () => {
-  const classes = useStyles();
-  return (
-    <TextField
-      id="outlined-dense-multiline"
-      label="start with @issue to submit issue"
-      className={clsx(classes.textField, classes.dense)}
-      margin="dense"
-      variant="outlined"
-      multiline
-      rowsMax="4"
-      fullWidth
-    />
-  );
-};
-
 const Chat: React.FC = () => {
   const classes = useStyles();
   return (
     <Grid className={classes.root} container>
-      <Grid item>
-        <Messages />
+      <Grid item xs={12}>
+        <Comments />
       </Grid>
-      <Grid item xs>
-        <MessageForm />
+      <Grid item xs={12}>
+        <CommentForm />
       </Grid>
     </Grid>
   );

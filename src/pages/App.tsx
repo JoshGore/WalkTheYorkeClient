@@ -17,7 +17,7 @@ import Markdown from '../components/Markdown';
 import Reviews from './app/Reviews';
 import ReviewSummary from './app/reviews/ReviewSummary';
 import Chat from './app/Chat';
-import UserContext, { UserProps } from '../contexts/UserContext';
+import UserContext, { UserContextProps } from '../contexts/UserContext';
 import TrailContext, { TrailContextProps, TrailEntityTypes } from '../contexts/TrailContext';
 import SignupLogin from './SignupLogin';
 import Carousel from '../components/Carousel';
@@ -200,7 +200,7 @@ const Body: React.FC<BodyProps> = ({
 const App: React.FC = () => {
   const classes = useStyles();
   const windowSize = useWindowSize();
-  const User = useContext<UserProps>(UserContext);
+  const User = useContext<UserContextProps>(UserContext);
   const Trail = useContext<TrailContextProps>(TrailContext);
   const [menuMode, setMenuMode] = useState<MenuModes>(window.innerHeight > window.innerWidth ? 'bottom' : 'side');
 

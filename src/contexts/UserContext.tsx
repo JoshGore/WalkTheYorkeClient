@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface UserProps {
+export interface UserContextProps {
   loggedIn: boolean;
   setLoggedIn: (loggedIn: boolean) => void;
   userId: number | undefined;
@@ -16,7 +16,7 @@ export interface UserProps {
   setLoginMenuOpen: (loginMenuOpen: boolean) => void;
 }
 
-const UserContext = React.createContext<UserProps>({
+const UserContext = React.createContext<UserContextProps>({
   loggedIn: false,
   setLoggedIn: () => {},
   userId: undefined,

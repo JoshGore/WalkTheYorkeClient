@@ -6,7 +6,7 @@ import {
   DialogActions,
   Grid, TextField, Button, CircularProgress,
 } from '@material-ui/core';
-import UserContext, { UserProps } from '../../contexts/UserContext';
+import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
 interface Inputs {
   firstname: string;
@@ -37,7 +37,7 @@ interface SubmissionErrors {
 }
 
 const Signup: React.FC<SignupProps> = ({ setNewUser }) => {
-  const User = useContext<UserProps>(UserContext);
+  const User = useContext<UserContextProps>(UserContext);
   const [signupFailed, setSignupFailed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<SubmissionErrors>({

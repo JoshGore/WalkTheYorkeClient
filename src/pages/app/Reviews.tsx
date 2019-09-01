@@ -10,7 +10,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import ReviewForm from './reviews/ReviewForm';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
-import UserContext, { UserProps } from '../../contexts/UserContext';
+import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -58,7 +58,7 @@ export const REVIEWS_QUERY = gql`
 
 const Reviews: React.FC = () => {
   const Trail = useContext<TrailContextProps>(TrailContext);
-  const User = useContext<UserProps>(UserContext);
+  const User = useContext<UserContextProps>(UserContext);
   const classes = useStyles();
   const { loading, error, data } = useQuery<ReviewQueryData, ReviewQueryVars>(REVIEWS_QUERY,
     {

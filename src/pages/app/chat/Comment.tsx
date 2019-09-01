@@ -4,36 +4,23 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
-
-const MESSAGE_INSERT_QUERY = gql`
-mutation ($route: Int!, $user: Int!, $body: String) {
-  insert_route_comment(objects: {route_id: $route, comment: {data: {body: $body, user_id: $user}}}) {
-    returning {
-      comment {
-        body
-      }
-    }
-  }
-}`;
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     backgroundColor: '#F5F5F5',
     padding: theme.spacing(2),
   },
-  messageFrom: {
+  commentFrom: {
     borderRadius: '15px 1px 15px 15px',
     padding: theme.spacing(1),
     marginBottom: theme.spacing(2),
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
   },
-  messageFromAvatar: {
+  commentFromAvatar: {
     backgroundColor: theme.palette.primary.main,
   },
-  messageTo: {
+  commentTo: {
     borderRadius: '1px 15px 15px 15px',
     padding: theme.spacing(2),
     paddingTop: theme.spacing(0.5),
@@ -51,17 +38,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 interface MessageProps {
   fromUser: boolean;
-  message: string;
+  comment: string;
   user: {
-    firstName: string,
-    lastName: string
+    firstname: string,
+    lastname: string
   };
 }
 
-const Message: React.FC<MessageProps> = ({
+const Comment: React.FC<MessageProps> = ({
   fromUser,
-  message,
-  user: { firstName, lastName },
+  comment,
+  user: { firstname, lastname },
 }) => {
   const classes = useStyles();
   return (
@@ -72,22 +59,22 @@ const Message: React.FC<MessageProps> = ({
       direction={fromUser ? 'row-reverse' : 'row'}
     >
       <Grid item>
-        <Avatar className={fromUser ? classes.messageFromAvatar : ''}>
-          {`${firstName.charAt(0)}${lastName.charAt(0)}`}
+        <Avatar className={fromUser ? classes.commentFromAvatar : ''}>
+          {`${firstname.charAt(0)}${lastname.charAt(0)}`}
         </Avatar>
       </Grid>
       <Grid item>
-        <Paper className={fromUser ? classes.messageFrom : classes.messageTo}>
+        <Paper className={fromUser ? classes.commentFrom : classes.commentTo}>
           {!fromUser && (
             <Typography variant="caption" color="textSecondary">
-              {`${firstName} ${lastName}`}
+              {`${firstname} ${lastname}`}
             </Typography>
           )}
-          <Typography variant="body1">{message}</Typography>
+          <Typography variant="body1">{comment}</Typography>
         </Paper>
       </Grid>
     </Grid>
   );
 };
 
-export default Message;
+export default Comment;
