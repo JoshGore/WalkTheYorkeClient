@@ -23,7 +23,7 @@ const wsLink = new WebSocketLink({
   options: {
     lazy: true,
     reconnect: true,
-    connectionParams: () => ({ authorization: getAuthorization() }),
+    connectionParams: () => ({ headers: { Authorization: getAuthorization() } }),
   },
 });
 
