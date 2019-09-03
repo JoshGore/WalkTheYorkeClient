@@ -1,7 +1,9 @@
 import React from 'react';
+import Comment from './Comment';
 
 const CommentGroup: React.FC = () => (
-  <div />
+  <>
+  </>
 );
 
 export default CommentGroup;

@@ -1,79 +1,115 @@
-import React from 'react';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+import React, { useState } from 'react';
+import {
+  ListItem,
+  Divider,
+  Avatar,
+  Typography,
+  Link,
+  Chip,
+} from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    backgroundColor: '#F5F5F5',
-    padding: theme.spacing(2),
-  },
-  commentFrom: {
-    borderRadius: '15px 1px 15px 15px',
-    padding: theme.spacing(1),
-    marginBottom: theme.spacing(2),
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-  },
-  commentFromAvatar: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  commentTo: {
-    borderRadius: '1px 15px 15px 15px',
-    padding: theme.spacing(2),
-    paddingTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(2),
-  },
-  textField: {
-    '& fieldset': {
-      borderRadius: '15px 15px 15px 15px',
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    dividerFullWidth: {
+      marginTop: '5px',
+      marginRight: theme.spacing(2),
+      marginBottom: 0,
+      marginLeft: theme.spacing(2),
     },
-  },
-  dense: {
-    marginTop: theme.spacing(2),
-  },
-}));
+    dividerInset: {
+      marginTop: '5px',
+      marginRight: theme.spacing(2),
+      marginBottom: 0,
+      marginLeft: theme.spacing(9),
+    },
+    avatarFullWidth: {
+      marginTop: '5px',
+      marginRight: theme.spacing(2),
+      marginBottom: 0,
+      marginLeft: theme.spacing(0),
+    },
+    avatarInset: {
+      marginTop: '5px',
+      marginRight: theme.spacing(2),
+      marginBottom: 0,
+      marginLeft: theme.spacing(9),
+    },
+    typography: {
+      marginTop: '5px',
+      marginRight: theme.spacing(2),
+      marginBottom: 0,
+      marginLeft: theme.spacing(0),
+    },
+  }),
+);
 
-interface MessageProps {
-  fromUser: boolean;
-  comment: string;
-  user: {
-    firstname: string,
-    lastname: string
-  };
+interface CommentProps {
+  level: 1 | 2;
+  firstname: string;
+  lastname: string;
+  body: string;
 }
 
-const Comment: React.FC<MessageProps> = ({
-  fromUser,
-  comment,
-  user: { firstname, lastname },
+const Comment: React.FC<CommentProps> = ({
+  level,
+  firstname,
+  lastname,
+  body,
 }) => {
   const classes = useStyles();
+  const replyToComment = (event: React.MouseEvent) => {
+    event.preventDefault();
+    console.log(event);
+  };
+  const [isIssue, setIsIssue] = useState(true);
+  const deleteIssue = () => setIsIssue(false);
   return (
-    <Grid
-      container
-      wrap="nowrap"
-      spacing={2}
-      direction={fromUser ? 'row-reverse' : 'row'}
-    >
-      <Grid item>
-        <Avatar className={fromUser ? classes.commentFromAvatar : ''}>
-          {`${firstname.charAt(0)}${lastname.charAt(0)}`}
-        </Avatar>
-      </Grid>
-      <Grid item>
-        <Paper className={fromUser ? classes.commentFrom : classes.commentTo}>
-          {!fromUser && (
-            <Typography variant="caption" color="textSecondary">
-              {`${firstname} ${lastname}`}
-            </Typography>
-          )}
-          <Typography variant="body1">{comment}</Typography>
-        </Paper>
-      </Grid>
-    </Grid>
+    <>
+      <ListItem style={{ alignItems: 'start' }}>
+        <div className={classes.typography}>
+          <div>
+            <div>
+              {isIssue && (
+                <Chip size="small" label="@issue" onDelete={deleteIssue} />
+              )}
+            </div>
+            <Avatar
+              style={{ float: 'left' }}
+              className={
+                level === 1 ? classes.avatarFullWidth : classes.avatarInset
+              }
+            >{`${firstname.charAt(0)}${lastname.charAt(0)}`}</Avatar>
+            <div
+              className={
+                level === 1 ? classes.avatarFullWidth : classes.avatarInset
+              }
+            >
+              <Typography
+                variant="subtitle2"
+                display="inline"
+              >{`${firstname} ${lastname} `}</Typography>
+              <Typography variant="subtitle2" display="inline">
+                5 days ago
+              </Typography>
+              <Typography variant="body2">{body}</Typography>
+            </div>
+            {level === 1 && (
+              <div>
+                <Link href="./" onClick={replyToComment}>
+                  reply
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </ListItem>
+      <Divider
+        className={
+          level === 1 ? classes.dividerFullWidth : classes.dividerInset
+        }
+      />
+    </>
   );
 };
 
