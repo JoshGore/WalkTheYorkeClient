@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 
 interface File {
-    file: {
-        id: number,
-        name: string,
-        link: string,
-    }
+  file: {
+    id: number,
+    name: string,
+    link: string,
+  }
 }
 
 interface DownloadMenuProps {
-    links: File []
+  links: File []
 }
 
 const DownloadMenu: React.FC<DownloadMenuProps> = ({ links }) => {
@@ -28,15 +26,17 @@ const DownloadMenu: React.FC<DownloadMenuProps> = ({ links }) => {
 
   return (
     <div>
-      <Button
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        variant="outlined"
-        size="small"
-        onClick={handleClick}
-      >
-        Downloads
-      </Button>
+      {!!links.length && (
+        <Button
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          variant="outlined"
+          size="small"
+          onClick={handleClick}
+        >
+          Downloads
+        </Button>
+      )}
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -44,14 +44,9 @@ const DownloadMenu: React.FC<DownloadMenuProps> = ({ links }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {links.map((link: File) => (
-          <MenuItem
-            key={link.file.link}
-            onClick={handleClose}
-            component="a"
-            href={link.file.link}
-          >
-            {link.file.name}
+        {links.map(({ file }: File) => (
+          <MenuItem key={file.link} onClick={handleClose} component="a" href={file.link}>
+            {file.name}
           </MenuItem>
         ))}
       </Menu>

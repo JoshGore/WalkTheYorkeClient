@@ -47,7 +47,13 @@ const currentTrailObject = (): TrailEntityProps => {
 };
 
 const TrailContext = React.createContext<TrailContextProps>({
-  trail, setTrail, trailSection, setTrailSection, trailObject, setTrailObject, currentTrailObject,
+  trail,
+  setTrail,
+  trailSection,
+  setTrailSection,
+  trailObject,
+  setTrailObject,
+  currentTrailObject,
 });
 
 export default TrailContext;

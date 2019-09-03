@@ -18,7 +18,6 @@ type MenuModes = 'side' | 'bottom';
 interface MenuProps {
   header: JSX.Element;
   body: JSX.Element;
-  mode: MenuModes;
   mainContent: JSX.Element;
 }
 
@@ -82,22 +81,29 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
   header, body, mainContent,
 }) => {
   const Trail = useContext<TrailContextProps>(TrailContext);
-  const [mode, setMode] = useState<MenuModes>(window.innerHeight > window.innerWidth ? 'bottom' : 'side');
+  const [menuMode, setMenuMode] = useState<MenuModes>(window.innerHeight > window.innerWidth ? 'bottom' : 'side');
   const [animationDisabled, setAnimationDisabled] = useState(false);
+  const windowSize = useWindowSize();
   useLayoutEffect(() => {
-    windowSize.innerHeight > windowSize.innerWidth ? setMode('bottom') : setMode('side');
+    windowSize.innerHeight > windowSize.innerWidth ? setMenuMode('bottom') : setMenuMode('side');
   });
   const classes = useStyles();
+  useLayoutEffect(() => {
+    if (windowSize.innerHeight > windowSize.innerWidth) {
+      setMenuMode('bottom');
+    } else {
+      setMenuMode('side');
+    }
+  });
   const [menuState, setMenuState] = useState<MenuStates>('collapsed');
-  const windowSize = useWindowSize();
   const [headerSize, setHeaderSize] = useState({ width: -1, height: -1 });
   const [offset, setOffset] = useState(VISIBLE_OFFSET);
   const contentLeft = 0;
   const contentBottom = 0;
-  const contentRightVisible = ():number => (mode === 'side' ? windowSize.innerWidth - offset : 0);
+  const contentRightVisible = ():number => (menuMode === 'side' ? windowSize.innerWidth - offset : 0);
   const contentRightFullscreen = 0;
-  const contentTopCollapsed = ():number => (mode === 'bottom' ? windowSize.innerHeight - headerSize.height : 0);
-  const contentTopVisible = ():number => (mode === 'bottom' ? windowSize.innerHeight - offset : 0);
+  const contentTopCollapsed = ():number => (menuMode === 'bottom' ? windowSize.innerHeight - headerSize.height : 0);
+  const contentTopVisible = ():number => (menuMode === 'bottom' ? windowSize.innerHeight - offset : 0);
   const contentTopFullscreen = 0;
   const [contentTopRight, setContentTopRight] = useSpring(() => ({
     top: contentTopCollapsed(), right: contentRightVisible(),
@@ -108,9 +114,9 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
       right: menuState === 'fullscreen' ? contentRightFullscreen : contentRightVisible(),
     });
   });
-  const placeholderWidth = (): number | string => (mode === 'side' ? offset : windowSize.innerWidth);
-  const placeholderHeightCollapsed = ():number => (mode === 'side' ? windowSize.innerHeight : headerSize.height);
-  const placeholderHeightVisible = ():number => (mode === 'side' ? windowSize.innerHeight : offset);
+  const placeholderWidth = (): number | string => (menuMode === 'side' ? offset : windowSize.innerWidth);
+  const placeholderHeightCollapsed = ():number => (menuMode === 'side' ? windowSize.innerHeight : headerSize.height);
+  const placeholderHeightVisible = ():number => (menuMode === 'side' ? windowSize.innerHeight : offset);
   const [placeholderHeight, setPlaceholderHeight] = useSpring(() => ({ height: placeholderHeightCollapsed(), immediate: animationDisabled }));
   useEffect(() => {
     setPlaceholderHeight({
@@ -122,13 +128,13 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
   }, [Trail.trailSection.id, Trail.trailObject.id]);
 
   const handleBodyScroll = () => {
-    mode === 'bottom' && setMenuState('fullscreen');
-  }
+    menuMode === 'bottom' && setMenuState('fullscreen');
+  };
 
   return (
-    <Grid container className={`${classes.root} ${mode === 'bottom' ? classes.portrait : classes.landscape}`}>
+    <Grid container className={`${classes.root} ${menuMode === 'bottom' ? classes.portrait : classes.landscape}`}>
       <animated.div
-        className={`${classes.placeholder} ${mode === 'bottom' ? classes.placeholderBottom : classes.placeholderSide} `}
+        className={`${classes.placeholder} ${menuMode === 'bottom' ? classes.placeholderBottom : classes.placeholderSide} `}
         style={{
           width: placeholderWidth(),
           ...placeholderHeight,
@@ -151,7 +157,7 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
                     {header}
                   </Grid>
                   <Grid item style={{ marginLeft: 'auto' }}>
-                    <ToggleButton mode={mode} menuState={menuState} setMenuState={setMenuState} />
+                    <ToggleButton menuMode={menuMode} menuState={menuState} setMenuState={setMenuState} />
                   </Grid>
                 </Grid>
               </div>
