@@ -1,5 +1,12 @@
 import React from 'react';
-import { Typography, makeStyles, createStyles, Theme } from '@material-ui/core';
+import {
+  Typography,
+  makeStyles,
+  createStyles,
+  Theme,
+  Paper,
+  Grid,
+} from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import DownloadMenu from './DownloadMenu';
 import Markdown from '../../components/Markdown';
@@ -39,6 +46,13 @@ const useStyles = makeStyles((theme: Theme) =>
     markdown: {
       ...theme.typography.body2,
       padding: theme.spacing(1, 0),
+    },
+    root: {
+      backgroundColor: '#F5F5F5',
+      padding: theme.spacing(2),
+    },
+    paper: {
+      padding: theme.spacing(2),
     },
   }),
 );
@@ -84,18 +98,25 @@ const Body: React.FC<BodyProps> = ({
   files = [],
   count = 0,
   avgRating = 0,
-}) => (
-  <>
-    <Carousel multimedia={multimedia} loading={loading} />
-    <div style={{ padding: 12 }}>
-      <BodyTitle loading={loading} text={title} />
-      {!loading && <DownloadMenu links={files!} />}
-      {!loading && <ReviewSummary count={count} average={avgRating} />}
-      <BodyText loading={loading} text={body} />
-    </div>
-    <Reviews />
-    <Chat />
-  </>
-);
+}) => {
+  const classes = useStyles();
+  return (
+    <>
+      <Carousel multimedia={multimedia} loading={loading} />
+      <Grid className={classes.root} container>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <BodyTitle loading={loading} text={title} />
+            {!loading && <DownloadMenu links={files!} />}
+            {!loading && <ReviewSummary count={count} average={avgRating} />}
+            <BodyText loading={loading} text={body} />
+          </Paper>
+        </Grid>
+      </Grid>
+      <Reviews />
+      <Chat />
+    </>
+  );
+};
 
 export default Body;
