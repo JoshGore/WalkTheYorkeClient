@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { List, Paper } from '@material-ui/core';
-// import CommentGroup from './CommentGroup';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import Comment from './Comment';
+import { useSubscription } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import CommentThread from './CommentThread';
+import CommentForm from './CommentForm';
+import TrailContext, {
+  TrailContextProps,
+} from '../../../contexts/TrailContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,20 +18,86 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const MESSAGE_SUBSCRIPTION_QUERY = gql`
+  subscription($id: Int!) {
+    routes_by_pk(id: $id) {
+      route_comments(order_by: { comment: { created_at: asc } }) {
+        comment {
+          created_at
+          body
+          id
+          user {
+            firstname
+            lastname
+            id
+          }
+          comments {
+            created_at
+            body
+            id
+            user {
+              firstname
+              lastname
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+interface comments {
+  routes_by_pk: {
+    route_comments: {
+      comment: {
+        created_at: string;
+        body: string;
+        id: number;
+        user: {
+          firstname: string;
+          lastname: string;
+          id: number;
+        };
+        comments: {
+          comment: {
+            id: number;
+            body: string;
+            created_at: string;
+            user: {
+              firstname: string;
+              lastname: string;
+              id: number;
+            };
+          };
+        }[];
+      };
+    }[];
+  };
+}
+
 const Comments: React.FC = () => {
+  const Trail = useContext<TrailContextProps>(TrailContext);
+  const { data, loading } = useSubscription<comments>(
+    MESSAGE_SUBSCRIPTION_QUERY,
+    {
+      variables: { id: Trail.currentTrailObject().id },
+    },
+  );
+  useEffect(() => console.log(data));
   const classes = useStyles();
-  const lorem = `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
   return (
     <Paper>
       <List className={classes.root}>
-        <Comment level={1} firstname="Joshua" lastname="Gore" body={lorem} />
-        <Comment level={2} firstname="Joshua" lastname="Gore" body={lorem} />
-        <Comment level={2} firstname="Joshua" lastname="Gore" body={lorem} />
-        <Comment level={2} firstname="Joshua" lastname="Gore" body={lorem} />
-        <Comment level={1} firstname="Joshua" lastname="Gore" body={lorem} />
-        <Comment level={2} firstname="Joshua" lastname="Gore" body={lorem} />
-        <Comment level={2} firstname="Joshua" lastname="Gore" body={lorem} />
-        <Comment level={1} firstname="Joshua" lastname="Gore" body={lorem} />
+        <CommentForm level={1} />
+        {!loading &&
+          data !== undefined &&
+          data.routes_by_pk.route_comments.map(commentThread => (
+            <CommentThread
+              key={commentThread.comment.id}
+              commentThread={commentThread.comment}
+            />
+          ))}
       </List>
     </Paper>
   );
