@@ -1,6 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { Typography, TextField, InputAdornment, Chip } from '@material-ui/core';
+import {
+  Typography,
+  TextField,
+  InputAdornment,
+  Chip,
+  Grid,
+  ListItem,
+} from '@material-ui/core';
 import clsx from 'clsx';
 import gql from 'graphql-tag';
 
@@ -11,8 +18,9 @@ import TrailContext, {
 import UserContext, { UserContextProps } from '../../../contexts/UserContext';
 
 interface CommentFormProps {
-  level: 1 | 2;
-  commentId?: number;
+  commentThreadId?: number;
+  showing: boolean;
+  setShowing?: (showing: boolean) => void;
 }
 
 const ROUTE_MESSAGE_INSERT_QUERY = gql`
@@ -33,9 +41,13 @@ const ROUTE_MESSAGE_INSERT_QUERY = gql`
 `;
 
 const COMMENT_REPLY_INSERT_QUERY = gql`
-  mutation insert_comments($commentId: Int!, $userId: Int!, $body: String) {
+  mutation insert_comments(
+    $commentThreadId: Int!
+    $userId: Int!
+    $body: String
+  ) {
     insert_comments(
-      objects: { body: $body, comment_id: $commentId, user_id: $userId }
+      objects: { body: $body, comment_id: $commentThreadId, user_id: $userId }
     ) {
       returning {
         body
@@ -58,22 +70,43 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const CommentForm: React.FC<CommentFormProps> = ({ commentId, level }) => {
+const CommentForm: React.FC<CommentFormProps> = ({
+  commentThreadId,
+  showing,
+  setShowing = undefined,
+}) => {
   const User = useContext<UserContextProps>(UserContext);
   const Trail = useContext<TrailContextProps>(TrailContext);
   const classes = useStyles();
   const [commentText, setCommentText] = useState('');
-  const [submitComment, { data }] = useMutation(ROUTE_MESSAGE_INSERT_QUERY);
+  const [commentOnObject] = useMutation(ROUTE_MESSAGE_INSERT_QUERY);
+  const [replyToComment] = useMutation(COMMENT_REPLY_INSERT_QUERY);
   const [isIssue, setIsIssue] = useState(false);
+  const onSubmitSucessful = () => {
+    setCommentText('');
+    if (setShowing !== undefined) {
+      setShowing(false);
+    }
+  };
   const handleSubmit = () => {
     if (commentText) {
-      submitComment({
-        variables: {
-          route: Trail.trailSection.id,
-          user: User.userId,
-          body: commentText,
-        },
-      }).then(() => setCommentText(''));
+      if (commentThreadId === undefined) {
+        commentOnObject({
+          variables: {
+            route: Trail.trailSection.id,
+            user: User.userId,
+            body: commentText,
+          },
+        }).then(() => onSubmitSucessful());
+      } else {
+        replyToComment({
+          variables: {
+            commentThreadId,
+            userId: User.userId,
+            body: commentText,
+          },
+        }).then(() => onSubmitSucessful());
+      }
     }
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,30 +133,41 @@ const CommentForm: React.FC<CommentFormProps> = ({ commentId, level }) => {
   const handleIssueDelete = () => {
     setIsIssue(false);
   };
-  return (
-    <>
-      <TextField
-        id="outlined-dense-multiline"
-        label="start with @issue to submit issue"
-        className={clsx(classes.textField, classes.dense)}
-        margin="dense"
-        variant="outlined"
-        multiline
-        rowsMax="4"
-        value={commentText}
-        onKeyDown={handleKeyDown}
-        onChange={handleChange}
-        fullWidth
-        InputProps={{
-          startAdornment: isIssue && (
-            <InputAdornment position="start">
-              <Chip label="@issue" size="small" onDelete={handleIssueDelete} />
-            </InputAdornment>
-          ),
-        }}
-      />
-    </>
-  );
+  if (showing) {
+    return (
+      <ListItem>
+        <Grid container>
+          <Grid item xs={12}>
+            <TextField
+              id="outlined-dense-multiline"
+              label="start with @issue to submit issue"
+              className={clsx(classes.textField, classes.dense)}
+              margin="dense"
+              variant="outlined"
+              multiline
+              rowsMax="4"
+              value={commentText}
+              onKeyDown={handleKeyDown}
+              onChange={handleChange}
+              fullWidth
+              InputProps={{
+                startAdornment: isIssue && (
+                  <InputAdornment position="start">
+                    <Chip
+                      label="@issue"
+                      size="small"
+                      onDelete={handleIssueDelete}
+                    />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+        </Grid>
+      </ListItem>
+    );
+  }
+  return <></>;
 };
 
 export default CommentForm;

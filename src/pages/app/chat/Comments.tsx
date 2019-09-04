@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { List, Paper } from '@material-ui/core';
+import React, { useContext } from 'react';
+import { Paper, List, ListItem, Typography } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { useSubscription } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const MESSAGE_SUBSCRIPTION_QUERY = gql`
   subscription($id: Int!) {
     routes_by_pk(id: $id) {
-      route_comments(order_by: { comment: { created_at: asc } }) {
+      route_comments(order_by: { comment: { created_at: desc } }) {
         comment {
           created_at
           body
@@ -32,15 +32,13 @@ const MESSAGE_SUBSCRIPTION_QUERY = gql`
             id
           }
           comments {
-            comment {
-              created_at
-              body
+            created_at
+            body
+            id
+            user {
+              firstname
+              lastname
               id
-              user {
-                firstname
-                lastname
-                id
-              }
             }
           }
         }
@@ -62,15 +60,13 @@ interface comments {
           id: number;
         };
         comments: {
-          comment: {
+          id: number;
+          body: string;
+          created_at: string;
+          user: {
+            firstname: string;
+            lastname: string;
             id: number;
-            body: string;
-            created_at: string;
-            user: {
-              firstname: string;
-              lastname: string;
-              id: number;
-            };
           };
         }[];
       };
@@ -90,7 +86,10 @@ const Comments: React.FC = () => {
   return (
     <Paper>
       <List className={classes.root}>
-        <CommentForm level={1} />
+        <ListItem>
+          <Typography variant="h4">Comments</Typography>
+        </ListItem>
+        <CommentForm showing />
         {!loading &&
           data !== undefined &&
           data.routes_by_pk.route_comments.map(commentThread => (

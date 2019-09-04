@@ -22,7 +22,7 @@ export interface CommentThreadProps {
       lastname: string;
       id: number;
     };
-    comments: { comment: CommentProps }[];
+    comments: CommentProps[];
   };
 }
 
@@ -32,19 +32,21 @@ const CommentThread: React.FC<CommentThreadProps> = ({ commentThread }) => {
     <>
       <Comment
         level={1}
+        dateCreated={commentThread.created_at}
         firstname={commentThread.user.firstname}
         lastname={commentThread.user.lastname}
         body={commentThread.body}
-        id={commentThread.id}
+        commentThreadId={commentThread.id}
       />
-      {commentThread.comments.map(({ comment }, index, comments) => (
+      {commentThread.comments.map((comment, index, comments) => (
         <Comment
           key={comment.id}
           level={2}
+          dateCreated={comment.created_at}
           firstname={comment.user.firstname}
           lastname={comment.user.lastname}
           body={comment.body}
-          id={comment.id}
+          commentThreadId={commentThread.id}
           lastInThread={index === comments.length - 1}
         />
       ))}
