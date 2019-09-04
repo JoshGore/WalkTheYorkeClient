@@ -54,13 +54,13 @@
     "react-resize-detector": "^4.2.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
-    "wonky-scripts": "0.0.5",
     "react-spring": "^8.0.27",
     "react-swipeable-views": "^0.13.3",
     "react-use-dimensions": "^1.2.1",
     "subscriptions-transport-ws": "^0.9.16",
     "typeface-roboto": "0.0.75",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "wonky-scripts": "0.0.5"
   },
   "scripts": {
     "predeploy": "npm run build",
