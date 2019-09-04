@@ -151,6 +151,7 @@ const Signup: React.FC<SignupProps> = ({ setNewUser }) => {
                 fullWidth
                 error={signupFailed}
                 helperText={signupFailed && errors.username}
+                autoComplete="username"
                 required
               >
                 Email
@@ -166,6 +167,7 @@ const Signup: React.FC<SignupProps> = ({ setNewUser }) => {
                 fullWidth
                 error={signupFailed}
                 helperText={signupFailed && errors.password}
+                autoComplete="new-password"
                 required
               >
                 Password
@@ -176,6 +178,7 @@ const Signup: React.FC<SignupProps> = ({ setNewUser }) => {
                 id="confirm-password"
                 label="Confirm Password"
                 type="password"
+                autoComplete="new-password"
                 margin="dense"
                 onChange={handleChange('confirmPassword')}
                 fullWidth

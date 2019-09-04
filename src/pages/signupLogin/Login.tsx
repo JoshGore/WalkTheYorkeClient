@@ -129,6 +129,7 @@ const Login: React.FC<LoginProps> = ({ setNewUser }) => {
                 error={authFailed}
                 onChange={handleChange('username')}
                 fullWidth
+                autoComplete="username"
                 required
               >
                 Email
@@ -144,6 +145,7 @@ const Login: React.FC<LoginProps> = ({ setNewUser }) => {
                 helperText={authFailed && errors.password}
                 onChange={handleChange('password')}
                 fullWidth
+                autoComplete="current-password"
                 required
               >
                 Password
