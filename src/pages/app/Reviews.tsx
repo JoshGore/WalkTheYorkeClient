@@ -3,7 +3,13 @@ import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import {
-  List, ListItem, ListItemText, ListItemAvatar, Avatar,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Paper,
 } from '@material-ui/core';
 
 import gql from 'graphql-tag';
@@ -12,15 +18,21 @@ import ReviewForm from './reviews/ReviewForm';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: 'inline',
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      backgroundColor: '#F5F5F5',
+      padding: theme.spacing(2),
+    },
+    paper: {
+      width: '100%',
+      backgroundColor: theme.palette.background.paper,
+    },
+    inline: {
+      display: 'inline',
+    },
+  }),
+);
 
 interface ReviewProps {
   rating: number;
@@ -28,13 +40,13 @@ interface ReviewProps {
   id: number;
   created_at: any;
   user: {
-    firstname: string,
-    lastname: string
-  }
+    firstname: string;
+    lastname: string;
+  };
 }
 
 interface ReviewQueryData {
-  reviews: ReviewProps [];
+  reviews: ReviewProps[];
 }
 
 interface ReviewQueryVars {
@@ -60,54 +72,64 @@ const Reviews: React.FC = () => {
   const Trail = useContext<TrailContextProps>(TrailContext);
   const User = useContext<UserContextProps>(UserContext);
   const classes = useStyles();
-  const { loading, error, data } = useQuery<ReviewQueryData, ReviewQueryVars>(REVIEWS_QUERY,
+  const { loading, error, data } = useQuery<ReviewQueryData, ReviewQueryVars>(
+    REVIEWS_QUERY,
     {
       variables: { id: Trail.trailSection.id! },
       skip: !Trail.trailSection.id,
-    });
+    },
+  );
   return (
-    <>
-    {User.loggedIn && <span>
-      <Typography variant="h4">Reviews</Typography>
-      <ReviewForm />
-      </span>}
-      {(!loading && !!data && !!data.reviews && data.reviews.length > 0)
-        && (
-        <List className={classes.root}>
-          {data.reviews.map((review: any) => (
-            <ListItem alignItems="flex-start" key={review.id}>
-              <ListItemAvatar>
-                <Avatar>
-                  {`${review.user.firstname.charAt(
-                    0,
-                  )}${review.user.lastname.charAt(0)}`}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                disableTypography
-                primary={(
-                  <Typography className="MuiListItemText-primary">
-                    {`${review.user.firstname} ${review.user.lastname}`}
-                  </Typography>
-                  )}
-                secondary={(
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="span"
-                  >
-                    <div style={{ display: 'inline-block' }}>
-                      <Rating value={review.rating} size="small" readOnly />
-                    </div>
-                    {review.body}
-                  </Typography>
-                )}
-              />
-            </ListItem>
-          ))}
-        </List>
-        )}
-    </>
+    <Grid className={classes.root} container>
+      <Grid item xs={12}>
+        <Paper>
+          {!loading && !!data && !!data.reviews && data.reviews.length > 0 && (
+            <List className={classes.paper}>
+              <ListItem>
+                <Typography
+                  variant="h4"
+                  display="inline"
+                >
+                  Reviews
+                </Typography>
+                {User.loggedIn && <ReviewForm />}
+              </ListItem>
+              {data.reviews.map((review: any) => (
+                <ListItem alignItems="flex-start" key={review.id}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {`${review.user.firstname.charAt(
+                        0,
+                      )}${review.user.lastname.charAt(0)}`}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    disableTypography
+                    primary={
+                      <Typography className="MuiListItemText-primary">
+                        {`${review.user.firstname} ${review.user.lastname}`}
+                      </Typography>
+                    }
+                    secondary={
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="span"
+                      >
+                        <div style={{ display: 'inline-block' }}>
+                          <Rating value={review.rating} size="small" readOnly />
+                        </div>
+                        {review.body}
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </Paper>
+      </Grid>
+    </Grid>
   );
 };
 export default Reviews;

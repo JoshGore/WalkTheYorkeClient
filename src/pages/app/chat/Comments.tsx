@@ -9,15 +9,6 @@ import TrailContext, {
   TrailContextProps,
 } from '../../../contexts/TrailContext';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-      backgroundColor: theme.palette.background.paper,
-    },
-  }),
-);
-
 const MESSAGE_SUBSCRIPTION_QUERY = gql`
   subscription($id: Int!) {
     routes_by_pk(id: $id) {
@@ -82,11 +73,10 @@ const Comments: React.FC = () => {
       variables: { id: Trail.currentTrailObject().id },
     },
   );
-  const classes = useStyles();
   return (
     <Paper>
-      <List className={classes.root}>
-        <ListItem>
+      <List>
+        <ListItem style={{ paddingBottom: 0, marginBottom: 0 }}>
           <Typography variant="h4">Comments</Typography>
         </ListItem>
         <CommentForm showing />
