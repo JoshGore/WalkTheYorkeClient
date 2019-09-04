@@ -24,7 +24,12 @@ const Logout: React.FC = () => {
   return (
     <>
       <DialogTitle>
-        <Avatar style={{ marginRight: 'auto', marginLeft: 'auto' }}>
+        <Avatar
+          style={{
+            marginRight: 'auto',
+            marginLeft: 'auto',
+          }}
+        >
           <LockOpenIcon />
         </Avatar>
       </DialogTitle>
@@ -32,14 +37,15 @@ const Logout: React.FC = () => {
         <DialogContentText style={{ textAlign: 'center', marginBottom: 0 }}>
           {`${User.firstname} ${User.lastname}`}
           <br />
-          <i>
-            {`${User.username}`}
-          </i>
+          <i>{`${User.username}`}</i>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={User.signOut} style={{ margin: 'auto', color: '#bdbdbd' }}>
-            Sign Out
+        <Button
+          onClick={User.signOut}
+          style={{ margin: 'auto', color: '#bdbdbd' }}
+        >
+          Sign Out
           <ExitToAppIcon style={{ marginLeft: 4 }} />
         </Button>
       </DialogActions>

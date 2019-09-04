@@ -1,6 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {
-  DialogTitle, DialogContent, DialogContentText, DialogActions, Grid, TextField, Button, CircularProgress, 
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Grid,
+  TextField,
+  Button,
+  CircularProgress,
 } from '@material-ui/core';
 import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
@@ -29,7 +36,7 @@ interface SubmissionErrors {
   username?: string;
   password?: string;
   confirmPassword?: string;
-  [key:string]: string | undefined;
+  [key: string]: string | undefined;
 }
 
 const Login: React.FC<LoginProps> = ({ setNewUser }) => {
@@ -47,7 +54,9 @@ const Login: React.FC<LoginProps> = ({ setNewUser }) => {
   const handleNewUser = () => {
     setNewUser(true);
   };
-  const handleChange = (name: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (name: keyof State) => (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setValues({ ...values, [name]: event.target.value });
   };
   const handleClose = () => {
@@ -61,55 +70,52 @@ const Login: React.FC<LoginProps> = ({ setNewUser }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then(
-      response => {
-        if (!response.ok) {
-          response.json().then(json => {
-            const submissionErrors: SubmissionErrors = {};
-            json.errors && json.errors.forEach((error: SubmissionError) => {
+    }).then(response => {
+      if (!response.ok) {
+        response.json().then(json => {
+          const submissionErrors: SubmissionErrors = {};
+          json.errors &&
+            json.errors.forEach((error: SubmissionError) => {
               submissionErrors[error.param] = error.msg;
             });
-            setErrors({ ...submissionErrors });
-            if (json.error) {
-              switch (json.error) {
-                default:
-                  setErrors({ ...setErrors, password: json.error });
-                  break;
-                case 'Invalid password':
-                  setErrors({ ...setErrors, password: json.error });
-                  break;
-                case 'Unknown user':
-                  setErrors({ ...setErrors, username: json.error });
-                  break;
-              }
+          setErrors({ ...submissionErrors });
+          if (json.error) {
+            switch (json.error) {
+              default:
+                setErrors({ ...setErrors, password: json.error });
+                break;
+              case 'Invalid password':
+                setErrors({ ...setErrors, password: json.error });
+                break;
+              case 'Unknown user':
+                setErrors({ ...setErrors, username: json.error });
+                break;
             }
-          });
-          setSubmitting(false);
-          setAuthFailed(true);
-        } else {
-          setSubmitting(false);
-          response.json().then(json => {
-            localStorage.setItem('authToken', json.token);
-            localStorage.setItem('userId', json.id);
-            User.setUserId(json.id);
-            User.setUsername(json.username);
-            User.setFirstname(json.firstname);
-            User.setLastname(json.lastname);
-            User.setLoggedIn(true);
-            User.setLoginMenuOpen(false);
-          });
-        }
-      },
-    );
+          }
+        });
+        setSubmitting(false);
+        setAuthFailed(true);
+      } else {
+        setSubmitting(false);
+        response.json().then(json => {
+          localStorage.setItem('authToken', json.token);
+          localStorage.setItem('userId', json.id);
+          User.setUserId(json.id);
+          User.setUsername(json.username);
+          User.setFirstname(json.firstname);
+          User.setLastname(json.lastname);
+          User.setLoggedIn(true);
+          setTimeout(() => User.setLoginMenuOpen(false), 1000);
+        });
+      }
+    });
   };
   return (
     <>
-      <DialogTitle>
-      Sign In
-      </DialogTitle>
+      <DialogTitle>Sign In</DialogTitle>
       <DialogContent>
         <DialogContentText>
-        Sign in to submit issues, reviews, and comments.
+          Sign in to submit issues, reviews, and comments.
         </DialogContentText>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -135,7 +141,7 @@ const Login: React.FC<LoginProps> = ({ setNewUser }) => {
                 type="password"
                 margin="dense"
                 error={authFailed}
-                helperText={authFailed && (errors.password)}
+                helperText={authFailed && errors.password}
                 onChange={handleChange('password')}
                 fullWidth
                 required
@@ -147,20 +153,22 @@ const Login: React.FC<LoginProps> = ({ setNewUser }) => {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleNewUser}>
-          Sign Up
-        </Button>
+        <Button onClick={handleNewUser}>Sign Up</Button>
         <div style={{ position: 'relative', marginLeft: 'auto' }}>
           <Button color="primary" disabled={submitting} onClick={handleSubmit}>
             Submit
           </Button>
           {submitting && (
-          <CircularProgress
-            size={24}
-            style={{
-              position: 'absolute', top: '50%', left: '50%', marginTop: -12, marginLeft: -12,
-            }}
-          />
+            <CircularProgress
+              size={24}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: -12,
+                marginLeft: -12,
+              }}
+            />
           )}
         </div>
         <Button color="primary" onClick={handleClose}>
