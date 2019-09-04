@@ -103,6 +103,7 @@ const ReviewForm: React.FC = () => {
         <DialogContent>
           <Rating value={rating} onChange={handleRatingChange} />
           <TextField
+            name="details"
             onChange={handleReviewChange}
             id="review"
             placeholder="Share the details of your experiences"

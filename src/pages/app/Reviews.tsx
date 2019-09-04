@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: '#F5F5F5',
-      padding: theme.spacing(2),
+      padding: theme.spacing(0, 2),
     },
     paper: {
       width: '100%',
@@ -82,19 +82,16 @@ const Reviews: React.FC = () => {
   return (
     <Grid className={classes.root} container>
       <Grid item xs={12}>
-        <Paper>
-          {!loading && !!data && !!data.reviews && data.reviews.length > 0 && (
-            <List className={classes.paper}>
-              <ListItem>
-                <Typography
-                  variant="h4"
-                  display="inline"
-                >
-                  Reviews
-                </Typography>
-                {User.loggedIn && <ReviewForm />}
-              </ListItem>
-              {data.reviews.map((review: any) => (
+        <Paper className={classes.paper}>
+          <List>
+            <ListItem>
+              <Typography variant="h4" display="inline">
+                Reviews
+              </Typography>
+              {User.loggedIn && <ReviewForm />}
+            </ListItem>
+            {!loading && !!data && !!data.reviews && data.reviews.length > 0 ? (
+              data.reviews.map((review: any) => (
                 <ListItem alignItems="flex-start" key={review.id}>
                   <ListItemAvatar>
                     <Avatar>
@@ -124,9 +121,13 @@ const Reviews: React.FC = () => {
                     }
                   />
                 </ListItem>
-              ))}
-            </List>
-          )}
+              ))
+            ) : (
+              <ListItem>
+                <Typography variant="body2">No Reviews</Typography>
+              </ListItem>
+            )}
+          </List>
         </Paper>
       </Grid>
     </Grid>
