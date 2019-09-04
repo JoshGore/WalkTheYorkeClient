@@ -28,7 +28,6 @@ export interface CommentThreadProps {
 
 // <Comment level={1} firstname="Joshua" lastname="Gore" body={lorem} />
 const CommentThread: React.FC<CommentThreadProps> = ({ commentThread }) => {
-  console.log(commentThread);
   return (
     <>
       <Comment

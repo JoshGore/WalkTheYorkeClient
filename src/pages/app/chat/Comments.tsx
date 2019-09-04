@@ -32,13 +32,15 @@ const MESSAGE_SUBSCRIPTION_QUERY = gql`
             id
           }
           comments {
-            created_at
-            body
-            id
-            user {
-              firstname
-              lastname
+            comment {
+              created_at
+              body
               id
+              user {
+                firstname
+                lastname
+                id
+              }
             }
           }
         }
@@ -84,7 +86,6 @@ const Comments: React.FC = () => {
       variables: { id: Trail.currentTrailObject().id },
     },
   );
-  useEffect(() => console.log(data));
   const classes = useStyles();
   return (
     <Paper>
