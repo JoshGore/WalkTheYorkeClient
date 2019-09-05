@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import SendIcon from '@material-ui/icons/Send';
 import {
-  Typography,
   TextField,
   InputAdornment,
   Chip,

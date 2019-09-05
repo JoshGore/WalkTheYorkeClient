@@ -3,14 +3,14 @@ import { Button, Menu, MenuItem } from '@material-ui/core';
 
 interface File {
   file: {
-    id: number,
-    name: string,
-    link: string,
-  }
+    id: number;
+    name: string;
+    link: string;
+  };
 }
 
 interface DownloadMenuProps {
-  links: File []
+  links: File[];
 }
 
 const DownloadMenu: React.FC<DownloadMenuProps> = ({ links }) => {
@@ -45,7 +45,12 @@ const DownloadMenu: React.FC<DownloadMenuProps> = ({ links }) => {
         onClose={handleClose}
       >
         {links.map(({ file }: File) => (
-          <MenuItem key={file.link} onClick={handleClose} component="a" href={file.link}>
+          <MenuItem
+            key={file.link}
+            onClick={handleClose}
+            component="a"
+            href={file.link}
+          >
             {file.name}
           </MenuItem>
         ))}

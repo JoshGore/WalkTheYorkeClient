@@ -7,23 +7,12 @@ const SettlementLabel: React.FC = () => (
       'text-line-height': 1.1,
       'text-size': [
         'interpolate',
-        [
-          'cubic-bezier',
-          0.2,
-          0,
-          0.9,
-          1,
-        ],
-        [
-          'zoom',
-        ],
+        ['cubic-bezier', 0.2, 0, 0.9, 1],
+        ['zoom'],
         3,
         [
           'step',
-          [
-            'get',
-            'symbolrank',
-          ],
+          ['get', 'symbolrank'],
           12,
           9,
           11,
@@ -41,10 +30,7 @@ const SettlementLabel: React.FC = () => (
         15,
         [
           'step',
-          [
-            'get',
-            'symbolrank',
-          ],
+          ['get', 'symbolrank'],
           28,
           9,
           26,
@@ -62,168 +48,60 @@ const SettlementLabel: React.FC = () => (
       ],
       'icon-image': [
         'case',
-        [
-          '==',
-          [
-            'get',
-            'capital',
-          ],
-          2,
-        ],
+        ['==', ['get', 'capital'], 2],
         'border-dot-13',
-        [
-          'step',
-          [
-            'get',
-            'symbolrank',
-          ],
-          'dot-11',
-          9,
-          'dot-10',
-          11,
-          'dot-9',
-        ],
+        ['step', ['get', 'symbolrank'], 'dot-11', 9, 'dot-10', 11, 'dot-9'],
       ],
       'text-font': [
         'step',
-        [
-          'zoom',
-        ],
-        [
-          'literal',
-          [
-            'DIN Offc Pro Regular',
-            'Arial Unicode MS Regular',
-          ],
-        ],
+        ['zoom'],
+        ['literal', ['DIN Offc Pro Regular', 'Arial Unicode MS Regular']],
         8,
         [
           'step',
-          [
-            'get',
-            'symbolrank',
-          ],
-          [
-            'literal',
-            [
-              'DIN Offc Pro Medium',
-              'Arial Unicode MS Regular',
-            ],
-          ],
+          ['get', 'symbolrank'],
+          ['literal', ['DIN Offc Pro Medium', 'Arial Unicode MS Regular']],
           11,
-          [
-            'literal',
-            [
-              'DIN Offc Pro Regular',
-              'Arial Unicode MS Regular',
-            ],
-          ],
+          ['literal', ['DIN Offc Pro Regular', 'Arial Unicode MS Regular']],
         ],
         10,
         [
           'step',
-          [
-            'get',
-            'symbolrank',
-          ],
-          [
-            'literal',
-            [
-              'DIN Offc Pro Medium',
-              'Arial Unicode MS Regular',
-            ],
-          ],
+          ['get', 'symbolrank'],
+          ['literal', ['DIN Offc Pro Medium', 'Arial Unicode MS Regular']],
           12,
-          [
-            'literal',
-            [
-              'DIN Offc Pro Regular',
-              'Arial Unicode MS Regular',
-            ],
-          ],
+          ['literal', ['DIN Offc Pro Regular', 'Arial Unicode MS Regular']],
         ],
         11,
         [
           'step',
-          [
-            'get',
-            'symbolrank',
-          ],
-          [
-            'literal',
-            [
-              'DIN Offc Pro Medium',
-              'Arial Unicode MS Regular',
-            ],
-          ],
+          ['get', 'symbolrank'],
+          ['literal', ['DIN Offc Pro Medium', 'Arial Unicode MS Regular']],
           13,
-          [
-            'literal',
-            [
-              'DIN Offc Pro Regular',
-              'Arial Unicode MS Regular',
-            ],
-          ],
+          ['literal', ['DIN Offc Pro Regular', 'Arial Unicode MS Regular']],
         ],
         12,
         [
           'step',
-          [
-            'get',
-            'symbolrank',
-          ],
-          [
-            'literal',
-            [
-              'DIN Offc Pro Medium',
-              'Arial Unicode MS Regular',
-            ],
-          ],
+          ['get', 'symbolrank'],
+          ['literal', ['DIN Offc Pro Medium', 'Arial Unicode MS Regular']],
           15,
-          [
-            'literal',
-            [
-              'DIN Offc Pro Regular',
-              'Arial Unicode MS Regular',
-            ],
-          ],
+          ['literal', ['DIN Offc Pro Regular', 'Arial Unicode MS Regular']],
         ],
         13,
-        [
-          'literal',
-          [
-            'DIN Offc Pro Medium',
-            'Arial Unicode MS Regular',
-          ],
-        ],
+        ['literal', ['DIN Offc Pro Medium', 'Arial Unicode MS Regular']],
       ],
       'text-justify': [
         'step',
-        [
-          'zoom',
-        ],
+        ['zoom'],
         [
           'match',
-          [
-            'get',
-            'text_anchor',
-          ],
-          [
-            'bottom',
-            'top',
-          ],
+          ['get', 'text_anchor'],
+          ['bottom', 'top'],
           'center',
-          [
-            'left',
-            'bottom-left',
-            'top-left',
-          ],
+          ['left', 'bottom-left', 'top-left'],
           'left',
-          [
-            'right',
-            'bottom-right',
-            'top-right',
-          ],
+          ['right', 'bottom-right', 'top-right'],
           'right',
           'center',
         ],
@@ -232,250 +110,74 @@ const SettlementLabel: React.FC = () => (
       ],
       'text-offset': [
         'step',
-        [
-          'zoom',
-        ],
+        ['zoom'],
         [
           'match',
-          [
-            'get',
-            'capital',
-          ],
+          ['get', 'capital'],
           2,
           [
             'match',
-            [
-              'get',
-              'text_anchor',
-            ],
+            ['get', 'text_anchor'],
             'bottom',
-            [
-              'literal',
-              [
-                0,
-                -0.3,
-              ],
-            ],
+            ['literal', [0, -0.3]],
             'bottom-left',
-            [
-              'literal',
-              [
-                0.3,
-                -0.1,
-              ],
-            ],
+            ['literal', [0.3, -0.1]],
             'left',
-            [
-              'literal',
-              [
-                0.45,
-                0.1,
-              ],
-            ],
+            ['literal', [0.45, 0.1]],
             'top-left',
-            [
-              'literal',
-              [
-                0.3,
-                0.1,
-              ],
-            ],
+            ['literal', [0.3, 0.1]],
             'top',
-            [
-              'literal',
-              [
-                0,
-                0.3,
-              ],
-            ],
+            ['literal', [0, 0.3]],
             'top-right',
-            [
-              'literal',
-              [
-                -0.3,
-                0.1,
-              ],
-            ],
+            ['literal', [-0.3, 0.1]],
             'right',
-            [
-              'literal',
-              [
-                -0.45,
-                0,
-              ],
-            ],
+            ['literal', [-0.45, 0]],
             'bottom-right',
-            [
-              'literal',
-              [
-                -0.3,
-                -0.1,
-              ],
-            ],
-            [
-              'literal',
-              [
-                0,
-                -0.3,
-              ],
-            ],
+            ['literal', [-0.3, -0.1]],
+            ['literal', [0, -0.3]],
           ],
           [
             'match',
-            [
-              'get',
-              'text_anchor',
-            ],
+            ['get', 'text_anchor'],
             'bottom',
-            [
-              'literal',
-              [
-                0,
-                -0.25,
-              ],
-            ],
+            ['literal', [0, -0.25]],
             'bottom-left',
-            [
-              'literal',
-              [
-                0.2,
-                -0.05,
-              ],
-            ],
+            ['literal', [0.2, -0.05]],
             'left',
-            [
-              'literal',
-              [
-                0.4,
-                0.05,
-              ],
-            ],
+            ['literal', [0.4, 0.05]],
             'top-left',
-            [
-              'literal',
-              [
-                0.2,
-                0.05,
-              ],
-            ],
+            ['literal', [0.2, 0.05]],
             'top',
-            [
-              'literal',
-              [
-                0,
-                0.25,
-              ],
-            ],
+            ['literal', [0, 0.25]],
             'top-right',
-            [
-              'literal',
-              [
-                -0.2,
-                0.05,
-              ],
-            ],
+            ['literal', [-0.2, 0.05]],
             'right',
-            [
-              'literal',
-              [
-                -0.4,
-                0.05,
-              ],
-            ],
+            ['literal', [-0.4, 0.05]],
             'bottom-right',
-            [
-              'literal',
-              [
-                -0.2,
-                -0.05,
-              ],
-            ],
-            [
-              'literal',
-              [
-                0,
-                -0.25,
-              ],
-            ],
+            ['literal', [-0.2, -0.05]],
+            ['literal', [0, -0.25]],
           ],
         ],
         8,
-        [
-          'literal',
-          [
-            0,
-            0,
-          ],
-        ],
+        ['literal', [0, 0]],
       ],
-      'text-anchor': [
-        'step',
-        [
-          'zoom',
-        ],
-        [
-          'get',
-          'text_anchor',
-        ],
-        8,
-        'center',
-      ],
-      'text-field': [
-        'coalesce',
-        [
-          'get',
-          'name_en',
-        ],
-        [
-          'get',
-          'name',
-        ],
-      ],
+      'text-anchor': ['step', ['zoom'], ['get', 'text_anchor'], 8, 'center'],
+      'text-field': ['coalesce', ['get', 'name_en'], ['get', 'name']],
       'text-max-width': 7,
     }}
     maxZoom={15}
     filter={[
       'all',
-      [
-        '<=',
-        [
-          'get',
-          'filterrank',
-        ],
-        3,
-      ],
-      [
-        '==',
-        [
-          'get',
-          'class',
-        ],
-        'settlement',
-      ],
+      ['<=', ['get', 'filterrank'], 3],
+      ['==', ['get', 'class'], 'settlement'],
       [
         'step',
-        [
-          'zoom',
-        ],
+        ['zoom'],
         true,
         13,
-        [
-          '>=',
-          [
-            'get',
-            'symbolrank',
-          ],
-          11,
-        ],
+        ['>=', ['get', 'symbolrank'], 11],
         14,
-        [
-          '>=',
-          [
-            'get',
-            'symbolrank',
-          ],
-          13,
-        ],
+        ['>=', ['get', 'symbolrank'], 13],
       ],
     ]}
     type="symbol"
@@ -485,15 +187,7 @@ const SettlementLabel: React.FC = () => (
       'text-color': 'hsl(0, 0%, 0%)',
       'text-halo-color': 'hsl(0, 0%, 100%)',
       'text-halo-width': 1,
-      'icon-opacity': [
-        'step',
-        [
-          'zoom',
-        ],
-        1,
-        8,
-        0,
-      ],
+      'icon-opacity': ['step', ['zoom'], 1, 8, 0],
       'text-halo-blur': 1,
     }}
     sourceLayer="place_label"

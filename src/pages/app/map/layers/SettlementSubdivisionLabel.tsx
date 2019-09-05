@@ -5,34 +5,15 @@ const SettlementSubdivisionLabel: React.FC = () => (
   <Layer
     minZoom={10}
     layout={{
-      'text-field': [
-        'coalesce',
-        [
-          'get',
-          'name_en',
-        ],
-        [
-          'get',
-          'name',
-        ],
-      ],
+      'text-field': ['coalesce', ['get', 'name_en'], ['get', 'name']],
       'text-transform': 'uppercase',
-      'text-font': [
-        'DIN Offc Pro Regular',
-        'Arial Unicode MS Regular',
-      ],
+      'text-font': ['DIN Offc Pro Regular', 'Arial Unicode MS Regular'],
       'text-letter-spacing': [
         'match',
-        [
-          'get',
-          'type',
-        ],
+        ['get', 'type'],
         'suburb',
         0.15,
-        [
-          'quarter',
-          'neighborhood',
-        ],
+        ['quarter', 'neighborhood'],
         0.1,
         0.1,
       ],
@@ -40,45 +21,25 @@ const SettlementSubdivisionLabel: React.FC = () => (
       'text-padding': 3,
       'text-size': [
         'interpolate',
-        [
-          'cubic-bezier',
-          0.5,
-          0,
-          1,
-          1,
-        ],
-        [
-          'zoom',
-        ],
+        ['cubic-bezier', 0.5, 0, 1, 1],
+        ['zoom'],
         11,
         [
           'match',
-          [
-            'get',
-            'type',
-          ],
+          ['get', 'type'],
           'suburb',
           11,
-          [
-            'quarter',
-            'neighborhood',
-          ],
+          ['quarter', 'neighborhood'],
           10.5,
           10.5,
         ],
         15,
         [
           'match',
-          [
-            'get',
-            'type',
-          ],
+          ['get', 'type'],
           'suburb',
           17,
-          [
-            'quarter',
-            'neighborhood',
-          ],
+          ['quarter', 'neighborhood'],
           16,
           16,
         ],
@@ -87,22 +48,8 @@ const SettlementSubdivisionLabel: React.FC = () => (
     maxZoom={15}
     filter={[
       'all',
-      [
-        '==',
-        [
-          'get',
-          'class',
-        ],
-        'settlement_subdivision',
-      ],
-      [
-        '<=',
-        [
-          'get',
-          'filterrank',
-        ],
-        4,
-      ],
+      ['==', ['get', 'class'], 'settlement_subdivision'],
+      ['<=', ['get', 'filterrank'], 4],
     ]}
     type="symbol"
     source="composite"

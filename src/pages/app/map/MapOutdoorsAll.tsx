@@ -7,8 +7,8 @@ import SettlementSubdivisionLabel from './layers/SettlementSubdivisionLabel';
 
 const MapOutdoorsAll: React.FC = () => (
   <>
-  <Layer id="data-stack-placeholder" />
-  <SettlementSubdivisionLabel />
+    <Layer id="data-stack-placeholder" />
+    <SettlementSubdivisionLabel />
     <SettlementLabel />
     <StateLabel />
     <CountryLabel />

@@ -9,7 +9,7 @@ export interface TrailSectionProps {
 export interface TrailObjectProps {
   name: string | undefined;
   id: number | undefined;
-  type: 'issue' | 'campsite' | 'interest' | undefined
+  type: 'issue' | 'campsite' | 'interest' | undefined;
 }
 
 interface TrailContextProps {

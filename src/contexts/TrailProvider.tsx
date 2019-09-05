@@ -33,9 +33,16 @@ const TrailProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <TrailContext.Provider value={{
-      trail, setTrail, trailSection, setTrailSection, trailObject, setTrailObject, currentTrailObject,
-    }}
+    <TrailContext.Provider
+      value={{
+        trail,
+        setTrail,
+        trailSection,
+        setTrailSection,
+        trailObject,
+        setTrailObject,
+        currentTrailObject,
+      }}
     >
       {children}
     </TrailContext.Provider>

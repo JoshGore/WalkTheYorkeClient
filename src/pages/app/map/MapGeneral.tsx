@@ -100,9 +100,9 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
       filter={[
         'in',
         'STAGE',
-        selectedFeature != undefined
-            && selectedFeature.layer.id === 'trail_line_all_target'
-            && selectedFeature.properties.routeId,
+        selectedFeature != undefined &&
+          selectedFeature.layer.id === 'trail_line_all_target' &&
+          selectedFeature.properties.routeId,
       ]}
     />
     <Layer
@@ -121,9 +121,9 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
       filter={[
         'in',
         'STAGE',
-        selectedFeature != undefined
-            && selectedFeature.layer.id === 'trail_line_all_target'
-            && selectedFeature.properties.routeId,
+        selectedFeature != undefined &&
+          selectedFeature.layer.id === 'trail_line_all_target' &&
+          selectedFeature.properties.routeId,
       ]}
     />
     <Layer

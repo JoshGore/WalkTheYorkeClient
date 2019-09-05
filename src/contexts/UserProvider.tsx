@@ -18,21 +18,22 @@ const UserProvider: React.FC = ({ children }) => {
     localStorage.removeItem('authToken');
   };
   return (
-    <UserContext.Provider value={{
-      loggedIn,
-      setLoggedIn,
-      userId,
-      setUserId,
-      username,
-      setUsername,
-      firstname,
-      setFirstname,
-      lastname,
-      setLastname,
-      loginMenuOpen,
-      setLoginMenuOpen,
-      signOut,
-    }}
+    <UserContext.Provider
+      value={{
+        loggedIn,
+        setLoggedIn,
+        userId,
+        setUserId,
+        username,
+        setUsername,
+        firstname,
+        setFirstname,
+        lastname,
+        setLastname,
+        loginMenuOpen,
+        setLoginMenuOpen,
+        signOut,
+      }}
     >
       {children}
     </UserContext.Provider>

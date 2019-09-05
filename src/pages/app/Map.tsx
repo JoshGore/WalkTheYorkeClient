@@ -7,7 +7,10 @@ import bbox from '@turf/bbox';
 import { BBox, featureCollection } from '@turf/helpers';
 
 import {
-  Feature, FeatureCollection, LineString, GeoJsonProperties,
+  Feature,
+  FeatureCollection,
+  LineString,
+  GeoJsonProperties,
 } from 'geojson';
 import MapGeneral from './map/MapGeneral';
 // import MapOutdoorsAll from './map/MapOutdoorsAll';
@@ -23,10 +26,7 @@ const MapComponent = ReactMapboxGl({
 });
 
 // const WTY_TRAIL_BOUNDS: mapboxgl.LngLatBoundsLike = [
-const WTY_TRAIL_BOUNDS: BBox = [
-  136.585109, -35.314486,
-  138.366868, -33.99099,
-];
+const WTY_TRAIL_BOUNDS: BBox = [136.585109, -35.314486, 138.366868, -33.99099];
 
 interface LineFeatureProps {
   routeId: number;
@@ -36,24 +36,24 @@ interface LineFeatureProps {
 interface LinesQueryData {
   routes_by_bk: {
     routes: {
-      id: number,
+      id: number;
       line_routes: {
         line: {
-          id: number,
-          geom: any,
+          id: number;
+          geom: any;
           line_types: {
             type: {
-              name: string
-            }
-          }
-        }
-      }
-    }
-  }
+              name: string;
+            };
+          };
+        };
+      };
+    };
+  };
 }
 
 interface LinesQueryVars {
-  id: number
+  id: number;
 }
 
 const Map: React.FC = () => {
@@ -64,7 +64,12 @@ const Map: React.FC = () => {
   const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
   // in state prevents reloading on map changes
   const [initialBounds] = useState<BBox>(WTY_TRAIL_BOUNDS);
-  const [transformedInitialBounds] = useState<[[number, number], [number, number]]>([[WTY_TRAIL_BOUNDS[0], WTY_TRAIL_BOUNDS[1]], [WTY_TRAIL_BOUNDS[2], WTY_TRAIL_BOUNDS[3]]]);
+  const [transformedInitialBounds] = useState<
+    [[number, number], [number, number]]
+  >([
+    [WTY_TRAIL_BOUNDS[0], WTY_TRAIL_BOUNDS[1]],
+    [WTY_TRAIL_BOUNDS[2], WTY_TRAIL_BOUNDS[3]],
+  ]);
   const [mapLoading, setMapLoading] = useState(true);
 
   const {
@@ -127,7 +132,9 @@ const Map: React.FC = () => {
     },
   );
   */
-  const geoJsonLines = (lines: any) : FeatureCollection<LineString, LineFeatureProps> => ({
+  const geoJsonLines = (
+    lines: any,
+  ): FeatureCollection<LineString, LineFeatureProps> => ({
     type: 'FeatureCollection',
     features: lines.map((line: any) => ({
       type: 'Feature',
@@ -164,7 +171,9 @@ const Map: React.FC = () => {
         // if trail section selected and currently in all mode then update trailSection
         if (feature.layer.id === 'trail_line_all_target') {
           Trail.setTrailSection({
-            ...Trail.trailSection, type: 'stage', id: feature.properties!.routeId,
+            ...Trail.trailSection,
+            type: 'stage',
+            id: feature.properties!.routeId,
           });
         }
       } else {
@@ -189,21 +198,31 @@ const Map: React.FC = () => {
   };
 
   const zoomToExtent = () => {
-    map!.fitBounds(
-      calculateExtent() as mapboxgl.LngLatBoundsLike, { padding: 100 },
-    );
+    map!.fitBounds(calculateExtent() as mapboxgl.LngLatBoundsLike, {
+      padding: 100,
+    });
   };
   useEffect(() => {
     if (map && !mapLoading && !linesLoading) {
       zoomToExtent();
     }
-  }, [Trail.trailSection.id, Trail.trailSection.type, mapLoading, linesLoading]);
-
+  }, [
+    Trail.trailSection.id,
+    Trail.trailSection.type,
+    mapLoading,
+    linesLoading,
+  ]);
 
   // blank style if convert to individual layers style={"mapbox://styles/joshg/cjzzmubza0zw21cuxtrntf6ny"}
   return (
     <>
-      <ReactResizeDetector handleWidth handleHeight refreshMode="throttle" refreshRate={100} onResize={handleResize} />
+      <ReactResizeDetector
+        handleWidth
+        handleHeight
+        refreshMode="throttle"
+        refreshRate={100}
+        onResize={handleResize}
+      />
       <MapComponent
         containerStyle={{ flex: 1 }}
         fitBounds={transformedInitialBounds}
