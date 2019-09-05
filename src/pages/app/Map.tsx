@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ReactMapboxGl from 'react-mapbox-gl';
-import mapboxgl from 'mapbox-gl';
 import ReactResizeDetector from 'react-resize-detector';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';

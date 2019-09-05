@@ -4,13 +4,12 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 import App from './pages/App';
 import './index.css';
-import 'typeface-roboto';
+// import 'typeface-roboto';
 import UserProvider from './contexts/UserProvider';
 import TrailProvider from './contexts/TrailProvider';
 import * as serviceWorker from './serviceWorker';
 
 import apolloClient from './contexts/apollo-client';
-
 
 ReactDOM.render(
   <UserProvider>

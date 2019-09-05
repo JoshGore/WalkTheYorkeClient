@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import Map from './app/Map';
+import loadable from '@loadable/component';
 import MenuContainer from './app/menu/MenuContainer';
 import TrailContext, {
   TrailEntityProps,
@@ -14,6 +14,8 @@ import RouteDetailQuery, {
   RouteDetailQueryVars,
 } from './app/RouteDetailQuery';
 import MenuBreadcrumbs from './app/MenuBreadcrumbs';
+// import Map from './app/Map';
+const Map = loadable(() => import('./app/Map'));
 
 interface LoadingOrTextProps {
   loading: boolean;
