@@ -5,13 +5,14 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { BBox, featureCollection } from '@turf/helpers';
-
 import {
   Feature,
   FeatureCollection,
   LineString,
   GeoJsonProperties,
 } from 'geojson';
+import useWindowSize from '../../utils/WindowSize';
+
 import MapGeneral from './map/MapGeneral';
 // import MapOutdoorsAll from './map/MapOutdoorsAll';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
@@ -151,7 +152,13 @@ const Map: React.FC = () => {
     setMapLoading(false);
   };
   // handle map click/tap events
-  const handleResize = () => map && map.resize();
+  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(0);
+  const handleResize = (height: number, width: number) => {
+    setHeight(height);
+    setWidth(width);
+    map && map.resize();
+  };
   const mapClick = (map: any, evt: any) => {
     setMapClickCoordinates({
       point: [evt.point.x, evt.point.y],
@@ -197,9 +204,12 @@ const Map: React.FC = () => {
     return bounds;
   };
 
+  const zoomPadding = () => (height > width ? height / 20 : width / 20);
+
   const zoomToExtent = () => {
+    console.log(`zooming with padding: ${zoomPadding()}`);
     map!.fitBounds(calculateExtent() as mapboxgl.LngLatBoundsLike, {
-      padding: 100,
+      padding: zoomPadding(),
     });
   };
   useEffect(() => {

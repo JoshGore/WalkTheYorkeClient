@@ -1,7 +1,8 @@
 import React from 'react';
 import { Source, Layer, Image } from 'react-mapbox-gl';
 import { FeatureCollection } from 'geojson';
-import shelter from './icons/custom-shelter-15.png';
+// import shelter from './icons/custom-shelter-15.png';
+const shelter = require('./icons/custom-shelter-15.png');
 
 interface MapGeneralProps {
   trailSection: any;
