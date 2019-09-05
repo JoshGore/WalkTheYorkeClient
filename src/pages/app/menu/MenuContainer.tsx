@@ -82,8 +82,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-// const VISIBLE_OFFSET = 500;
-
 const MenuContainer: React.FunctionComponent<MenuProps> = ({
   header,
   body,

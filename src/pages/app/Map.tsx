@@ -184,7 +184,6 @@ const Map: React.FC = () => {
           });
         }
       } else {
-        // if no interactive features returned then set trailObject to none
         Trail.setTrailObject({ ...Trail.trail });
       }
     }
@@ -207,7 +206,6 @@ const Map: React.FC = () => {
   const zoomPadding = () => (height > width ? height / 20 : width / 20);
 
   const zoomToExtent = () => {
-    console.log(`zooming with padding: ${zoomPadding()}`);
     map!.fitBounds(calculateExtent() as mapboxgl.LngLatBoundsLike, {
       padding: zoomPadding(),
     });
