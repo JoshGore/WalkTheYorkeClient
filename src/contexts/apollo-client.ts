@@ -3,6 +3,7 @@ import { ApolloClient } from 'apollo-client';
 import { ApolloLink, split } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { HttpLink } from 'apollo-link-http';
+import { onError } from 'apollo-link-error';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { OperationDefinitionNode } from 'graphql';
@@ -14,16 +15,19 @@ const httpLink = new HttpLink({
   uri: httpUri,
 });
 
-const getAuthorization = () => (
-  localStorage.getItem('authToken') ? `Bearer ${localStorage.getItem('authToken')}` : ''
-);
+const getAuthorization = () =>
+  localStorage.getItem('authToken')
+    ? `Bearer ${localStorage.getItem('authToken')}`
+    : '';
 
 const wsLink = new WebSocketLink({
   uri: wsUri,
   options: {
     lazy: true,
     reconnect: true,
-    connectionParams: () => ({ headers: { Authorization: getAuthorization() } }),
+    connectionParams: () => ({
+      headers: { Authorization: getAuthorization() },
+    }),
   },
 });
 
@@ -34,19 +38,44 @@ const authLink = setContext((_, { headers }) => ({
   },
 }));
 
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
+    );
+
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
+
 const terminatingLink = split(
   ({ query }) => {
-    const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
+    const { kind, operation } = getMainDefinition(
+      query,
+    ) as OperationDefinitionNode;
     return kind === 'OperationDefinition' && operation === 'subscription';
   },
   wsLink,
   authLink.concat(httpLink),
 );
 
-const link = ApolloLink.from([terminatingLink]);
+const link = ApolloLink.from([errorLink, terminatingLink]);
 const cache = new InMemoryCache();
 
 export default new ApolloClient({
   link,
   cache,
+  connectToDevTools: true,
+  defaultOptions: {
+    watchQuery: {
+      errorPolicy: 'all',
+    },
+    query: {
+      errorPolicy: 'all',
+    },
+    mutate: {
+      errorPolicy: 'all',
+    },
+  },
 });

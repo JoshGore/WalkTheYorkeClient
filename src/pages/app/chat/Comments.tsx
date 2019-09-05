@@ -67,7 +67,7 @@ interface comments {
 
 const Comments: React.FC = () => {
   const Trail = useContext<TrailContextProps>(TrailContext);
-  const { data, loading } = useSubscription<comments>(
+  const { data, loading, error } = useSubscription<comments>(
     MESSAGE_SUBSCRIPTION_QUERY,
     {
       variables: { id: Trail.currentTrailObject().id },

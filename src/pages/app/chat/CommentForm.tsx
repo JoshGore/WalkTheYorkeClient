@@ -79,8 +79,12 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const Trail = useContext<TrailContextProps>(TrailContext);
   const classes = useStyles();
   const [commentText, setCommentText] = useState('');
-  const [commentOnObject] = useMutation(ROUTE_MESSAGE_INSERT_QUERY);
-  const [replyToComment] = useMutation(COMMENT_REPLY_INSERT_QUERY);
+  const [commentOnObject, { error: commentOnObjectError }] = useMutation(
+    ROUTE_MESSAGE_INSERT_QUERY,
+  );
+  const [replyToComment, { error: replyToError }] = useMutation(
+    COMMENT_REPLY_INSERT_QUERY,
+  );
   const [isIssue, setIsIssue] = useState(false);
   const onSubmitSucessful = () => {
     setCommentText('');

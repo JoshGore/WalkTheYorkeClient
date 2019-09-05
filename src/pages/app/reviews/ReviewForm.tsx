@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ReviewForm: React.FC = () => {
-  const [submitReview, { data }] = useMutation(gql`
+  const [submitReview, { error: submitReviewError }] = useMutation(gql`
     mutation($route_id: Int!, $user_id: Int!, $rating: Int!, $review: String!) {
       insert_route_review(
         objects: {
