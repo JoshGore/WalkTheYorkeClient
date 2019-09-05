@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
+import loadable from '@loadable/component';
 
-import App from './pages/App';
 import './index.css';
 import 'typeface-roboto';
 import UserProvider from './contexts/UserProvider';
@@ -10,6 +10,8 @@ import TrailProvider from './contexts/TrailProvider';
 import * as serviceWorker from './serviceWorker';
 
 import apolloClient from './contexts/apollo-client';
+// import App from './pages/App';
+const App = loadable(() => import('./pages/App'));
 
 ReactDOM.render(
   <UserProvider>

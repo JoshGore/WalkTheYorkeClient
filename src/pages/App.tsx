@@ -6,15 +6,17 @@ import TrailContext, {
   TrailEntityProps,
   TrailContextProps,
 } from '../contexts/TrailContext';
-import SignupLogin from './SignupLogin';
 import CornerAvatar from './signupLogin/CornerAvatar';
-import Body from './app/Body';
 import RouteDetailQuery, {
   RouteDetailQueryData,
   RouteDetailQueryVars,
 } from './app/RouteDetailQuery';
 import MenuBreadcrumbs from './app/MenuBreadcrumbs';
+// import SignupLogin from './SignupLogin';
+// import Body from './app/Body';
 // import Map from './app/Map';
+const SignupLogin = loadable(() => import('./SignupLogin'));
+const Body = loadable(() => import('./app/Body'));
 const Map = loadable(() => import('./app/Map'));
 
 interface LoadingOrTextProps {
