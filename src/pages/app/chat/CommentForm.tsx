@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import SendIcon from '@material-ui/icons/Send';
 import {
   Typography,
   TextField,
@@ -7,6 +8,7 @@ import {
   Chip,
   Grid,
   ListItem,
+  IconButton,
 } from '@material-ui/core';
 import clsx from 'clsx';
 import gql from 'graphql-tag';
@@ -140,8 +142,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
   if (showing) {
     return (
       <ListItem>
-        <Grid container>
-          <Grid item xs={12}>
+        <Grid container alignItems="flex-end">
+          <Grid item xs>
             <TextField
               id="outlined-dense-multiline"
               label="start with @issue to submit issue"
@@ -166,6 +168,11 @@ const CommentForm: React.FC<CommentFormProps> = ({
                 ),
               }}
             />
+          </Grid>
+          <Grid item>
+            <IconButton onClick={handleSubmit}>
+              <SendIcon />
+            </IconButton>
           </Grid>
         </Grid>
       </ListItem>
