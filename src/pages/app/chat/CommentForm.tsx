@@ -17,47 +17,16 @@ import TrailContext, {
   TrailContextProps,
 } from '../../../contexts/TrailContext';
 import UserContext, { UserContextProps } from '../../../contexts/UserContext';
+import {
+  ROUTE_MESSAGE_INSERT_QUERY,
+  COMMENT_REPLY_INSERT_QUERY,
+} from '../../../queries/queries';
 
 interface CommentFormProps {
   commentThreadId?: number;
   showing: boolean;
   setShowing?: (showing: boolean) => void;
 }
-
-const ROUTE_MESSAGE_INSERT_QUERY = gql`
-  mutation($route: Int!, $user: Int!, $body: String) {
-    insert_route_comment(
-      objects: {
-        route_id: $route
-        comment: { data: { body: $body, user_id: $user } }
-      }
-    ) {
-      returning {
-        comment {
-          body
-        }
-      }
-    }
-  }
-`;
-
-const COMMENT_REPLY_INSERT_QUERY = gql`
-  mutation insert_comments(
-    $commentThreadId: Int!
-    $userId: Int!
-    $body: String
-  ) {
-    insert_comments(
-      objects: { body: $body, comment_id: $commentThreadId, user_id: $userId }
-    ) {
-      returning {
-        body
-        user_id
-      }
-    }
-  }
-`;
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     textField: {
