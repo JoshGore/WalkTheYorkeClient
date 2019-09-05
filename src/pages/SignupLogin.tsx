@@ -1,8 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {
-  Dialog,
-  useMediaQuery,
-} from '@material-ui/core';
+import { Dialog, useMediaQuery } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
@@ -13,9 +10,9 @@ import Logout from './signupLogin/Logout';
 
 interface UserQueryProps {
   users_by_pk: {
-    username: string,
-    firstname: string,
-    lastname: string,
+    username: string;
+    firstname: string;
+    lastname: string;
   };
 }
 
@@ -29,22 +26,27 @@ const SignupLogin: React.FC = () => {
     User.setLoggedIn(true);
     User.setLoginMenuOpen(false);
   };
-  const { error: userLoadingError, data: userData } = useQuery(gql`
-    query ($userId: Int!) {
-      users_by_pk(id: $userId) {
-        username
-        firstname
-        lastname
+  const { error: userLoadingError, data: userData } = useQuery(
+    gql`
+      query($userId: Int!) {
+        users_by_pk(id: $userId) {
+          username
+          firstname
+          lastname
+        }
       }
-    }
-  `,
-  {
-    variables: { userId: User.userId },
-    skip: !loadDetails,
-    onCompleted: setUserVariables,
-  });
+    `,
+    {
+      variables: { userId: User.userId },
+      skip: !loadDetails,
+      onCompleted: setUserVariables,
+    },
+  );
   useEffect(() => {
-    if (!!localStorage.getItem('authToken') && !!localStorage.getItem('userId')) {
+    if (
+      !!localStorage.getItem('authToken') &&
+      !!localStorage.getItem('userId')
+    ) {
       User.setUserId(parseInt(localStorage.getItem('userId')!, 10));
       setLoadDetails(true);
     } else {
@@ -55,7 +57,11 @@ const SignupLogin: React.FC = () => {
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
   const [newUser, setNewUser] = useState(true);
   return (
-    <Dialog open={User.loginMenuOpen} fullScreen={fullScreen} onClose={() => User.setLoginMenuOpen(false)}>
+    <Dialog
+      open={User.loginMenuOpen}
+      fullScreen={fullScreen}
+      onClose={() => User.setLoginMenuOpen(false)}
+    >
       {User.loggedIn && <Logout />}
       {!User.loggedIn && newUser && <Signup setNewUser={setNewUser} />}
       {!User.loggedIn && !newUser && <Login setNewUser={setNewUser} />}
