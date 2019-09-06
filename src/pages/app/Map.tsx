@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { BBox, featureCollection } from '@turf/helpers';
-import { FeatureCollection, LineString } from 'geojson';
+import { FeatureCollection, LineString, Point } from 'geojson';
 import MapGeneral from './map/MapGeneral';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import { TrailSectionProps, TrailObjectProps } from '../types';
@@ -24,6 +24,9 @@ const WTY_TRAIL_BOUNDS: BBox = [136.585109, -35.314486, 138.366868, -33.99099];
 interface LineFeatureProps {
   routeId: number;
   routeType: string;
+}
+interface PointFeatureProps {
+  name: string;
 }
 
 const Map: React.FC = () => {
@@ -51,22 +54,35 @@ const Map: React.FC = () => {
   const [mapLoading, setMapLoading] = useState(true);
   const geoJsonLines = (
     lines: TrailGeometryQueryData,
-  ): FeatureCollection<LineString, LineFeatureProps> => {
-    return {
-      type: 'FeatureCollection',
-      features:
-        lines && lines.routes_by_pk && lines.routes_by_pk.line_routes
-          ? lines.routes_by_pk.line_routes.map(({ line }) => ({
-              type: 'Feature',
-              properties: {
-                routeId: line.line_routes[0].route_id,
-                routeType: line.line_types[0].type.name,
-              },
-              geometry: line.geom,
-            }))
-          : [],
-    };
-  };
+  ): FeatureCollection<LineString, LineFeatureProps> => ({
+    type: 'FeatureCollection',
+    features:
+      lines && lines.routes_by_pk && lines.routes_by_pk.line_routes
+        ? lines.routes_by_pk.line_routes.map(({ line }) => ({
+            type: 'Feature',
+            properties: {
+              routeId: line.line_routes[0].route_id,
+              routeType: line.line_types[0].type.name,
+            },
+            geometry: line.geom,
+          }))
+        : [],
+  });
+  const geoJsonPoints = (
+    points: TrailGeometryQueryData,
+  ): FeatureCollection<Point, PointFeatureProps> => ({
+    type: 'FeatureCollection',
+    features:
+      points && points.routes_by_pk && points.routes_by_pk.point_routes
+        ? points.routes_by_pk.point_routes.map(({ point }) => ({
+            type: 'Feature',
+            properties: {
+              name: point.name,
+            },
+            geometry: point.geom,
+          }))
+        : [],
+  });
   // set map when component loads
   const onStyleLoad = (map: any) => {
     setMap(map);
@@ -172,6 +188,7 @@ const Map: React.FC = () => {
             trailObject={Trail.trailObject}
             selectedFeature={selectedFeature()}
             stagesData={geoJsonLines(data!)}
+            pointsData={geoJsonPoints(data!)}
           />
         )}
       </MapComponent>

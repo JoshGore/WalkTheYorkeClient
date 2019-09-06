@@ -9,10 +9,12 @@ interface MapGeneralProps {
   trailObject: any;
   selectedFeature: any;
   stagesData: FeatureCollection;
+  pointsData: FeatureCollection;
 }
 const shelters = false;
 const MapGeneral: React.FC<MapGeneralProps> = ({
   stagesData,
+  pointsData,
   selectedFeature,
 }) => {
   return (
@@ -23,7 +25,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
       />
       <Source
         id="trail_point_shelters"
-        geoJsonSource={{ type: 'geojson', data: shelters }}
+        geoJsonSource={{ type: 'geojson', data: pointsData }}
       />
       <Image
         id="custom-shelter-icon"
@@ -42,7 +44,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
           'text-allow-overlap': false,
           'icon-optional': false,
           'text-optional': true,
-          'text-field': '{NAME}',
+          'text-field': '{name}',
           'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
           'text-size': 10,
           'text-anchor': 'right',

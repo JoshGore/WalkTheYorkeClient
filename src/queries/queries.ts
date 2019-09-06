@@ -102,7 +102,7 @@ export const TRAIL_GEOMETRY_QUERY = gql`
     routes_by_pk(id: $trailId) {
       point_routes {
         point {
-          title
+          name
           id
           geom
           point_types {
@@ -136,16 +136,16 @@ export interface TrailGeometryQueryData {
   routes_by_pk: {
     point_routes: {
       point: {
-        title: string;
         id: number;
+        name: string;
         geom: any;
         point_types: {
           type: {
             name: string;
           };
-        };
+        }[];
       };
-    };
+    }[];
     line_routes: {
       line: {
         id: number;
