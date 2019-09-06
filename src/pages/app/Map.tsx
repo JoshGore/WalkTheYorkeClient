@@ -10,9 +10,9 @@ import MapGeneral from './map/MapGeneral';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import { TrailSectionProps, TrailObjectProps } from '../types';
 import {
-  LINES_QUERY,
-  LinesQueryVars,
-  LinesQueryData,
+  TRAIL_GEOMETRY_QUERY,
+  TrailGeometryQueryVars,
+  TrailGeometryQueryData,
 } from '../../queries/queries';
 
 const MapComponent = ReactMapboxGl({
@@ -28,16 +28,16 @@ interface LineFeatureProps {
 
 const Map: React.FC = () => {
   const Trail = useContext<TrailContextProps>(TrailContext);
-  const { loading, error, data } = useQuery<LinesQueryData, LinesQueryVars>(
-    LINES_QUERY,
-    {
-      partialRefetch: false,
-      returnPartialData: false,
-      variables: { trailId: 18 },
-      fetchPolicy: 'no-cache',
-      // cache-first cache-and-network network-only cache-only no-cache standby
-    },
-  );
+  const { loading, error, data } = useQuery<
+    TrailGeometryQueryData,
+    TrailGeometryQueryVars
+  >(TRAIL_GEOMETRY_QUERY, {
+    partialRefetch: false,
+    returnPartialData: false,
+    variables: { trailId: 18 },
+    fetchPolicy: 'no-cache',
+    // cache-first cache-and-network network-only cache-only no-cache standby
+  });
   const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
   const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
   // in state prevents reloading on map changes
@@ -50,7 +50,7 @@ const Map: React.FC = () => {
   ]);
   const [mapLoading, setMapLoading] = useState(true);
   const geoJsonLines = (
-    lines: LinesQueryData,
+    lines: TrailGeometryQueryData,
   ): FeatureCollection<LineString, LineFeatureProps> => {
     return {
       type: 'FeatureCollection',
@@ -96,6 +96,7 @@ const Map: React.FC = () => {
           (feature: any) => feature.layer.id === 'trail_line_all_target',
         )[0];
       if (feature) {
+        console.log(feature);
         // if trail section selected and currently in all mode then update trailSection
         if (feature.layer.id === 'trail_line_all_target') {
           Trail.setTrailSection({
@@ -105,7 +106,7 @@ const Map: React.FC = () => {
           });
         }
       } else {
-        Trail.setTrailObject({ ...Trail.trail });
+        Trail.setTrailSection({ ...Trail.trail });
       }
     }
   }, [mapClickCoordinates]);

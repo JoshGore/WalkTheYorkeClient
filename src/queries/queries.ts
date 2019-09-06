@@ -97,16 +97,22 @@ export interface ROUTE_MESSAGE_SUBSCRIPTION_QUERY_TYPES {
   };
 }
 
-export const LINES_QUERY = gql`
-  query TrailLines($trailId: Int!) {
+export const TRAIL_GEOMETRY_QUERY = gql`
+  query TrailGeometryQuery($trailId: Int!) {
     routes_by_pk(id: $trailId) {
-      line_routes(
-        where: {
-          line: {
-            line_routes: { route: { typeByType: { name: { _eq: "stage" } } } }
+      point_routes {
+        point {
+          title
+          id
+          geom
+          point_types {
+            type {
+              name
+            }
           }
         }
-      ) {
+      }
+      line_routes {
         line {
           id
           geom
@@ -126,8 +132,20 @@ export const LINES_QUERY = gql`
   }
 `;
 
-export interface LinesQueryData {
+export interface TrailGeometryQueryData {
   routes_by_pk: {
+    point_routes: {
+      point: {
+        title: string;
+        id: number;
+        geom: any;
+        point_types: {
+          type: {
+            name: string;
+          };
+        };
+      };
+    };
     line_routes: {
       line: {
         id: number;
@@ -145,6 +163,6 @@ export interface LinesQueryData {
   };
 }
 
-export interface LinesQueryVars {
+export interface TrailGeometryQueryVars {
   trailId: number;
 }
