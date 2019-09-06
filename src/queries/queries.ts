@@ -96,3 +96,55 @@ export interface ROUTE_MESSAGE_SUBSCRIPTION_QUERY_TYPES {
     }[];
   };
 }
+
+export const LINES_QUERY = gql`
+  query TrailLines($trailId: Int!) {
+    routes_by_pk(id: $trailId) {
+      line_routes(
+        where: {
+          line: {
+            line_routes: { route: { typeByType: { name: { _eq: "stage" } } } }
+          }
+        }
+      ) {
+        line {
+          id
+          geom
+          line_types {
+            type {
+              name
+            }
+          }
+          line_routes(
+            where: { route: { typeByType: { name: { _eq: "stage" } } } }
+          ) {
+            route_id
+          }
+        }
+      }
+    }
+  }
+`;
+
+export interface LinesQueryData {
+  routes_by_pk: {
+    line_routes: {
+      line: {
+        id: number;
+        geom: any;
+        line_types: {
+          type: {
+            name: 'walk' | 'bike' | 'shared';
+          };
+        }[];
+        line_routes: {
+          route_id: number;
+        }[];
+      };
+    }[];
+  };
+}
+
+export interface LinesQueryVars {
+  trailId: number;
+}

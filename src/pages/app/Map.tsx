@@ -5,28 +5,20 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { BBox, featureCollection } from '@turf/helpers';
-import {
-  Feature,
-  FeatureCollection,
-  LineString,
-  GeoJsonProperties,
-} from 'geojson';
-import useWindowSize from '../../utils/WindowSize';
-
+import { FeatureCollection, LineString } from 'geojson';
 import MapGeneral from './map/MapGeneral';
-// import MapOutdoorsAll from './map/MapOutdoorsAll';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
-
 import { TrailSectionProps, TrailObjectProps } from '../types';
-
-// const shelters = require('/data/walktheyorke_oldcouncil_shelters.geojson');
+import {
+  LINES_QUERY,
+  LinesQueryVars,
+  LinesQueryData,
+} from '../../queries/queries';
 
 const MapComponent = ReactMapboxGl({
   accessToken: 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A',
   trackResize: false,
 });
-
-// const WTY_TRAIL_BOUNDS: mapboxgl.LngLatBoundsLike = [
 const WTY_TRAIL_BOUNDS: BBox = [136.585109, -35.314486, 138.366868, -33.99099];
 
 interface LineFeatureProps {
@@ -34,34 +26,19 @@ interface LineFeatureProps {
   routeType: string;
 }
 
-interface LinesQueryData {
-  routes_by_bk: {
-    routes: {
-      id: number;
-      line_routes: {
-        line: {
-          id: number;
-          geom: any;
-          line_types: {
-            type: {
-              name: string;
-            };
-          };
-        };
-      };
-    };
-  };
-}
-
-interface LinesQueryVars {
-  id: number;
-}
-
 const Map: React.FC = () => {
   const Trail = useContext<TrailContextProps>(TrailContext);
-
+  const { loading, error, data } = useQuery<LinesQueryData, LinesQueryVars>(
+    LINES_QUERY,
+    {
+      partialRefetch: false,
+      returnPartialData: false,
+      variables: { trailId: 18 },
+      fetchPolicy: 'no-cache',
+      // cache-first cache-and-network network-only cache-only no-cache standby
+    },
+  );
   const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
-  const [selectedFeature, setSelectedFeature] = useState<any>(undefined);
   const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
   // in state prevents reloading on map changes
   const [initialBounds] = useState<BBox>(WTY_TRAIL_BOUNDS);
@@ -72,80 +49,24 @@ const Map: React.FC = () => {
     [WTY_TRAIL_BOUNDS[2], WTY_TRAIL_BOUNDS[3]],
   ]);
   const [mapLoading, setMapLoading] = useState(true);
-
-  const {
-    loading: linesLoading,
-    error: linesError,
-    data: linesData,
-  } = useQuery(
-    gql`
-      {
-        lines(
-          where: {
-            line_routes: { route: { typeByType: { name: { _eq: "stage" } } } }
-          }
-        ) {
-          geom
-          line_routes(
-            where: { route: { typeByType: { name: { _eq: "stage" } } } }
-          ) {
-            route_id
-          }
-          line_types {
-            type {
-              name
-            }
-          }
-        }
-      }
-    `,
-  );
-
-  /*
-  const {
-    loading: linesLoading,
-    error: linesError,
-    data: linesData,
-  } = useQuery<LinesQueryData,LinesQueryVars>(
-    gql`
-      query($trailId: Int!) {
-        routes_by_pk(id: $id) {
-          routes(where: { typeByType: { name: { _eq: "stage" } } }) {
-            id
-            line_routes {
-              line {
-                id
-                geom
-                line_types {
-                  type {
-                    name
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `,
-    {
-      variables: { id: Trail.trailId! },
-      skip: !!!Trail.trailSection.id
-    },
-  );
-  */
   const geoJsonLines = (
-    lines: any,
-  ): FeatureCollection<LineString, LineFeatureProps> => ({
-    type: 'FeatureCollection',
-    features: lines.map((line: any) => ({
-      type: 'Feature',
-      properties: {
-        routeId: line.line_routes[0].route_id,
-        routeType: line.line_types[0].type.name,
-      },
-      geometry: line.geom,
-    })),
-  });
+    lines: LinesQueryData,
+  ): FeatureCollection<LineString, LineFeatureProps> => {
+    return {
+      type: 'FeatureCollection',
+      features:
+        lines && lines.routes_by_pk && lines.routes_by_pk.line_routes
+          ? lines.routes_by_pk.line_routes.map(({ line }) => ({
+              type: 'Feature',
+              properties: {
+                routeId: line.line_routes[0].route_id,
+                routeType: line.line_types[0].type.name,
+              },
+              geometry: line.geom,
+            }))
+          : [],
+    };
+  };
   // set map when component loads
   const onStyleLoad = (map: any) => {
     setMap(map);
@@ -192,8 +113,9 @@ const Map: React.FC = () => {
   const calculateExtent = (): BBox => {
     const bounds = bbox(
       featureCollection(
-        geoJsonLines(linesData.lines).features.filter(
-          feature => feature.properties.routeId === Trail.trailSection.id,
+        geoJsonLines(data!).features.filter(
+          (feature: any) =>
+            feature.properties.routeId === Trail.trailSection.id,
         ),
       ),
     );
@@ -211,17 +133,21 @@ const Map: React.FC = () => {
     });
   };
   useEffect(() => {
-    if (map && !mapLoading && !linesLoading) {
+    if (map && !mapLoading && !loading) {
       zoomToExtent();
     }
-  }, [
-    Trail.trailSection.id,
-    Trail.trailSection.type,
-    mapLoading,
-    linesLoading,
-  ]);
-
-  // blank style if convert to individual layers style={"mapbox://styles/joshg/cjzzmubza0zw21cuxtrntf6ny"}
+  }, [Trail.trailSection.id, Trail.trailSection.type, mapLoading, loading]);
+  const selectedFeature = () =>
+    Trail.currentTrailObject().type === 'stage'
+      ? {
+          layer: {
+            id: 'trail_line_all_target',
+          },
+          properties: {
+            routeId: Trail.currentTrailObject().id,
+          },
+        }
+      : undefined;
   return (
     <>
       <ReactResizeDetector
@@ -239,12 +165,12 @@ const Map: React.FC = () => {
         style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
       >
         {/* sources for trail lines, short walk lines, day walk lines, hero walk lines */}
-        {!linesLoading && !!linesData.lines && (
+        {!loading && !!data && (
           <MapGeneral
             trailSection={Trail.trailSection}
             trailObject={Trail.trailObject}
-            selectedFeature={selectedFeature}
-            stagesData={geoJsonLines(linesData.lines)}
+            selectedFeature={selectedFeature()}
+            stagesData={geoJsonLines(data!)}
           />
         )}
       </MapComponent>

@@ -12,9 +12,7 @@ import RouteDetailQuery, {
   RouteDetailQueryVars,
 } from './app/RouteDetailQuery';
 import MenuBreadcrumbs from './app/MenuBreadcrumbs';
-// import SignupLogin from './SignupLogin';
-// import Body from './app/Body';
-// import Map from './app/Map';
+
 const SignupLogin = loadable(() => import('./SignupLogin'));
 const Body = loadable(() => import('./app/Body'));
 const Map = loadable(() => import('./app/Map'));
@@ -33,49 +31,38 @@ interface BreadcrumbProps {
 
 const App: React.FC = () => {
   const TrailSelections = useContext<TrailContextProps>(TrailContext);
-  const {
-    loading: selectionInfoLoading,
-    error: selectionInfoError,
-    data: selectionInfo,
-  } = useQuery<RouteDetailQueryData, RouteDetailQueryVars>(RouteDetailQuery, {
+  const { loading: selectionInfoLoading, data: selectionInfo } = useQuery<
+    RouteDetailQueryData,
+    RouteDetailQueryVars
+  >(RouteDetailQuery, {
     variables: { id: TrailSelections.trailSection.id! },
     skip: !TrailSelections.trailSection.id,
   });
   const id = () =>
-    selectionInfo &&
-    selectionInfo.routes_by_pk &&
-    selectionInfo.routes_by_pk.id;
+    !selectionInfoLoading ? selectionInfo!.routes_by_pk.id : undefined;
   const name = () =>
-    selectionInfo &&
-    selectionInfo.routes_by_pk &&
-    selectionInfo.routes_by_pk.title;
+    !selectionInfoLoading ? selectionInfo!.routes_by_pk.title : undefined;
   const shortName = () =>
-    selectionInfo &&
-    selectionInfo.routes_by_pk &&
-    selectionInfo.routes_by_pk.short_title;
+    !selectionInfoLoading ? selectionInfo!.routes_by_pk.short_title : undefined;
   const type = () =>
-    selectionInfo &&
-    selectionInfo.routes_by_pk &&
-    selectionInfo.routes_by_pk.typeByType.name;
-  const body = () =>
-    !selectionInfoLoading && !!selectionInfo
-      ? selectionInfo.routes_by_pk.body
+    !selectionInfoLoading
+      ? selectionInfo!.routes_by_pk.typeByType.name
       : undefined;
+  const body = () =>
+    !selectionInfoLoading ? selectionInfo!.routes_by_pk.body : undefined;
   const multimedia = () =>
-    !selectionInfoLoading && !!selectionInfo
-      ? selectionInfo.routes_by_pk.route_multimedia
+    !selectionInfoLoading
+      ? selectionInfo!.routes_by_pk.route_multimedia
       : undefined;
   const files = () =>
-    !selectionInfoLoading && !!selectionInfo
-      ? selectionInfo.routes_by_pk.route_files
-      : undefined;
+    !selectionInfoLoading ? selectionInfo!.routes_by_pk.route_files : undefined;
   const count = () =>
-    !selectionInfoLoading && !!selectionInfo
-      ? selectionInfo.reviews_aggregate.aggregate.count
+    !selectionInfoLoading
+      ? selectionInfo!.reviews_aggregate.aggregate.count
       : undefined;
   const avgRating = () =>
-    !selectionInfoLoading && !!selectionInfo
-      ? selectionInfo.reviews_aggregate.aggregate.avg.rating
+    !selectionInfoLoading
+      ? selectionInfo!.reviews_aggregate.aggregate.avg.rating
       : undefined;
   const title = () => TrailSelections.trailSection.name;
 
