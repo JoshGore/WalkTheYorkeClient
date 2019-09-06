@@ -28,13 +28,19 @@ const Comments: React.FC = () => {
         </ListItem>
         <CommentForm showing />
         {!loading &&
-          data !== undefined &&
+        data !== undefined &&
+        data.routes_by_pk.route_comments.length > 0 ? (
           data.routes_by_pk.route_comments.map(commentThread => (
             <CommentThread
               key={commentThread.comment.id}
               commentThread={commentThread.comment}
             />
-          ))}
+          ))
+        ) : (
+          <ListItem>
+            <Typography variant="body2">No Comments</Typography>
+          </ListItem>
+        )}
       </List>
     </Paper>
   );

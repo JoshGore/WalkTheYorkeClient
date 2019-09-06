@@ -107,7 +107,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const handleIssueDelete = () => {
     setIsIssue(false);
   };
-  if (showing) {
+  if (showing && User.loggedIn) {
     return (
       <ListItem>
         <Grid container alignItems="flex-end">
