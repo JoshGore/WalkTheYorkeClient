@@ -112,7 +112,6 @@ const Map: React.FC = () => {
           (feature: any) => feature.layer.id === 'trail_line_all_target',
         )[0];
       if (feature) {
-        console.log(feature);
         // if trail section selected and currently in all mode then update trailSection
         if (feature.layer.id === 'trail_line_all_target') {
           Trail.setTrailSection({
