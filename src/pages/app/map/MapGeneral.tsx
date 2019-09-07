@@ -75,7 +75,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         sourceId="trail_point_markers"
         layout={{
           'icon-image': 'custom-marker-icon',
-          'icon-size': 0.8,
+          'icon-size': 0.06,
           'icon-allow-overlap': true,
           'text-allow-overlap': false,
           'icon-optional': false,
