@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { BBox, featureCollection } from '@turf/helpers';
-import { FeatureCollection, LineString, Point } from 'geojson';
+import { FeatureCollection, Feature, LineString, Point } from 'geojson';
 import MapGeneral from './map/MapGeneral';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import { TrailSectionProps, TrailObjectProps } from '../types';
@@ -13,6 +13,10 @@ import {
   TRAIL_GEOMETRY_QUERY,
   TrailGeometryQueryVars,
   TrailGeometryQueryData,
+  LineTypes,
+  PointTypes,
+  TrailGeometryQueryPoint,
+  TrailGeometryQueryLine,
 } from '../../queries/queries';
 
 const MapComponent = ReactMapboxGl({
@@ -23,10 +27,11 @@ const WTY_TRAIL_BOUNDS: BBox = [136.585109, -35.314486, 138.366868, -33.99099];
 
 interface LineFeatureProps {
   routeId: number;
-  routeType: string;
+  routeUsageType: LineTypes;
 }
 interface PointFeatureProps {
   name: string;
+  id: number;
 }
 
 const Map: React.FC = () => {
@@ -41,8 +46,6 @@ const Map: React.FC = () => {
     fetchPolicy: 'no-cache',
     // cache-first cache-and-network network-only cache-only no-cache standby
   });
-  const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
-  const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
   // in state prevents reloading on map changes
   const [initialBounds] = useState<BBox>(WTY_TRAIL_BOUNDS);
   const [transformedInitialBounds] = useState<
@@ -51,38 +54,45 @@ const Map: React.FC = () => {
     [WTY_TRAIL_BOUNDS[0], WTY_TRAIL_BOUNDS[1]],
     [WTY_TRAIL_BOUNDS[2], WTY_TRAIL_BOUNDS[3]],
   ]);
+  const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
   const [mapLoading, setMapLoading] = useState(true);
-  const geoJsonLines = (
-    lines: TrailGeometryQueryData,
-  ): FeatureCollection<LineString, LineFeatureProps> => ({
-    type: 'FeatureCollection',
-    features:
-      lines && lines.routes_by_pk && lines.routes_by_pk.line_routes
-        ? lines.routes_by_pk.line_routes.map(({ line }) => ({
-            type: 'Feature',
-            properties: {
-              routeId: line.line_routes[0].route_id,
-              routeType: line.line_types[0].type.name,
-            },
-            geometry: line.geom,
-          }))
-        : [],
-  });
-  const geoJsonPoints = (
-    points: TrailGeometryQueryData,
-  ): FeatureCollection<Point, PointFeatureProps> => ({
-    type: 'FeatureCollection',
-    features:
-      points && points.routes_by_pk && points.routes_by_pk.point_routes
-        ? points.routes_by_pk.point_routes.map(({ point }) => ({
-            type: 'Feature',
-            properties: {
-              name: point.name,
-            },
-            geometry: point.geom,
-          }))
-        : [],
-  });
+  const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
+
+  const transformLinesToFeatures = (
+    queryData: TrailGeometryQueryData,
+  ): Feature<LineString, LineFeatureProps>[] =>
+    queryData.routes_by_pk.line_routes.map(feature => ({
+      type: 'Feature',
+      properties: {
+        routeId: feature.line.line_routes.map(route => route.route_id)[0],
+        routeUsageType: feature.line.types
+          .map(({ type }) => type.name)
+          .filter(
+            name => name === 'bike' || name === 'walk' || name === 'shared',
+          )[0],
+      },
+      geometry: feature.line.geom,
+    }));
+
+  const transformPointsToFeatures = (
+    queryData: TrailGeometryQueryData,
+    type: PointTypes,
+  ): Feature<Point, PointFeatureProps>[] => {
+    console.log(queryData);
+    return queryData.routes_by_pk.point_routes
+      .filter(feature =>
+        feature.point.types.some(({ type: { name } }) => name === type),
+      )
+      .map(feature => ({
+        type: 'Feature',
+        properties: {
+          id: feature.point.id,
+          name: feature.point.name,
+        },
+        geometry: feature.point.geom,
+      }));
+  };
+
   // set map when component loads
   const onStyleLoad = (map: any) => {
     setMap(map);
@@ -129,7 +139,7 @@ const Map: React.FC = () => {
   const calculateExtent = (): BBox => {
     const bounds = bbox(
       featureCollection(
-        geoJsonLines(data!).features.filter(
+        transformLinesToFeatures(data!).filter(
           (feature: any) =>
             feature.properties.routeId === Trail.trailSection.id,
         ),
@@ -186,8 +196,13 @@ const Map: React.FC = () => {
             trailSection={Trail.trailSection}
             trailObject={Trail.trailObject}
             selectedFeature={selectedFeature()}
-            stagesData={geoJsonLines(data!)}
-            pointsData={geoJsonPoints(data!)}
+            stagesData={featureCollection(transformLinesToFeatures(data!))}
+            sheltersData={featureCollection(
+              transformPointsToFeatures(data!, 'shelter'),
+            )}
+            markersData={featureCollection(
+              transformPointsToFeatures(data!, 'marker'),
+            )}
           />
         )}
       </MapComponent>

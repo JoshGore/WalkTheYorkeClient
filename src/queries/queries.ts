@@ -105,10 +105,13 @@ export const TRAIL_GEOMETRY_QUERY = gql`
           name
           id
           geom
-          point_types {
+          types {
             type {
               name
             }
+          }
+          point_routes {
+            route_id
           }
         }
       }
@@ -116,14 +119,12 @@ export const TRAIL_GEOMETRY_QUERY = gql`
         line {
           id
           geom
-          line_types {
+          types {
             type {
               name
             }
           }
-          line_routes(
-            where: { route: { typeByType: { name: { _eq: "stage" } } } }
-          ) {
+          line_routes {
             route_id
           }
         }
@@ -132,33 +133,42 @@ export const TRAIL_GEOMETRY_QUERY = gql`
   }
 `;
 
+export type PointTypes = 'shelter' | 'marker' | 'toilet' | 'seat' | 'stile';
+export type LineTypes = 'walk' | 'bike' | 'shared';
+export interface TrailGeometryQueryPoint {
+  id: number;
+  name: string;
+  geom: any;
+  types: {
+    type: {
+      name: PointTypes;
+    };
+  }[];
+  point_routes: {
+    route_id: number;
+  };
+}
+
+export interface TrailGeometryQueryLine {
+  id: number;
+  geom: any;
+  types: {
+    type: {
+      name: LineTypes;
+    };
+  }[];
+  line_routes: {
+    route_id: number;
+  }[];
+}
+
 export interface TrailGeometryQueryData {
   routes_by_pk: {
     point_routes: {
-      point: {
-        id: number;
-        name: string;
-        geom: any;
-        point_types: {
-          type: {
-            name: string;
-          };
-        }[];
-      };
+      point: TrailGeometryQueryPoint;
     }[];
     line_routes: {
-      line: {
-        id: number;
-        geom: any;
-        line_types: {
-          type: {
-            name: 'walk' | 'bike' | 'shared';
-          };
-        }[];
-        line_routes: {
-          route_id: number;
-        }[];
-      };
+      line: TrailGeometryQueryLine;
     }[];
   };
 }
