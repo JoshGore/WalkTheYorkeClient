@@ -9,8 +9,10 @@ import { getMainDefinition } from 'apollo-utilities';
 import { OperationDefinitionNode } from 'graphql';
 
 // const httpUri = 'https://wty-dev-hasura.herokuapp.com/v1/graphql';
-const httpUri = 'https://wty-dev-hasura-2.herokuapp.com/v1/graphql';
-const wsUri = httpUri.replace(/^https?/, 'wss');
+// const httpUri = 'https://api.wty.joshgore.com.au:80/v1/graphql';
+const httpUri = 'http://api.wty.joshgore.com.au:80/v1/graphql';
+// const wsUri = httpUri.replace(/^https?/, 'wss');
+const wsUri = httpUri.replace(/^http?/, 'ws');
 
 const httpLink = new HttpLink({
   uri: httpUri,

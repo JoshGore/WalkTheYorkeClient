@@ -9,30 +9,23 @@ interface MapGeneralProps {
   trailSection: any;
   trailObject: any;
   selectedFeature: any;
-  stagesData: FeatureCollection;
-  sheltersData: FeatureCollection;
-  markersData: FeatureCollection;
 }
-const MapGeneral: React.FC<MapGeneralProps> = ({
-  stagesData,
-  sheltersData,
-  markersData,
-  selectedFeature,
-}) => {
-  React.useEffect(() => console.log(markersData.features.length));
+
+const WALKTHEYORKE_TILE_SERVER_SOURCE = {
+  type: 'vector',
+  tiles: [
+    'http://api.wty.joshgore.com.au:8000/maps/walktheyorke/{z}/{x}/{y}.vector.pbf?',
+  ],
+};
+
+const MapGeneral: React.FC<MapGeneralProps> = ({ selectedFeature }) => {
+  // React.useEffect(() => console.log(markersData.features.length));
+  // geoJsonSource={{ type: 'geojson', data: stagesData }}
   return (
     <>
       <Source
-        id="trail_line_all"
-        geoJsonSource={{ type: 'geojson', data: stagesData }}
-      />
-      <Source
-        id="trail_point_shelters"
-        geoJsonSource={{ type: 'geojson', data: sheltersData }}
-      />
-      <Source
-        id="trail_point_markers"
-        geoJsonSource={{ type: 'geojson', data: markersData }}
+        id="walktheyorke_tile_server"
+        tileJsonSource={WALKTHEYORKE_TILE_SERVER_SOURCE}
       />
       <Image
         id="custom-shelter-icon"
@@ -48,7 +41,8 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
       <Layer
         id="trail_shelters"
         type="symbol"
-        sourceId="trail_point_shelters"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_shelters"
         layout={{
           'icon-image': 'custom-shelter-icon',
           'icon-size': 0.8,
@@ -72,7 +66,8 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
       <Layer
         id="trail_markers"
         type="symbol"
-        sourceId="trail_point_markers"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_markers"
         layout={{
           'icon-image': 'custom-marker-icon',
           'icon-size': 0.06,
@@ -103,7 +98,8 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         id="trail_line_all_target"
         before="data-stack-placeholder"
         type="line"
-        sourceId="trail_line_all"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_stages"
         onMouseMove={(evt: any) => {
           evt.target.getCanvas().style.cursor = 'pointer';
         }}
@@ -119,7 +115,8 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         id="trail_line_all_highlight"
         before="trail_line_all_target"
         type="line"
-        sourceId="trail_line_all"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_stages"
         layout={{
           'line-join': 'round',
           'line-cap': 'round',
@@ -127,11 +124,11 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         paint={{
           'line-color': [
             'case',
-            ['match', ['get', 'routeUsageType'], ['', 'walk'], true, false],
+            ['match', ['get', 'use'], ['', 'walk'], true, false],
             'hsl(33, 100%, 64%)',
-            ['match', ['get', 'routeUsageType'], ['', 'bike'], true, false],
+            ['match', ['get', 'use'], ['', 'bike'], true, false],
             'hsl(0, 100%, 69%)',
-            ['match', ['get', 'routeUsageType'], ['', 'shared'], true, false],
+            ['match', ['get', 'use'], ['', 'shared'], true, false],
             'hsl(82, 100%, 41%)',
             'hsl(46, 98%, 30%)',
           ],
@@ -139,7 +136,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         }}
         filter={[
           'in',
-          'routeId',
+          'route_id',
           selectedFeature !== undefined &&
             selectedFeature.layer.id === 'trail_line_all_target' &&
             selectedFeature.properties.routeId,
@@ -149,7 +146,8 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         id="trail_line_all_highlight_case"
         before="trail_line_all_highlight"
         type="line"
-        sourceId="trail_line_all"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_stages"
         layout={{
           'line-join': 'round',
           'line-cap': 'round',
@@ -160,7 +158,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         }}
         filter={[
           'in',
-          'routeId',
+          'route_id',
           selectedFeature !== undefined &&
             selectedFeature.layer.id === 'trail_line_all_target' &&
             selectedFeature.properties.routeId,
@@ -170,7 +168,8 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         id="trail_line_all"
         before="trail_line_all_highlight_case"
         type="line"
-        sourceId="trail_line_all"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_stages"
         layout={{
           'line-join': 'round',
           'line-cap': 'round',
@@ -178,11 +177,11 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         paint={{
           'line-color': [
             'case',
-            ['match', ['get', 'routeUsageType'], ['', 'walk'], true, false],
+            ['match', ['get', 'use'], ['', 'walk'], true, false],
             'hsl(33, 100%, 64%)',
-            ['match', ['get', 'routeUsageType'], ['', 'bike'], true, false],
+            ['match', ['get', 'use'], ['', 'bike'], true, false],
             'hsl(0, 100%, 69%)',
-            ['match', ['get', 'routeUsageType'], ['', 'shared'], true, false],
+            ['match', ['get', 'use'], ['', 'shared'], true, false],
             'hsl(82, 100%, 41%)',
             'hsl(46, 98%, 30%)',
           ],
@@ -193,7 +192,8 @@ const MapGeneral: React.FC<MapGeneralProps> = ({
         id="trail_line_all_case"
         before="trail_line_all"
         type="line"
-        sourceId="trail_line_all"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_stages"
         layout={{
           'line-join': 'round',
           'line-cap': 'round',

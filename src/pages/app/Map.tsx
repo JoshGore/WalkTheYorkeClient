@@ -9,15 +9,7 @@ import { FeatureCollection, Feature, LineString, Point } from 'geojson';
 import MapGeneral from './map/MapGeneral';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import { TrailSectionProps, TrailObjectProps } from '../types';
-import {
-  TRAIL_GEOMETRY_QUERY,
-  TrailGeometryQueryVars,
-  TrailGeometryQueryData,
-  LineTypes,
-  PointTypes,
-  TrailGeometryQueryPoint,
-  TrailGeometryQueryLine,
-} from '../../queries/queries';
+import { LineTypes } from '../../queries/queries';
 
 const MapComponent = ReactMapboxGl({
   accessToken: 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A',
@@ -36,16 +28,16 @@ interface PointFeatureProps {
 
 const Map: React.FC = () => {
   const Trail = useContext<TrailContextProps>(TrailContext);
-  const { loading, error, data } = useQuery<
-    TrailGeometryQueryData,
-    TrailGeometryQueryVars
-  >(TRAIL_GEOMETRY_QUERY, {
-    partialRefetch: false,
-    returnPartialData: false,
-    variables: { trailId: 18 },
-    fetchPolicy: 'no-cache',
-    // cache-first cache-and-network network-only cache-only no-cache standby
-  });
+  const { loading, error, data } = useQuery(
+    gql`
+      {
+        routes_extent {
+          id
+          extent
+        }
+      }
+    `,
+  );
   // in state prevents reloading on map changes
   const [initialBounds] = useState<BBox>(WTY_TRAIL_BOUNDS);
   const [transformedInitialBounds] = useState<
@@ -57,41 +49,6 @@ const Map: React.FC = () => {
   const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
   const [mapLoading, setMapLoading] = useState(true);
   const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
-
-  const transformLinesToFeatures = (
-    queryData: TrailGeometryQueryData,
-  ): Feature<LineString, LineFeatureProps>[] =>
-    queryData.routes_by_pk.line_routes.map(feature => ({
-      type: 'Feature',
-      properties: {
-        routeId: feature.line.line_routes.map(route => route.route_id)[0],
-        routeUsageType: feature.line.types
-          .map(({ type }) => type.name)
-          .filter(
-            name => name === 'bike' || name === 'walk' || name === 'shared',
-          )[0],
-      },
-      geometry: feature.line.geom,
-    }));
-
-  const transformPointsToFeatures = (
-    queryData: TrailGeometryQueryData,
-    type: PointTypes,
-  ): Feature<Point, PointFeatureProps>[] => {
-    console.log(queryData);
-    return queryData.routes_by_pk.point_routes
-      .filter(feature =>
-        feature.point.types.some(({ type: { name } }) => name === type),
-      )
-      .map(feature => ({
-        type: 'Feature',
-        properties: {
-          id: feature.point.id,
-          name: feature.point.name,
-        },
-        geometry: feature.point.geom,
-      }));
-  };
 
   // set map when component loads
   const onStyleLoad = (map: any) => {
@@ -127,7 +84,7 @@ const Map: React.FC = () => {
           Trail.setTrailSection({
             ...Trail.trailSection,
             type: 'stage',
-            id: feature.properties!.routeId,
+            id: feature.properties!.route_id,
           });
         }
       } else {
@@ -137,18 +94,13 @@ const Map: React.FC = () => {
   }, [mapClickCoordinates]);
 
   const calculateExtent = (): BBox => {
-    const bounds = bbox(
-      featureCollection(
-        transformLinesToFeatures(data!).filter(
-          (feature: any) =>
-            feature.properties.routeId === Trail.trailSection.id,
-        ),
-      ),
+    return bbox(
+      loading
+        ? initialBounds
+        : data.routes_extent.find(
+            (route: any) => route.id === Trail.trailSection.id,
+          ).extent,
     );
-    if (bounds[0] === Infinity) {
-      return initialBounds;
-    }
-    return bounds;
   };
 
   const zoomPadding = () => (height > width ? height / 20 : width / 20);
@@ -191,20 +143,11 @@ const Map: React.FC = () => {
         style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
       >
         {/* sources for trail lines, short walk lines, day walk lines, hero walk lines */}
-        {!loading && !!data && (
-          <MapGeneral
-            trailSection={Trail.trailSection}
-            trailObject={Trail.trailObject}
-            selectedFeature={selectedFeature()}
-            stagesData={featureCollection(transformLinesToFeatures(data!))}
-            sheltersData={featureCollection(
-              transformPointsToFeatures(data!, 'shelter'),
-            )}
-            markersData={featureCollection(
-              transformPointsToFeatures(data!, 'marker'),
-            )}
-          />
-        )}
+        <MapGeneral
+          trailSection={Trail.trailSection}
+          trailObject={Trail.trailObject}
+          selectedFeature={selectedFeature()}
+        />
       </MapComponent>
     </>
   );
