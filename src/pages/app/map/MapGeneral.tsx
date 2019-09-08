@@ -14,7 +14,7 @@ interface MapGeneralProps {
 const WALKTHEYORKE_TILE_SERVER_SOURCE = {
   type: 'vector',
   tiles: [
-    'http://api.wty.joshgore.com.au:8000/maps/walktheyorke/{z}/{x}/{y}.vector.pbf?',
+    'https://api.wty.joshgore.com.au/maps/walktheyorke/{z}/{x}/{y}.vector.pbf?',
   ],
 };
 
