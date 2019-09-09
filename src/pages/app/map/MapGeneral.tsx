@@ -13,9 +13,7 @@ interface MapGeneralProps {
 
 const WALKTHEYORKE_TILE_SERVER_SOURCE = {
   type: 'vector',
-  tiles: [
-    'https://api.wty.joshgore.com.au/maps/walktheyorke/{z}/{x}/{y}.vector.pbf?',
-  ],
+  tiles: [process.env.REACT_APP_TILES_URL],
 };
 
 const MapGeneral: React.FC<MapGeneralProps> = ({ selectedFeature }) => {

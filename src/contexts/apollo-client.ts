@@ -8,7 +8,8 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { OperationDefinitionNode } from 'graphql';
 
-const httpUri = 'https://api.wty.joshgore.com.au/v1/graphql';
+const httpUri = process.env.REACT_APP_API_URL!;
+// const httpUri = 'https://api.wty.joshgore.com.au/v1/graphql';
 const wsUri = httpUri.replace(/^https?/, 'wss');
 
 const httpLink = new HttpLink({
