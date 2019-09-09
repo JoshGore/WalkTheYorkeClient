@@ -7,10 +7,11 @@ import TrailContext, {
   TrailContextProps,
 } from '../contexts/TrailContext';
 import CornerAvatar from './signupLogin/CornerAvatar';
-import RouteDetailQuery, {
+import {
+  RouteDetailQuery,
   RouteDetailQueryData,
   RouteDetailQueryVars,
-} from './app/RouteDetailQuery';
+} from '../queries/objectInfoQueries';
 import MenuBreadcrumbs from './app/MenuBreadcrumbs';
 
 const SignupLogin = loadable(() => import('./SignupLogin'));
@@ -29,9 +30,9 @@ interface BreadcrumbProps {
   ) => void;
 }
 
-const App: React.FC = () => {
+const TrailSection: React.FC = () => {
   const TrailSelections = useContext<TrailContextProps>(TrailContext);
-  const { loading: selectionInfoLoading, data: selectionInfo } = useQuery<
+  const { loading: sectionInfoLoading, data: sectionInfo } = useQuery<
     RouteDetailQueryData,
     RouteDetailQueryVars
   >(RouteDetailQuery, {
@@ -39,46 +40,115 @@ const App: React.FC = () => {
     skip: !TrailSelections.trailSection.id,
   });
   const id = () =>
-    !selectionInfoLoading ? selectionInfo!.routes_by_pk.id : undefined;
+    !sectionInfoLoading ? sectionInfo!.routes_by_pk.id : undefined;
   const name = () =>
-    !selectionInfoLoading ? selectionInfo!.routes_by_pk.title : undefined;
+    !sectionInfoLoading ? sectionInfo!.routes_by_pk.title : undefined;
   const shortName = () =>
-    !selectionInfoLoading ? selectionInfo!.routes_by_pk.short_title : undefined;
+    !sectionInfoLoading ? sectionInfo!.routes_by_pk.short_title : undefined;
   const type = () =>
-    !selectionInfoLoading
-      ? selectionInfo!.routes_by_pk.typeByType.name
-      : undefined;
+    !sectionInfoLoading ? sectionInfo!.routes_by_pk.typeByType.name : undefined;
   const body = () =>
-    !selectionInfoLoading ? selectionInfo!.routes_by_pk.body : undefined;
+    !sectionInfoLoading ? sectionInfo!.routes_by_pk.body : undefined;
   const multimedia = () =>
-    !selectionInfoLoading
-      ? selectionInfo!.routes_by_pk.route_multimedia
+    !sectionInfoLoading
+      ? sectionInfo!.routes_by_pk.route_multimedia
       : undefined;
   const files = () =>
-    !selectionInfoLoading ? selectionInfo!.routes_by_pk.route_files : undefined;
+    !sectionInfoLoading ? sectionInfo!.routes_by_pk.route_files : undefined;
   const count = () =>
-    !selectionInfoLoading
-      ? selectionInfo!.reviews_aggregate.aggregate.count
+    !sectionInfoLoading
+      ? sectionInfo!.reviews_aggregate.aggregate.count
       : undefined;
   const avgRating = () =>
-    !selectionInfoLoading
-      ? selectionInfo!.reviews_aggregate.aggregate.avg.rating
+    !sectionInfoLoading
+      ? sectionInfo!.reviews_aggregate.aggregate.avg.rating
       : undefined;
   const title = () => TrailSelections.trailSection.name;
 
   useEffect(() => {
-    if (!selectionInfoLoading && !!TrailSelections.trailSection.id) {
+    if (!sectionInfoLoading && !!TrailSelections.trailSection.id) {
       TrailSelections.setTrailSection({
         id: id(),
         name: name(),
         shortName: shortName(),
         type: type(),
       });
-    } else if (!selectionInfoLoading && !TrailSelections.trailSection.id) {
+    } else if (!sectionInfoLoading && !TrailSelections.trailSection.id) {
       TrailSelections.setTrailSection({ ...TrailSelections.trail });
     }
-  }, [selectionInfoLoading, TrailSelections.trailSection.id]);
+  }, [sectionInfoLoading, TrailSelections.trailSection.id]);
+  return (
+    <Body
+      loading={sectionInfoLoading}
+      title={title()}
+      body={body()}
+      multimedia={multimedia()}
+      files={files()}
+      count={count()}
+      avgRating={avgRating()}
+    />
+  );
+};
 
+const Point: React.FC = () => {
+  const TrailSelections = useContext<TrailContextProps>(TrailContext);
+  const { loading: pointInfoLoading, data: pointInfo } = useQuery<
+    RouteDetailQueryData,
+    RouteDetailQueryVars
+  >(RouteDetailQuery, {
+    variables: { id: TrailSelections.trailSection.id! },
+    skip: !TrailSelections.trailSection.id,
+  });
+  const id = () => (!pointInfoLoading ? pointInfo!.routes_by_pk.id : undefined);
+  const name = () =>
+    !pointInfoLoading ? pointInfo!.routes_by_pk.title : undefined;
+  const shortName = () =>
+    !pointInfoLoading ? pointInfo!.routes_by_pk.short_title : undefined;
+  const type = () =>
+    !pointInfoLoading ? pointInfo!.routes_by_pk.typeByType.name : undefined;
+  const body = () =>
+    !pointInfoLoading ? pointInfo!.routes_by_pk.body : undefined;
+  const multimedia = () =>
+    !pointInfoLoading ? pointInfo!.routes_by_pk.route_multimedia : undefined;
+  const files = () =>
+    !pointInfoLoading ? pointInfo!.routes_by_pk.route_files : undefined;
+  const count = () =>
+    !pointInfoLoading
+      ? pointInfo!.reviews_aggregate.aggregate.count
+      : undefined;
+  const avgRating = () =>
+    !pointInfoLoading
+      ? pointInfo!.reviews_aggregate.aggregate.avg.rating
+      : undefined;
+  const title = () => TrailSelections.trailSection.name;
+
+  useEffect(() => {
+    if (!pointInfoLoading && !!TrailSelections.trailSection.id) {
+      TrailSelections.setTrailSection({
+        id: id(),
+        name: name(),
+        shortName: shortName(),
+        type: type(),
+      });
+    } else if (!pointInfoLoading && !TrailSelections.trailSection.id) {
+      TrailSelections.setTrailSection({ ...TrailSelections.trail });
+    }
+  }, [pointInfoLoading, TrailSelections.trailSection.id]);
+  return (
+    <Body
+      loading={pointInfoLoading}
+      title={title()}
+      body={body()}
+      multimedia={multimedia()}
+      files={files()}
+      count={count()}
+      avgRating={avgRating()}
+    />
+  );
+};
+
+const App: React.FC = () => {
+  const TrailSelections = useContext<TrailContextProps>(TrailContext);
   const handleHomeLinkClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
@@ -94,17 +164,7 @@ const App: React.FC = () => {
           handleHomeLinkClick={handleHomeLinkClick}
         />
       }
-      body={
-        <Body
-          loading={selectionInfoLoading}
-          title={title()}
-          body={body()}
-          multimedia={multimedia()}
-          files={files()}
-          count={count()}
-          avgRating={avgRating()}
-        />
-      }
+      body={<TrailSection />}
       mainContent={
         <>
           <SignupLogin />

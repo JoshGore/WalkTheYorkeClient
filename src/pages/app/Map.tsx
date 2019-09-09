@@ -70,25 +70,65 @@ const Map: React.FC = () => {
     });
   };
   // query map when clicked
+  interface interactiveFeatureTypeIdProps {
+    type: 'stage' | 'shelter' | undefined;
+    id: number | undefined;
+  }
+
+  const interactiveFeatureTypeId = (
+    renderedFeatures: any,
+  ): interactiveFeatureTypeIdProps => {
+    const firstInteractive = renderedFeatures.find(
+      (feature: any) =>
+        feature.layer.id === 'trail_line_all_target' ||
+        feature.layer.id === 'trail_shelters',
+    );
+    console.log('returned feature is: ');
+    console.log(firstInteractive);
+    return {
+      type:
+        firstInteractive === undefined
+          ? undefined
+          : firstInteractive.layer.id === 'trail_shelters'
+          ? 'shelter'
+          : firstInteractive.layer.id === 'trail_line_all_target'
+          ? 'stage'
+          : undefined,
+      id:
+        firstInteractive === undefined
+          ? undefined
+          : firstInteractive.layer.id === 'trail_shelters'
+          ? firstInteractive.id
+          : firstInteractive.layer.id === 'trail_line_all_target'
+          ? firstInteractive.properties.route_id
+          : undefined,
+    };
+  };
   useEffect(() => {
     if (map) {
-      // check if interactive feature(s) returned at point based on layer id
-      const feature = map
-        .queryRenderedFeatures(mapClickCoordinates.point)
-        .filter(
-          (feature: any) => feature.layer.id === 'trail_line_all_target',
-        )[0];
-      if (feature) {
-        // if trail section selected and currently in all mode then update trailSection
-        if (feature.layer.id === 'trail_line_all_target') {
-          Trail.setTrailSection({
-            ...Trail.trailSection,
-            type: 'stage',
-            id: feature.properties!.route_id,
-          });
-        }
-      } else {
+      const firstInteractive = interactiveFeatureTypeId(
+        map.queryRenderedFeatures(mapClickCoordinates.point),
+      );
+      if (firstInteractive.type === undefined) {
         Trail.setTrailSection({ ...Trail.trail });
+        Trail.setTrailObject({
+          name: undefined,
+          shortName: undefined,
+          id: undefined,
+          type: undefined,
+        });
+      } else if (firstInteractive.type === 'stage') {
+        Trail.setTrailSection({
+          ...Trail.trailSection,
+          type: firstInteractive.type,
+          id: firstInteractive.id,
+        });
+      } else {
+        Trail.setTrailObject({
+          ...Trail.trailObject,
+          type: firstInteractive.type,
+          id: firstInteractive.id,
+        });
       }
     }
   }, [mapClickCoordinates]);
@@ -142,7 +182,6 @@ const Map: React.FC = () => {
         onClick={(map, evt) => mapClick(map, evt)}
         style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
       >
-        {/* sources for trail lines, short walk lines, day walk lines, hero walk lines */}
         <MapGeneral
           trailSection={Trail.trailSection}
           trailObject={Trail.trailObject}

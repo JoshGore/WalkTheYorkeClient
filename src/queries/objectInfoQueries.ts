@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { TrailEntityTypes } from '../../contexts/TrailContext';
+import { TrailEntityTypes } from '../contexts/TrailContext';
 
 interface Multimedium {
   multimedium: {
@@ -43,7 +43,7 @@ export interface RouteDetailQueryVars {
   id: number;
 }
 
-const RouteDetailQuery = gql`
+export const RouteDetailQuery = gql`
   query($id: Int!) {
     routes_by_pk(id: $id) {
       id
@@ -79,4 +79,64 @@ const RouteDetailQuery = gql`
   }
 `;
 
-export default RouteDetailQuery;
+export interface PointDetailQueryVars {
+  id: number;
+}
+
+export interface PointDetailQueryData {
+  routes_by_pk: {
+    id: number;
+    short_title: string;
+    title: string;
+    body: string;
+    typeByType: {
+      name: TrailEntityTypes;
+    };
+    route_multimedia: Multimedium[];
+    route_files: File[];
+  };
+  reviews_aggregate: {
+    aggregate: {
+      avg: {
+        rating: number;
+      };
+      count: number;
+    };
+  };
+}
+
+export const PointDetailQuery = gql`
+  query($id: Int!) {
+    routes_by_pk(id: $id) {
+      id
+      short_title
+      title
+      body
+      typeByType {
+        name
+      }
+      route_multimedia {
+        multimedium {
+          id
+          name
+          link
+        }
+      }
+      route_files {
+        file {
+          id
+          name
+          link
+        }
+      }
+    }
+    reviews_aggregate(where: { route_review: { route_id: { _eq: $id } } }) {
+      aggregate {
+        avg {
+          rating
+        }
+        count
+      }
+    }
+  }
+`;

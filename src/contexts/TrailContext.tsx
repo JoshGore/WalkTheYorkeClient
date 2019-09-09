@@ -1,6 +1,12 @@
 import React from 'react';
 
-export type TrailEntityTypes = 'trail' | 'stage' | 'short' | undefined;
+// export type TrailEntityTypes = 'trail' | 'stage' | 'short' | undefined;
+export type TrailEntityTypes =
+  | 'trail'
+  | 'stage'
+  | 'short'
+  | 'shelter'
+  | undefined;
 
 export interface TrailEntityProps {
   name: string | undefined;
