@@ -11,11 +11,14 @@ import {
   RouteDetailQuery,
   RouteDetailQueryData,
   RouteDetailQueryVars,
+  PointDetailQuery,
+  PointDetailQueryData,
+  PointDetailQueryVars,
 } from '../queries/objectInfoQueries';
 import MenuBreadcrumbs from './app/MenuBreadcrumbs';
 
 const SignupLogin = loadable(() => import('./SignupLogin'));
-const Body = loadable(() => import('./app/Body'));
+const RouteBody = loadable(() => import('./app/RouteBody'));
 const Map = loadable(() => import('./app/Map'));
 
 interface LoadingOrTextProps {
@@ -78,7 +81,7 @@ const TrailSection: React.FC = () => {
     }
   }, [sectionInfoLoading, TrailSelections.trailSection.id]);
   return (
-    <Body
+    <RouteBody
       loading={sectionInfoLoading}
       title={title()}
       body={body()}
@@ -93,57 +96,42 @@ const TrailSection: React.FC = () => {
 const Point: React.FC = () => {
   const TrailSelections = useContext<TrailContextProps>(TrailContext);
   const { loading: pointInfoLoading, data: pointInfo } = useQuery<
-    RouteDetailQueryData,
-    RouteDetailQueryVars
-  >(RouteDetailQuery, {
+    PointDetailQueryData,
+    PointDetailQueryVars
+  >(PointDetailQuery, {
     variables: { id: TrailSelections.trailSection.id! },
     skip: !TrailSelections.trailSection.id,
   });
-  const id = () => (!pointInfoLoading ? pointInfo!.routes_by_pk.id : undefined);
+  const id = () => (!pointInfoLoading ? pointInfo!.points_by_pk.id : undefined);
   const name = () =>
-    !pointInfoLoading ? pointInfo!.routes_by_pk.title : undefined;
-  const shortName = () =>
-    !pointInfoLoading ? pointInfo!.routes_by_pk.short_title : undefined;
+    !pointInfoLoading ? pointInfo!.points_by_pk.name : undefined;
   const type = () =>
-    !pointInfoLoading ? pointInfo!.routes_by_pk.typeByType.name : undefined;
+    !pointInfoLoading ? pointInfo!.points_by_pk.types[0].type.name : undefined;
   const body = () =>
-    !pointInfoLoading ? pointInfo!.routes_by_pk.body : undefined;
-  const multimedia = () =>
-    !pointInfoLoading ? pointInfo!.routes_by_pk.route_multimedia : undefined;
-  const files = () =>
-    !pointInfoLoading ? pointInfo!.routes_by_pk.route_files : undefined;
-  const count = () =>
-    !pointInfoLoading
-      ? pointInfo!.reviews_aggregate.aggregate.count
-      : undefined;
-  const avgRating = () =>
-    !pointInfoLoading
-      ? pointInfo!.reviews_aggregate.aggregate.avg.rating
-      : undefined;
-  const title = () => TrailSelections.trailSection.name;
+    !pointInfoLoading ? pointInfo!.points_by_pk.description : undefined;
 
   useEffect(() => {
     if (!pointInfoLoading && !!TrailSelections.trailSection.id) {
-      TrailSelections.setTrailSection({
+      TrailSelections.setTrailObject({
         id: id(),
         name: name(),
-        shortName: shortName(),
+        shortName: name(),
         type: type(),
       });
     } else if (!pointInfoLoading && !TrailSelections.trailSection.id) {
-      TrailSelections.setTrailSection({ ...TrailSelections.trail });
+      TrailSelections.setTrailObject({
+        name: undefined,
+        shortName: undefined,
+        id: undefined,
+        type: undefined,
+      });
     }
   }, [pointInfoLoading, TrailSelections.trailSection.id]);
   return (
-    <Body
-      loading={pointInfoLoading}
-      title={title()}
-      body={body()}
-      multimedia={multimedia()}
-      files={files()}
-      count={count()}
-      avgRating={avgRating()}
-    />
+    <div>
+      {!pointInfoLoading && <h4>{`${name()} ${type()}`}</h4>}
+      {!pointInfoLoading && <p>{body()}</p>}
+    </div>
   );
 };
 
@@ -155,6 +143,18 @@ const App: React.FC = () => {
     event.preventDefault();
     TrailSelections.setTrailSection({ ...TrailSelections.trail });
   };
+  const getCorrectBody = (currentTrailObject: TrailEntityProps) => {
+    if (
+      currentTrailObject.type === 'trail' ||
+      currentTrailObject.type === 'stage'
+    ) {
+      return <TrailSection />;
+    }
+    if (currentTrailObject.type === 'shelter') {
+      return <Point />;
+    }
+    return <></>;
+  };
 
   return (
     <MenuContainer
@@ -164,7 +164,7 @@ const App: React.FC = () => {
           handleHomeLinkClick={handleHomeLinkClick}
         />
       }
-      body={<TrailSection />}
+      body={getCorrectBody(TrailSelections.currentTrailObject())}
       mainContent={
         <>
           <SignupLogin />

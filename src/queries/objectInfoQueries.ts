@@ -84,58 +84,28 @@ export interface PointDetailQueryVars {
 }
 
 export interface PointDetailQueryData {
-  routes_by_pk: {
+  points_by_pk: {
     id: number;
-    short_title: string;
-    title: string;
-    body: string;
-    typeByType: {
-      name: TrailEntityTypes;
-    };
-    route_multimedia: Multimedium[];
-    route_files: File[];
-  };
-  reviews_aggregate: {
-    aggregate: {
-      avg: {
-        rating: number;
+    name: string;
+    description: string;
+    types: {
+      type: {
+        name: 'shelter';
       };
-      count: number;
-    };
+    }[];
   };
 }
 
 export const PointDetailQuery = gql`
   query($id: Int!) {
-    routes_by_pk(id: $id) {
+    points_by_pk(id: $id) {
       id
-      short_title
-      title
-      body
-      typeByType {
-        name
-      }
-      route_multimedia {
-        multimedium {
-          id
+      name
+      description
+      types {
+        type {
           name
-          link
         }
-      }
-      route_files {
-        file {
-          id
-          name
-          link
-        }
-      }
-    }
-    reviews_aggregate(where: { route_review: { route_id: { _eq: $id } } }) {
-      aggregate {
-        avg {
-          rating
-        }
-        count
       }
     }
   }

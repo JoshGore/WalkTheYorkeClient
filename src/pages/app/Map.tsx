@@ -83,8 +83,6 @@ const Map: React.FC = () => {
         feature.layer.id === 'trail_line_all_target' ||
         feature.layer.id === 'trail_shelters',
     );
-    console.log('returned feature is: ');
-    console.log(firstInteractive);
     return {
       type:
         firstInteractive === undefined
@@ -118,6 +116,12 @@ const Map: React.FC = () => {
           type: undefined,
         });
       } else if (firstInteractive.type === 'stage') {
+        Trail.setTrailObject({
+          name: undefined,
+          shortName: undefined,
+          id: undefined,
+          type: undefined,
+        });
         Trail.setTrailSection({
           ...Trail.trailSection,
           type: firstInteractive.type,
