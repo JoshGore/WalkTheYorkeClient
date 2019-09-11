@@ -17,12 +17,10 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import UserContext, { UserContextProps } from '../../contexts/UserContext';
-// Typography for title
-// useQuery
 // dropdown
 // text form
 // cancel button
-// contact details
+// contact details - currently linkes to and requires user.
 const SUBMIT_USER_POINT = gql`
   mutation(
     $typeId: Int!
@@ -122,7 +120,6 @@ const NewPointMenu: React.FC = () => {
       .types.map(({ type }: any) => type);
   };
   const [description, setDescription] = useState('');
-  // issue newFeature
   const title = () =>
     Trail.newTrailPoint.type === 'issue'
       ? 'Submit Issue'
