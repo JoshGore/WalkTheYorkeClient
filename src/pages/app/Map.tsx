@@ -1,15 +1,31 @@
 import React, { useState, useEffect, useContext } from 'react';
-import ReactMapboxGl from 'react-mapbox-gl';
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import ReactResizeDetector from 'react-resize-detector';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { BBox, featureCollection } from '@turf/helpers';
-import { FeatureCollection, Feature, LineString, Point } from 'geojson';
 import MapGeneral from './map/MapGeneral';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import { TrailSectionProps, TrailObjectProps } from '../types';
 import { LineTypes } from '../../queries/queries';
+
+const Issue: React.FC<{ coordinates: [number, number] }> = ({
+  coordinates,
+}) => (
+  <Layer
+    id="issue"
+    type="circle"
+    paint={{
+      'circle-radius': 8,
+      'circle-color': 'red',
+      'circle-stroke-width': 3,
+      'circle-stroke-color': 'white',
+    }}
+  >
+    <Feature coordinates={coordinates} />
+  </Layer>
+);
 
 const MapComponent = ReactMapboxGl({
   accessToken: 'pk.eyJ1Ijoiam9zaGciLCJhIjoiTFBBaE1JOCJ9.-BaGpeSYz4yPrpxh1eqT2A',
@@ -28,7 +44,14 @@ interface PointFeatureProps {
 
 const Map: React.FC = () => {
   const Trail = useContext<TrailContextProps>(TrailContext);
-  const { loading, error, data } = useQuery(
+
+  interface ExtentQueryProps {
+    routes_extent: {
+      id: number;
+      extent: any;
+    }[];
+  }
+  const { loading, error, data } = useQuery<ExtentQueryProps>(
     gql`
       {
         routes_extent {
@@ -47,29 +70,81 @@ const Map: React.FC = () => {
     [WTY_TRAIL_BOUNDS[2], WTY_TRAIL_BOUNDS[3]],
   ]);
   const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
-  const [mapLoading, setMapLoading] = useState(true);
-  const [mapClickCoordinates, setMapClickCoordinates] = useState<any>({});
+  const [issueCoordinates, setIssueCoordinates] = useState<
+    [number, number] | undefined
+  >(undefined);
 
-  // set map when component loads
-  const onStyleLoad = (map: any) => {
+  const onStyleLoad = (map: mapboxgl.Map) => {
     setMap(map);
-    setMapLoading(false);
   };
-  // handle map click/tap events
-  const [height, setHeight] = useState(0);
-  const [width, setWidth] = useState(0);
+  const [mapDimensions, setMapDimensions] = useState({ width: 0, height: 0 });
   const handleResize = (height: number, width: number) => {
-    setHeight(height);
-    setWidth(width);
+    setMapDimensions({ height, width });
     map && map.resize();
   };
-  const mapClick = (map: any, evt: any) => {
-    setMapClickCoordinates({
-      point: [evt.point.x, evt.point.y],
-      lngLat: evt.lngLat,
-    });
+
+  const updateTrailContextFromClickedPoint = (
+    map: any,
+    mapClickCoordinates: any,
+  ) => {
+    const firstInteractive = interactiveFeatureTypeId(
+      map.queryRenderedFeatures(mapClickCoordinates.point),
+    );
+    const undefinedProperties = {
+      name: undefined,
+      shortName: undefined,
+      id: undefined,
+      type: undefined,
+    };
+    if (firstInteractive.type === undefined) {
+      Trail.setTrailSection({ ...Trail.trail });
+      Trail.setTrailObject(undefinedProperties);
+    } else if (firstInteractive.type === 'stage') {
+      Trail.setTrailObject(undefinedProperties);
+      Trail.setTrailSection({
+        ...Trail.trailSection,
+        type: firstInteractive.type,
+        id: firstInteractive.id,
+      });
+    } else {
+      Trail.setTrailObject({
+        ...Trail.trailObject,
+        type: firstInteractive.type,
+        id: firstInteractive.id,
+      });
+    }
   };
-  // query map when clicked
+
+  const mapClick = (map: any, evt: any) => {
+    updateTrailContextFromClickedPoint(map, {
+      point: [evt.point.x, evt.point.y],
+      lngLat: [evt.lngLat.lng, evt.lngLat.lat],
+    });
+    setIssueCoordinates([evt.lngLat.lng, evt.lngLat.lat]);
+  };
+
+  const mapLayerTypes: any = {
+    trail_shelters: {
+      type: 'shelter',
+      id: (feature: any) => feature.layer.id,
+    },
+    trail_line_all_target: {
+      type: 'stage',
+      id: (feature: any) => feature.properties.route_id,
+    },
+  };
+
+  const featureType = (feature: any) =>
+    feature && feature.layer && mapLayerTypes[feature.layer.id].type;
+
+  const featureId = (feature: any) =>
+    feature && feature.layer && mapLayerTypes[feature.layer.id].id(feature);
+
+  const firstInteractiveFeature = (renderedFeatures: any) =>
+    renderedFeatures.find((feature: any) =>
+      Object.hasOwnProperty.call(mapLayerTypes, feature.layer.id),
+    );
+
   interface interactiveFeatureTypeIdProps {
     type: 'stage' | 'shelter' | undefined;
     id: number | undefined;
@@ -78,98 +153,48 @@ const Map: React.FC = () => {
   const interactiveFeatureTypeId = (
     renderedFeatures: any,
   ): interactiveFeatureTypeIdProps => {
-    const firstInteractive = renderedFeatures.find(
-      (feature: any) =>
-        feature.layer.id === 'trail_line_all_target' ||
-        feature.layer.id === 'trail_shelters',
-    );
     return {
-      type:
-        firstInteractive === undefined
-          ? undefined
-          : firstInteractive.layer.id === 'trail_shelters'
-          ? 'shelter'
-          : firstInteractive.layer.id === 'trail_line_all_target'
-          ? 'stage'
-          : undefined,
-      id:
-        firstInteractive === undefined
-          ? undefined
-          : firstInteractive.layer.id === 'trail_shelters'
-          ? firstInteractive.id
-          : firstInteractive.layer.id === 'trail_line_all_target'
-          ? firstInteractive.properties.route_id
-          : undefined,
+      type: featureType(firstInteractiveFeature(renderedFeatures)),
+      id: featureId(firstInteractiveFeature(renderedFeatures)),
     };
   };
-  useEffect(() => {
-    if (map) {
-      const firstInteractive = interactiveFeatureTypeId(
-        map.queryRenderedFeatures(mapClickCoordinates.point),
-      );
-      if (firstInteractive.type === undefined) {
-        Trail.setTrailSection({ ...Trail.trail });
-        Trail.setTrailObject({
-          name: undefined,
-          shortName: undefined,
-          id: undefined,
-          type: undefined,
-        });
-      } else if (firstInteractive.type === 'stage') {
-        Trail.setTrailObject({
-          name: undefined,
-          shortName: undefined,
-          id: undefined,
-          type: undefined,
-        });
-        Trail.setTrailSection({
-          ...Trail.trailSection,
-          type: firstInteractive.type,
-          id: firstInteractive.id,
-        });
-      } else {
-        Trail.setTrailObject({
-          ...Trail.trailObject,
-          type: firstInteractive.type,
-          id: firstInteractive.id,
-        });
-      }
-    }
-  }, [mapClickCoordinates]);
+
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  const findExtentById = ({ routes_extent }: ExtentQueryProps) =>
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    routes_extent.find((route: any) => route.id === Trail.trailSection.id)!
+      .extent;
 
   const calculateExtent = (): BBox => {
     return bbox(
-      loading
+      loading || Trail.trailSection.id === undefined
         ? initialBounds
-        : data.routes_extent.find(
-            (route: any) => route.id === Trail.trailSection.id,
-          ).extent,
+        : findExtentById(data!),
     );
   };
 
-  const zoomPadding = () => (height > width ? height / 20 : width / 20);
+  const dimensionsArePortrait = (dimensions: {
+    height: number;
+    width: number;
+  }) => dimensions.height > dimensions.width;
+
+  const selectionExtentPadding = () =>
+    dimensionsArePortrait(mapDimensions)
+      ? mapDimensions.height / 20
+      : mapDimensions.width / 20;
 
   const zoomToExtent = () => {
     map!.fitBounds(calculateExtent() as mapboxgl.LngLatBoundsLike, {
-      padding: zoomPadding(),
+      padding: selectionExtentPadding(),
     });
   };
+
   useEffect(() => {
-    if (map && !mapLoading && !loading) {
+    if (map && !loading) {
       zoomToExtent();
     }
-  }, [Trail.trailSection.id, Trail.trailSection.type, mapLoading, loading]);
-  const selectedFeature = () =>
-    Trail.currentTrailObject().type === 'stage'
-      ? {
-          layer: {
-            id: 'trail_line_all_target',
-          },
-          properties: {
-            routeId: Trail.currentTrailObject().id,
-          },
-        }
-      : undefined;
+  }, [Trail.trailSection.id, Trail.trailSection.type, loading]);
+
   return (
     <>
       <ReactResizeDetector
@@ -186,10 +211,11 @@ const Map: React.FC = () => {
         onClick={(map, evt) => mapClick(map, evt)}
         style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
       >
+        {issueCoordinates && <Issue coordinates={issueCoordinates} />}
         <MapGeneral
           trailSection={Trail.trailSection}
           trailObject={Trail.trailObject}
-          selectedFeature={selectedFeature()}
+          selectedFeature={Trail.currentTrailObject()}
         />
       </MapComponent>
     </>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Source, Layer, Image } from 'react-mapbox-gl';
-import { FeatureCollection } from 'geojson';
+import { TrailEntityProps } from '../../../contexts/TrailContext';
 // import shelter from './icons/custom-shelter-15.png';
 const shelter = require('./icons/custom-shelter-15.png');
 const marker = require('./icons/custom-trail-sign.png');
@@ -8,7 +8,7 @@ const marker = require('./icons/custom-trail-sign.png');
 interface MapGeneralProps {
   trailSection: any;
   trailObject: any;
-  selectedFeature: any;
+  selectedFeature: TrailEntityProps;
 }
 
 const WALKTHEYORKE_TILE_SERVER_SOURCE = {
@@ -17,8 +17,17 @@ const WALKTHEYORKE_TILE_SERVER_SOURCE = {
 };
 
 const MapGeneral: React.FC<MapGeneralProps> = ({ selectedFeature }) => {
-  // React.useEffect(() => console.log(markersData.features.length));
-  // geoJsonSource={{ type: 'geojson', data: stagesData }}
+  const selectedFeatureLayerId = () =>
+    selectedFeature.type === 'stage'
+      ? {
+          layer: {
+            id: 'trail_line_all_target',
+          },
+          properties: {
+            routeId: selectedFeature.id,
+          },
+        }
+      : undefined;
   return (
     <>
       <Source
@@ -135,9 +144,9 @@ const MapGeneral: React.FC<MapGeneralProps> = ({ selectedFeature }) => {
         filter={[
           'in',
           'route_id',
-          selectedFeature !== undefined &&
-            selectedFeature.layer.id === 'trail_line_all_target' &&
-            selectedFeature.properties.routeId,
+          selectedFeatureLayerId() !== undefined &&
+            selectedFeatureLayerId()!.layer.id === 'trail_line_all_target' &&
+            selectedFeatureLayerId()!.properties.routeId,
         ]}
       />
       <Layer
@@ -157,9 +166,9 @@ const MapGeneral: React.FC<MapGeneralProps> = ({ selectedFeature }) => {
         filter={[
           'in',
           'route_id',
-          selectedFeature !== undefined &&
-            selectedFeature.layer.id === 'trail_line_all_target' &&
-            selectedFeature.properties.routeId,
+          selectedFeatureLayerId() !== undefined &&
+            selectedFeatureLayerId()!.layer.id === 'trail_line_all_target' &&
+            selectedFeatureLayerId()!.properties.routeId,
         ]}
       />
       <Layer

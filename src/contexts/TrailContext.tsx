@@ -6,6 +6,7 @@ export type TrailEntityTypes =
   | 'stage'
   | 'short'
   | 'shelter'
+  | 'issue'
   | undefined;
 
 export interface TrailEntityProps {
