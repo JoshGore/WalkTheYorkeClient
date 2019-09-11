@@ -70,9 +70,11 @@ const Map: React.FC = () => {
     [WTY_TRAIL_BOUNDS[2], WTY_TRAIL_BOUNDS[3]],
   ]);
   const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
+  /*
   const [issueCoordinates, setIssueCoordinates] = useState<
     [number, number] | undefined
   >(undefined);
+   */
 
   interface MapClickCoordinatesProps {
     point: [number, number];
@@ -128,7 +130,10 @@ const Map: React.FC = () => {
     };
     if (mapClickCoordinates !== undefined) {
       if (Trail.newTrailPoint.type !== undefined) {
-        setIssueCoordinates(mapClickCoordinates.lngLat);
+        Trail.setNewTrailPoint({
+          ...Trail.newTrailPoint,
+          point: mapClickCoordinates.lngLat,
+        });
       } else {
         updateTrailContextFromClickedPoint(map, mapClickCoordinates.point);
       }
@@ -230,7 +235,9 @@ const Map: React.FC = () => {
         onClick={mapClick}
         style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
       >
-        {issueCoordinates && <Issue coordinates={issueCoordinates} />}
+        {Trail.newTrailPoint.point && (
+          <Issue coordinates={Trail.newTrailPoint.point} />
+        )}
         <MapGeneral
           trailSection={Trail.trailSection}
           trailObject={Trail.trailObject}

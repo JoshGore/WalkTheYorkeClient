@@ -163,10 +163,8 @@ const NewPointMenu: React.FC = () => {
         userId: User.userId,
         description,
         geom: {
-          point: {
-            type: 'Point',
-            coordinates: Trail.newTrailPoint.point,
-          },
+          type: 'Point',
+          coordinates: Trail.newTrailPoint.point,
         },
       },
     });
