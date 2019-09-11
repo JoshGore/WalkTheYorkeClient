@@ -1,12 +1,12 @@
 import React from 'react';
 
-// export type TrailEntityTypes = 'trail' | 'stage' | 'short' | undefined;
 export type TrailEntityTypes =
   | 'trail'
   | 'stage'
   | 'short'
   | 'shelter'
   | 'issue'
+  | 'newFeature'
   | undefined;
 
 export interface TrailEntityProps {
@@ -19,8 +19,9 @@ export interface TrailEntityProps {
 export interface NewTrailPointProps {
   name: string | undefined;
   description: string | undefined;
-  type: 'issue' | undefined;
-  issueType: 'hazard' | 'missing' | 'damage' | undefined;
+  type: 'issue' | 'newFeature' | undefined;
+  // subType: 'hazard' | 'missing' | 'damage' | undefined;
+  subType: string | undefined;
   point: [number, number] | undefined;
 }
 
@@ -59,7 +60,7 @@ const newTrailPoint = {
   name: undefined,
   description: undefined,
   type: undefined,
-  issueType: undefined,
+  subType: undefined,
   point: undefined,
 };
 const setNewTrailPoint = () => {};

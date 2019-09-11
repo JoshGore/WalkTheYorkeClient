@@ -30,7 +30,7 @@ const TrailProvider: React.FC = ({ children }) => {
 
   const [newTrailPoint, setNewTrailPoint] = useState<NewTrailPointProps>({
     type: undefined,
-    issueType: undefined,
+    subType: undefined,
     point: undefined,
     name: undefined,
     description: undefined,

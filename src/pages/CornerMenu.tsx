@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import {
   makeStyles,
   createStyles,
-  Theme,
   IconButton,
   Avatar,
 } from '@material-ui/core';
@@ -15,7 +14,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import UserContext, { UserContextProps } from '../contexts/UserContext';
 import TrailContext, { TrailContextProps } from '../contexts/TrailContext';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     container: {
       position: 'absolute',
@@ -24,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: 99,
     },
     button: {
-      margin: 4,
       boxShadow: '4px 4px 10px -5px rgba(0,0,0,0.75)',
       padding: 0,
     },
@@ -47,15 +45,21 @@ const CornerMenu: React.FC = () => {
     User.setLoginMenuOpen(!User.loginMenuOpen);
   };
   const [dialOpen, setDialOpen] = useState(false);
-  const handleDialClick = () => setDialOpen(!dialOpen);
-  const handleIssueClick = () => {
-    console.log('handling issue click');
-    Trail.setNewTrailPoint({ ...Trail.newTrailPoint, type: 'issue' });
-    console.log(Trail.newTrailPoint);
+  const toggleDialMenu = () => setDialOpen(!dialOpen);
+  const setSubmissionMode = (
+    type: 'issue' | 'newFeature',
+    subType: string | undefined,
+  ) => {
+    Trail.setNewTrailPoint({
+      ...Trail.newTrailPoint,
+      type,
+      subType,
+    });
+    toggleDialMenu();
   };
   return (
     <div className={classes.container}>
-      <div style={{ display: 'inline-block', marginTop: 0 }}>
+      <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
         <IconButton className={classes.button} onClick={handleLoginToggle}>
           <Avatar
             style={{ height: 56, width: 56 }}
@@ -69,17 +73,31 @@ const CornerMenu: React.FC = () => {
           </Avatar>
         </IconButton>
       </div>
-      <div style={{ display: 'inline-block', marginTop: 0 }}>
+      <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
         <SpeedDial
           icon={<SpeedDialIcon />}
           ariaLabel="map actions"
           open={dialOpen}
-          onClick={handleDialClick}
+          onClick={toggleDialMenu}
           direction="down"
         >
           <SpeedDialAction
-            onClick={handleIssueClick}
             icon={<BugReportIcon />}
+            tooltipTitle="Add Asset"
+            tooltipOpen
+            onClick={() => setSubmissionMode('newFeature', undefined)}
+          />
+          <SpeedDialAction
+            onClick={() => setSubmissionMode('issue', 'damage')}
+            icon={<BugReportIcon />}
+            tooltipTitle="Report Damage"
+            tooltipOpen
+          />
+          <SpeedDialAction
+            onClick={() => setSubmissionMode('issue', 'hazard')}
+            icon={<BugReportIcon />}
+            tooltipTitle="Report Hazard"
+            tooltipOpen
           />
         </SpeedDial>
       </div>
