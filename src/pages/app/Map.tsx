@@ -145,7 +145,7 @@ const Map: React.FC = () => {
   const mapLayerTypes: any = {
     trail_shelters: {
       type: 'shelter',
-      id: (feature: any) => feature.layer.id,
+      id: (feature: any) => feature.id,
     },
     trail_line_all_target: {
       type: 'stage',
