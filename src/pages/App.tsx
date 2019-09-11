@@ -18,6 +18,7 @@ import {
 } from '../queries/objectInfoQueries';
 import TrailSectionDetails from './app/TrailSectionDetails';
 import PointDetails from './app/PointDetails';
+import NewPointMenu from './app/NewPointMenu';
 import MenuBreadcrumbs from './app/MenuBreadcrumbs';
 
 const SignupLogin = loadable(() => import('./SignupLogin'));
@@ -46,6 +47,12 @@ const App: React.FC = () => {
   const bodyFromSelection = (
     currentTrailObject: TrailEntityProps | NewTrailPointProps,
   ) => {
+    if (
+      currentTrailObject.type === 'issue' ||
+      currentTrailObject.type === 'newFeature'
+    ) {
+      return <NewPointMenu />;
+    }
     if (
       currentTrailObject.type === 'trail' ||
       currentTrailObject.type === 'stage'

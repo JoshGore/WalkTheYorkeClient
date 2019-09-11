@@ -32,15 +32,18 @@ const TrailProvider: React.FC = ({ children }) => {
     type: undefined,
     subType: undefined,
     point: undefined,
-    name: undefined,
-    description: undefined,
+    // name: undefined,
+    // description: undefined,
   });
 
-  const currentTrailObject = (): TrailEntityProps => {
-    if (trailObject.id === undefined) {
-      return trailSection;
+  const currentTrailObject = (): TrailEntityProps | NewTrailPointProps => {
+    if (newTrailPoint.type !== undefined) {
+      return newTrailPoint;
     }
-    return trailObject;
+    if (trailObject.id !== undefined) {
+      return trailObject;
+    }
+    return trailSection;
   };
 
   return (

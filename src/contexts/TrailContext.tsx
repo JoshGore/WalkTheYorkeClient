@@ -17,8 +17,8 @@ export interface TrailEntityProps {
 }
 
 export interface NewTrailPointProps {
-  name: string | undefined;
-  description: string | undefined;
+  // name: string | undefined;
+  // description: string | undefined;
   type: 'issue' | 'newFeature' | undefined;
   // subType: 'hazard' | 'missing' | 'damage' | undefined;
   subType: string | undefined;
@@ -57,8 +57,8 @@ const trailObject = {
   type: undefined,
 };
 const newTrailPoint = {
-  name: undefined,
-  description: undefined,
+  // name: undefined,
+  // description: undefined,
   type: undefined,
   subType: undefined,
   point: undefined,
@@ -70,7 +70,7 @@ const currentTrailObject = (): TrailEntityProps | NewTrailPointProps => {
     return newTrailPoint;
   }
   if (trailObject.id !== undefined) {
-    return trailSection;
+    return trailObject;
   }
   return trailSection;
 };

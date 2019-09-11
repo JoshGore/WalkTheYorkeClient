@@ -50,12 +50,14 @@ const CornerMenu: React.FC = () => {
     type: 'issue' | 'newFeature',
     subType: string | undefined,
   ) => {
-    Trail.setNewTrailPoint({
-      ...Trail.newTrailPoint,
-      type,
-      subType,
-    });
-    toggleDialMenu();
+    if (!Trail.newTrailPoint.type) {
+      Trail.setNewTrailPoint({
+        ...Trail.newTrailPoint,
+        type,
+        subType,
+      });
+      toggleDialMenu();
+    }
   };
   return (
     <div className={classes.container}>
