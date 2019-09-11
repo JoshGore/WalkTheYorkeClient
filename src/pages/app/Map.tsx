@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { BBox, featureCollection } from '@turf/helpers';
-import MapGeneral from './map/MapGeneral';
+import MapLayers from './map/MapLayers';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import { TrailSectionProps, TrailObjectProps } from '../types';
 import { LineTypes } from '../../queries/queries';
@@ -61,6 +61,7 @@ const Map: React.FC = () => {
       }
     `,
   );
+
   // in state prevents reloading on map changes
   const [initialBounds] = useState<BBox>(WTY_TRAIL_BOUNDS);
   const [transformedInitialBounds] = useState<
@@ -70,11 +71,6 @@ const Map: React.FC = () => {
     [WTY_TRAIL_BOUNDS[2], WTY_TRAIL_BOUNDS[3]],
   ]);
   const [map, setMap] = useState<mapboxgl.Map | undefined>(undefined);
-  /*
-  const [issueCoordinates, setIssueCoordinates] = useState<
-    [number, number] | undefined
-  >(undefined);
-   */
 
   interface MapClickCoordinatesProps {
     point: [number, number];
@@ -238,7 +234,7 @@ const Map: React.FC = () => {
         {Trail.newTrailPoint.point && (
           <Issue coordinates={Trail.newTrailPoint.point} />
         )}
-        <MapGeneral
+        <MapLayers
           trailSection={Trail.trailSection}
           trailObject={Trail.trailObject}
           selectedStage={

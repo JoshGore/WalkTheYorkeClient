@@ -1,11 +1,13 @@
 import React from 'react';
 import { Source, Layer, Image } from 'react-mapbox-gl';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import { TrailEntityProps } from '../../../contexts/TrailContext';
 // import shelter from './icons/custom-shelter-15.png';
 const shelter = require('./icons/custom-shelter-15.png');
 const marker = require('./icons/custom-trail-sign.png');
 
-interface MapGeneralProps {
+interface MapLayersProps {
   trailSection: any;
   trailObject: any;
   selectedStage: number | undefined;
@@ -16,12 +18,44 @@ const WALKTHEYORKE_TILE_SERVER_SOURCE = {
   tiles: [process.env.REACT_APP_TILES_URL],
 };
 
-const MapGeneral: React.FC<MapGeneralProps> = ({ selectedStage }) => {
+const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
+  const { loading: userPointsLoading, data: userPoints } = useQuery(
+    gql`
+      query allUserPoints {
+        user_points {
+          description
+          type {
+            name
+            type_id
+          }
+          geom
+        }
+      }
+    `,
+  );
+
+  const userPointsToGeoJson = (userPoints: any) => ({
+    type: 'FeatureCollection',
+    features: userPoints.map(({ type: { name, type_id }, geom }: any) => ({
+      type: 'Feature',
+      properties: { type: name, parentType: type_id },
+      geometry: geom,
+    })),
+  });
   return (
     <>
       <Source
         id="walktheyorke_tile_server"
         tileJsonSource={WALKTHEYORKE_TILE_SERVER_SOURCE}
+      />
+      <Source
+        id="all_user_points"
+        geoJsonSource={{
+          type: 'geojson',
+          data: userPointsLoading
+            ? userPointsToGeoJson([])
+            : userPointsToGeoJson(userPoints.user_points),
+        }}
       />
       <Image
         id="custom-shelter-icon"
@@ -34,6 +68,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({ selectedStage }) => {
         onError={() => console.log('image loading error')}
       />
       {/* data-stack-placeholder layer places data under labels */}
+      <Layer id="user_points" type="circle" sourceId="all_user_points" />
       <Layer
         id="trail_shelters"
         type="symbol"
@@ -199,4 +234,4 @@ const MapGeneral: React.FC<MapGeneralProps> = ({ selectedStage }) => {
   );
 };
 
-export default MapGeneral;
+export default MapLayers;

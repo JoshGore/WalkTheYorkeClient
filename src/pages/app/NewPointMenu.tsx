@@ -154,20 +154,26 @@ const NewPointMenu: React.FC = () => {
     setSubType(event.target.value);
   };
 
-  const [submitPoint] = useMutation(SUBMIT_USER_POINT);
-  const handleSubmit = () => {
-    console.log(Trail.newTrailPoint.point);
-    submitPoint({
-      variables: {
-        typeId: subType,
-        userId: User.userId,
-        description,
-        geom: {
-          type: 'Point',
-          coordinates: Trail.newTrailPoint.point,
-        },
+  const [submitPoint] = useMutation(SUBMIT_USER_POINT, {
+    variables: {
+      typeId: subType,
+      userId: User.userId,
+      description,
+      geom: {
+        type: 'Point',
+        coordinates: Trail.newTrailPoint.point,
       },
-    });
+    },
+    refetchQueries: ['allUserPoints'],
+    onCompleted: () =>
+      Trail.setNewTrailPoint({
+        type: undefined,
+        subType: undefined,
+        point: undefined,
+      }),
+  });
+  const handleSubmit = () => {
+    submitPoint();
   };
 
   return (
