@@ -16,6 +16,14 @@ export interface TrailEntityProps {
   type: TrailEntityTypes;
 }
 
+export interface NewTrailPointProps {
+  name: string | undefined;
+  description: string | undefined;
+  type: 'issue' | undefined;
+  issueType: 'hazard' | 'missing' | 'damage' | undefined;
+  point: [number, number] | undefined;
+}
+
 export interface TrailContextProps {
   trail: TrailEntityProps;
   setTrail: (trail: TrailEntityProps) => void;
@@ -23,7 +31,9 @@ export interface TrailContextProps {
   setTrailSection: (trailSection: TrailEntityProps) => void;
   trailObject: TrailEntityProps;
   setTrailObject: (trailObject: TrailEntityProps) => void;
-  currentTrailObject: () => TrailEntityProps;
+  newTrailPoint: NewTrailPointProps;
+  setNewTrailPoint: (newTrailPoint: NewTrailPointProps) => void;
+  currentTrailObject: () => TrailEntityProps | NewTrailPointProps;
 }
 const trail = {
   name: undefined,
@@ -45,12 +55,23 @@ const trailObject = {
   id: undefined,
   type: undefined,
 };
+const newTrailPoint = {
+  name: undefined,
+  description: undefined,
+  type: undefined,
+  issueType: undefined,
+  point: undefined,
+};
+const setNewTrailPoint = () => {};
 const setTrailObject = () => {};
-const currentTrailObject = (): TrailEntityProps => {
-  if (trailObject.id === undefined) {
+const currentTrailObject = (): TrailEntityProps | NewTrailPointProps => {
+  if (newTrailPoint.type !== undefined) {
+    return newTrailPoint;
+  }
+  if (trailObject.id !== undefined) {
     return trailSection;
   }
-  return trailObject;
+  return trailSection;
 };
 
 const TrailContext = React.createContext<TrailContextProps>({
@@ -60,6 +81,8 @@ const TrailContext = React.createContext<TrailContextProps>({
   setTrailSection,
   trailObject,
   setTrailObject,
+  newTrailPoint,
+  setNewTrailPoint,
   currentTrailObject,
 });
 

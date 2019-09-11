@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import TrailContext, { TrailEntityProps } from './TrailContext';
+import TrailContext, {
+  TrailEntityProps,
+  NewTrailPointProps,
+} from './TrailContext';
 
 const WTY_TRAIL_ID = 18;
 const WTY_NAME = 'Walk the Yorke';
@@ -25,6 +28,14 @@ const TrailProvider: React.FC = ({ children }) => {
     type: undefined,
   });
 
+  const [newTrailPoint, setNewTrailPoint] = useState<NewTrailPointProps>({
+    type: undefined,
+    issueType: undefined,
+    point: undefined,
+    name: undefined,
+    description: undefined,
+  });
+
   const currentTrailObject = (): TrailEntityProps => {
     if (trailObject.id === undefined) {
       return trailSection;
@@ -41,6 +52,8 @@ const TrailProvider: React.FC = ({ children }) => {
         setTrailSection,
         trailObject,
         setTrailObject,
+        newTrailPoint,
+        setNewTrailPoint,
         currentTrailObject,
       }}
     >

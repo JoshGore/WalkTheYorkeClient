@@ -68,15 +68,20 @@ export const REVIEWS_QUERY = gql`
   }
 `;
 
-const Reviews: React.FC = () => {
-  const Trail = useContext<TrailContextProps>(TrailContext);
+interface ReviewsProps {
+  id: number;
+  type: 'route' | 'point';
+}
+
+const Reviews: React.FC<ReviewsProps> = ({ id, type }) => {
+  // const Trail = useContext<TrailContextProps>(TrailContext);
   const User = useContext<UserContextProps>(UserContext);
   const classes = useStyles();
-  const { loading, error, data } = useQuery<ReviewQueryData, ReviewQueryVars>(
+  const { loading, data } = useQuery<ReviewQueryData, ReviewQueryVars>(
     REVIEWS_QUERY,
     {
-      variables: { id: Trail.trailSection.id! },
-      skip: !Trail.trailSection.id,
+      variables: { id },
+      skip: !id,
     },
   );
   return (

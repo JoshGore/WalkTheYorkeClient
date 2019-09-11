@@ -5,8 +5,9 @@ import MenuContainer from './app/menu/MenuContainer';
 import TrailContext, {
   TrailEntityProps,
   TrailContextProps,
+  NewTrailPointProps,
 } from '../contexts/TrailContext';
-import CornerAvatar from './signupLogin/CornerAvatar';
+import CornerMenu from './CornerMenu';
 import {
   RouteDetailQuery,
   RouteDetailQueryData,
@@ -43,7 +44,8 @@ const TrailSection: React.FC = () => {
     skip: !TrailSelections.trailSection.id,
   });
   const id = () =>
-    !sectionInfoLoading ? sectionInfo!.routes_by_pk.id : undefined;
+    // !sectionInfoLoading ? sectionInfo!.routes_by_pk.id : undefined;
+    TrailSelections.trailSection.id!;
   const name = () =>
     !sectionInfoLoading ? sectionInfo!.routes_by_pk.title : undefined;
   const shortName = () =>
@@ -89,6 +91,7 @@ const TrailSection: React.FC = () => {
       files={files()}
       count={count()}
       avgRating={avgRating()}
+      id={id()}
     />
   );
 };
@@ -143,7 +146,9 @@ const App: React.FC = () => {
     event.preventDefault();
     TrailSelections.setTrailSection({ ...TrailSelections.trail });
   };
-  const getCorrectBody = (currentTrailObject: TrailEntityProps) => {
+  const bodyFromSelection = (
+    currentTrailObject: TrailEntityProps | NewTrailPointProps,
+  ) => {
     if (
       currentTrailObject.type === 'trail' ||
       currentTrailObject.type === 'stage'
@@ -164,11 +169,11 @@ const App: React.FC = () => {
           handleHomeLinkClick={handleHomeLinkClick}
         />
       }
-      body={getCorrectBody(TrailSelections.currentTrailObject())}
+      body={bodyFromSelection(TrailSelections.currentTrailObject())}
       mainContent={
         <>
           <SignupLogin />
-          <CornerAvatar />
+          <CornerMenu />
           <Map />
         </>
       }

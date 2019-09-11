@@ -8,7 +8,7 @@ const marker = require('./icons/custom-trail-sign.png');
 interface MapGeneralProps {
   trailSection: any;
   trailObject: any;
-  selectedFeature: TrailEntityProps;
+  selectedStage: number | undefined;
 }
 
 const WALKTHEYORKE_TILE_SERVER_SOURCE = {
@@ -16,18 +16,7 @@ const WALKTHEYORKE_TILE_SERVER_SOURCE = {
   tiles: [process.env.REACT_APP_TILES_URL],
 };
 
-const MapGeneral: React.FC<MapGeneralProps> = ({ selectedFeature }) => {
-  const selectedFeatureLayerId = () =>
-    selectedFeature.type === 'stage'
-      ? {
-          layer: {
-            id: 'trail_line_all_target',
-          },
-          properties: {
-            routeId: selectedFeature.id,
-          },
-        }
-      : undefined;
+const MapGeneral: React.FC<MapGeneralProps> = ({ selectedStage }) => {
   return (
     <>
       <Source
@@ -144,9 +133,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({ selectedFeature }) => {
         filter={[
           'in',
           'route_id',
-          selectedFeatureLayerId() !== undefined &&
-            selectedFeatureLayerId()!.layer.id === 'trail_line_all_target' &&
-            selectedFeatureLayerId()!.properties.routeId,
+          selectedStage !== undefined && selectedStage,
         ]}
       />
       <Layer
@@ -166,9 +153,7 @@ const MapGeneral: React.FC<MapGeneralProps> = ({ selectedFeature }) => {
         filter={[
           'in',
           'route_id',
-          selectedFeatureLayerId() !== undefined &&
-            selectedFeatureLayerId()!.layer.id === 'trail_line_all_target' &&
-            selectedFeatureLayerId()!.properties.routeId,
+          selectedStage !== undefined && selectedStage,
         ]}
       />
       <Layer

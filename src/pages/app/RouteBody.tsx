@@ -12,7 +12,7 @@ import DownloadMenu from './DownloadMenu';
 import Markdown from '../../components/Markdown';
 import Reviews from './Reviews';
 import ReviewSummary from './reviews/ReviewSummary';
-import Chat from './Chat';
+import Comments from './chat/Comments';
 import Carousel from '../../components/Carousel';
 
 interface BodyProps {
@@ -23,6 +23,7 @@ interface BodyProps {
   files: File[] | undefined;
   count: number | undefined;
   avgRating: number | undefined;
+  id: number;
 }
 
 interface Multimedium {
@@ -90,7 +91,7 @@ const BodyTitle: React.FC<LoadingOrTextProps> = ({ loading, text }) =>
     </Typography>
   );
 
-const Body: React.FC<BodyProps> = ({
+const RouteBody: React.FC<BodyProps> = ({
   loading,
   title = '',
   body = '',
@@ -98,6 +99,7 @@ const Body: React.FC<BodyProps> = ({
   files = [],
   count = 0,
   avgRating = 0,
+  id,
 }) => {
   const classes = useStyles();
   return (
@@ -113,10 +115,10 @@ const Body: React.FC<BodyProps> = ({
           </Paper>
         </Grid>
       </Grid>
-      <Reviews />
-      <Chat />
+      <Reviews id={id} type="route" />
+      <Comments id={id} type="route" />
     </>
   );
 };
 
-export default Body;
+export default RouteBody;

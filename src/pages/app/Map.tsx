@@ -74,6 +74,15 @@ const Map: React.FC = () => {
     [number, number] | undefined
   >(undefined);
 
+  interface MapClickCoordinatesProps {
+    point: [number, number];
+    lngLat: [number, number];
+  }
+
+  const [mapClickCoordinates, setMapClickCoordinates] = useState<
+    MapClickCoordinatesProps | undefined
+  >(undefined);
+
   const onStyleLoad = (map: mapboxgl.Map) => {
     setMap(map);
   };
@@ -83,44 +92,54 @@ const Map: React.FC = () => {
     map && map.resize();
   };
 
-  const updateTrailContextFromClickedPoint = (
-    map: any,
-    mapClickCoordinates: any,
-  ) => {
-    const firstInteractive = interactiveFeatureTypeId(
-      map.queryRenderedFeatures(mapClickCoordinates.point),
-    );
-    const undefinedProperties = {
-      name: undefined,
-      shortName: undefined,
-      id: undefined,
-      type: undefined,
+  // needs to be in effect to ensure state is not stale
+  useEffect(() => {
+    // this function is extremely slow due to object spreading and stale props
+    const updateTrailContextFromClickedPoint = (
+      map: any,
+      clickLocation: [number, number],
+    ) => {
+      const firstInteractive = interactiveFeatureTypeId(
+        map.queryRenderedFeatures(clickLocation),
+      );
+      const undefinedProperties = {
+        name: undefined,
+        shortName: undefined,
+        id: undefined,
+        type: undefined,
+      };
+      if (firstInteractive.type === undefined) {
+        Trail.setTrailSection({ ...Trail.trail });
+        Trail.setTrailObject(undefinedProperties);
+      } else if (firstInteractive.type === 'stage') {
+        Trail.setTrailObject(undefinedProperties);
+        Trail.setTrailSection({
+          ...Trail.trailSection,
+          type: firstInteractive.type,
+          id: firstInteractive.id,
+        });
+      } else if (firstInteractive.type !== undefined) {
+        Trail.setTrailObject({
+          ...Trail.trailObject,
+          type: firstInteractive.type,
+          id: firstInteractive.id,
+        });
+      }
     };
-    if (firstInteractive.type === undefined) {
-      Trail.setTrailSection({ ...Trail.trail });
-      Trail.setTrailObject(undefinedProperties);
-    } else if (firstInteractive.type === 'stage') {
-      Trail.setTrailObject(undefinedProperties);
-      Trail.setTrailSection({
-        ...Trail.trailSection,
-        type: firstInteractive.type,
-        id: firstInteractive.id,
-      });
-    } else {
-      Trail.setTrailObject({
-        ...Trail.trailObject,
-        type: firstInteractive.type,
-        id: firstInteractive.id,
-      });
+    if (mapClickCoordinates !== undefined) {
+      if (Trail.newTrailPoint.type !== undefined) {
+        setIssueCoordinates(mapClickCoordinates.lngLat);
+      } else {
+        updateTrailContextFromClickedPoint(map, mapClickCoordinates.point);
+      }
     }
-  };
+  }, [mapClickCoordinates]);
 
   const mapClick = (map: any, evt: any) => {
-    updateTrailContextFromClickedPoint(map, {
+    setMapClickCoordinates({
       point: [evt.point.x, evt.point.y],
       lngLat: [evt.lngLat.lng, evt.lngLat.lat],
     });
-    setIssueCoordinates([evt.lngLat.lng, evt.lngLat.lat]);
   };
 
   const mapLayerTypes: any = {
@@ -208,14 +227,18 @@ const Map: React.FC = () => {
         containerStyle={{ flex: 1 }}
         fitBounds={transformedInitialBounds}
         onStyleLoad={onStyleLoad}
-        onClick={(map, evt) => mapClick(map, evt)}
+        onClick={mapClick}
         style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
       >
         {issueCoordinates && <Issue coordinates={issueCoordinates} />}
         <MapGeneral
           trailSection={Trail.trailSection}
           trailObject={Trail.trailObject}
-          selectedFeature={Trail.currentTrailObject()}
+          selectedStage={
+            Trail.trailSection.type !== 'trail'
+              ? Trail.trailSection.id
+              : undefined
+          }
         />
       </MapComponent>
     </>
