@@ -51,7 +51,7 @@ const Map: React.FC = () => {
       extent: any;
     }[];
   }
-  const { loading, error, data } = useQuery<ExtentQueryProps>(
+  const { loading: extentsLoading, data: extents } = useQuery<ExtentQueryProps>(
     gql`
       {
         routes_extent {
@@ -191,9 +191,9 @@ const Map: React.FC = () => {
 
   const calculateExtent = (): BBox => {
     return bbox(
-      loading || Trail.trailSection.id === undefined
+      extentsLoading || Trail.trailSection.id === undefined
         ? initialBounds
-        : findExtentById(data!),
+        : findExtentById(extents!),
     );
   };
 
@@ -214,10 +214,10 @@ const Map: React.FC = () => {
   };
 
   useEffect(() => {
-    if (map && !loading) {
+    if (map && !extentsLoading) {
       zoomToExtent();
     }
-  }, [Trail.trailSection.id, Trail.trailSection.type, loading]);
+  }, [Trail.trailSection.id, Trail.trailSection.type, extentsLoading]);
 
   return (
     <>
