@@ -55,6 +55,7 @@
     "react-dom": "^16.8.6",
     "react-facebook": "^8.0.4",
     "react-ga": "^2.6.0",
+    "react-iframe": "^1.8.0",
     "react-mapbox-gl": "^4.6.0",
     "react-mapbox-gl-draw": "^2.0.3",
     "react-markdown": "^4.1.0",

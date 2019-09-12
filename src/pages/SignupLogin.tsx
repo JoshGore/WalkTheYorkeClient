@@ -50,7 +50,7 @@ const SignupLogin: React.FC = () => {
       User.setUserId(parseInt(localStorage.getItem('userId')!, 10));
       setLoadDetails(true);
     } else {
-      User.setLoginMenuOpen(true);
+      // User.setLoginMenuOpen(true);
     }
   }, []);
   const theme = useTheme();

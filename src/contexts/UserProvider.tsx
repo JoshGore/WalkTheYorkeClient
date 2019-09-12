@@ -7,7 +7,8 @@ const UserProvider: React.FC = ({ children }) => {
   const [username, setUsername] = useState<undefined | string>(undefined);
   const [firstname, setFirstname] = useState<undefined | string>(undefined);
   const [lastname, setLastname] = useState<undefined | string>(undefined);
-  const [loginMenuOpen, setLoginMenuOpen] = useState<boolean>(!loggedIn);
+  // const [loginMenuOpen, setLoginMenuOpen] = useState<boolean>(!loggedIn);
+  const [loginMenuOpen, setLoginMenuOpen] = useState<boolean>(false);
   const signOut = () => {
     setLoggedIn(false);
     setUserId(undefined);

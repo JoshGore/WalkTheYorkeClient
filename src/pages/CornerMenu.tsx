@@ -6,13 +6,18 @@ import {
   Avatar,
 } from '@material-ui/core';
 import SpeedDial from '@material-ui/lab/SpeedDial';
-import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import BugReportIcon from '@material-ui/icons/BugReport';
+import EditLocationIcon from '@material-ui/icons/EditLocation';
+import AddLocationIcon from '@material-ui/icons/AddLocation';
+import WarningIcon from '@material-ui/icons/Warning';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import InfoIcon from '@material-ui/icons/Info';
 
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import UserContext, { UserContextProps } from '../contexts/UserContext';
 import TrailContext, { TrailContextProps } from '../contexts/TrailContext';
+import SurveyForm from './SurveyForm';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -59,6 +64,8 @@ const CornerMenu: React.FC = () => {
       toggleDialMenu();
     }
   };
+  const [surveyFormOpen, setSurveyFormOpen] = useState(true);
+  const openSurveyForm = () => setSurveyFormOpen(true);
   return (
     <div className={classes.container}>
       <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
@@ -75,16 +82,27 @@ const CornerMenu: React.FC = () => {
           </Avatar>
         </IconButton>
       </div>
+      <SurveyForm open={surveyFormOpen} setOpen={setSurveyFormOpen} />
+      <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
+        <IconButton className={classes.button} onClick={openSurveyForm}>
+          <Avatar
+            style={{ height: 56, width: 56 }}
+            className={User.loggedIn ? classes.loggedIn : undefined}
+          >
+            <InfoIcon />
+          </Avatar>
+        </IconButton>
+      </div>
       <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
         <SpeedDial
-          icon={<SpeedDialIcon />}
+          icon={<EditLocationIcon />}
           ariaLabel="map actions"
           open={dialOpen}
           onClick={toggleDialMenu}
           direction="down"
         >
           <SpeedDialAction
-            icon={<BugReportIcon />}
+            icon={<AddLocationIcon />}
             tooltipTitle="Add Asset"
             tooltipOpen
             onClick={() => setSubmissionMode('newFeature', undefined)}
@@ -97,7 +115,7 @@ const CornerMenu: React.FC = () => {
           />
           <SpeedDialAction
             onClick={() => setSubmissionMode('issue', 'hazard')}
-            icon={<BugReportIcon />}
+            icon={<WarningIcon />}
             tooltipTitle="Report Hazard"
             tooltipOpen
           />
