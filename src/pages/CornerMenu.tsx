@@ -64,7 +64,7 @@ const CornerMenu: React.FC = () => {
       toggleDialMenu();
     }
   };
-  const [surveyFormOpen, setSurveyFormOpen] = useState(true);
+  const [surveyFormOpen, setSurveyFormOpen] = useState(false);
   const openSurveyForm = () => setSurveyFormOpen(true);
   return (
     <div className={classes.container}>
