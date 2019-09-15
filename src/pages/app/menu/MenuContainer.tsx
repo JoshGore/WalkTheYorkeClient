@@ -164,7 +164,7 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
   });
   useEffect(() => {
     setMenuState('visible');
-  }, [Trail.trailSection.id, Trail.trailObject.id]);
+  }, [Trail.trailSection.id, Trail.trailObject.id, Trail.newTrailPoint]);
 
   const handleBodyScroll = () => {
     menuMode === 'bottom' && setMenuState('fullscreen');

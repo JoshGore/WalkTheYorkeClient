@@ -48,7 +48,8 @@ const CornerMenu: React.FC = () => {
     User.setLoginMenuOpen(!User.loginMenuOpen);
   };
   const [dialOpen, setDialOpen] = useState(false);
-  const toggleDialMenu = () => setDialOpen(!dialOpen);
+  const toggleDialMenu = () =>
+    User.loggedIn ? setDialOpen(!dialOpen) : setDialOpen(false);
   const setSubmissionMode = (
     type: 'issue' | 'newFeature',
     subType: string | undefined,

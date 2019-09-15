@@ -63,7 +63,6 @@ const NewPointMenu: React.FC = () => {
   const classes = useStyles();
   const Trail = useContext(TrailContext);
   const User = useContext(UserContext);
-  useEffect(() => console.log(Trail.newTrailPoint));
   // eventually retrieve from backend
   const userPointTypeDummyReturn = {
     name: 'user point type',
@@ -148,6 +147,7 @@ const NewPointMenu: React.FC = () => {
   const updateSubType = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>,
   ) => {
+    console.log(event.target.value);
     setSubType(event.target.value);
   };
 
