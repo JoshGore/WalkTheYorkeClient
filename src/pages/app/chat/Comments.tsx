@@ -41,7 +41,7 @@ const Comments: React.FC<CommentsProps> = ({ id, type }) => {
         <Paper>
           <List>
             <ListItem style={{ paddingBottom: 0, marginBottom: 0 }}>
-              <Typography variant="h4">Comments</Typography>
+              <Typography variant="h4">Comments and Issues</Typography>
             </ListItem>
             <CommentForm showing />
             {!loading &&
