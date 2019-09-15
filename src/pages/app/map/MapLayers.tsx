@@ -19,6 +19,7 @@ const WALKTHEYORKE_TILE_SERVER_SOURCE = {
 };
 
 const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
+  const includeTempStackPlaceholder = false;
   const { loading: userPointsLoading, data: userPoints } = useQuery(
     gql`
       query allUserPoints {
@@ -230,6 +231,12 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
           'line-width': ['interpolate', ['linear'], ['zoom'], 4, 2, 22, 10],
         }}
       />
+      {includeTempStackPlaceholder && (
+        <Layer
+          id="data-stack-placeholder"
+          paint={{ backgroundColor: 'white' }}
+        />
+      )}
     </>
   );
 };

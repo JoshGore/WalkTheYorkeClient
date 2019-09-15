@@ -14,6 +14,9 @@ import InfoIcon from '@material-ui/icons/Info';
 import TouchAppIcon from '@material-ui/icons/TouchApp';
 import customShelter15 from './app/map/icons/custom-shelter-15.png';
 import customTrailSign from './app/map/icons/custom-trail-sign.png';
+import walkTrailUse from './app/map/icons/walkTrailUse.png';
+import sharedTrailUse from './app/map/icons/sharedTrailUse.png';
+import rideTrailUse from './app/map/icons/rideTrailUse.png';
 
 const LegendEntry: React.FC<{
   interactive?: boolean;
@@ -95,6 +98,16 @@ const SplashLegend: React.FC<{
       </DialogTitle>
       <DialogContent>
         <div>
+          <TouchAppIcon style={{ verticalAlign: 'middle' }} />
+          <Typography
+            variant="body2"
+            display="inline"
+            style={{ verticalAlign: 'middle' }}
+          >
+            <i>&nbsp;tap features to interact</i>
+          </Typography>
+        </div>
+        <div>
           <PersonAddIcon style={{ verticalAlign: 'middle' }} />
           <Typography
             variant="body2"
@@ -117,6 +130,21 @@ const SplashLegend: React.FC<{
         <Typography variant="h6" display="inline">
           Legend
         </Typography>
+        <LegendEntry
+          symbol={sharedTrailUse}
+          interactive
+          description="Shared Use"
+        />
+        <LegendEntry
+          symbol={rideTrailUse}
+          interactive
+          description="Bike Route"
+        />
+        <LegendEntry
+          symbol={walkTrailUse}
+          interactive
+          description="Foot Route"
+        />
         <LegendEntry
           symbol={customShelter15}
           interactive
