@@ -51,6 +51,7 @@ const SignupLogin: React.FC = () => {
       setLoadDetails(true);
     } else {
       // User.setLoginMenuOpen(true);
+      setLoadDetails(false);
     }
   }, []);
   const theme = useTheme();
