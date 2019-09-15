@@ -10,14 +10,12 @@ import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import EditLocationIcon from '@material-ui/icons/EditLocation';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
-import WarningIcon from '@material-ui/icons/Warning';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import InfoIcon from '@material-ui/icons/Info';
-
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import WarningIcon from '@material-ui/icons/Warning';
+import InfoIcon from '@material-ui/icons/Info';
 import UserContext, { UserContextProps } from '../contexts/UserContext';
 import TrailContext, { TrailContextProps } from '../contexts/TrailContext';
-import SurveyForm from './SurveyForm';
+import SplashLegend from './SplashLegend';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -64,8 +62,8 @@ const CornerMenu: React.FC = () => {
       toggleDialMenu();
     }
   };
-  const [surveyFormOpen, setSurveyFormOpen] = useState(false);
-  const openSurveyForm = () => setSurveyFormOpen(true);
+  const [splashLegendOpen, setSplashLegendOpen] = useState(true);
+  const openSplashLegend = () => setSplashLegendOpen(true);
   return (
     <div className={classes.container}>
       <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
@@ -82,11 +80,11 @@ const CornerMenu: React.FC = () => {
           </Avatar>
         </IconButton>
       </div>
-      <SurveyForm open={surveyFormOpen} setOpen={setSurveyFormOpen} />
+      <SplashLegend open={splashLegendOpen} setOpen={setSplashLegendOpen} />
       <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
-        <IconButton className={classes.button} onClick={openSurveyForm}>
+        <IconButton className={classes.button} onClick={openSplashLegend}>
           <Avatar
-            style={{ height: 56, width: 56 }}
+            style={{ height: 56, width: 56, backgroundColor: '#3f51b5' }}
             className={User.loggedIn ? classes.loggedIn : undefined}
           >
             <InfoIcon />
