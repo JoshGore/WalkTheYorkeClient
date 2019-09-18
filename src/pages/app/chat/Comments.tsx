@@ -9,13 +9,14 @@ import TrailContext, {
   TrailContextProps,
 } from '../../../contexts/TrailContext';
 import {
-  ROUTE_MESSAGE_SUBSCRIPTION_QUERY,
-  ROUTE_MESSAGE_SUBSCRIPTION_QUERY_TYPES,
+  ROUTE_COMMENT_SUBSCRIPTION_QUERY,
+  ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES,
 } from '../../../queries/queries';
 
 interface CommentsProps {
   id: number;
-  type: 'route' | 'point';
+  // queryType: 'route' | 'point';
+  queryType: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,12 +28,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const Comments: React.FC<CommentsProps> = ({ id, type }) => {
+const Comments: React.FC<CommentsProps> = ({ id, queryType }) => {
   // const Trail = useContext<TrailContextProps>(TrailContext);
   const classes = useStyles();
   const { data, loading } = useSubscription<
-    ROUTE_MESSAGE_SUBSCRIPTION_QUERY_TYPES
-  >(ROUTE_MESSAGE_SUBSCRIPTION_QUERY, {
+    ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES
+  >(ROUTE_COMMENT_SUBSCRIPTION_QUERY, {
     variables: { id },
   });
   return (

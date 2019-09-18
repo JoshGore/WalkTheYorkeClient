@@ -24,6 +24,11 @@ interface BodyProps {
   count: number | undefined;
   avgRating: number | undefined;
   id: number;
+  showDownloads?: boolean;
+  showReviews?: boolean;
+  showComments?: boolean;
+  // queryType: 'route' | 'point';
+  queryType: string;
 }
 
 interface Multimedium {
@@ -91,7 +96,7 @@ const BodyTitle: React.FC<LoadingOrTextProps> = ({ loading, text }) =>
     </Typography>
   );
 
-const RouteBody: React.FC<BodyProps> = ({
+const DisplayDetails: React.FC<BodyProps> = ({
   loading,
   title = '',
   body = '',
@@ -100,6 +105,10 @@ const RouteBody: React.FC<BodyProps> = ({
   count = 0,
   avgRating = 0,
   id,
+  showDownloads = true,
+  showReviews = true,
+  showComments = true,
+  queryType,
 }) => {
   const classes = useStyles();
   return (
@@ -109,16 +118,18 @@ const RouteBody: React.FC<BodyProps> = ({
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <BodyTitle loading={loading} text={title} />
-            {!loading && <DownloadMenu links={files!} />}
-            {!loading && <ReviewSummary count={count} average={avgRating} />}
-            <BodyText loading={loading} text={body} />
+            {!loading && showDownloads && <DownloadMenu links={files!} />}
+            {!loading && showReviews && (
+              <ReviewSummary count={count} average={avgRating} />
+            )}
+            {body && <BodyText loading={loading} text={body} />}
           </Paper>
         </Grid>
       </Grid>
-      <Reviews id={id} type="route" />
-      <Comments id={id} type="route" />
+      {showReviews && <Reviews id={id} queryType={queryType} />}
+      {showComments && <Comments id={id} queryType={queryType} />}
     </>
   );
 };
 
-export default RouteBody;
+export default DisplayDetails;

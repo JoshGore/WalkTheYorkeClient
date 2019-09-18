@@ -112,7 +112,7 @@ const NewPointMenu: React.FC = () => {
   };
   const [name, setName] = useState('');
   const typeId = (typeName: string) =>
-    typeName === 'issue' ? 16 : typeName === 'newFeature' ? 17 : undefined;
+    typeName === 'userIssue' ? 16 : typeName === 'userPoint' ? 17 : undefined;
   const typeOptions = (userPointTypes: any, typeId: number) => {
     return userPointTypes
       .find(({ type }: any) => type.id === typeId)
@@ -120,9 +120,9 @@ const NewPointMenu: React.FC = () => {
   };
   const [description, setDescription] = useState('');
   const title = () =>
-    Trail.newTrailPoint.type === 'issue'
+    Trail.newTrailPoint.type === 'userIssue'
       ? 'Submit Issue'
-      : Trail.newTrailPoint.type === 'newFeature'
+      : Trail.newTrailPoint.type === 'userPoint'
       ? 'Add Feature'
       : '';
   const cancelPointSumbission = () =>

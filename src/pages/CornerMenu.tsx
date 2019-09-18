@@ -51,7 +51,7 @@ const CornerMenu: React.FC = () => {
   const toggleDialMenu = () =>
     User.loggedIn ? setDialOpen(!dialOpen) : setDialOpen(false);
   const setSubmissionMode = (
-    type: 'issue' | 'newFeature',
+    type: 'userIssue' | 'userPoint',
     subType: string | undefined,
   ) => {
     if (!Trail.newTrailPoint.type) {
@@ -104,16 +104,16 @@ const CornerMenu: React.FC = () => {
             icon={<AddLocationIcon />}
             tooltipTitle="Add Asset"
             tooltipOpen
-            onClick={() => setSubmissionMode('newFeature', undefined)}
+            onClick={() => setSubmissionMode('userPoint', undefined)}
           />
           <SpeedDialAction
-            onClick={() => setSubmissionMode('issue', 'damage')}
+            onClick={() => setSubmissionMode('userIssue', 'damage')}
             icon={<BugReportIcon />}
             tooltipTitle="Report Damage"
             tooltipOpen
           />
           <SpeedDialAction
-            onClick={() => setSubmissionMode('issue', 'hazard')}
+            onClick={() => setSubmissionMode('userIssue', 'hazard')}
             icon={<WarningIcon />}
             tooltipTitle="Report Hazard"
             tooltipOpen

@@ -145,12 +145,16 @@ const Map: React.FC = () => {
 
   const mapLayerTypes: any = {
     trail_shelters: {
-      type: 'shelter',
+      type: 'point',
       id: (feature: any) => feature.id,
     },
     trail_line_all_target: {
       type: 'stage',
       id: (feature: any) => feature.properties.route_id,
+    },
+    user_points: {
+      type: 'userPoint',
+      id: (feature: any) => feature.id,
     },
   };
 
@@ -166,7 +170,7 @@ const Map: React.FC = () => {
     );
 
   interface interactiveFeatureTypeIdProps {
-    type: 'stage' | 'shelter' | undefined;
+    type: 'stage' | 'point' | 'userPoint' | undefined;
     id: number | undefined;
   }
 

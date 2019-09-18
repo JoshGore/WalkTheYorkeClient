@@ -16,10 +16,10 @@ import {
   PointDetailQueryData,
   PointDetailQueryVars,
 } from '../queries/objectInfoQueries';
-import TrailSectionDetails from './app/TrailSectionDetails';
 import PointDetails from './app/PointDetails';
 import NewPointMenu from './app/NewPointMenu';
 import MenuBreadcrumbs from './app/MenuBreadcrumbs';
+import SelectionDetails from './app/SelectionDetails';
 
 const SignupLogin = loadable(() => import('./SignupLogin'));
 const Map = loadable(() => import('./app/Map'));
@@ -27,13 +27,6 @@ const Map = loadable(() => import('./app/Map'));
 interface LoadingOrTextProps {
   loading: boolean;
   text: string | undefined;
-}
-
-interface BreadcrumbProps {
-  trailSection: TrailEntityProps;
-  handleHomeLinkClick: (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) => void;
 }
 
 const App: React.FC = () => {
@@ -44,36 +37,39 @@ const App: React.FC = () => {
     event.preventDefault();
     TrailSelections.setTrailSection({ ...TrailSelections.trail });
   };
-  const bodyFromSelection = (
-    currentTrailObject: TrailEntityProps | NewTrailPointProps,
-  ) => {
-    if (
-      currentTrailObject.type === 'issue' ||
-      currentTrailObject.type === 'newFeature'
-    ) {
-      return <NewPointMenu />;
-    }
-    if (
-      currentTrailObject.type === 'trail' ||
-      currentTrailObject.type === 'stage'
-    ) {
-      return <TrailSectionDetails />;
-    }
-    if (currentTrailObject.type === 'shelter') {
-      return <PointDetails />;
-    }
-    return <></>;
-  };
+  const getCurrentSelectionName = () =>
+    TrailSelections.trailSection.type === 'trail' ||
+    TrailSelections.trailSection.type === undefined
+      ? undefined
+      : TrailSelections.trailSection.shortName;
 
+  // body={bodyFromSelection(TrailSelections.currentTrailObject())}
   return (
     <MenuContainer
       header={
         <MenuBreadcrumbs
-          trailSection={TrailSelections.trailSection}
+          currentSelectionIfNotHome={getCurrentSelectionName()}
           handleHomeLinkClick={handleHomeLinkClick}
         />
       }
-      body={bodyFromSelection(TrailSelections.currentTrailObject())}
+      body={
+        TrailSelections.newTrailPoint.type === undefined ? (
+          <SelectionDetails
+            type={
+              TrailSelections.trailObject.type !== undefined
+                ? TrailSelections.trailObject.type
+                : TrailSelections.trailSection.type!
+            }
+            id={
+              TrailSelections.trailObject.id !== undefined
+                ? TrailSelections.trailObject.id
+                : TrailSelections.trailSection.id!
+            }
+          />
+        ) : (
+          <NewPointMenu />
+        )
+      }
       mainContent={
         <>
           <SignupLogin />

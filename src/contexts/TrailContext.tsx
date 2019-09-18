@@ -4,9 +4,9 @@ export type TrailEntityTypes =
   | 'trail'
   | 'stage'
   | 'short'
-  | 'shelter'
-  | 'issue'
-  | 'newFeature'
+  | 'point'
+  | 'userPoint'
+  | 'userIssue'
   | undefined;
 
 export interface TrailEntityProps {
@@ -17,12 +17,10 @@ export interface TrailEntityProps {
 }
 
 export interface NewTrailPointProps {
-  // name: string | undefined;
-  // description: string | undefined;
-  type: 'issue' | 'newFeature' | undefined;
-  // subType: 'hazard' | 'missing' | 'damage' | undefined;
+  type: 'userIssue' | 'userPoint' | undefined;
   subType: string | undefined;
   point: [number, number] | undefined;
+  id?: undefined;
 }
 
 export interface TrailContextProps {

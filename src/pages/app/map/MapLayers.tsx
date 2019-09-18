@@ -24,6 +24,7 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
     gql`
       query allUserPoints {
         user_points {
+          id
           description
           type {
             name
@@ -37,8 +38,9 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
 
   const userPointsToGeoJson = (userPoints: any) => ({
     type: 'FeatureCollection',
-    features: userPoints.map(({ type: { name, type_id }, geom }: any) => ({
+    features: userPoints.map(({ id, type: { name, type_id }, geom }: any) => ({
       type: 'Feature',
+      id,
       properties: { type: name, parentType: type_id },
       geometry: geom,
     })),
@@ -69,7 +71,17 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         onError={() => console.log('image loading error')}
       />
       {/* data-stack-placeholder layer places data under labels */}
-      <Layer id="user_points" type="circle" sourceId="all_user_points" />
+      <Layer
+        id="user_points"
+        type="circle"
+        sourceId="all_user_points"
+        onMouseMove={(evt: any) => {
+          evt.target.getCanvas().style.cursor = 'pointer';
+        }}
+        onMouseLeave={(evt: any) => {
+          evt.target.getCanvas().style.cursor = '';
+        }}
+      />
       <Layer
         id="trail_shelters"
         type="symbol"
@@ -93,6 +105,12 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         paint={{
           'icon-opacity': 1,
           'text-color': 'hsl(131, 83%, 19%)',
+        }}
+        onMouseMove={(evt: any) => {
+          evt.target.getCanvas().style.cursor = 'pointer';
+        }}
+        onMouseLeave={(evt: any) => {
+          evt.target.getCanvas().style.cursor = '';
         }}
       />
       <Layer

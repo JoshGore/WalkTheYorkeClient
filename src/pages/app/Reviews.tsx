@@ -15,7 +15,13 @@ import {
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import ReviewForm from './reviews/ReviewForm';
-import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
+import {
+  ROUTE_REVIEWS_QUERY,
+  POINT_REVIEWS_QUERY,
+  ReviewQueryVars,
+  ReviewQueryData,
+} from '../../queries/queries';
+// import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,56 +40,44 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface ReviewProps {
-  rating: number;
-  body: string;
-  id: number;
-  created_at: any;
-  user: {
-    firstname: string;
-    lastname: string;
-  };
-}
-
-interface ReviewQueryData {
-  reviews: ReviewProps[];
-}
-
-interface ReviewQueryVars {
-  id: number;
-}
-
-export const REVIEWS_QUERY = gql`
-  query($id: Int!) {
-    reviews(where: { route_review: { route_id: { _eq: $id } } }) {
-      rating
-      body
-      id
-      created_at
-      user {
-        firstname
-        lastname
-      }
-    }
-  }
-`;
-
 interface ReviewsProps {
   id: number;
-  type: 'route' | 'point';
+  // queryType: 'route' | 'point';
+  queryType: string;
 }
 
-const Reviews: React.FC<ReviewsProps> = ({ id, type }) => {
+const Reviews: React.FC<ReviewsProps> = ({ id, queryType }) => {
   // const Trail = useContext<TrailContextProps>(TrailContext);
   const User = useContext<UserContextProps>(UserContext);
   const classes = useStyles();
-  const { loading, data } = useQuery<ReviewQueryData, ReviewQueryVars>(
-    REVIEWS_QUERY,
-    {
-      variables: { id },
-      skip: !id,
-    },
-  );
+  const { loading: routeReviewsLoading, data: routeReviews } = useQuery<
+    ReviewQueryData,
+    ReviewQueryVars
+  >(ROUTE_REVIEWS_QUERY, {
+    variables: { id },
+    skip: queryType !== 'route',
+  });
+  const { loading: pointReviewsLoading, data: pointReviews } = useQuery<
+    ReviewQueryData,
+    ReviewQueryVars
+  >(POINT_REVIEWS_QUERY, {
+    variables: { id },
+    skip: queryType !== 'point',
+  });
+  const reviews = () =>
+    queryType === 'route'
+      ? !routeReviewsLoading &&
+        !!routeReviews &&
+        !!routeReviews.reviews &&
+        routeReviews.reviews.length > 0
+        ? routeReviews.reviews
+        : undefined
+      : !pointReviewsLoading &&
+        !!pointReviews &&
+        !!pointReviews.reviews &&
+        pointReviews.reviews.length > 0
+      ? pointReviews.reviews
+      : undefined;
   return (
     <Grid className={classes.root} container>
       <Grid item xs={12}>
@@ -95,8 +89,8 @@ const Reviews: React.FC<ReviewsProps> = ({ id, type }) => {
               </Typography>
               {User.loggedIn && <ReviewForm />}
             </ListItem>
-            {!loading && !!data && !!data.reviews && data.reviews.length > 0 ? (
-              data.reviews.map((review: any) => (
+            {reviews() !== undefined ? (
+              reviews()!.map((review: any) => (
                 <ListItem alignItems="flex-start" key={review.id}>
                   <ListItemAvatar>
                     <Avatar>
@@ -138,4 +132,5 @@ const Reviews: React.FC<ReviewsProps> = ({ id, type }) => {
     </Grid>
   );
 };
+
 export default Reviews;

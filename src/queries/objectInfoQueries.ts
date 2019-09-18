@@ -20,9 +20,9 @@ interface File {
 export interface RouteDetailQueryData {
   routes_by_pk: {
     id: number;
-    short_title: string;
-    title: string;
-    body: string;
+    short_name: string;
+    name: string;
+    description: string;
     typeByType: {
       name: TrailEntityTypes;
     };
@@ -47,9 +47,9 @@ export const RouteDetailQuery = gql`
   query($id: Int!) {
     routes_by_pk(id: $id) {
       id
-      short_title
-      title
-      body
+      short_name
+      name
+      description
       typeByType {
         name
       }
@@ -90,9 +90,18 @@ export interface PointDetailQueryData {
     description: string;
     types: {
       type: {
-        name: 'shelter';
+        name: TrailEntityTypes;
       };
     }[];
+    point_multimedia: Multimedium[];
+  };
+  reviews_aggregate: {
+    aggregate: {
+      avg: {
+        rating: number;
+      };
+      count: number;
+    };
   };
 }
 
@@ -106,6 +115,21 @@ export const PointDetailQuery = gql`
         type {
           name
         }
+      }
+      point_multimedia {
+        multimedium {
+          id
+          name
+          link
+        }
+      }
+    }
+    reviews_aggregate(where: { point_reviews: { point_id: { _eq: $id } } }) {
+      aggregate {
+        avg {
+          rating
+        }
+        count
       }
     }
   }

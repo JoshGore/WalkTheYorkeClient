@@ -18,7 +18,10 @@ import TrailContext, {
   TrailContextProps,
   TrailEntityTypes,
 } from '../../../contexts/TrailContext';
-import { REVIEWS_QUERY } from '../Reviews';
+import {
+  ROUTE_REVIEWS_QUERY,
+  POINT_REVIEWS_QUERY,
+} from '../../../queries/queries';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,7 +84,10 @@ const ReviewForm: React.FC = () => {
         review,
       },
       refetchQueries: [
-        { query: REVIEWS_QUERY, variables: { id: Trail.trailSection.id! } },
+        {
+          query: ROUTE_REVIEWS_QUERY,
+          variables: { id: Trail.trailSection.id! },
+        },
       ],
     }).then(() => {
       setSubmitting(false);

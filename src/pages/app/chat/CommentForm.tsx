@@ -18,7 +18,7 @@ import TrailContext, {
 } from '../../../contexts/TrailContext';
 import UserContext, { UserContextProps } from '../../../contexts/UserContext';
 import {
-  ROUTE_MESSAGE_INSERT_QUERY,
+  ROUTE_COMMENT_INSERT_QUERY,
   COMMENT_REPLY_INSERT_QUERY,
 } from '../../../queries/queries';
 
@@ -50,7 +50,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const classes = useStyles();
   const [commentText, setCommentText] = useState('');
   const [commentOnObject, { error: commentOnObjectError }] = useMutation(
-    ROUTE_MESSAGE_INSERT_QUERY,
+    ROUTE_COMMENT_INSERT_QUERY,
   );
   const [replyToComment, { error: replyToError }] = useMutation(
     COMMENT_REPLY_INSERT_QUERY,
