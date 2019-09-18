@@ -164,11 +164,12 @@ const SplashLegend: React.FC<{
           still at the prototype stage so there will be a few bugs.
         </Typography>
         <Typography variant="body2">
-          <Link href="/" target="_blank">
+          <Link href="https://www.surveymonkey.com/r/RQVKLBT" target="_blank">
             The survey (opens in new tab)
           </Link>
           &nbsp;contains several short tasks exploring the various features of
-          this map. Thanks for your input!
+          this map. After exploring the map click the (i) icon to return to this
+          screen and complete the survey. Thanks for your input!
         </Typography>
       </DialogContent>
     </Dialog>
