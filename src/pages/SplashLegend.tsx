@@ -153,6 +153,11 @@ const SplashLegend: React.FC<{
         <LegendEntry symbol={customTrailSign} description="Marker" />
         <Typography variant="h6">The Research Project</Typography>
         <Typography variant="body2" gutterBottom>
+          <b>
+            Ethics approval is currently in progress. If you come across this
+            site, please do not complete the survey until this notice has been
+            removed.
+          </b>
           We are researching effective cartography for tourism-focused
           participatory applications and would love your input! The aim of this
           project is to create a highly usable web map suitable for a range of
