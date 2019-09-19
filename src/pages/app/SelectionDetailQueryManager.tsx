@@ -338,6 +338,15 @@ const SelectionDetailQueryManager: React.FC<{
       : queryType() === 'userPoint'
       ? userPointInfoLoading
       : false;
+  const showReviews = () =>
+    queryType() === 'route' ||
+    queryType() === 'point' ||
+    queryType() === 'userPoint';
+
+  const showComments = () =>
+    queryType() === 'route' ||
+    queryType() === 'point' ||
+    queryType() === 'userPoint';
 
   useEffect(() => {
     if (!routeInfoLoading && !!TrailSelections.trailSection.id) {
@@ -362,17 +371,9 @@ const SelectionDetailQueryManager: React.FC<{
       avgRating={avgRating()}
       id={id as number}
       queryType={queryType()}
-      showReviews={
-        queryType() === 'route' ||
-        queryType() === 'point' ||
-        queryType() === 'userPoint'
-      }
+      showReviews={showReviews()}
       reviews={reviews()}
-      showComments={
-        queryType() === 'route' ||
-        queryType() === 'point' ||
-        queryType() === 'userPoint'
-      }
+      showComments={showComments()}
       commentThreads={commentThreads()}
       loggedIn={User.loggedIn}
       submitComment={submitComment}
