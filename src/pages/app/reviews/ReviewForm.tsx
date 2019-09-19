@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import {
@@ -12,16 +12,6 @@ import {
 } from '@material-ui/core';
 
 import CreateIcon from '@material-ui/icons/Create';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
-import TrailContext, {
-  TrailContextProps,
-  TrailEntityTypes,
-} from '../../../contexts/TrailContext';
-import {
-  ROUTE_REVIEWS_QUERY,
-  POINT_REVIEWS_QUERY,
-} from '../../../queries/queries';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,26 +25,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const ReviewForm: React.FC = () => {
-  const [submitReview, { error: submitReviewError }] = useMutation(gql`
-    mutation($route_id: Int!, $user_id: Int!, $rating: Int!, $review: String!) {
-      insert_route_review(
-        objects: {
-          route_id: $route_id
-          review: {
-            data: { body: $review, rating: $rating, user_id: $user_id }
-          }
-        }
-      ) {
-        returning {
-          review {
-            rating
-            body
-          }
-        }
-      }
-    }
-  `);
+interface ReviewFormProps {
+  submitReview: ({ review, rating }: { review: string; rating: number }) => any;
+}
+
+const ReviewForm: React.FC<ReviewFormProps> = ({ submitReview }) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const handleAddReview = () => {
     setShowReviewForm(true);
@@ -73,25 +48,11 @@ const ReviewForm: React.FC = () => {
     setRating(3);
     setReview('');
   };
-  const Trail = useContext<TrailContextProps>(TrailContext);
   const handleSubmit = () => {
     setSubmitting(true);
-    submitReview({
-      variables: {
-        route_id: Trail.trailSection.id,
-        user_id: localStorage.getItem('userId'),
-        rating,
-        review,
-      },
-      refetchQueries: [
-        {
-          query: ROUTE_REVIEWS_QUERY,
-          variables: { id: Trail.trailSection.id! },
-        },
-      ],
-    }).then(() => {
-      setSubmitting(false);
+    submitReview({ review, rating }).then(() => {
       setShowReviewForm(false);
+      setSubmitting(false);
     });
   };
   return (
@@ -107,7 +68,7 @@ const ReviewForm: React.FC = () => {
       <Dialog open={showReviewForm}>
         <DialogTitle>Add Review</DialogTitle>
         <DialogContent>
-          <Rating value={rating} onChange={handleRatingChange} />
+          <Rating name="rating" value={rating} onChange={handleRatingChange} />
           <TextField
             name="details"
             onChange={handleReviewChange}

@@ -1,22 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Grid, Paper, List, ListItem, Typography } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { useSubscription } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import CommentThread from './CommentThread';
-import CommentForm from './CommentForm';
-import TrailContext, {
-  TrailContextProps,
-} from '../../../contexts/TrailContext';
-import {
-  ROUTE_COMMENT_SUBSCRIPTION_QUERY,
-  ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES,
-} from '../../../queries/queries';
+import CommentThread from './comments/CommentThread';
+import CommentForm from './comments/CommentForm';
+
+interface SubmitCommentProps {
+  commentText: string;
+  commentThreadId?: number | undefined;
+}
 
 interface CommentsProps {
-  id: number;
-  // queryType: 'route' | 'point';
-  queryType: string;
+  commentThreads: any[];
+  submitComment: (options: SubmitCommentProps) => void;
+  loggedIn: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,14 +24,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const Comments: React.FC<CommentsProps> = ({ id, queryType }) => {
-  // const Trail = useContext<TrailContextProps>(TrailContext);
+const Comments: React.FC<CommentsProps> = ({
+  commentThreads,
+  submitComment,
+  loggedIn,
+}) => {
   const classes = useStyles();
-  const { data, loading } = useSubscription<
-    ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES
-  >(ROUTE_COMMENT_SUBSCRIPTION_QUERY, {
-    variables: { id },
-  });
   return (
     <Grid className={classes.root} container>
       <Grid item xs={12}>
@@ -44,14 +38,14 @@ const Comments: React.FC<CommentsProps> = ({ id, queryType }) => {
             <ListItem style={{ paddingBottom: 0, marginBottom: 0 }}>
               <Typography variant="h4">Comments and Issues</Typography>
             </ListItem>
-            <CommentForm showing />
-            {!loading &&
-            data !== undefined &&
-            data.routes_by_pk.route_comments.length > 0 ? (
-              data.routes_by_pk.route_comments.map(commentThread => (
+            {loggedIn && <CommentForm submitComment={submitComment} />}
+            {commentThreads.length > 0 ? (
+              commentThreads.map(commentThread => (
                 <CommentThread
+                  submitComment={submitComment}
                   key={commentThread.comment.id}
                   commentThread={commentThread.comment}
+                  loggedIn={loggedIn}
                 />
               ))
             ) : (

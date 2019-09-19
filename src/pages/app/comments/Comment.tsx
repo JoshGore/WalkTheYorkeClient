@@ -45,6 +45,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+interface SubmitCommentProps {
+  commentText: string;
+  commentThreadId?: number | undefined;
+}
+
 export interface CommentProps {
   level: 1 | 2;
   dateCreated: string;
@@ -53,6 +58,8 @@ export interface CommentProps {
   lastname: string;
   body: string;
   commentThreadId: number;
+  submitComment: (options: SubmitCommentProps) => void;
+  loggedIn: boolean;
 }
 
 const Comment: React.FC<CommentProps> = ({
@@ -63,6 +70,8 @@ const Comment: React.FC<CommentProps> = ({
   body,
   lastInThread = false,
   commentThreadId,
+  submitComment,
+  loggedIn,
 }) => {
   const [replyFormShown, setReplyFormShown] = useState(false);
   const classes = useStyles();
@@ -124,7 +133,7 @@ const Comment: React.FC<CommentProps> = ({
               />
             )}
             <Typography variant="body2">{body}</Typography>
-            {level === 1 && (
+            {level === 1 && loggedIn && (
               <Grid item xs={12}>
                 <Link href="./" onClick={replyToComment}>
                   reply
@@ -134,12 +143,14 @@ const Comment: React.FC<CommentProps> = ({
           </Grid>
         </Grid>
       </ListItem>
-      <CommentForm
-        commentThreadId={commentThreadId}
-        showing={level === 1 && replyFormShown}
-        setShowing={setReplyFormShown}
-      />
-      {lastInThread && (
+      {loggedIn && level === 1 && replyFormShown && (
+        <CommentForm
+          commentThreadId={commentThreadId}
+          submitComment={submitComment}
+          setShown={setReplyFormShown}
+        />
+      )}
+      {lastInThread && loggedIn && (
         <>
           <Divider
             className={
@@ -155,11 +166,13 @@ const Comment: React.FC<CommentProps> = ({
           >
             Continue this thread...
           </Link>
-          <CommentForm
-            commentThreadId={commentThreadId}
-            showing={replyFormShown}
-            setShowing={setReplyFormShown}
-          />
+          {replyFormShown && (
+            <CommentForm
+              commentThreadId={commentThreadId}
+              submitComment={submitComment}
+              setShown={setReplyFormShown}
+            />
+          )}
         </>
       )}
     </>

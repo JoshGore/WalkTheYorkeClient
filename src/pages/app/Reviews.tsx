@@ -12,17 +12,7 @@ import {
   Paper,
 } from '@material-ui/core';
 
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 import ReviewForm from './reviews/ReviewForm';
-import {
-  ROUTE_REVIEWS_QUERY,
-  POINT_REVIEWS_QUERY,
-  ReviewQueryVars,
-  ReviewQueryData,
-} from '../../queries/queries';
-// import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
-import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,44 +30,23 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface ReviewsProps {
-  id: number;
-  // queryType: 'route' | 'point';
-  queryType: string;
+interface SubmitReviewProps {
+  review: string;
+  rating: number;
 }
 
-const Reviews: React.FC<ReviewsProps> = ({ id, queryType }) => {
-  // const Trail = useContext<TrailContextProps>(TrailContext);
-  const User = useContext<UserContextProps>(UserContext);
+interface ReviewsProps {
+  reviews: any[];
+  loggedIn: boolean;
+  submitReview: (options: SubmitReviewProps) => void;
+}
+
+const Reviews: React.FC<ReviewsProps> = ({
+  submitReview,
+  reviews,
+  loggedIn,
+}) => {
   const classes = useStyles();
-  const { loading: routeReviewsLoading, data: routeReviews } = useQuery<
-    ReviewQueryData,
-    ReviewQueryVars
-  >(ROUTE_REVIEWS_QUERY, {
-    variables: { id },
-    skip: queryType !== 'route',
-  });
-  const { loading: pointReviewsLoading, data: pointReviews } = useQuery<
-    ReviewQueryData,
-    ReviewQueryVars
-  >(POINT_REVIEWS_QUERY, {
-    variables: { id },
-    skip: queryType !== 'point',
-  });
-  const reviews = () =>
-    queryType === 'route'
-      ? !routeReviewsLoading &&
-        !!routeReviews &&
-        !!routeReviews.reviews &&
-        routeReviews.reviews.length > 0
-        ? routeReviews.reviews
-        : undefined
-      : !pointReviewsLoading &&
-        !!pointReviews &&
-        !!pointReviews.reviews &&
-        pointReviews.reviews.length > 0
-      ? pointReviews.reviews
-      : undefined;
   return (
     <Grid className={classes.root} container>
       <Grid item xs={12}>
@@ -87,10 +56,10 @@ const Reviews: React.FC<ReviewsProps> = ({ id, queryType }) => {
               <Typography variant="h4" display="inline">
                 Reviews
               </Typography>
-              {User.loggedIn && <ReviewForm />}
+              {loggedIn && <ReviewForm submitReview={submitReview} />}
             </ListItem>
-            {reviews() !== undefined ? (
-              reviews()!.map((review: any) => (
+            {reviews.length > 0 ? (
+              reviews.map((review: any) => (
                 <ListItem alignItems="flex-start" key={review.id}>
                   <ListItemAvatar>
                     <Avatar>

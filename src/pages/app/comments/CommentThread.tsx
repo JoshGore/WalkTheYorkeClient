@@ -12,6 +12,11 @@ interface CommentProps {
   };
 }
 
+interface SubmitCommentProps {
+  commentText: string;
+  commentThreadId?: number | undefined;
+}
+
 export interface CommentThreadProps {
   commentThread: {
     id: number;
@@ -24,10 +29,15 @@ export interface CommentThreadProps {
     };
     comments: CommentProps[];
   };
+  submitComment: (options: SubmitCommentProps) => void;
+  loggedIn: boolean;
 }
 
-// <Comment level={1} firstname="Joshua" lastname="Gore" body={lorem} />
-const CommentThread: React.FC<CommentThreadProps> = ({ commentThread }) => {
+const CommentThread: React.FC<CommentThreadProps> = ({
+  commentThread,
+  submitComment,
+  loggedIn,
+}) => {
   return (
     <>
       <Comment
@@ -37,6 +47,8 @@ const CommentThread: React.FC<CommentThreadProps> = ({ commentThread }) => {
         lastname={commentThread.user.lastname}
         body={commentThread.body}
         commentThreadId={commentThread.id}
+        submitComment={submitComment}
+        loggedIn={loggedIn}
       />
       {commentThread.comments.map((comment, index, comments) => (
         <Comment
@@ -48,6 +60,8 @@ const CommentThread: React.FC<CommentThreadProps> = ({ commentThread }) => {
           body={comment.body}
           commentThreadId={commentThread.id}
           lastInThread={index === comments.length - 1}
+          submitComment={submitComment}
+          loggedIn={loggedIn}
         />
       ))}
     </>

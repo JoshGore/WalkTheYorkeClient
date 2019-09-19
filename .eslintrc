@@ -18,6 +18,7 @@
      "fp/no-this": "warn",
      "fp/no-loops": "warn",
      "fp/no-delete": "warn",
-     "fp/no-throw": "warn"
+     "fp/no-throw": "warn",
+     "no-nested-ternary": "off"
    }
 }

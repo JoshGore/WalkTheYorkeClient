@@ -206,6 +206,24 @@ export const POINT_REVIEWS_QUERY = gql`
   }
 `;
 
+export const ROUTE_REVIEW_INSERT_QUERY = gql`
+  mutation($route_id: Int!, $user_id: Int!, $rating: Int!, $review: String!) {
+    insert_route_review(
+      objects: {
+        route_id: $route_id
+        review: { data: { body: $review, rating: $rating, user_id: $user_id } }
+      }
+    ) {
+      returning {
+        review {
+          rating
+          body
+        }
+      }
+    }
+  }
+`;
+
 export const TRAIL_GEOMETRY_QUERY = gql`
   query TrailGeometryQuery($trailId: Int!) {
     routes_by_pk(id: $trailId) {

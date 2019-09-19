@@ -12,8 +12,18 @@ import DownloadMenu from './DownloadMenu';
 import Markdown from '../../components/Markdown';
 import Reviews from './Reviews';
 import ReviewSummary from './reviews/ReviewSummary';
-import Comments from './chat/Comments';
+import Comments from './Comments';
 import Carousel from '../../components/Carousel';
+
+interface SubmitCommentProps {
+  commentText: string;
+  commentThreadId?: number | undefined;
+}
+
+interface SubmitReviewProps {
+  review: string;
+  rating: number;
+}
 
 interface BodyProps {
   loading: boolean;
@@ -29,6 +39,11 @@ interface BodyProps {
   showComments?: boolean;
   // queryType: 'route' | 'point';
   queryType: string;
+  commentThreads?: any[];
+  reviews?: any[];
+  loggedIn: boolean;
+  submitComment: (options: SubmitCommentProps) => void;
+  submitReview: (options: SubmitReviewProps) => void;
 }
 
 interface Multimedium {
@@ -109,6 +124,11 @@ const DisplayDetails: React.FC<BodyProps> = ({
   showReviews = true,
   showComments = true,
   queryType,
+  commentThreads = [],
+  reviews = [],
+  loggedIn,
+  submitComment,
+  submitReview,
 }) => {
   const classes = useStyles();
   return (
@@ -126,8 +146,20 @@ const DisplayDetails: React.FC<BodyProps> = ({
           </Paper>
         </Grid>
       </Grid>
-      {showReviews && <Reviews id={id} queryType={queryType} />}
-      {showComments && <Comments id={id} queryType={queryType} />}
+      {showReviews && (
+        <Reviews
+          reviews={reviews}
+          loggedIn={loggedIn}
+          submitReview={submitReview}
+        />
+      )}
+      {showComments && (
+        <Comments
+          commentThreads={commentThreads}
+          submitComment={submitComment}
+          loggedIn={loggedIn}
+        />
+      )}
     </>
   );
 };

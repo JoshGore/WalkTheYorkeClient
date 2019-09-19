@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useSubscription, useMutation } from '@apollo/react-hooks';
 import {
   RouteDetailQuery,
   RouteDetailQueryData,
@@ -10,11 +10,25 @@ import {
   PointDetailQueryVars,
 } from '../../queries/objectInfoQueries';
 
+import {
+  ROUTE_COMMENT_SUBSCRIPTION_QUERY,
+  ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES,
+  ROUTE_REVIEWS_QUERY,
+  POINT_REVIEWS_QUERY,
+  ReviewQueryVars,
+  ReviewQueryData,
+  ROUTE_COMMENT_INSERT_QUERY,
+  COMMENT_REPLY_INSERT_QUERY,
+  ROUTE_REVIEW_INSERT_QUERY,
+} from '../../queries/queries';
+
 import TrailContext, {
   TrailContextProps,
   TrailEntityProps,
   TrailEntityTypes,
 } from '../../contexts/TrailContext';
+
+import UserContext, { UserContextProps } from '../../contexts/UserContext';
 
 import DisplayDetails from './DisplayDetails';
 
@@ -27,6 +41,7 @@ const SelectionDetails: React.FC<{
   id: number;
   type: string;
 }> = ({ id, type }) => {
+  const User = useContext<UserContextProps>(UserContext);
   const TrailSelections = useContext<TrailContextProps>(TrailContext);
   const queryType = () =>
     type === 'trail' || type === 'stage' ? 'route' : type;
@@ -44,11 +59,106 @@ const SelectionDetails: React.FC<{
     variables: { id: id as number },
     skip: queryType() !== 'point',
   });
-  /*
-  const id = () =>
-    // !sectionInfoLoading ? sectionInfo!.routes_by_pk.id : undefined;
-    TrailSelections.trailSection.id!;
-   */
+  const {
+    data: routeCommentsSubscription,
+    loading: routeCommentsSubscriptionLoading,
+  } = useSubscription<ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES>(
+    ROUTE_COMMENT_SUBSCRIPTION_QUERY,
+    {
+      variables: { id: id as number },
+      skip: queryType() !== 'route',
+    },
+  );
+  const { loading: routeReviewsLoading, data: routeReviews } = useQuery<
+    ReviewQueryData,
+    ReviewQueryVars
+  >(ROUTE_REVIEWS_QUERY, {
+    variables: { id },
+    skip: queryType() !== 'route',
+  });
+  const { loading: pointReviewsLoading, data: pointReviews } = useQuery<
+    ReviewQueryData,
+    ReviewQueryVars
+  >(POINT_REVIEWS_QUERY, {
+    variables: { id },
+    skip: queryType() !== 'point',
+  });
+  const [commentOnObject] = useMutation(ROUTE_COMMENT_INSERT_QUERY);
+  const [replyToComment] = useMutation(COMMENT_REPLY_INSERT_QUERY);
+
+  interface SubmitCommentProps {
+    commentText: string;
+    commentThreadId?: number | undefined;
+  }
+
+  const submitComment = ({
+    commentText,
+    commentThreadId = undefined,
+  }: SubmitCommentProps) =>
+    commentThreadId === undefined
+      ? queryType() === 'route'
+        ? commentOnObject({
+            variables: {
+              route: id,
+              user: User.userId,
+              body: commentText,
+            },
+          })
+        : undefined
+      : replyToComment({
+          variables: {
+            commentThreadId,
+            userId: User.userId,
+            body: commentText,
+          },
+        });
+
+  const [submitRouteReview] = useMutation(ROUTE_REVIEW_INSERT_QUERY);
+
+  const submitReview = ({
+    review,
+    rating,
+  }: {
+    review: string;
+    rating: number;
+  }) =>
+    queryType() === 'route'
+      ? submitRouteReview({
+          variables: {
+            route_id: id,
+            user_id: User.userId,
+            rating,
+            review,
+          },
+          refetchQueries: [
+            {
+              query: ROUTE_REVIEWS_QUERY,
+              variables: { id },
+            },
+          ],
+        })
+      : undefined;
+
+  const reviews = () =>
+    queryType() === 'route'
+      ? !routeReviewsLoading &&
+        !!routeReviews &&
+        !!routeReviews.reviews &&
+        routeReviews.reviews.length > 0
+        ? routeReviews.reviews
+        : []
+      : !pointReviewsLoading &&
+        !!pointReviews &&
+        !!pointReviews.reviews &&
+        pointReviews.reviews.length > 0
+      ? pointReviews.reviews
+      : [];
+  const commentThreads = () =>
+    queryType() === 'route' &&
+    !routeCommentsSubscriptionLoading &&
+    routeCommentsSubscription !== undefined
+      ? routeCommentsSubscription.routes_by_pk.route_comments
+      : [];
   const name = () =>
     queryType() === 'route'
       ? !routeInfoLoading
@@ -65,8 +175,6 @@ const SelectionDetails: React.FC<{
         ? routeInfo!.routes_by_pk.short_name
         : undefined
       : undefined;
-  // const type = () =>
-  //   !sectionInfoLoading ? sectionInfo!.routes_by_pk.typeByType.name : undefined;
   const body = () =>
     queryType() === 'route'
       ? !routeInfoLoading
@@ -114,7 +222,6 @@ const SelectionDetails: React.FC<{
         : undefined
       : undefined;
 
-  // const title = () => TrailSelections.trailSection.name;
   const title = () =>
     queryType() === 'route'
       ? !routeInfoLoading
@@ -150,15 +257,14 @@ const SelectionDetails: React.FC<{
       id={id as number}
       queryType={queryType()}
       showReviews={queryType() === 'route'}
+      reviews={reviews()}
       showComments={queryType() === 'route'}
+      commentThreads={commentThreads()}
+      loggedIn={User.loggedIn}
+      submitComment={submitComment}
+      submitReview={submitReview}
     />
   );
 };
-
-/*
-const SelectionDetails: React.FC<SelectionDetailsProps> = ({ type, id }) => {
-  return <TrailSectionDetails id={id} type={type} />;
-};
- */
 
 export default SelectionDetails;
