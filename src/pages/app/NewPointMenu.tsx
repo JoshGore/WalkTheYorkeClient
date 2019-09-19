@@ -25,6 +25,7 @@ const SUBMIT_USER_POINT = gql`
   mutation(
     $typeId: Int!
     $geom: geography!
+    $name: String
     $description: String
     $userId: Int!
   ) {
@@ -32,7 +33,8 @@ const SUBMIT_USER_POINT = gql`
       objects: {
         geom: $geom
         type_id: $typeId
-        description: ""
+        name: $name
+        description: $description
         user_id: $userId
       }
     ) {
@@ -110,7 +112,6 @@ const NewPointMenu: React.FC = () => {
       },
     ],
   };
-  const [name, setName] = useState('');
   const typeId = (typeName: string) =>
     typeName === 'userIssue' ? 16 : typeName === 'userPoint' ? 17 : undefined;
   const typeOptions = (userPointTypes: any, typeId: number) => {
@@ -118,6 +119,7 @@ const NewPointMenu: React.FC = () => {
       .find(({ type }: any) => type.id === typeId)
       .types.map(({ type }: any) => type);
   };
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const title = () =>
     Trail.newTrailPoint.type === 'userIssue'
@@ -138,6 +140,11 @@ const NewPointMenu: React.FC = () => {
         typeId(Trail.newTrailPoint.type!)!,
       )[0].id,
   );
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -155,6 +162,7 @@ const NewPointMenu: React.FC = () => {
     variables: {
       typeId: subType,
       userId: User.userId,
+      name,
       description,
       geom: {
         type: 'Point',
@@ -205,7 +213,16 @@ const NewPointMenu: React.FC = () => {
             </Select>
           </FormControl>
           <TextField
-            id="review"
+            id="name"
+            label="Name"
+            value={name}
+            onChange={handleNameChange}
+            placeholder="Describe the issue"
+            variant="outlined"
+            fullWidth
+          />
+          <TextField
+            id="description"
             label="Details"
             multiline
             rows="5"

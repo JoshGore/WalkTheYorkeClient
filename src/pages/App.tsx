@@ -1,25 +1,11 @@
 import React, { useEffect, useContext } from 'react';
-import { useQuery } from '@apollo/react-hooks';
 import loadable from '@loadable/component';
 import MenuContainer from './app/menu/MenuContainer';
-import TrailContext, {
-  TrailEntityProps,
-  TrailContextProps,
-  NewTrailPointProps,
-} from '../contexts/TrailContext';
+import TrailContext, { TrailContextProps } from '../contexts/TrailContext';
 import CornerMenu from './CornerMenu';
-import {
-  RouteDetailQuery,
-  RouteDetailQueryData,
-  RouteDetailQueryVars,
-  PointDetailQuery,
-  PointDetailQueryData,
-  PointDetailQueryVars,
-} from '../queries/objectInfoQueries';
-import PointDetails from './app/PointDetails';
 import NewPointMenu from './app/NewPointMenu';
 import MenuBreadcrumbs from './app/MenuBreadcrumbs';
-import SelectionDetails from './app/SelectionDetails';
+import SelectionDetailQueryManager from './app/SelectionDetailQueryManager';
 
 const SignupLogin = loadable(() => import('./SignupLogin'));
 const Map = loadable(() => import('./app/Map'));
@@ -54,7 +40,7 @@ const App: React.FC = () => {
       }
       body={
         TrailSelections.newTrailPoint.type === undefined ? (
-          <SelectionDetails
+          <SelectionDetailQueryManager
             type={
               TrailSelections.trailObject.type !== undefined
                 ? TrailSelections.trailObject.type

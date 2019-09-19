@@ -1,25 +1,31 @@
 import React, { useContext, useEffect } from 'react';
 
 import { useQuery, useSubscription, useMutation } from '@apollo/react-hooks';
-import {
-  RouteDetailQuery,
-  RouteDetailQueryData,
-  RouteDetailQueryVars,
-  PointDetailQuery,
-  PointDetailQueryData,
-  PointDetailQueryVars,
-} from '../../queries/objectInfoQueries';
 
 import {
+  ROUTE_DETAIL_QUERY,
+  POINT_DETAIL_QUERY,
+  USER_POINT_DETAIL_QUERY,
   ROUTE_COMMENT_SUBSCRIPTION_QUERY,
-  ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES,
+  POINT_COMMENT_SUBSCRIPTION_QUERY,
+  USER_POINT_COMMENT_SUBSCRIPTION_QUERY,
   ROUTE_REVIEWS_QUERY,
   POINT_REVIEWS_QUERY,
+  USER_POINT_REVIEWS_QUERY,
+  ROUTE_REVIEW_INSERT_QUERY,
+  POINT_REVIEW_INSERT_QUERY,
+  USER_POINT_REVIEW_INSERT_QUERY,
+  ROUTE_COMMENT_INSERT_QUERY,
+  POINT_COMMENT_INSERT_QUERY,
+  USER_POINT_COMMENT_INSERT_QUERY,
+  COMMENT_REPLY_INSERT_QUERY,
+  RouteDetailQueryData,
+  RouteDetailQueryVars,
   ReviewQueryVars,
   ReviewQueryData,
-  ROUTE_COMMENT_INSERT_QUERY,
-  COMMENT_REPLY_INSERT_QUERY,
-  ROUTE_REVIEW_INSERT_QUERY,
+  PointDetailQueryData,
+  PointDetailQueryVars,
+  ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES,
 } from '../../queries/queries';
 
 import TrailContext, {
@@ -37,7 +43,7 @@ interface SelectionDetailsProps {
   id: number;
 }
 
-const SelectionDetails: React.FC<{
+const SelectionDetailQueryManager: React.FC<{
   id: number;
   type: string;
 }> = ({ id, type }) => {
@@ -48,17 +54,24 @@ const SelectionDetails: React.FC<{
   const { loading: routeInfoLoading, data: routeInfo } = useQuery<
     RouteDetailQueryData,
     RouteDetailQueryVars
-  >(RouteDetailQuery, {
+  >(ROUTE_DETAIL_QUERY, {
     variables: { id: id as number },
     skip: queryType() !== 'route',
   });
   const { loading: pointInfoLoading, data: pointInfo } = useQuery<
     PointDetailQueryData,
     PointDetailQueryVars
-  >(PointDetailQuery, {
+  >(POINT_DETAIL_QUERY, {
     variables: { id: id as number },
     skip: queryType() !== 'point',
   });
+  const { loading: userPointInfoLoading, data: userPointInfo } = useQuery(
+    USER_POINT_DETAIL_QUERY,
+    {
+      variables: { id: id as number },
+      skip: queryType() !== 'userPoint',
+    },
+  );
   const {
     data: routeCommentsSubscription,
     loading: routeCommentsSubscriptionLoading,
@@ -69,6 +82,20 @@ const SelectionDetails: React.FC<{
       skip: queryType() !== 'route',
     },
   );
+  const {
+    data: pointCommentsSubscription,
+    loading: pointCommentsSubscriptionLoading,
+  } = useSubscription(POINT_COMMENT_SUBSCRIPTION_QUERY, {
+    variables: { id: id as number },
+    skip: queryType() !== 'point',
+  });
+  const {
+    data: userPointCommentsSubscription,
+    loading: userPointCommentsSubscriptionLoading,
+  } = useSubscription(USER_POINT_COMMENT_SUBSCRIPTION_QUERY, {
+    variables: { id: id as number },
+    skip: queryType() !== 'userPoint',
+  });
   const { loading: routeReviewsLoading, data: routeReviews } = useQuery<
     ReviewQueryData,
     ReviewQueryVars
@@ -83,7 +110,16 @@ const SelectionDetails: React.FC<{
     variables: { id },
     skip: queryType() !== 'point',
   });
-  const [commentOnObject] = useMutation(ROUTE_COMMENT_INSERT_QUERY);
+  const { loading: userPointReviewsLoading, data: userPointReviews } = useQuery(
+    USER_POINT_REVIEWS_QUERY,
+    {
+      variables: { id },
+      skip: queryType() !== 'userPoint',
+    },
+  );
+  const [commentOnRoute] = useMutation(ROUTE_COMMENT_INSERT_QUERY);
+  const [commentOnPoint] = useMutation(POINT_COMMENT_INSERT_QUERY);
+  const [commentOnUserPoint] = useMutation(USER_POINT_COMMENT_INSERT_QUERY);
   const [replyToComment] = useMutation(COMMENT_REPLY_INSERT_QUERY);
 
   interface SubmitCommentProps {
@@ -97,9 +133,25 @@ const SelectionDetails: React.FC<{
   }: SubmitCommentProps) =>
     commentThreadId === undefined
       ? queryType() === 'route'
-        ? commentOnObject({
+        ? commentOnRoute({
             variables: {
-              route: id,
+              routeId: id,
+              user: User.userId,
+              body: commentText,
+            },
+          })
+        : queryType() === 'point'
+        ? commentOnPoint({
+            variables: {
+              pointId: id,
+              user: User.userId,
+              body: commentText,
+            },
+          })
+        : queryType() === 'userPoint'
+        ? commentOnUserPoint({
+            variables: {
+              pointId: id,
               user: User.userId,
               body: commentText,
             },
@@ -114,6 +166,8 @@ const SelectionDetails: React.FC<{
         });
 
   const [submitRouteReview] = useMutation(ROUTE_REVIEW_INSERT_QUERY);
+  const [submitPointReview] = useMutation(POINT_REVIEW_INSERT_QUERY);
+  const [submitUserPointReview] = useMutation(USER_POINT_REVIEW_INSERT_QUERY);
 
   const submitReview = ({
     review,
@@ -132,7 +186,37 @@ const SelectionDetails: React.FC<{
           },
           refetchQueries: [
             {
-              query: ROUTE_REVIEWS_QUERY,
+              query: POINT_REVIEWS_QUERY,
+              variables: { id },
+            },
+          ],
+        })
+      : queryType() === 'point'
+      ? submitPointReview({
+          variables: {
+            point_id: id,
+            user_id: User.userId,
+            rating,
+            review,
+          },
+          refetchQueries: [
+            {
+              query: POINT_REVIEWS_QUERY,
+              variables: { id },
+            },
+          ],
+        })
+      : queryType() === 'userPoint'
+      ? submitUserPointReview({
+          variables: {
+            point_id: id,
+            user_id: User.userId,
+            rating,
+            review,
+          },
+          refetchQueries: [
+            {
+              query: USER_POINT_REVIEWS_QUERY,
               variables: { id },
             },
           ],
@@ -147,17 +231,34 @@ const SelectionDetails: React.FC<{
         routeReviews.reviews.length > 0
         ? routeReviews.reviews
         : []
-      : !pointReviewsLoading &&
+      : queryType() === 'point'
+      ? !pointReviewsLoading &&
         !!pointReviews &&
         !!pointReviews.reviews &&
         pointReviews.reviews.length > 0
-      ? pointReviews.reviews
+        ? pointReviews.reviews
+        : []
+      : queryType() === 'userPoint'
+      ? !userPointReviewsLoading &&
+        !!userPointReviews &&
+        !!userPointReviews.reviews &&
+        userPointReviews.reviews.length > 0
+        ? userPointReviews.reviews
+        : []
       : [];
   const commentThreads = () =>
     queryType() === 'route' &&
     !routeCommentsSubscriptionLoading &&
     routeCommentsSubscription !== undefined
       ? routeCommentsSubscription.routes_by_pk.route_comments
+      : queryType() === 'point' &&
+        !pointCommentsSubscriptionLoading &&
+        pointCommentsSubscription !== undefined
+      ? pointCommentsSubscription.points_by_pk.point_comments
+      : queryType() === 'userPoint' &&
+        !userPointCommentsSubscriptionLoading &&
+        userPointCommentsSubscription !== undefined
+      ? userPointCommentsSubscription.user_points_by_pk.user_point_comments
       : [];
   const name = () =>
     queryType() === 'route'
@@ -168,6 +269,10 @@ const SelectionDetails: React.FC<{
       ? !pointInfoLoading
         ? pointInfo!.points_by_pk.name
         : undefined
+      : queryType() === 'userPoint'
+      ? !userPointInfoLoading
+        ? userPointInfo!.user_points_by_pk.name
+        : undefined
       : undefined;
   const shortName = () =>
     queryType() === 'route'
@@ -175,7 +280,7 @@ const SelectionDetails: React.FC<{
         ? routeInfo!.routes_by_pk.short_name
         : undefined
       : undefined;
-  const body = () =>
+  const description = () =>
     queryType() === 'route'
       ? !routeInfoLoading
         ? routeInfo!.routes_by_pk.description
@@ -183,6 +288,10 @@ const SelectionDetails: React.FC<{
       : queryType() === 'point'
       ? !pointInfoLoading
         ? pointInfo!.points_by_pk.description
+        : undefined
+      : queryType() === 'userPoint'
+      ? !userPointInfoLoading
+        ? userPointInfo!.user_points_by_pk.description
         : undefined
       : undefined;
   const multimedia = () =>
@@ -222,17 +331,6 @@ const SelectionDetails: React.FC<{
         : undefined
       : undefined;
 
-  const title = () =>
-    queryType() === 'route'
-      ? !routeInfoLoading
-        ? routeInfo!.routes_by_pk.name
-        : undefined
-      : queryType() === 'point'
-      ? !pointInfoLoading
-        ? pointInfo!.points_by_pk.name
-        : undefined
-      : undefined;
-
   useEffect(() => {
     if (!routeInfoLoading && !!TrailSelections.trailSection.id) {
       TrailSelections.setTrailSection({
@@ -248,17 +346,25 @@ const SelectionDetails: React.FC<{
   return (
     <DisplayDetails
       loading={routeInfoLoading}
-      title={title()}
-      body={body()}
+      title={name()}
+      body={description()}
       multimedia={multimedia()}
       files={files()}
       count={count()}
       avgRating={avgRating()}
       id={id as number}
       queryType={queryType()}
-      showReviews={queryType() === 'route'}
+      showReviews={
+        queryType() === 'route' ||
+        queryType() === 'point' ||
+        queryType() === 'userPoint'
+      }
       reviews={reviews()}
-      showComments={queryType() === 'route'}
+      showComments={
+        queryType() === 'route' ||
+        queryType() === 'point' ||
+        queryType() === 'userPoint'
+      }
       commentThreads={commentThreads()}
       loggedIn={User.loggedIn}
       submitComment={submitComment}
@@ -267,4 +373,4 @@ const SelectionDetails: React.FC<{
   );
 };
 
-export default SelectionDetails;
+export default SelectionDetailQueryManager;
