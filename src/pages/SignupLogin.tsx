@@ -38,7 +38,7 @@ const SignupLogin: React.FC = () => {
     `,
     {
       variables: { userId: User.userId },
-      skip: !loadDetails,
+      skip: !loadDetails || User.userId === undefined,
       onCompleted: setUserVariables,
     },
   );
