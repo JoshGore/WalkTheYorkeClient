@@ -10,9 +10,6 @@
      "prettier/prettier": ["error"],
      "react/prop-types": 0,
      "max-lines": ["warn", 200],
-     "complexity": ["warn", 5],
-     "max-nested-callbacks": ["warn", 2],
-     "max-depth": ["warn", 3],
      "fp/no-mutation": "warn",
      "no-param-reassign": "warn",
      "fp/no-mutating-assign": "warn",
@@ -21,7 +18,6 @@
      "fp/no-this": "warn",
      "fp/no-loops": "warn",
      "fp/no-delete": "warn",
-     "max-params": ["warn", 2],
      "fp/no-throw": "warn"
    }
 }
