@@ -330,6 +330,14 @@ const SelectionDetailQueryManager: React.FC<{
         ? pointInfo!.reviews_aggregate.aggregate.avg.rating
         : undefined
       : undefined;
+  const loading = () =>
+    queryType() === 'route'
+      ? routeInfoLoading
+      : queryType() === 'point'
+      ? pointInfoLoading
+      : queryType() === 'userPoint'
+      ? userPointInfoLoading
+      : false;
 
   useEffect(() => {
     if (!routeInfoLoading && !!TrailSelections.trailSection.id) {
@@ -345,7 +353,7 @@ const SelectionDetailQueryManager: React.FC<{
   }, [routeInfoLoading, TrailSelections.trailSection.id]);
   return (
     <DisplayDetails
-      loading={routeInfoLoading}
+      loading={loading()}
       title={name()}
       body={description()}
       multimedia={multimedia()}
