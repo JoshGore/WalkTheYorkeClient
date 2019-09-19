@@ -227,7 +227,7 @@ const SelectionDetails: React.FC<{
       ? !routeInfoLoading
         ? routeInfo!.routes_by_pk.name
         : undefined
-      : queryType() === 'route'
+      : queryType() === 'point'
       ? !pointInfoLoading
         ? pointInfo!.points_by_pk.name
         : undefined
