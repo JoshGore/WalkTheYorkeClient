@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg4954"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="Bench.svg"
+   inkscape:export-filename="G:\University\Honours\Icons\Bench.png"
+   inkscape:export-xdpi="1"
+   inkscape:export-ydpi="1">
+  <defs
+     id="defs4948" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="144.13851"
+     inkscape:cy="165.22575"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g4975"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1137"
+     inkscape:window-x="1912"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata4951">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-197)">
+    <g
+       id="g4975"
+       transform="matrix(0.26458333,0,0,0.26458333,51.728481,250.53981)">
+      <path
+         id="path4958"
+         d="m 138.58683,-47.13748 h -281.97316 v -65.07073 h 281.97316 z m 25.81139,65.070729 h -333.59594 l -10.84512,21.690244 h 36.65651 v 43.380486 h 21.69024 V 39.623493 h 238.59268 v 43.380486 h 21.69024 V 39.623493 h 36.65651 z M 95.206346,-3.7569935 V -25.447237 H -100.00584 v 21.6902435 z"
+         inkscape:connector-curvature="0"
+         style="stroke-width:21.69024277" />
+      <text
+         id="text4960"
+         font-weight="bold"
+         font-size="5px"
+         y="40"
+         x="0"
+         style="font-weight:bold;font-size:5px;font-family:'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif;fill:#000000" />
+    </g>
+  </g>
+</svg>

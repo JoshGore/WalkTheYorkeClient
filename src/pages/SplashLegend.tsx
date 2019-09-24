@@ -17,6 +17,9 @@ import customTrailSign from './app/map/icons/custom-trail-sign.png';
 import walkTrailUse from './app/map/icons/walkTrailUse.png';
 import sharedTrailUse from './app/map/icons/sharedTrailUse.png';
 import rideTrailUse from './app/map/icons/rideTrailUse.png';
+import toilet from './app/map/icons/Toilet.png';
+import seat from './app/map/icons/Bench.png';
+import infoSign from './app/map/icons/Sign.png';
 
 const LegendEntry: React.FC<{
   interactive?: boolean;
@@ -150,6 +153,9 @@ const SplashLegend: React.FC<{
           interactive
           description="Shelter"
         />
+        <LegendEntry symbol={toilet} description="Toilet" />
+        <LegendEntry symbol={seat} description="Seat" />
+        <LegendEntry symbol={infoSign} description="Info Sign" />
         <LegendEntry symbol={customTrailSign} description="Marker" />
         <Typography variant="h6">The Research Project</Typography>
         <Typography variant="body2" gutterBottom>

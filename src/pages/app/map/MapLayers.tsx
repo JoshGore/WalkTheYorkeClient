@@ -6,6 +6,9 @@ import { TrailEntityProps } from '../../../contexts/TrailContext';
 // import shelter from './icons/custom-shelter-15.png';
 const shelter = require('./icons/custom-shelter-15.png');
 const marker = require('./icons/custom-trail-sign.png');
+const toilet = require('./icons/Toilet.png');
+const seat = require('./icons/Bench.png');
+const sign = require('./icons/Sign.png');
 
 interface MapLayersProps {
   trailSection: any;
@@ -66,6 +69,21 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         onError={() => console.log('image loading error')}
       />
       <Image
+        id="custom-toilet-icon"
+        url={toilet}
+        onError={() => console.log('image loading error')}
+      />
+      <Image
+        id="custom-seat-icon"
+        url={seat}
+        onError={() => console.log('image loading error')}
+      />
+      <Image
+        id="custom-info-sign-icon"
+        url={sign}
+        onError={() => console.log('image loading error')}
+      />
+      <Image
         id="custom-marker-icon"
         url={marker}
         onError={() => console.log('image loading error')}
@@ -121,6 +139,81 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         layout={{
           'icon-image': 'custom-marker-icon',
           'icon-size': 0.06,
+          'icon-allow-overlap': true,
+          'text-allow-overlap': false,
+          'icon-optional': false,
+          'text-optional': true,
+          'text-field': '{name}',
+          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
+          'text-size': 10,
+          'text-anchor': 'right',
+          'text-justify': 'right',
+          'text-max-width': 12,
+          'text-offset': [-1, 0],
+        }}
+        paint={{
+          'icon-opacity': 1,
+          'text-color': 'hsl(131, 83%, 19%)',
+        }}
+      />
+      <Layer
+        id="toilets"
+        type="symbol"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="toilets"
+        layout={{
+          'icon-image': 'custom-toilet-icon',
+          'icon-size': 0.2,
+          'icon-allow-overlap': true,
+          'text-allow-overlap': false,
+          'icon-optional': false,
+          'text-optional': true,
+          'text-field': '{name}',
+          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
+          'text-size': 10,
+          'text-anchor': 'right',
+          'text-justify': 'right',
+          'text-max-width': 12,
+          'text-offset': [-1, 0],
+        }}
+        paint={{
+          'icon-opacity': 1,
+          'text-color': 'hsl(131, 83%, 19%)',
+        }}
+      />
+      <Layer
+        id="seats"
+        type="symbol"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="seats"
+        layout={{
+          'icon-image': 'custom-seat-icon',
+          'icon-size': 0.2,
+          'icon-allow-overlap': true,
+          'text-allow-overlap': false,
+          'icon-optional': false,
+          'text-optional': true,
+          'text-field': '{name}',
+          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
+          'text-size': 10,
+          'text-anchor': 'right',
+          'text-justify': 'right',
+          'text-max-width': 12,
+          'text-offset': [-1, 0],
+        }}
+        paint={{
+          'icon-opacity': 1,
+          'text-color': 'hsl(131, 83%, 19%)',
+        }}
+      />
+      <Layer
+        id="info_signs"
+        type="symbol"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="information"
+        layout={{
+          'icon-image': 'custom-info-sign-icon',
+          'icon-size': 0.15,
           'icon-allow-overlap': true,
           'text-allow-overlap': false,
           'icon-optional': false,
