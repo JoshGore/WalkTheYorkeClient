@@ -44,6 +44,20 @@ const SUBMIT_USER_POINT = gql`
     }
   }
 `;
+const USER_POINT_TYPES_QUERY = gql`
+  {
+    types_by_pk(id: 15) {
+      types {
+        name
+        id
+        types {
+          name
+          id
+        }
+      }
+    }
+  }
+`;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,7 +75,17 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const NewPointMenu: React.FC = () => {
+interface NewPointMenuProps {
+  newPointCategoryTypeIds: [number | undefined, number | undefined];
+  setNewPointCategoryTypeIds: (
+    newPointCategoryTypeIds: [number | undefined, number | undefined],
+  ) => void;
+}
+
+const NewPointMenu: React.FC<NewPointMenuProps> = ({
+  newPointCategoryTypeIds,
+  setNewPointCategoryTypeIds,
+}) => {
   const classes = useStyles();
   const Trail = useContext(TrailContext);
   const User = useContext(UserContext);
@@ -134,11 +158,14 @@ const NewPointMenu: React.FC = () => {
       point: undefined,
     });
   const [subType, setSubType] = useState(
-    typeId(Trail.newTrailPoint.type!) !== undefined &&
-      typeOptions(
-        userPointTypeDummyReturn.types,
-        typeId(Trail.newTrailPoint.type!)!,
-      )[0].id,
+    newPointCategoryTypeIds[1] !== undefined
+      ? newPointCategoryTypeIds[1]
+      : newPointCategoryTypeIds[0] !== undefined
+      ? typeOptions(
+          userPointTypeDummyReturn.types,
+          newPointCategoryTypeIds[0],
+        )[0].id
+      : undefined,
   );
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {

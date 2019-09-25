@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import loadable from '@loadable/component';
 import MenuContainer from './app/menu/MenuContainer';
 import TrailContext, { TrailContextProps } from '../contexts/TrailContext';
@@ -28,6 +28,9 @@ const App: React.FC = () => {
     TrailSelections.trailSection.type === undefined
       ? undefined
       : TrailSelections.trailSection.shortName;
+  const [newPointCategoryTypeIds, setNewPointCategoryTypeIds] = useState<
+    [number | undefined, number | undefined]
+  >([undefined, undefined]);
 
   // body={bodyFromSelection(TrailSelections.currentTrailObject())}
   return (
@@ -53,13 +56,19 @@ const App: React.FC = () => {
             }
           />
         ) : (
-          <NewPointMenu />
+          <NewPointMenu
+            newPointCategoryTypeIds={newPointCategoryTypeIds}
+            setNewPointCategoryTypeIds={setNewPointCategoryTypeIds}
+          />
         )
       }
       mainContent={
         <>
           <SignupLogin />
-          <CornerMenu />
+          <CornerMenu
+            newPointCategoryTypeIds={newPointCategoryTypeIds}
+            setNewPointCategoryTypeIds={setNewPointCategoryTypeIds}
+          />
           <Map />
         </>
       }

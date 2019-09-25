@@ -40,7 +40,17 @@ interface BodyTextProps {
   body: string | undefined;
 }
 
-const CornerMenu: React.FC = () => {
+interface CornerMenuProps {
+  newPointCategoryTypeIds: [number | undefined, number | undefined];
+  setNewPointCategoryTypeIds: (
+    pointTypeId: [number | undefined, number | undefined],
+  ) => void;
+}
+
+const CornerMenu: React.FC<CornerMenuProps> = ({
+  newPointCategoryTypeIds,
+  setNewPointCategoryTypeIds,
+}) => {
   const classes = useStyles();
   const User = useContext<UserContextProps>(UserContext);
   const Trail = useContext<TrailContextProps>(TrailContext);
@@ -50,16 +60,15 @@ const CornerMenu: React.FC = () => {
   const [dialOpen, setDialOpen] = useState(false);
   const toggleDialMenu = () =>
     User.loggedIn ? setDialOpen(!dialOpen) : setDialOpen(false);
-  const setSubmissionMode = (
-    type: 'userIssue' | 'userPoint',
-    subType: string | undefined,
-  ) => {
+  // set category id
+  // set mode to trigger map
+  const setSubmissionMode = (type: number, subType: number | undefined) => {
     if (!Trail.newTrailPoint.type) {
       Trail.setNewTrailPoint({
         ...Trail.newTrailPoint,
-        type,
-        subType,
+        type: type === 16 ? 'userIssue' : type === 17 ? 'userPoint' : undefined,
       });
+      setNewPointCategoryTypeIds([type, subType]);
       toggleDialMenu();
     }
   };
@@ -104,16 +113,16 @@ const CornerMenu: React.FC = () => {
             icon={<AddLocationIcon />}
             tooltipTitle="Add Asset"
             tooltipOpen
-            onClick={() => setSubmissionMode('userPoint', undefined)}
+            onClick={() => setSubmissionMode(17, undefined)}
           />
           <SpeedDialAction
-            onClick={() => setSubmissionMode('userIssue', 'damage')}
+            onClick={() => setSubmissionMode(16, 19)}
             icon={<BugReportIcon />}
             tooltipTitle="Report Damage"
             tooltipOpen
           />
           <SpeedDialAction
-            onClick={() => setSubmissionMode('userIssue', 'hazard')}
+            onClick={() => setSubmissionMode(16, 18)}
             icon={<WarningIcon />}
             tooltipTitle="Report Hazard"
             tooltipOpen
