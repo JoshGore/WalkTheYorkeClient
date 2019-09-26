@@ -152,6 +152,10 @@ const Map: React.FC = () => {
       type: 'stage',
       id: (feature: any) => feature.properties.route_id,
     },
+    user_issues: {
+      type: 'userPoint',
+      id: (feature: any) => feature.id,
+    },
     user_points: {
       type: 'userPoint',
       id: (feature: any) => feature.id,

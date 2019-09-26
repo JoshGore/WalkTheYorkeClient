@@ -30,8 +30,9 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
           id
           description
           type {
+            typeId: id
             name
-            type_id
+            parentTypeId: type_id
           }
           geom
         }
@@ -41,12 +42,14 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
 
   const userPointsToGeoJson = (userPoints: any) => ({
     type: 'FeatureCollection',
-    features: userPoints.map(({ id, type: { name, type_id }, geom }: any) => ({
-      type: 'Feature',
-      id,
-      properties: { type: name, parentType: type_id },
-      geometry: geom,
-    })),
+    features: userPoints.map(
+      ({ id, type: { typeId, parentTypeId, name }, geom }: any) => ({
+        type: 'Feature',
+        id,
+        properties: { type: name, typeId, parentTypeId },
+        geometry: geom,
+      }),
+    ),
   });
   return (
     <>
@@ -93,12 +96,27 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         id="user_points"
         type="circle"
         sourceId="all_user_points"
+        paint={{'circle-color': 'mediumblue'}}
         onMouseMove={(evt: any) => {
           evt.target.getCanvas().style.cursor = 'pointer';
         }}
         onMouseLeave={(evt: any) => {
           evt.target.getCanvas().style.cursor = '';
         }}
+        filter={['==', 17, ['get', 'parentTypeId']]}
+      />
+      <Layer
+        id="user_issues"
+        type="circle"
+        sourceId="all_user_points"
+        paint={{'circle-color': 'red'}}
+        onMouseMove={(evt: any) => {
+          evt.target.getCanvas().style.cursor = 'pointer';
+        }}
+        onMouseLeave={(evt: any) => {
+          evt.target.getCanvas().style.cursor = '';
+        }}
+        filter={['==', 16, ['get', 'parentTypeId']]}
       />
       <Layer
         id="trail_shelters"
