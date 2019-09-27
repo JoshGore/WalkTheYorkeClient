@@ -4,8 +4,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { TrailEntityProps } from '../../../contexts/TrailContext';
 // import shelter from './icons/custom-shelter-15.png';
-const shelter = require('./icons/custom-shelter-15.png');
-const marker = require('./icons/custom-trail-sign.png');
+const shelter = require('./icons/shelter_teardrop.png');
+const marker = require('./icons/marker.png');
 const toilet = require('./icons/Toilet.png');
 const seat = require('./icons/Bench.png');
 const sign = require('./icons/Sign.png');
@@ -92,163 +92,12 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         onError={() => console.log('image loading error')}
       />
       {/* data-stack-placeholder layer places data under labels */}
-      <Layer
-        id="user_points"
-        type="circle"
-        sourceId="all_user_points"
-        paint={{'circle-color': 'mediumblue'}}
-        onMouseMove={(evt: any) => {
-          evt.target.getCanvas().style.cursor = 'pointer';
-        }}
-        onMouseLeave={(evt: any) => {
-          evt.target.getCanvas().style.cursor = '';
-        }}
-        filter={['==', 17, ['get', 'parentTypeId']]}
-      />
-      <Layer
-        id="user_issues"
-        type="circle"
-        sourceId="all_user_points"
-        paint={{'circle-color': 'red'}}
-        onMouseMove={(evt: any) => {
-          evt.target.getCanvas().style.cursor = 'pointer';
-        }}
-        onMouseLeave={(evt: any) => {
-          evt.target.getCanvas().style.cursor = '';
-        }}
-        filter={['==', 16, ['get', 'parentTypeId']]}
-      />
-      <Layer
-        id="trail_shelters"
-        type="symbol"
-        sourceId="walktheyorke_tile_server"
-        sourceLayer="trail_shelters"
-        layout={{
-          'icon-image': 'custom-shelter-icon',
-          'icon-size': 0.8,
-          'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
-        }}
-        paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
-        }}
-        onMouseMove={(evt: any) => {
-          evt.target.getCanvas().style.cursor = 'pointer';
-        }}
-        onMouseLeave={(evt: any) => {
-          evt.target.getCanvas().style.cursor = '';
-        }}
-      />
-      <Layer
-        id="trail_markers"
-        type="symbol"
-        sourceId="walktheyorke_tile_server"
-        sourceLayer="trail_markers"
-        layout={{
-          'icon-image': 'custom-marker-icon',
-          'icon-size': 0.06,
-          'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
-        }}
-        paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
-        }}
-      />
-      <Layer
-        id="toilets"
-        type="symbol"
-        sourceId="walktheyorke_tile_server"
-        sourceLayer="toilets"
-        layout={{
-          'icon-image': 'custom-toilet-icon',
-          'icon-size': 0.2,
-          'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
-        }}
-        paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
-        }}
-      />
-      <Layer
-        id="seats"
-        type="symbol"
-        sourceId="walktheyorke_tile_server"
-        sourceLayer="seats"
-        layout={{
-          'icon-image': 'custom-seat-icon',
-          'icon-size': 0.2,
-          'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
-        }}
-        paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
-        }}
-      />
-      <Layer
-        id="info_signs"
-        type="symbol"
-        sourceId="walktheyorke_tile_server"
-        sourceLayer="information"
-        layout={{
-          'icon-image': 'custom-info-sign-icon',
-          'icon-size': 0.15,
-          'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
-        }}
-        paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
-        }}
-      />
+      {includeTempStackPlaceholder && (
+        <Layer
+          id="data-stack-placeholder"
+          paint={{ backgroundColor: 'white' }}
+        />
+      )}
       {/* layer showing trail selections */}
       {/* case layer showing trail selections */}
       {/* layer showing trail */}
@@ -360,12 +209,164 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
           'line-width': ['interpolate', ['linear'], ['zoom'], 4, 2, 22, 10],
         }}
       />
-      {includeTempStackPlaceholder && (
-        <Layer
-          id="data-stack-placeholder"
-          paint={{ backgroundColor: 'white' }}
-        />
-      )}
+      <Layer
+        id="user_points"
+        type="circle"
+        sourceId="all_user_points"
+        paint={{ 'circle-color': 'mediumblue' }}
+        onMouseMove={(evt: any) => {
+          evt.target.getCanvas().style.cursor = 'pointer';
+        }}
+        onMouseLeave={(evt: any) => {
+          evt.target.getCanvas().style.cursor = '';
+        }}
+        filter={['==', 17, ['get', 'parentTypeId']]}
+      />
+      <Layer
+        id="user_issues"
+        type="circle"
+        sourceId="all_user_points"
+        paint={{ 'circle-color': 'red' }}
+        onMouseMove={(evt: any) => {
+          evt.target.getCanvas().style.cursor = 'pointer';
+        }}
+        onMouseLeave={(evt: any) => {
+          evt.target.getCanvas().style.cursor = '';
+        }}
+        filter={['==', 16, ['get', 'parentTypeId']]}
+      />
+      <Layer
+        id="trail_markers"
+        type="symbol"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_markers"
+        layout={{
+          'icon-image': 'custom-marker-icon',
+          'icon-size': 0.5,
+          'icon-allow-overlap': true,
+          'text-allow-overlap': false,
+          'icon-optional': false,
+          'text-optional': true,
+          'text-field': '{name}',
+          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
+          'text-size': 10,
+          'text-anchor': 'right',
+          'text-justify': 'right',
+          'text-max-width': 12,
+          'text-offset': [-1, 0],
+        }}
+        paint={{
+          'icon-opacity': 1,
+          'text-color': 'hsl(131, 83%, 19%)',
+        }}
+      />
+      <Layer
+        id="toilets"
+        type="symbol"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="toilets"
+        layout={{
+          'icon-image': 'custom-toilet-icon',
+          'icon-size': 0.2,
+          'icon-allow-overlap': true,
+          'text-allow-overlap': false,
+          'icon-optional': false,
+          'text-optional': true,
+          'text-field': '{name}',
+          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
+          'text-size': 10,
+          'text-anchor': 'right',
+          'text-justify': 'right',
+          'text-max-width': 12,
+          'text-offset': [-1, 0],
+        }}
+        paint={{
+          'icon-opacity': 1,
+          'text-color': 'hsl(131, 83%, 19%)',
+        }}
+      />
+      <Layer
+        id="seats"
+        type="symbol"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="seats"
+        layout={{
+          'icon-image': 'custom-seat-icon',
+          'icon-size': 0.2,
+          'icon-allow-overlap': true,
+          'text-allow-overlap': false,
+          'icon-optional': false,
+          'text-optional': true,
+          'text-field': '{name}',
+          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
+          'text-size': 10,
+          'text-anchor': 'right',
+          'text-justify': 'right',
+          'text-max-width': 12,
+          'text-offset': [-1, 0],
+        }}
+        paint={{
+          'icon-opacity': 1,
+          'text-color': 'hsl(131, 83%, 19%)',
+        }}
+      />
+      <Layer
+        id="info_signs"
+        type="symbol"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="information"
+        layout={{
+          'icon-image': 'custom-info-sign-icon',
+          'icon-size': 0.15,
+          'icon-allow-overlap': true,
+          'text-allow-overlap': false,
+          'icon-optional': false,
+          'text-optional': true,
+          'text-field': '{name}',
+          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
+          'text-size': 10,
+          'text-anchor': 'right',
+          'text-justify': 'right',
+          'text-max-width': 12,
+          'text-offset': [-1, 0],
+        }}
+        paint={{
+          'icon-opacity': 1,
+          'text-color': 'hsl(131, 83%, 19%)',
+        }}
+      />
+      <Layer
+        id="trail_shelters"
+        type="symbol"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_shelters"
+        layout={{
+          'icon-image': 'custom-shelter-icon',
+          'icon-size': 0.8,
+          'icon-anchor': 'bottom',
+          'icon-allow-overlap': true,
+          'text-allow-overlap': false,
+          'icon-optional': false,
+          'text-optional': true,
+          'text-field': '{name}',
+          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
+          'text-size': 10,
+          'text-anchor': 'right',
+          'text-justify': 'right',
+          'text-max-width': 12,
+          'text-offset': [-1, 0],
+        }}
+        paint={{
+          'icon-opacity': 1,
+          'text-color': 'hsl(131, 83%, 19%)',
+        }}
+        onMouseMove={(evt: any) => {
+          evt.target.getCanvas().style.cursor = 'pointer';
+        }}
+        onMouseLeave={(evt: any) => {
+          evt.target.getCanvas().style.cursor = '';
+        }}
+      />
     </>
   );
 };
