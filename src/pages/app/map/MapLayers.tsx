@@ -241,6 +241,7 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_markers"
         layout={{
+          'icon-anchor': 'bottom',
           'icon-image': 'custom-marker-icon',
           'icon-size': 0.5,
           'icon-allow-overlap': true,
@@ -316,8 +317,9 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         sourceId="walktheyorke_tile_server"
         sourceLayer="information"
         layout={{
+          'icon-anchor': 'bottom',
           'icon-image': 'custom-info-sign-icon',
-          'icon-size': 0.15,
+          'icon-size': 0.5,
           'icon-allow-overlap': true,
           'text-allow-overlap': false,
           'icon-optional': false,
