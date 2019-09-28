@@ -16,9 +16,9 @@
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="shelter_teardrop.svg"
-   inkscape:export-filename="\\wsl$\Ubuntu\home\jagore\development\WalkTheYorkeClient\src\pages\app\map\icons\shelter_teardrop.png"
-   inkscape:export-xdpi="34.770611"
-   inkscape:export-ydpi="34.770611">
+   inkscape:export-filename="G:\Development\WalkTheYorkeClient\src\pages\app\map\icons\shelter_teardrop.png"
+   inkscape:export-xdpi="48"
+   inkscape:export-ydpi="48">
   <defs
      id="defs2">
     <filter
@@ -43,8 +43,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.959798"
-     inkscape:cx="10.167334"
-     inkscape:cy="51.182883"
+     inkscape:cx="-6.5001826"
+     inkscape:cy="101.69051"
      inkscape:document-units="mm"
      inkscape:current-layer="g4932"
      showgrid="false"
@@ -71,7 +71,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -94,13 +94,15 @@
            cy="93.96904"
            rx="20.076782"
            ry="5.9346461"
-           transform="matrix(0.585807,0,0,0.585807,20.843204,41.393789)" />
+           transform="matrix(0.91486978,0,0,0.85613997,5.2984649,14.455331)" />
         <path
            id="path4930"
-           d="m 50.236235,8.0524702 c -16.01,0 -28.99,11.4799998 -28.99,28.9899998 0,24.43 28.99,34.26 28.99,59.26 0,-25 28.99,-35.35 28.99,-59.26 0,-16.01 -12.98,-28.9899998 -28.99,-28.9899998 z"
+           d="m 50.236235,9.886944 c -16.020812,0 -29.009578,11.021161 -29.009578,27.831312 0,23.453568 29.009578,32.890677 29.009578,56.891463 0,-24.000786 29.009578,-33.937111 29.009578,-56.891463 0,-15.370104 -12.988766,-27.831312 -29.009578,-27.831312 z"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="sscss"
-           style="opacity:1;fill:#664f3d;fill-opacity:1;stroke:#ffffff;stroke-width:2.82842697;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill;stroke-linejoin:miter;stroke-linecap:square" />
+           style="opacity:1;fill:#af2299;fill-opacity:1;stroke:#ffffff;stroke-width:2.77226233;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+           inkscape:export-xdpi="34.770611"
+           inkscape:export-ydpi="34.770611" />
         <g
            id="g4984"
            transform="matrix(1.0571051,0,0,1.008929,104.95031,19.469739)"

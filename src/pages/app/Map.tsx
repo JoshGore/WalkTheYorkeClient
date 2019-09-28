@@ -223,7 +223,6 @@ const Map: React.FC = () => {
     }
   }, [Trail.trailSection.id, Trail.trailSection.type, extentsLoading]);
 
-  // style="mapbox://styles/joshg/cjsv8vxg371cm1fmo1sscgou2"
   return (
     <>
       <ReactResizeDetector
