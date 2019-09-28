@@ -23,14 +23,19 @@ const useStyles = makeStyles(() =>
       position: 'absolute',
       top: 0,
       right: 0,
-      zIndex: 99,
     },
     button: {
       boxShadow: '4px 4px 10px -5px rgba(0,0,0,0.75)',
       padding: 0,
+      zIndex: 99,
     },
     loggedIn: {
       backgroundColor: '#3f51b5',
+    },
+    speedDial: {
+      '& .MuiButtonBase-root': {
+        zIndex: 99,
+      },
     },
   }),
 );
@@ -101,13 +106,20 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
           </Avatar>
         </IconButton>
       </div>
-      <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
+      <div
+        style={{
+          display: 'inline-block',
+          verticalAlign: 'top',
+          margin: 4,
+        }}
+      >
         <SpeedDial
           icon={<EditLocationIcon />}
           ariaLabel="map actions"
           open={dialOpen}
           onClick={toggleDialMenu}
           direction="down"
+          className={classes.speedDial}
         >
           <SpeedDialAction
             icon={<AddLocationIcon />}
