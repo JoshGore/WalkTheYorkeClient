@@ -4,7 +4,9 @@ import {
   createStyles,
   IconButton,
   Avatar,
+  Button,
 } from '@material-ui/core';
+import clsx from 'clsx';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import BugReportIcon from '@material-ui/icons/BugReport';
@@ -81,6 +83,25 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
   const openSplashLegend = () => setSplashLegendOpen(true);
   return (
     <div className={classes.container}>
+      <div
+        style={{
+          display: 'inline-block',
+          verticalAlign: 'top',
+          margin: 4,
+          height: '56px',
+          paddingTop: '10px',
+        }}
+      >
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          style={{ padding: '6px' }}
+          onClick={openSplashLegend}
+        >
+          Survey
+        </Button>
+      </div>
       <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
         <IconButton className={classes.button} onClick={handleLoginToggle}>
           <Avatar
