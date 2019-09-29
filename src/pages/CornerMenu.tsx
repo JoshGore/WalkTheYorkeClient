@@ -5,6 +5,7 @@ import {
   IconButton,
   Avatar,
   Button,
+  Link,
 } from '@material-ui/core';
 import clsx from 'clsx';
 import SpeedDial from '@material-ui/lab/SpeedDial';
@@ -97,7 +98,8 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
           color="secondary"
           className={classes.button}
           style={{ padding: '6px' }}
-          onClick={openSplashLegend}
+          href="https://www.surveymonkey.com/r/RQVKLBT"
+          target="_blank"
         >
           Survey
         </Button>
