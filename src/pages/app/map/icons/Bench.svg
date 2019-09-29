@@ -16,9 +16,9 @@
    id="svg4954"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="Bench.svg"
-   inkscape:export-filename="\\wsl$\Ubuntu\home\jagore\development\WalkTheYorkeClient\src\pages\app\map\icons\Bench.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96">
+   inkscape:export-filename="\\wsl$\Ubuntu\home\jagore\development\WalkTheYorkeClient\src\pages\app\map\icons\Bench - legend.png"
+   inkscape:export-xdpi="192"
+   inkscape:export-ydpi="192">
   <defs
      id="defs4948" />
   <sodipodi:namedview
@@ -29,14 +29,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="31.678384"
-     inkscape:cx="12.761681"
+     inkscape:cx="7.3005438"
      inkscape:cy="6.5626806"
      inkscape:document-units="mm"
      inkscape:current-layer="g4975"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1137"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      units="px"
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>

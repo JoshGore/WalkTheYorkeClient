@@ -12,14 +12,15 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 import InfoIcon from '@material-ui/icons/Info';
 import TouchAppIcon from '@material-ui/icons/TouchApp';
+
 import shelterTeardrop from './app/map/icons/shelter_teardrop.png';
-import marker from './app/map/icons/marker.png';
 import walkTrailUse from './app/map/icons/trail-walking - legend.png';
 import sharedTrailUse from './app/map/icons/shared - legend.png';
 import rideTrailUse from './app/map/icons/bicycling - legend.png';
-import toilet from './app/map/icons/Toilet.png';
-import seat from './app/map/icons/Bench.png';
-import infoSign from './app/map/icons/info_sign.png';
+import marker from './app/map/icons/marker - legend.png';
+import toilet from './app/map/icons/Toilet - legend.png';
+import seat from './app/map/icons/Bench - legend.png';
+import infoSign from './app/map/icons/info_sign - legend.png';
 
 const LegendEntry: React.FC<{
   interactive?: boolean;
@@ -153,7 +154,7 @@ const SplashLegend: React.FC<{
           interactive
           description="Shelter"
         />
-        <LegendEntry symbol={toilet} description="Toilet - in progress" />
+        <LegendEntry symbol={toilet} description="Toilet" />
         <LegendEntry symbol={seat} description="Seat" />
         <LegendEntry symbol={infoSign} description="Info Sign" />
         <LegendEntry symbol={marker} description="Marker" />
