@@ -186,7 +186,7 @@ const SelectionDetailQueryManager: React.FC<{
           },
           refetchQueries: [
             {
-              query: POINT_REVIEWS_QUERY,
+              query: ROUTE_REVIEWS_QUERY,
               variables: { id },
             },
           ],

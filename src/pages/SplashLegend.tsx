@@ -12,14 +12,14 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 import InfoIcon from '@material-ui/icons/Info';
 import TouchAppIcon from '@material-ui/icons/TouchApp';
-import customShelter15 from './app/map/icons/shelter_teardrop.png';
-import customTrailSign from './app/map/icons/custom-trail-sign.png';
+import shelterTeardrop from './app/map/icons/shelter_teardrop.png';
+import marker from './app/map/icons/marker.png';
 import walkTrailUse from './app/map/icons/trail-walking - legend.png';
 import sharedTrailUse from './app/map/icons/shared - legend.png';
 import rideTrailUse from './app/map/icons/bicycling - legend.png';
 import toilet from './app/map/icons/Toilet.png';
 import seat from './app/map/icons/Bench.png';
-import infoSign from './app/map/icons/Sign.png';
+import infoSign from './app/map/icons/info_sign.png';
 
 const LegendEntry: React.FC<{
   interactive?: boolean;
@@ -149,17 +149,14 @@ const SplashLegend: React.FC<{
           description="Foot Route"
         />
         <LegendEntry
-          symbol={customShelter15}
+          symbol={shelterTeardrop}
           interactive
           description="Shelter"
         />
         <LegendEntry symbol={toilet} description="Toilet - in progress" />
-        <LegendEntry symbol={seat} description="Seat - in progress" />
-        <LegendEntry symbol={infoSign} description="Info Sign - in progress" />
-        <LegendEntry
-          symbol={customTrailSign}
-          description="Marker - in progress"
-        />
+        <LegendEntry symbol={seat} description="Seat" />
+        <LegendEntry symbol={infoSign} description="Info Sign" />
+        <LegendEntry symbol={marker} description="Marker" />
         <Typography variant="h6">The Research Project</Typography>
         <Typography variant="body2" gutterBottom>
           <b>

@@ -16,9 +16,9 @@
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="shelter_teardrop.svg"
-   inkscape:export-filename="G:\Development\WalkTheYorkeClient\src\pages\app\map\icons\shelter_teardrop.png"
-   inkscape:export-xdpi="48"
-   inkscape:export-ydpi="48">
+   inkscape:export-filename="\\wsl$\Ubuntu\home\jagore\development\WalkTheYorkeClient\src\pages\app\map\icons\shelter_teardrop.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <defs
      id="defs2">
     <filter
@@ -42,9 +42,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="-6.5001826"
-     inkscape:cy="101.69051"
+     inkscape:zoom="1.8101934"
+     inkscape:cx="-44.352261"
+     inkscape:cy="149.95013"
      inkscape:document-units="mm"
      inkscape:current-layer="g4932"
      showgrid="false"
@@ -53,7 +53,7 @@
      inkscape:guide-bbox="true"
      inkscape:window-width="1920"
      inkscape:window-height="1137"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:pagecheckerboard="true">
@@ -71,7 +71,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -97,22 +97,22 @@
            transform="matrix(0.91486978,0,0,0.85613997,5.2984649,14.455331)" />
         <path
            id="path4930"
-           d="m 50.236235,9.886944 c -16.020812,0 -29.009578,11.021161 -29.009578,27.831312 0,23.453568 29.009578,32.890677 29.009578,56.891463 0,-24.000786 29.009578,-33.937111 29.009578,-56.891463 0,-15.370104 -12.988766,-27.831312 -29.009578,-27.831312 z"
+           d="m 50.236235,12.708986 c -14.953069,0 -27.07617,10.286631 -27.07617,25.976432 0,21.890452 27.07617,30.698604 27.07617,53.099804 0,-22.4012 27.07617,-31.675297 27.07617,-53.099804 0,-14.345729 -12.123101,-25.976432 -27.07617,-25.976432 z"
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="sscss"
-           style="opacity:1;fill:#af2299;fill-opacity:1;stroke:#ffffff;stroke-width:2.77226233;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+           style="opacity:1;fill:#af2299;fill-opacity:1;stroke:#ffffff;stroke-width:4.89705181;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
            inkscape:export-xdpi="34.770611"
            inkscape:export-ydpi="34.770611" />
         <g
            id="g4984"
-           transform="matrix(1.0571051,0,0,1.008929,104.95031,19.469739)"
+           transform="matrix(1.0170328,0,0,0.97068295,102.87623,20.711598)"
            style="stroke-width:0.36597225;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill">
           <g
              id="g4962"
              style="stroke-width:0.36597225;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill">
             <polygon
                id="polygon4952"
-               points="95.757,98.874 95.757,88.427 25.278,88.427 25.278,43.408 95.757,11.493 95.757,0.732 3.684,42.277 3.684,53.142 14.831,48.066 14.831,98.874 "
+               points="95.757,88.427 25.278,88.427 25.278,43.408 95.757,11.493 95.757,0.732 3.684,42.277 3.684,53.142 14.831,48.066 14.831,98.874 95.757,98.874 "
                transform="matrix(0.40755446,0,0,0.40755446,-74.471715,-2.5967875)"
                style="fill:#fffffc;fill-opacity:1;stroke:none;stroke-width:0.89797139;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill" />
             <g

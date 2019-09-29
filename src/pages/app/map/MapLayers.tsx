@@ -3,12 +3,12 @@ import { Source, Layer, Image } from 'react-mapbox-gl';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { TrailEntityProps } from '../../../contexts/TrailContext';
-// import shelter from './icons/custom-shelter-15.png';
+
 const shelter = require('./icons/shelter_teardrop.png');
 const marker = require('./icons/marker.png');
 const toilet = require('./icons/Toilet.png');
-const seat = require('./icons/Bench.png');
-const sign = require('./icons/Sign.png');
+const bench = require('./icons/Bench.png');
+const infoSign = require('./icons/info_sign.png');
 const shared = require('./icons/shared.png');
 const bicycling = require('./icons/bicycling.png');
 const trailWalking = require('./icons/trail-walking.png');
@@ -70,27 +70,27 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         }}
       />
       <Image
-        id="custom-shelter-icon"
+        id="shelter_teardrop"
         url={shelter}
         onError={() => console.log('image loading error')}
       />
       <Image
-        id="custom-toilet-icon"
+        id="toilet"
         url={toilet}
         onError={() => console.log('image loading error')}
       />
       <Image
-        id="custom-seat-icon"
-        url={seat}
+        id="bench"
+        url={bench}
         onError={() => console.log('image loading error')}
       />
       <Image
-        id="custom-info-sign-icon"
-        url={sign}
+        id="info_sign"
+        url={infoSign}
         onError={() => console.log('image loading error')}
       />
       <Image
-        id="custom-marker-icon"
+        id="marker"
         url={marker}
         onError={() => console.log('image loading error')}
       />
@@ -144,30 +144,51 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         filter={['==', 16, ['get', 'parentTypeId']]}
       />
       <Layer
-        id="trail_shelters"
+        id="shelter"
         before="user_issues"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_shelters"
         layout={{
-          'icon-image': 'custom-shelter-icon',
-          'icon-size': 0.6,
+          'icon-image': 'shelter_teardrop',
+          'icon-size': ['interpolate', ['linear'], ['zoom'], 8, 0.3, 22, 0.5],
+          'icon-offset': [0, 0],
+          'text-field': ['to-string', ['get', 'name']],
+          'text-size': ['interpolate', ['linear'], ['zoom'], 0, 6, 22, 12],
+          'text-anchor': 'top',
           'icon-anchor': 'bottom',
-          'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
         }}
         paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
+          'text-color': 'hsl(304, 100%, 31%)',
+          'text-halo-color': 'hsl(0, 2%, 100%)',
+          'text-halo-width': 1,
+          'text-translate': [0, 3],
+          'icon-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            0,
+            0,
+            8,
+            0,
+            8.25,
+            1,
+            22,
+            1,
+          ],
+          'text-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            0,
+            0,
+            9,
+            0,
+            9.2,
+            1,
+            22,
+            1,
+          ],
         }}
         onMouseMove={(evt: any) => {
           evt.target.getCanvas().style.cursor = 'pointer';
@@ -177,117 +198,169 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         }}
       />
       <Layer
-        id="info_signs"
-        before="trail_shelters"
+        id="information-sign"
+        before="shelter"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="information"
         layout={{
-          visibility: 'none',
-          'icon-anchor': 'bottom',
-          'icon-image': 'custom-info-sign-icon',
-          'icon-size': 0.5,
+          'icon-image': 'info_sign',
+          'text-field': ['to-string', ['get', 'name']],
+          'text-anchor': 'top',
+          'text-size': 9,
           'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
+          'icon-padding': 0,
+          'icon-anchor': 'bottom',
         }}
         paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
+          'text-color': '#591a03',
+          'text-halo-color': 'hsl(0, 91%, 100%)',
+          'text-halo-width': 1,
+          'text-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            11,
+            0,
+            11.2,
+            1,
+            22,
+            1,
+          ],
+          'icon-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            10,
+            0,
+            10.2,
+            1,
+            22,
+            1,
+          ],
         }}
       />
       <Layer
-        id="toilets"
-        before="info_signs"
+        id="toilet"
+        before="information-sign"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="toilets"
         layout={{
-          visibility: 'none',
-          'icon-image': 'custom-toilet-icon',
-          'icon-size': 0.2,
-          'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
+          'icon-image': 'toilet',
+          'text-field': ['to-string', ['get', 'name']],
+          'text-anchor': 'top',
+          'text-size': 11,
+          'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
+          'icon-padding': 0,
         }}
         paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
+          'icon-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            10,
+            0,
+            10.5,
+            1,
+            22,
+            1,
+          ],
+          'text-color': 'hsl(36, 80%, 16%)',
+          'text-translate': [0, 9],
+          'text-halo-color': 'hsl(0, 0%, 100%)',
+          'text-halo-width': 0.5,
+          'text-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            0,
+            0,
+            13,
+            0,
+            13.25,
+            1,
+            22,
+            1,
+          ],
         }}
       />
       <Layer
-        id="seats"
-        before="toilets"
+        id="seat"
+        before="toilet"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="seats"
         layout={{
-          visibility: 'none',
-          'icon-image': 'custom-seat-icon',
-          'icon-size': 0.2,
-          'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
+          'icon-image': 'bench',
+          'icon-size': 1,
+          'icon-padding': 0,
         }}
         paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
+          'icon-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            0,
+            0,
+            12,
+            0,
+            12.2,
+            1,
+            22,
+            1,
+          ],
         }}
       />
       <Layer
-        id="trail_markers"
-        before="seats"
+        id="trail-marker"
+        before="seat"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_markers"
         layout={{
-          visibility: 'none',
-          'icon-anchor': 'bottom',
-          'icon-image': 'custom-marker-icon',
-          'icon-size': 0.5,
+          'icon-image': 'marker',
+          'text-field': ['to-string', ['get', 'name']],
+          'text-size': 9,
+          'text-anchor': 'bottom-left',
+          'text-font': ['Open Sans Light Italic', 'Arial Unicode MS Regular'],
           'icon-allow-overlap': true,
-          'text-allow-overlap': false,
-          'icon-optional': false,
-          'text-optional': true,
-          'text-field': '{name}',
-          'text-font': ['Open Sans Italic', 'Arial Unicode MS Regular'],
-          'text-size': 10,
-          'text-anchor': 'right',
-          'text-justify': 'right',
-          'text-max-width': 12,
-          'text-offset': [-1, 0],
+          'icon-padding': 0,
+          'icon-anchor': 'bottom',
         }}
         paint={{
-          'icon-opacity': 1,
-          'text-color': 'hsl(131, 83%, 19%)',
+          'text-color': '#591a03',
+          'text-translate': [6, -4],
+          'text-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            0,
+            0,
+            14,
+            0,
+            14.25,
+            1,
+            22,
+            1,
+          ],
+          'icon-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            0,
+            0,
+            13,
+            0,
+            13.25,
+            1,
+            22,
+            1,
+          ],
         }}
       />
       <Layer
-        id="trail_line_all_target"
+        id="trail-line-target"
         before="data-stack-placeholder"
         type="line"
         sourceId="walktheyorke_tile_server"
@@ -304,14 +377,23 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         }}
       />
       <Layer
-        id="trail_line_all_symbol"
-        before="trail_line_all_target"
+        id="trail-line-icons"
+        before="trail-line-target"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_stages"
         layout={{
+          visibility: 'visible',
           'symbol-placement': 'line',
-          'symbol-spacing': 100,
+          'symbol-spacing': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            8,
+            20,
+            22,
+            200,
+          ],
           'icon-rotation-alignment': 'viewport',
           'icon-image': [
             'match',
@@ -324,18 +406,32 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
             'trail-walking',
             '',
           ],
+          'icon-padding': 0,
+        }}
+        paint={{
+          'icon-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            8,
+            0,
+            8.2,
+            1,
+            22,
+            1,
+          ],
         }}
       />
       <Layer
-        id="trail_line_all"
-        before="trail_line_all_symbol"
+        id="trail-line-plain"
+        before="trail-line-icons"
         type="line"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_stages"
         layout={{
+          visibility: selectedStage === undefined ? 'visible' : 'none',
           'line-join': 'round',
           'line-cap': 'round',
-          visibility: selectedStage === undefined ? 'visible' : 'none',
         }}
         paint={{
           'line-color': [
@@ -353,30 +449,31 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         }}
       />
       <Layer
-        id="trail_line_all_case"
-        before="trail_line_all"
+        id="trail-line-case"
+        before="trail-line-plain"
         type="line"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_stages"
         layout={{
+          visibility: selectedStage === undefined ? 'visible' : 'none',
           'line-join': 'round',
           'line-cap': 'round',
-          visibility: selectedStage === undefined ? 'visible' : 'none',
         }}
         paint={{
-          'line-color': 'white',
+          'line-color': 'hsl(0, 0%, 100%)',
           'line-width': 6,
         }}
       />
       <Layer
-        id="trail_line_all_highlight"
-        before="trail_line_all_case"
+        id="trail-line-selection"
+        before="trail-line-case"
         type="line"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_stages"
         layout={{
           'line-join': 'round',
           'line-cap': 'round',
+          visibility: 'visible',
         }}
         paint={{
           'line-color': [
@@ -399,17 +496,17 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         ]}
       />
       <Layer
-        id="trail_line_all_highlight_case"
-        before="trail_line_all_highlight"
+        id="trail-line-case-selection"
+        before="trail-line-selection"
         type="line"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_stages"
         layout={{
           'line-join': 'round',
-          'line-cap': 'round',
+          visibility: 'visible',
         }}
         paint={{
-          'line-color': 'white',
+          'line-color': 'hsl(0, 0%, 100%)',
           'line-width': 8,
         }}
         filter={[
@@ -419,8 +516,8 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         ]}
       />
       <Layer
-        id="trail_line_all_dashed"
-        before="trail_line_all_highlight_case"
+        id="trail-line-dashed"
+        before="trail-line-case-selection"
         type="line"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_stages"

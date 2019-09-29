@@ -148,7 +148,7 @@ const Map: React.FC = () => {
       type: 'point',
       id: (feature: any) => feature.id,
     },
-    trail_line_all_target: {
+    'trail-line-target': {
       type: 'stage',
       id: (feature: any) => feature.properties.route_id,
     },
