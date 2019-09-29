@@ -144,7 +144,7 @@ const Map: React.FC = () => {
   };
 
   const mapLayerTypes: any = {
-    trail_shelters: {
+    shelter: {
       type: 'point',
       id: (feature: any) => feature.id,
     },
