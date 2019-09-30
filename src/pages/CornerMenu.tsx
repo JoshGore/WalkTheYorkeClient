@@ -5,9 +5,9 @@ import {
   IconButton,
   Avatar,
   Button,
-  Link,
+  Tooltip,
+  ClickAwayListener,
 } from '@material-ui/core';
-import clsx from 'clsx';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import BugReportIcon from '@material-ui/icons/BugReport';
@@ -40,6 +40,11 @@ const useStyles = makeStyles(() =>
         zIndex: 99,
       },
     },
+    speedDialDisabled: {
+      '& .MuiSpeedDial-fab': {
+        backgroundColor: '#bdbdbd',
+      },
+    },
   }),
 );
 
@@ -66,10 +71,17 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
     User.setLoginMenuOpen(!User.loginMenuOpen);
   };
   const [dialOpen, setDialOpen] = useState(false);
-  const toggleDialMenu = () =>
-    User.loggedIn ? setDialOpen(!dialOpen) : setDialOpen(false);
-  // set category id
-  // set mode to trigger map
+  const [showLoginTooltip, setShowLoginTooltip] = useState(false);
+  const handleHideLoginTooltip = () => setShowLoginTooltip(false);
+  const handleShowLoginTooltip = () => setShowLoginTooltip(true);
+  const toggleDialMenu = () => {
+    if (User.loggedIn) {
+      setDialOpen(!dialOpen);
+    } else {
+      setDialOpen(false);
+      setShowLoginTooltip(true);
+    }
+  };
   const setSubmissionMode = (type: number, subType: number | undefined) => {
     if (!Trail.newTrailPoint.type) {
       Trail.setNewTrailPoint({
@@ -136,33 +148,57 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
           margin: 4,
         }}
       >
-        <SpeedDial
-          icon={<EditLocationIcon />}
-          ariaLabel="map actions"
-          open={dialOpen}
-          onClick={toggleDialMenu}
-          direction="down"
-          className={classes.speedDial}
-        >
-          <SpeedDialAction
-            icon={<AddLocationIcon />}
-            tooltipTitle="Add Asset"
-            tooltipOpen
-            onClick={() => setSubmissionMode(17, undefined)}
-          />
-          <SpeedDialAction
-            onClick={() => setSubmissionMode(16, 19)}
-            icon={<BugReportIcon />}
-            tooltipTitle="Report Damage"
-            tooltipOpen
-          />
-          <SpeedDialAction
-            onClick={() => setSubmissionMode(16, 18)}
-            icon={<WarningIcon />}
-            tooltipTitle="Report Hazard"
-            tooltipOpen
-          />
-        </SpeedDial>
+        {User.loggedIn ? (
+          <SpeedDial
+            icon={<EditLocationIcon />}
+            ariaLabel="map actions"
+            open={dialOpen}
+            onClick={toggleDialMenu}
+            direction="down"
+            className={`${classes.speedDial} ${
+              User.loggedIn ? '' : classes.speedDialDisabled
+            }`}
+          >
+            <SpeedDialAction
+              icon={<AddLocationIcon />}
+              tooltipTitle="Add Asset"
+              tooltipOpen
+              onClick={() => setSubmissionMode(17, undefined)}
+            />
+            <SpeedDialAction
+              onClick={() => setSubmissionMode(16, 19)}
+              icon={<BugReportIcon />}
+              tooltipTitle="Report Damage"
+              tooltipOpen
+            />
+            <SpeedDialAction
+              onClick={() => setSubmissionMode(16, 18)}
+              icon={<WarningIcon />}
+              tooltipTitle="Report Hazard"
+              tooltipOpen
+            />
+          </SpeedDial>
+        ) : (
+          <ClickAwayListener onClickAway={handleHideLoginTooltip}>
+            <div>
+              <Tooltip
+                onClose={handleHideLoginTooltip}
+                onOpen={handleShowLoginTooltip}
+                open={showLoginTooltip}
+                title="Login to add points"
+              >
+                <IconButton
+                  className={classes.button}
+                  onClick={handleShowLoginTooltip}
+                >
+                  <Avatar style={{ height: 56, width: 56 }}>
+                    <EditLocationIcon />
+                  </Avatar>
+                </IconButton>
+              </Tooltip>
+            </div>
+          </ClickAwayListener>
+        )}
       </div>
     </div>
   );
