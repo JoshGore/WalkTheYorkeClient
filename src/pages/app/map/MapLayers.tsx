@@ -5,6 +5,7 @@ import { gql } from 'apollo-boost';
 import { TrailEntityProps } from '../../../contexts/TrailContext';
 
 const shelter = require('./icons/shelter_teardrop.png');
+const selected = require('./icons/selected_teardrop.png');
 const marker = require('./icons/marker.png');
 const toilet = require('./icons/Toilet.png');
 const bench = require('./icons/Bench.png');
@@ -17,6 +18,10 @@ interface MapLayersProps {
   trailSection: any;
   trailObject: any;
   selectedStage: number | undefined;
+  selectedFeatureLayerId: {
+    layer: string | undefined;
+    id: number | undefined;
+  };
 }
 
 const WALKTHEYORKE_TILE_SERVER_SOURCE = {
@@ -24,7 +29,10 @@ const WALKTHEYORKE_TILE_SERVER_SOURCE = {
   tiles: [process.env.REACT_APP_TILES_URL],
 };
 
-const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
+const MapLayers: React.FC<MapLayersProps> = ({
+  selectedStage,
+  selectedFeatureLayerId,
+}) => {
   const includeTempStackPlaceholder = false;
   const { loading: userPointsLoading, data: userPoints } = useQuery(
     gql`
@@ -72,6 +80,11 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
       <Image
         id="shelter_teardrop"
         url={shelter}
+        onError={() => console.log('image loading error')}
+      />
+      <Image
+        id="selected_teardrop"
+        url={selected}
         onError={() => console.log('image loading error')}
       />
       <Image
@@ -150,16 +163,66 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_shelters"
         layout={{
-          'icon-image': 'shelter_teardrop',
+          'icon-image': [
+            'match',
+            ['id'],
+            [
+              selectedFeatureLayerId.layer === 'shelter'
+                ? selectedFeatureLayerId.id
+                : '',
+            ],
+            'selected_teardrop',
+            'shelter_teardrop',
+          ],
           'icon-size': ['interpolate', ['linear'], ['zoom'], 8, 0.3, 22, 0.5],
           'icon-offset': [0, 0],
           'text-field': ['to-string', ['get', 'name']],
-          'text-size': ['interpolate', ['linear'], ['zoom'], 0, 6, 22, 12],
+          'text-size': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            0,
+            [
+              'match',
+              ['id'],
+              [
+                selectedFeatureLayerId.layer === 'shelter'
+                  ? selectedFeatureLayerId.id
+                  : '',
+              ],
+              8,
+              6,
+            ],
+            22,
+            [
+              'match',
+              ['id'],
+              [
+                selectedFeatureLayerId.layer === 'shelter'
+                  ? selectedFeatureLayerId.id
+                  : '',
+              ],
+              14,
+              12,
+            ],
+          ],
           'text-anchor': 'top',
           'icon-anchor': 'bottom',
+          'icon-allow-overlap': true,
+          'text-allow-overlap': true,
         }}
         paint={{
-          'text-color': 'hsl(304, 100%, 31%)',
+          'text-color': [
+            'match',
+            ['id'],
+            [
+              selectedFeatureLayerId.layer === 'shelter'
+                ? selectedFeatureLayerId.id
+                : '',
+            ],
+            '#9e0000',
+            'hsl(304, 100%, 31%)',
+          ],
           'text-halo-color': 'hsl(0, 2%, 100%)',
           'text-halo-width': 1,
           'text-translate': [0, 3],
@@ -167,10 +230,18 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
             'interpolate',
             ['linear'],
             ['zoom'],
-            0,
-            0,
             8,
-            0,
+            [
+              'match',
+              ['id'],
+              [
+                selectedFeatureLayerId.layer === 'shelter'
+                  ? selectedFeatureLayerId.id
+                  : '',
+              ],
+              1,
+              0,
+            ],
             8.25,
             1,
             22,
@@ -180,10 +251,18 @@ const MapLayers: React.FC<MapLayersProps> = ({ selectedStage }) => {
             'interpolate',
             ['linear'],
             ['zoom'],
-            0,
-            0,
             9,
-            0,
+            [
+              'match',
+              ['id'],
+              [
+                selectedFeatureLayerId.layer === 'shelter'
+                  ? selectedFeatureLayerId.id
+                  : '',
+              ],
+              1,
+              0,
+            ],
             9.2,
             1,
             22,

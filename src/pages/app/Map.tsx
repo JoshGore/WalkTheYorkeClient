@@ -90,6 +90,14 @@ const Map: React.FC = () => {
     map && map.resize();
   };
 
+  const [selectedFeatureLayerId, setSelectedFeatureLayerId] = useState<{
+    id: number | undefined;
+    layer: string | undefined;
+  }>({
+    id: undefined,
+    layer: undefined,
+  });
+
   // needs to be in effect to ensure state is not stale
   useEffect(() => {
     // this function is extremely slow due to object spreading and stale props
@@ -100,6 +108,10 @@ const Map: React.FC = () => {
       const firstInteractive = interactiveFeatureTypeId(
         map.queryRenderedFeatures(clickLocation),
       );
+      setSelectedFeatureLayerId({
+        layer: firstInteractive.layerId,
+        id: firstInteractive.id,
+      });
       const undefinedProperties = {
         name: undefined,
         shortName: undefined,
@@ -167,6 +179,8 @@ const Map: React.FC = () => {
 
   const featureId = (feature: any) =>
     feature && feature.layer && mapLayerTypes[feature.layer.id].id(feature);
+  const featureLayerId = (feature: any) =>
+    feature && feature.layer && feature.layer.id;
 
   const firstInteractiveFeature = (renderedFeatures: any) =>
     renderedFeatures.find((feature: any) =>
@@ -176,6 +190,7 @@ const Map: React.FC = () => {
   interface interactiveFeatureTypeIdProps {
     type: 'stage' | 'point' | 'userPoint' | undefined;
     id: number | undefined;
+    layerId: string | undefined;
   }
 
   const interactiveFeatureTypeId = (
@@ -184,6 +199,7 @@ const Map: React.FC = () => {
     return {
       type: featureType(firstInteractiveFeature(renderedFeatures)),
       id: featureId(firstInteractiveFeature(renderedFeatures)),
+      layerId: featureLayerId(firstInteractiveFeature(renderedFeatures)),
     };
   };
 
@@ -250,6 +266,7 @@ const Map: React.FC = () => {
               ? Trail.trailSection.id
               : undefined
           }
+          selectedFeatureLayerId={selectedFeatureLayerId}
         />
       </MapComponent>
     </>
