@@ -582,6 +582,7 @@ const MapLayers: React.FC<MapLayersProps> = ({
         sourceLayer="trail_stages"
         layout={{
           'line-join': 'round',
+          'line-cap': 'round',
           visibility: 'visible',
         }}
         paint={{
