@@ -157,72 +157,75 @@ const MapLayers: React.FC<MapLayersProps> = ({
         filter={['==', 16, ['get', 'parentTypeId']]}
       />
       <Layer
+        id="shelter-selection"
+        before=""
+        type="symbol"
+        sourceId="walktheyorke_tile_server"
+        sourceLayer="trail_shelters"
+        layout={{
+          'text-size': ['interpolate', ['linear'], ['zoom'], 0, 8, 22, 14],
+          'icon-offset': [0, 0],
+          'icon-image': 'selected_teardrop',
+          'icon-allow-overlap': true,
+          visibility: 'visible',
+          'icon-size': ['interpolate', ['linear'], ['zoom'], 8, 0.3, 22, 0.5],
+          'text-anchor': 'top',
+          'text-field': ['to-string', ['get', 'name']],
+          'icon-anchor': 'bottom',
+        }}
+        paint={{
+          'text-color': '#9e0000',
+          'text-halo-color': 'hsl(0, 2%, 100%)',
+          'text-halo-width': 1,
+          'text-translate': [0, 7],
+          'icon-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            8,
+            1,
+            8.25,
+            1,
+            22,
+            1,
+          ],
+          'text-opacity': 1,
+        }}
+        filter={[
+          'all',
+          [
+            'match',
+            ['id'],
+            [
+              selectedFeatureLayerId.layer === 'shelter'
+                ? selectedFeatureLayerId.id
+                : '',
+            ],
+            true,
+            false,
+          ],
+        ]}
+      />
+      <Layer
         id="shelter"
         before="user_issues"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_shelters"
         layout={{
-          'icon-image': [
-            'match',
-            ['id'],
-            [
-              selectedFeatureLayerId.layer === 'shelter'
-                ? selectedFeatureLayerId.id
-                : '',
-            ],
-            'selected_teardrop',
-            'shelter_teardrop',
-          ],
+          'icon-image': 'shelter_teardrop',
           'icon-size': ['interpolate', ['linear'], ['zoom'], 8, 0.3, 22, 0.5],
           'icon-offset': [0, 0],
           'text-field': ['to-string', ['get', 'name']],
-          'text-size': [
-            'interpolate',
-            ['linear'],
-            ['zoom'],
-            0,
-            [
-              'match',
-              ['id'],
-              [
-                selectedFeatureLayerId.layer === 'shelter'
-                  ? selectedFeatureLayerId.id
-                  : '',
-              ],
-              8,
-              6,
-            ],
-            22,
-            [
-              'match',
-              ['id'],
-              [
-                selectedFeatureLayerId.layer === 'shelter'
-                  ? selectedFeatureLayerId.id
-                  : '',
-              ],
-              14,
-              12,
-            ],
-          ],
+          'text-size': ['interpolate', ['linear'], ['zoom'], 0, 6, 22, 12],
           'text-anchor': 'top',
           'icon-anchor': 'bottom',
           'icon-allow-overlap': true,
-          'text-allow-overlap': true,
+          'text-allow-overlap': false,
         }}
+        minZoom={8}
         paint={{
-          'text-color': [
-            'match',
-            ['id'],
-            [
-              selectedFeatureLayerId.layer === 'shelter'
-                ? selectedFeatureLayerId.id
-                : '',
-            ],
-            '#9e0000',
-            'hsl(304, 100%, 31%)',
-          ],
+          'text-color': 'hsl(304, 100%, 31%)',
           'text-halo-color': 'hsl(0, 2%, 100%)',
           'text-halo-width': 1,
           'text-translate': [0, 3],
@@ -231,17 +234,7 @@ const MapLayers: React.FC<MapLayersProps> = ({
             ['linear'],
             ['zoom'],
             8,
-            [
-              'match',
-              ['id'],
-              [
-                selectedFeatureLayerId.layer === 'shelter'
-                  ? selectedFeatureLayerId.id
-                  : '',
-              ],
-              1,
-              0,
-            ],
+            0,
             8.25,
             1,
             22,
@@ -252,17 +245,7 @@ const MapLayers: React.FC<MapLayersProps> = ({
             ['linear'],
             ['zoom'],
             9,
-            [
-              'match',
-              ['id'],
-              [
-                selectedFeatureLayerId.layer === 'shelter'
-                  ? selectedFeatureLayerId.id
-                  : '',
-              ],
-              1,
-              0,
-            ],
+            0,
             9.2,
             1,
             22,
