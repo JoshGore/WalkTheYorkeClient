@@ -13,6 +13,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
+import SendIcon from '@material-ui/icons/Send';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
@@ -143,8 +144,33 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
       .find(({ type }: any) => type.id === typeId)
       .types.map(({ type }: any) => type);
   };
+  const [subType, setSubType] = useState(
+    newPointCategoryTypeIds[1] !== undefined
+      ? newPointCategoryTypeIds[1]
+      : newPointCategoryTypeIds[0] !== undefined
+      ? typeOptions(
+          userPointTypeDummyReturn.types,
+          newPointCategoryTypeIds[0],
+        )[0].id
+      : undefined,
+  );
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const fieldsValid = () => ({
+    location: Trail.newTrailPoint.point !== undefined,
+    subType: true,
+    name: name.length > 0,
+    description: description.length > 0,
+    all() {
+      return (
+        this.location &&
+        this.subType &&
+        this.name &&
+        this.description &&
+        this.location
+      );
+    },
+  });
   const title = () =>
     Trail.newTrailPoint.type === 'userIssue'
       ? 'Submit Issue'
@@ -157,16 +183,6 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
       subType: undefined,
       point: undefined,
     });
-  const [subType, setSubType] = useState(
-    newPointCategoryTypeIds[1] !== undefined
-      ? newPointCategoryTypeIds[1]
-      : newPointCategoryTypeIds[0] !== undefined
-      ? typeOptions(
-          userPointTypeDummyReturn.types,
-          newPointCategoryTypeIds[0],
-        )[0].id
-      : undefined,
-  );
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -223,9 +239,9 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
             <CancelIcon style={{ marginRight: 4 }} />
             Cancel
           </Button>
-          <Button size="small" onClick={handleSubmit}>
-            Submit
-          </Button>
+          {!fieldsValid().location && (
+            <Typography variant="subtitle1">Tap Map to Add Point</Typography>
+          )}
           <FormControl variant="outlined">
             <Select variant="outlined" value={subType} onChange={updateSubType}>
               {typeId(Trail.newTrailPoint.type!) !== undefined &&
@@ -259,6 +275,17 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
             variant="outlined"
             fullWidth
           />
+          <div>
+            <Button
+              size="small"
+              onClick={handleSubmit}
+              disabled={!fieldsValid().all()}
+              style={{ marginRight: 0 }}
+            >
+              Submit
+              <SendIcon />
+            </Button>
+          </div>
         </Paper>
       </Grid>
     </Grid>
