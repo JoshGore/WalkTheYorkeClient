@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import bbox from '@turf/bbox';
 import { BBox, featureCollection } from '@turf/helpers';
+import mapboxgl from 'mapbox-gl';
 import MapLayers from './map/MapLayers';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import { TrailSectionProps, TrailObjectProps } from '../types';
@@ -83,6 +84,13 @@ const Map: React.FC = () => {
 
   const onStyleLoad = (map: mapboxgl.Map) => {
     setMap(map);
+    const geolocate = new mapboxgl.GeolocateControl({
+      trackUserLocation: true,
+      fitBoundsOptions: {
+        maxZoom: map.getZoom(),
+      },
+    });
+    map.addControl(geolocate, 'top-left');
   };
   const [mapDimensions, setMapDimensions] = useState({ width: 0, height: 0 });
   const handleResize = (height: number, width: number) => {
