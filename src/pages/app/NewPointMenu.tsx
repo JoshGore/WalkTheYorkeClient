@@ -15,7 +15,7 @@ import {
 import CancelIcon from '@material-ui/icons/Cancel';
 import SendIcon from '@material-ui/icons/Send';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import UserContext, { UserContextProps } from '../../contexts/UserContext';
 // dropdown
@@ -90,70 +90,33 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
   const classes = useStyles();
   const Trail = useContext(TrailContext);
   const User = useContext(UserContext);
-  // eventually retrieve from backend
-  const userPointTypeDummyReturn = {
-    name: 'user point type',
-    id: 15,
-    types: [
-      {
-        type: {
-          name: 'issue',
-          id: 16,
-        },
-        types: [
-          {
-            type: {
-              name: 'hazard',
-              id: 18,
-            },
-          },
-          {
-            type: {
-              name: 'damage',
-              id: 19,
-            },
-          },
-        ],
-      },
-      {
-        type: {
-          name: 'user feature',
-          id: 17,
-        },
-        types: [
-          {
-            type: {
-              name: 'trail marker',
-              id: 20,
-            },
-          },
-          {
-            type: {
-              name: 'camping spot',
-              id: 21,
-            },
-          },
-        ],
-      },
-    ],
-  };
+  const { loading: userPointTypesLoading, data: userPointTypes } = useQuery(
+    USER_POINT_TYPES_QUERY,
+  );
   const typeId = (typeName: string) =>
     typeName === 'userIssue' ? 16 : typeName === 'userPoint' ? 17 : undefined;
   const typeOptions = (userPointTypes: any, typeId: number) => {
     return userPointTypes
-      .find(({ type }: any) => type.id === typeId)
-      .types.map(({ type }: any) => type);
+      .find((type: any) => type.id === typeId)
+      .types.map((type: any) => type);
   };
-  const [subType, setSubType] = useState(
+  const [subType, setSubType] = useState<number | undefined>(
     newPointCategoryTypeIds[1] !== undefined
       ? newPointCategoryTypeIds[1]
-      : newPointCategoryTypeIds[0] !== undefined
-      ? typeOptions(
-          userPointTypeDummyReturn.types,
-          newPointCategoryTypeIds[0],
-        )[0].id
       : undefined,
   );
+  useEffect(() => {
+    if (!userPointTypesLoading && newPointCategoryTypeIds[1] == undefined) {
+      setSubType(
+        newPointCategoryTypeIds[0] !== undefined
+          ? typeOptions(
+              userPointTypes.types_by_pk.types,
+              newPointCategoryTypeIds[0],
+            )[0].id
+          : undefined,
+      );
+    }
+  });
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const fieldsValid = () => ({
@@ -197,8 +160,7 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
   const updateSubType = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>,
   ) => {
-    console.log(event.target.value);
-    setSubType(event.target.value);
+    setSubType(event.target.value as number);
   };
 
   const [submitPoint] = useMutation(SUBMIT_USER_POINT, {
@@ -242,19 +204,25 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
           {!fieldsValid().location && (
             <Typography variant="subtitle1">Tap Map to Add Point</Typography>
           )}
-          <FormControl variant="outlined">
-            <Select variant="outlined" value={subType} onChange={updateSubType}>
-              {typeId(Trail.newTrailPoint.type!) !== undefined &&
-                typeOptions(
-                  userPointTypeDummyReturn.types,
-                  typeId(Trail.newTrailPoint.type!)!,
-                ).map(({ id, name }: any) => (
-                  <MenuItem key={id} value={id}>
-                    {name}
-                  </MenuItem>
-                ))}
-            </Select>
-          </FormControl>
+          {!userPointTypesLoading && (
+            <FormControl variant="outlined">
+              <Select
+                variant="outlined"
+                value={subType === undefined ? '' : subType}
+                onChange={updateSubType}
+              >
+                {typeId(Trail.newTrailPoint.type!) !== undefined &&
+                  typeOptions(
+                    userPointTypes.types_by_pk.types,
+                    typeId(Trail.newTrailPoint.type!)!,
+                  ).map(({ id, name }: any) => (
+                    <MenuItem key={id} value={id}>
+                      {name}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          )}
           <TextField
             id="name"
             label="Name"
