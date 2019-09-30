@@ -168,12 +168,12 @@ const SplashLegend: React.FC<{
           We are researching effective cartography for tourism-focused
           participatory applications and would love your input! The aim of this
           project is to create a highly usable web map suitable for a range of
-          non-technical trail users, whilst also providing participatory
-          functionality allowing users to share otherwise-inaccessible
-          information with both other users and trail mangers. We would
-          appreciate your feedback on the design and interaction decisions we
-          have made and your opinion on suitability of this map. The map is
-          still at the prototype stage so there will be a few bugs.
+          trail users, whilst also providing participatory functionality
+          allowing users to share otherwise-inaccessible information with both
+          other users and trail mangers. We would appreciate your feedback on
+          the design and interaction decisions we have made and your opinion on
+          suitability of this map. The map is still at the prototype stage so
+          there will be a few bugs.
         </Typography>
         <Typography variant="body2">
           <Link href="https://www.surveymonkey.com/r/RQVKLBT" target="_blank">
