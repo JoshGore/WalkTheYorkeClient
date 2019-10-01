@@ -5,6 +5,7 @@ interface CommentProps {
   id: number;
   body: string;
   created_at: string;
+  type_id: number | null;
   user: {
     firstname: string;
     lastname: string;
@@ -22,6 +23,7 @@ export interface CommentThreadProps {
     id: number;
     body: string;
     created_at: string;
+    type_id: number | null;
     user: {
       firstname: string;
       lastname: string;
@@ -49,6 +51,7 @@ const CommentThread: React.FC<CommentThreadProps> = ({
         commentThreadId={commentThread.id}
         submitComment={submitComment}
         loggedIn={loggedIn}
+        typeId={commentThread.type_id}
       />
       {commentThread.comments.map((comment, index, comments) => (
         <Comment
@@ -62,6 +65,7 @@ const CommentThread: React.FC<CommentThreadProps> = ({
           lastInThread={index === comments.length - 1}
           submitComment={submitComment}
           loggedIn={loggedIn}
+          typeId={commentThread.type_id}
         />
       ))}
     </>

@@ -14,6 +14,7 @@ import clsx from 'clsx';
 interface SubmitCommentProps {
   commentText: string;
   commentThreadId?: number | undefined;
+  typeId?: number | null;
 }
 
 interface CommentFormProps {
@@ -44,16 +45,21 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const [isIssue, setIsIssue] = useState(false);
   const onSubmitSucessful = () => {
     setCommentText('');
+    setIsIssue(false);
     setShown !== undefined && setShown(false);
   };
   const handleSubmit = () => {
     if (commentText) {
       if (commentThreadId === undefined) {
-        submitComment({ commentText }).then(onSubmitSucessful());
-      } else {
-        submitComment({ commentText, commentThreadId }).then(
+        submitComment({ commentText, typeId: isIssue ? 27 : null }).then(
           onSubmitSucessful(),
         );
+      } else {
+        submitComment({
+          commentText,
+          typeId: isIssue ? 1 : null,
+          commentThreadId,
+        }).then(onSubmitSucessful());
       }
     }
   };

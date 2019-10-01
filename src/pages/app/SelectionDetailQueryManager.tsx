@@ -125,11 +125,13 @@ const SelectionDetailQueryManager: React.FC<{
   interface SubmitCommentProps {
     commentText: string;
     commentThreadId?: number | undefined;
+    typeId?: number | null;
   }
 
   const submitComment = ({
     commentText,
     commentThreadId = undefined,
+    typeId = null,
   }: SubmitCommentProps) =>
     commentThreadId === undefined
       ? queryType() === 'route'
@@ -138,6 +140,7 @@ const SelectionDetailQueryManager: React.FC<{
               routeId: id,
               user: User.userId,
               body: commentText,
+              typeId,
             },
           })
         : queryType() === 'point'
@@ -146,6 +149,7 @@ const SelectionDetailQueryManager: React.FC<{
               pointId: id,
               user: User.userId,
               body: commentText,
+              typeId,
             },
           })
         : queryType() === 'userPoint'
@@ -154,6 +158,7 @@ const SelectionDetailQueryManager: React.FC<{
               pointId: id,
               user: User.userId,
               body: commentText,
+              typeId,
             },
           })
         : undefined
@@ -162,6 +167,7 @@ const SelectionDetailQueryManager: React.FC<{
             commentThreadId,
             userId: User.userId,
             body: commentText,
+            typeId,
           },
         });
 

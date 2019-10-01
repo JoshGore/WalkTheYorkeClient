@@ -60,6 +60,7 @@ export interface CommentProps {
   commentThreadId: number;
   submitComment: (options: SubmitCommentProps) => void;
   loggedIn: boolean;
+  typeId: number | null;
 }
 
 const Comment: React.FC<CommentProps> = ({
@@ -72,6 +73,7 @@ const Comment: React.FC<CommentProps> = ({
   commentThreadId,
   submitComment,
   loggedIn,
+  typeId,
 }) => {
   const [replyFormShown, setReplyFormShown] = useState(false);
   const classes = useStyles();
@@ -79,8 +81,7 @@ const Comment: React.FC<CommentProps> = ({
     event.preventDefault();
     setReplyFormShown(true);
   };
-  const [isIssue, setIsIssue] = useState(false);
-  const deleteIssue = () => setIsIssue(false);
+  const isIssue = () => typeId === 27;
   return (
     <>
       <Divider
@@ -124,13 +125,8 @@ const Comment: React.FC<CommentProps> = ({
                 </Moment>
               </i>
             </Typography>
-            {isIssue && (
-              <Chip
-                className={classes.chip}
-                size="small"
-                label="@issue"
-                onDelete={deleteIssue}
-              />
+            {isIssue() && (
+              <Chip className={classes.chip} size="small" label="@issue" />
             )}
             <Typography variant="body2">{body}</Typography>
             {level === 1 && loggedIn && (

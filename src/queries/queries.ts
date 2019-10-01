@@ -161,6 +161,7 @@ export const COMMENT_DETAILS_FRAGMENT = gql`
     created_at
     body
     id
+    type_id
     user {
       ...basic_user_details
     }
@@ -217,11 +218,11 @@ export const USER_POINT_COMMENT_SUBSCRIPTION_QUERY = gql`
 `;
 
 export const ROUTE_COMMENT_INSERT_QUERY = gql`
-  mutation($routeId: Int!, $user: Int!, $body: String) {
+  mutation($routeId: Int!, $typeId: Int, $user: Int!, $body: String!) {
     insert_route_comment(
       objects: {
         route_id: $routeId
-        comment: { data: { body: $body, user_id: $user } }
+        comment: { data: { body: $body, user_id: $user, type_id: $typeId } }
       }
     ) {
       returning {
@@ -234,11 +235,11 @@ export const ROUTE_COMMENT_INSERT_QUERY = gql`
 `;
 
 export const POINT_COMMENT_INSERT_QUERY = gql`
-  mutation($pointId: Int!, $user: Int!, $body: String) {
+  mutation($pointId: Int!, $typeId: Int, $user: Int!, $body: String!) {
     insert_point_comment(
       objects: {
         point_id: $pointId
-        comment: { data: { body: $body, user_id: $user } }
+        comment: { data: { body: $body, user_id: $user, type_id: $typeId } }
       }
     ) {
       returning {
@@ -251,11 +252,11 @@ export const POINT_COMMENT_INSERT_QUERY = gql`
 `;
 
 export const USER_POINT_COMMENT_INSERT_QUERY = gql`
-  mutation($pointId: Int!, $user: Int!, $body: String) {
+  mutation($pointId: Int!, $typeId: Int, $user: Int!, $body: String!) {
     insert_user_point_comment(
       objects: {
         user_point_id: $pointId
-        comment: { data: { body: $body, user_id: $user } }
+        comment: { data: { body: $body, user_id: $user, type_id: $typeId } }
       }
     ) {
       returning {
@@ -271,10 +272,16 @@ export const COMMENT_REPLY_INSERT_QUERY = gql`
   mutation insert_comments(
     $commentThreadId: Int!
     $userId: Int!
-    $body: String
+    $typeId: Int
+    $body: String!
   ) {
     insert_comments(
-      objects: { body: $body, comment_id: $commentThreadId, user_id: $userId }
+      objects: {
+        body: $body
+        comment_id: $commentThreadId
+        user_id: $userId
+        type_id: $typeId
+      }
     ) {
       returning {
         body
@@ -291,6 +298,7 @@ export interface ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES {
         created_at: string;
         body: string;
         id: number;
+        type_id: number | null;
         user: {
           firstname: string;
           lastname: string;
@@ -300,6 +308,7 @@ export interface ROUTE_COMMENT_SUBSCRIPTION_QUERY_TYPES {
           id: number;
           body: string;
           created_at: string;
+          type_id: number | null;
           user: {
             firstname: string;
             lastname: string;
@@ -318,6 +327,7 @@ export interface POINT_COMMENT_SUBSCRIPTION_QUERY_TYPES {
         created_at: string;
         body: string;
         id: number;
+        type_id: number | null;
         user: {
           firstname: string;
           lastname: string;
@@ -325,6 +335,7 @@ export interface POINT_COMMENT_SUBSCRIPTION_QUERY_TYPES {
         };
         comments: {
           id: number;
+          type_id: number | null;
           body: string;
           created_at: string;
           user: {
