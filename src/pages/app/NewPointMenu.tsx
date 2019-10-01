@@ -81,10 +81,8 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
   const classes = useStyles();
   const Trail = useContext(TrailContext);
   const User = useContext(UserContext);
-  const typeOptions = (userPointTypes: any, typeId: number) => {
-    return userPointTypes
-      .find((type: any) => type.id === typeId)
-      .types.map((type: any) => type);
+  const typeOptions = (userPointTypes: any[], typeId: number) => {
+    return userPointTypes.find((type: any) => type.id === typeId).types;
   };
   useEffect(() => {
     if (!userPointTypesLoading && newPointCategoryTypeIds.typeId == undefined) {
@@ -115,7 +113,15 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
       );
     },
   });
-  const title = () => 'Add: ToDo Title';
+  const title = () =>
+    newPointCategoryTypeIds.parentTypeId
+      ? `Add ${
+          typeOptions(
+            userPointTypes.types_by_pk.types,
+            newPointCategoryTypeIds.parentTypeId,
+          ).find((type: any) => type.id === newPointCategoryTypeIds.typeId).name
+        }`
+      : 'add point';
   const cancelPointSumbission = () =>
     Trail.setNewTrailPoint({
       type: undefined,

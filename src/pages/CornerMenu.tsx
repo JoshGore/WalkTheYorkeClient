@@ -39,6 +39,9 @@ const useStyles = makeStyles(() =>
       '& .MuiButtonBase-root': {
         zIndex: 99,
       },
+      '& .MuiSpeedDialAction-button': {
+        zIndex: 999,
+      },
     },
     speedDialDisabled: {
       '& .MuiSpeedDial-fab': {
