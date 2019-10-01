@@ -64,7 +64,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
     }
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.slice(0, 6) === '@issue') {
+    if (event.target.value.slice(0, 6) === '#issue') {
       setIsIssue(true);
       setCommentText(event.target.value.substr(6));
     } else {
@@ -93,7 +93,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         <Grid item xs>
           <TextField
             id="outlined-dense-multiline"
-            label="start with @issue to submit issue"
+            label="start with #issue to submit issue"
             className={clsx(classes.textField, classes.dense)}
             margin="dense"
             variant="outlined"
@@ -107,7 +107,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
               startAdornment: isIssue && (
                 <InputAdornment position="start">
                   <Chip
-                    label="@issue"
+                    label="#issue"
                     size="small"
                     onDelete={handleIssueDelete}
                   />

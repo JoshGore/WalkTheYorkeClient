@@ -44,6 +44,10 @@ interface BodyProps {
   loggedIn: boolean;
   submitComment: (options: SubmitCommentProps) => void;
   submitReview: (options: SubmitReviewProps) => void;
+  user: {
+    firstname: string | undefined;
+    lastname: string | undefined;
+  };
 }
 
 interface Multimedium {
@@ -129,8 +133,10 @@ const DisplayDetails: React.FC<BodyProps> = ({
   loggedIn,
   submitComment,
   submitReview,
+  user,
 }) => {
   const classes = useStyles();
+  console.log(user);
   return (
     <>
       <Carousel multimedia={multimedia} loading={loading} />
@@ -138,6 +144,9 @@ const DisplayDetails: React.FC<BodyProps> = ({
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <BodyTitle loading={loading} text={title} />
+            {user.firstname !== undefined && (
+              <Typography variant="subtitle2">{`submitted by ${user.firstname} ${user.lastname}`}</Typography>
+            )}
             {!loading && showDownloads && <DownloadMenu links={files!} />}
             {!loading && showReviews && (
               <ReviewSummary count={count} average={avgRating} />

@@ -144,6 +144,10 @@ export const USER_POINT_DETAIL_QUERY = gql`
       type {
         name
       }
+      user {
+        firstname
+        lastname
+      }
     }
   }
 `;

@@ -126,7 +126,7 @@ const Comment: React.FC<CommentProps> = ({
               </i>
             </Typography>
             {isIssue() && (
-              <Chip className={classes.chip} size="small" label="@issue" />
+              <Chip className={classes.chip} size="small" label="issue" />
             )}
             <Typography variant="body2">{body}</Typography>
             {level === 1 && loggedIn && (

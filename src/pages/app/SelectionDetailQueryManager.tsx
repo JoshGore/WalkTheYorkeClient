@@ -353,7 +353,17 @@ const SelectionDetailQueryManager: React.FC<{
     queryType() === 'route' ||
     queryType() === 'point' ||
     queryType() === 'userPoint';
-
+  const user = () => {
+    console.log(userPointInfo);
+    return queryType() === 'userPoint' &&
+      !userPointInfoLoading &&
+      userPointInfo !== undefined
+      ? {
+          firstname: userPointInfo.user_points_by_pk.user.firstname,
+          lastname: userPointInfo.user_points_by_pk.user.lastname,
+        }
+      : { firstname: undefined, lastname: undefined };
+  };
   useEffect(() => {
     if (!routeInfoLoading && !!TrailSelections.trailSection.id) {
       TrailSelections.setTrailSection({
@@ -384,6 +394,7 @@ const SelectionDetailQueryManager: React.FC<{
       loggedIn={User.loggedIn}
       submitComment={submitComment}
       submitReview={submitReview}
+      user={user()}
     />
   );
 };
