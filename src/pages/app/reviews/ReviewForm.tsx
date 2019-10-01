@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Rating from '@material-ui/lab/Rating';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import {
   Dialog,
   DialogActions,
@@ -12,18 +11,6 @@ import {
 } from '@material-ui/core';
 
 import CreateIcon from '@material-ui/icons/Create';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-      backgroundColor: theme.palette.background.paper,
-    },
-    inline: {
-      display: 'inline',
-    },
-  }),
-);
 
 interface ReviewFormProps {
   submitReview: ({ review, rating }: { review: string; rating: number }) => any;

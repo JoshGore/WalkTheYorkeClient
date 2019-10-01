@@ -136,7 +136,6 @@ const DisplayDetails: React.FC<BodyProps> = ({
   user,
 }) => {
   const classes = useStyles();
-  console.log(user);
   return (
     <>
       <Carousel multimedia={multimedia} loading={loading} />

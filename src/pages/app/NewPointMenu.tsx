@@ -15,9 +15,9 @@ import {
 import CancelIcon from '@material-ui/icons/Cancel';
 import SendIcon from '@material-ui/icons/Send';
 import gql from 'graphql-tag';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
-import UserContext, { UserContextProps } from '../../contexts/UserContext';
+import { useMutation } from '@apollo/react-hooks';
+import TrailContext from '../../contexts/TrailContext';
+import UserContext from '../../contexts/UserContext';
 
 const SUBMIT_USER_POINT = gql`
   mutation(
@@ -85,7 +85,10 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
     return userPointTypes.find((type: any) => type.id === typeId).types;
   };
   useEffect(() => {
-    if (!userPointTypesLoading && newPointCategoryTypeIds.typeId == undefined) {
+    if (
+      !userPointTypesLoading &&
+      newPointCategoryTypeIds.typeId === undefined
+    ) {
       setNewPointCategoryTypeIds(
         newPointCategoryTypeIds.parentTypeId !== undefined
           ? typeOptions(

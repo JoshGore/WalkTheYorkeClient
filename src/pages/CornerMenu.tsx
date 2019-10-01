@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
-import BugReportIcon from '@material-ui/icons/BugReport';
 import EditLocationIcon from '@material-ui/icons/EditLocation';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
