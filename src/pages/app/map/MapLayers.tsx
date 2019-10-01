@@ -13,6 +13,8 @@ const infoSign = require('./icons/info_sign.png');
 const shared = require('./icons/shared.png');
 const bicycling = require('./icons/bicycling.png');
 const trailWalking = require('./icons/trail-walking.png');
+const user_point_teardrop = require('./icons/user_point_teardrop.png');
+const user_issue_teardrop = require('./icons/user_issue_teardrop.png');
 
 interface MapLayersProps {
   trailSection: any;
@@ -37,14 +39,14 @@ const MapLayers: React.FC<MapLayersProps> = ({
   const { loading: userPointsLoading, data: userPoints } = useQuery(
     gql`
       query allUserPoints {
-        user_points {
+        user_point_map_layer {
+          user_id
+          updated_at
+          type_id
+          type
+          parent_type_id
+          name
           id
-          description
-          type {
-            typeId: id
-            name
-            parentTypeId: type_id
-          }
           geom
         }
       }
@@ -54,10 +56,26 @@ const MapLayers: React.FC<MapLayersProps> = ({
   const userPointsToGeoJson = (userPoints: any) => ({
     type: 'FeatureCollection',
     features: userPoints.map(
-      ({ id, type: { typeId, parentTypeId, name }, geom }: any) => ({
+      ({
+        id,
+        geom,
+        name,
+        parent_type_id,
+        type,
+        type_id,
+        updated_at,
+        user_id,
+      }: any) => ({
         type: 'Feature',
         id,
-        properties: { type: name, typeId, parentTypeId },
+        properties: {
+          name,
+          parent_type_id,
+          type,
+          type_id,
+          updated_at,
+          user_id,
+        },
         geometry: geom,
       }),
     ),
@@ -74,7 +92,7 @@ const MapLayers: React.FC<MapLayersProps> = ({
           type: 'geojson',
           data: userPointsLoading
             ? userPointsToGeoJson([])
-            : userPointsToGeoJson(userPoints.user_points),
+            : userPointsToGeoJson(userPoints.user_point_map_layer),
         }}
       />
       <Image
@@ -122,43 +140,95 @@ const MapLayers: React.FC<MapLayersProps> = ({
         url={trailWalking}
         onError={() => console.log('image loading error')}
       />
+      <Image
+        id="user_point_teardrop"
+        url={user_point_teardrop}
+        onError={() => console.log('image loading error')}
+      />
+      <Image
+        id="user_issue_teardrop"
+        url={user_issue_teardrop}
+        onError={() => console.log('image loading error')}
+      />
       {/* data-stack-placeholder layer places data under labels */}
       {includeTempStackPlaceholder && (
         <Layer
           id="data-stack-placeholder"
-          paint={{ backgroundColor: 'white' }}
+          paint={{ 'background-color': 'hsla(0, 0%, 0%, 0)' }}
         />
       )}
       <Layer
-        id="user_points"
-        type="circle"
-        sourceId="all_user_points"
-        paint={{ 'circle-color': 'mediumblue' }}
-        onMouseMove={(evt: any) => {
-          evt.target.getCanvas().style.cursor = 'pointer';
-        }}
-        onMouseLeave={(evt: any) => {
-          evt.target.getCanvas().style.cursor = '';
-        }}
-        filter={['==', 17, ['get', 'parentTypeId']]}
+        id="data-stack-top"
+        type="background"
+        paint={{ 'background-color': 'hsla(0, 0%, 0%, 0)' }}
       />
       <Layer
-        id="user_issues"
-        before="user_points"
-        type="circle"
+        id="user-point-selection"
+        before="data-stack-top"
+        type="symbol"
         sourceId="all_user_points"
-        paint={{ 'circle-color': 'red' }}
-        onMouseMove={(evt: any) => {
-          evt.target.getCanvas().style.cursor = 'pointer';
+        layout={{
+          'text-size': ['interpolate', ['linear'], ['zoom'], 0, 8, 22, 14],
+          'icon-offset': [0, 0],
+          'icon-image': 'selected_teardrop',
+          'icon-allow-overlap': true,
+          visibility: 'visible',
+          'icon-size': ['interpolate', ['linear'], ['zoom'], 8, 0.3, 22, 0.5],
+          'text-anchor': 'top',
+          'text-field': [
+            'format',
+            ['get', 'type'],
+            {},
+            ' - ',
+            {},
+            ['get', 'name'],
+            {},
+            '\nuser submitted',
+            {
+              'text-font': [
+                'literal',
+                ['Open Sans Italic', 'Arial Unicode MS Regular'],
+              ],
+            },
+          ],
+          'icon-anchor': 'bottom',
         }}
-        onMouseLeave={(evt: any) => {
-          evt.target.getCanvas().style.cursor = '';
+        paint={{
+          'text-color': '#9e0000',
+          'text-halo-color': 'hsl(0, 2%, 100%)',
+          'text-halo-width': 1,
+          'text-translate': [0, 7],
+          'icon-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            8,
+            1,
+            8.25,
+            1,
+            22,
+            1,
+          ],
+          'text-opacity': 1,
         }}
-        filter={['==', 16, ['get', 'parentTypeId']]}
+        filter={[
+          'all',
+          [
+            'match',
+            ['id'],
+            [
+              selectedFeatureLayerId.layer === 'user-point'
+                ? selectedFeatureLayerId.id
+                : '',
+            ],
+            true,
+            false,
+          ],
+        ]}
       />
       <Layer
         id="shelter-selection"
-        before=""
+        before="user-point-selection"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_shelters"
@@ -208,7 +278,7 @@ const MapLayers: React.FC<MapLayersProps> = ({
       />
       <Layer
         id="shelter"
-        before="user_issues"
+        before="shelter-selection"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="trail_shelters"
@@ -222,6 +292,7 @@ const MapLayers: React.FC<MapLayersProps> = ({
           'icon-anchor': 'bottom',
           'icon-allow-overlap': true,
           'text-allow-overlap': false,
+          'text-optional': true,
         }}
         minZoom={8}
         paint={{
@@ -252,6 +323,118 @@ const MapLayers: React.FC<MapLayersProps> = ({
             1,
           ],
         }}
+        filter={[
+          'all',
+          [
+            'match',
+            ['id'],
+            [
+              selectedFeatureLayerId.layer === 'shelter'
+                ? selectedFeatureLayerId.id
+                : '',
+            ],
+            false,
+            true,
+          ],
+        ]}
+        onMouseMove={(evt: any) => {
+          evt.target.getCanvas().style.cursor = 'pointer';
+        }}
+        onMouseLeave={(evt: any) => {
+          evt.target.getCanvas().style.cursor = '';
+        }}
+      />
+      <Layer
+        id="user-point"
+        type="symbol"
+        sourceId="all_user_points"
+        before="shelter"
+        minZoom={10}
+        layout={{
+          'text-size': ['interpolate', ['linear'], ['zoom'], 0, 6, 22, 12],
+          'icon-image': [
+            'match',
+            ['get', 'parent_type_id'],
+            [17],
+            'user_point_teardrop',
+            [16],
+            'user_issue_teardrop',
+            'user_point_teardrop',
+          ],
+          'icon-size': ['interpolate', ['linear'], ['zoom'], 8, 0.3, 22, 0.5],
+          'text-field': [
+            'format',
+            ['get', 'type'],
+            {},
+            ' - ',
+            {},
+            ['get', 'name'],
+            {},
+            '\nuser submitted',
+            {
+              'text-font': [
+                'literal',
+                ['Open Sans Italic', 'Arial Unicode MS Regular'],
+              ],
+            },
+          ],
+          'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
+          'text-anchor': 'top',
+          'icon-anchor': 'bottom',
+          'icon-allow-overlap': true,
+          'text-allow-overlap': false,
+          'text-optional': true,
+        }}
+        paint={{
+          'text-color': [
+            'match',
+            ['get', 'parent_type_id'],
+            [16],
+            '#df2000',
+            [17],
+            '#1f00eb',
+            '#1f00eb',
+          ],
+          'text-translate': [0, 3],
+          'text-halo-width': 1,
+          'text-halo-color': 'hsl(0, 100%, 100%)',
+          'icon-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            10,
+            0,
+            10.2,
+            1,
+            22,
+            1,
+          ],
+          'text-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            11,
+            0,
+            11.2,
+            1,
+            22,
+            1,
+          ],
+        }}
+        filter={[
+          'all',
+          [
+            'match',
+            ['id'],
+            [
+              selectedFeatureLayerId.layer === 'user-point'
+                ? selectedFeatureLayerId.id
+                : '',
+            ],
+            false,
+            true,
+          ],
+        ]}
         onMouseMove={(evt: any) => {
           evt.target.getCanvas().style.cursor = 'pointer';
         }}
@@ -261,7 +444,7 @@ const MapLayers: React.FC<MapLayersProps> = ({
       />
       <Layer
         id="information-sign"
-        before="shelter"
+        before="user-point"
         type="symbol"
         sourceId="walktheyorke_tile_server"
         sourceLayer="information"
