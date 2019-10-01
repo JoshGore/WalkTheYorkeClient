@@ -17,8 +17,8 @@ export interface TrailEntityProps {
 }
 
 export interface NewTrailPointProps {
-  type: 'userIssue' | 'userPoint' | undefined;
-  subType: string | undefined;
+  type: number | undefined;
+  subType: number | undefined;
   point: [number, number] | undefined;
   id?: undefined;
 }

@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 import loadable from '@loadable/component';
 import MenuContainer from './app/menu/MenuContainer';
 import TrailContext, { TrailContextProps } from '../contexts/TrailContext';
@@ -15,7 +17,25 @@ interface LoadingOrTextProps {
   text: string | undefined;
 }
 
+const USER_POINT_TYPES_QUERY = gql`
+  {
+    types_by_pk(id: 15) {
+      types {
+        name
+        id
+        types {
+          name
+          id
+        }
+      }
+    }
+  }
+`;
+
 const App: React.FC = () => {
+  const { loading: userPointTypesLoading, data: userPointTypes } = useQuery(
+    USER_POINT_TYPES_QUERY,
+  );
   const TrailSelections = useContext<TrailContextProps>(TrailContext);
   const handleHomeLinkClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -28,11 +48,11 @@ const App: React.FC = () => {
     TrailSelections.trailSection.type === undefined
       ? undefined
       : TrailSelections.trailSection.shortName;
-  const [newPointCategoryTypeIds, setNewPointCategoryTypeIds] = useState<
-    [number | undefined, number | undefined]
-  >([undefined, undefined]);
+  const [newPointCategoryTypeIds, setNewPointCategoryTypeIds] = useState<{
+    parentTypeId: number | undefined;
+    typeId: number | undefined;
+  }>({ parentTypeId: undefined, typeId: undefined });
 
-  // body={bodyFromSelection(TrailSelections.currentTrailObject())}
   return (
     <MenuContainer
       header={
@@ -59,6 +79,8 @@ const App: React.FC = () => {
           <NewPointMenu
             newPointCategoryTypeIds={newPointCategoryTypeIds}
             setNewPointCategoryTypeIds={setNewPointCategoryTypeIds}
+            userPointTypes={userPointTypes}
+            userPointTypesLoading={userPointTypesLoading}
           />
         )
       }
@@ -68,6 +90,8 @@ const App: React.FC = () => {
           <CornerMenu
             newPointCategoryTypeIds={newPointCategoryTypeIds}
             setNewPointCategoryTypeIds={setNewPointCategoryTypeIds}
+            userPointTypes={userPointTypes}
+            userPointTypesLoading={userPointTypesLoading}
           />
           <Map />
         </>

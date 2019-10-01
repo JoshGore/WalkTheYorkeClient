@@ -18,10 +18,7 @@ import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import TrailContext, { TrailContextProps } from '../../contexts/TrailContext';
 import UserContext, { UserContextProps } from '../../contexts/UserContext';
-// dropdown
-// text form
-// cancel button
-// contact details - currently linkes to and requires user.
+
 const SUBMIT_USER_POINT = gql`
   mutation(
     $typeId: Int!
@@ -45,20 +42,6 @@ const SUBMIT_USER_POINT = gql`
     }
   }
 `;
-const USER_POINT_TYPES_QUERY = gql`
-  {
-    types_by_pk(id: 15) {
-      types {
-        name
-        id
-        types {
-          name
-          id
-        }
-      }
-    }
-  }
-`;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,41 +60,39 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface NewPointMenuProps {
-  newPointCategoryTypeIds: [number | undefined, number | undefined];
-  setNewPointCategoryTypeIds: (
-    newPointCategoryTypeIds: [number | undefined, number | undefined],
-  ) => void;
+  newPointCategoryTypeIds: {
+    parentTypeId: number | undefined;
+    typeId: number | undefined;
+  };
+  setNewPointCategoryTypeIds: (newPointCategoryTypeIds: {
+    parentTypeId: number | undefined;
+    typeId: number | undefined;
+  }) => void;
+  userPointTypesLoading: any;
+  userPointTypes: any;
 }
 
 const NewPointMenu: React.FC<NewPointMenuProps> = ({
   newPointCategoryTypeIds,
   setNewPointCategoryTypeIds,
+  userPointTypesLoading,
+  userPointTypes,
 }) => {
   const classes = useStyles();
   const Trail = useContext(TrailContext);
   const User = useContext(UserContext);
-  const { loading: userPointTypesLoading, data: userPointTypes } = useQuery(
-    USER_POINT_TYPES_QUERY,
-  );
-  const typeId = (typeName: string) =>
-    typeName === 'userIssue' ? 16 : typeName === 'userPoint' ? 17 : undefined;
   const typeOptions = (userPointTypes: any, typeId: number) => {
     return userPointTypes
       .find((type: any) => type.id === typeId)
       .types.map((type: any) => type);
   };
-  const [subType, setSubType] = useState<number | undefined>(
-    newPointCategoryTypeIds[1] !== undefined
-      ? newPointCategoryTypeIds[1]
-      : undefined,
-  );
   useEffect(() => {
-    if (!userPointTypesLoading && newPointCategoryTypeIds[1] == undefined) {
-      setSubType(
-        newPointCategoryTypeIds[0] !== undefined
+    if (!userPointTypesLoading && newPointCategoryTypeIds.typeId == undefined) {
+      setNewPointCategoryTypeIds(
+        newPointCategoryTypeIds.parentTypeId !== undefined
           ? typeOptions(
               userPointTypes.types_by_pk.types,
-              newPointCategoryTypeIds[0],
+              newPointCategoryTypeIds.parentTypeId,
             )[0].id
           : undefined,
       );
@@ -134,12 +115,7 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
       );
     },
   });
-  const title = () =>
-    Trail.newTrailPoint.type === 'userIssue'
-      ? 'Submit Issue'
-      : Trail.newTrailPoint.type === 'userPoint'
-      ? 'Add Feature'
-      : '';
+  const title = () => 'Add: ToDo Title';
   const cancelPointSumbission = () =>
     Trail.setNewTrailPoint({
       type: undefined,
@@ -160,12 +136,15 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
   const updateSubType = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>,
   ) => {
-    setSubType(event.target.value as number);
+    setNewPointCategoryTypeIds({
+      ...newPointCategoryTypeIds,
+      typeId: event.target.value as number,
+    });
   };
 
   const [submitPoint] = useMutation(SUBMIT_USER_POINT, {
     variables: {
-      typeId: subType,
+      typeId: newPointCategoryTypeIds.typeId,
       userId: User.userId,
       name,
       description,
@@ -208,13 +187,17 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
             <FormControl variant="outlined">
               <Select
                 variant="outlined"
-                value={subType === undefined ? '' : subType}
+                value={
+                  newPointCategoryTypeIds.typeId === undefined
+                    ? ''
+                    : newPointCategoryTypeIds.typeId
+                }
                 onChange={updateSubType}
               >
-                {typeId(Trail.newTrailPoint.type!) !== undefined &&
+                {Trail.newTrailPoint.type !== undefined &&
                   typeOptions(
                     userPointTypes.types_by_pk.types,
-                    typeId(Trail.newTrailPoint.type!)!,
+                    Trail.newTrailPoint.type!,
                   ).map(({ id, name }: any) => (
                     <MenuItem key={id} value={id}>
                       {name}

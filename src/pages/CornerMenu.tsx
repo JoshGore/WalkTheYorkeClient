@@ -54,15 +54,23 @@ interface BodyTextProps {
 }
 
 interface CornerMenuProps {
-  newPointCategoryTypeIds: [number | undefined, number | undefined];
-  setNewPointCategoryTypeIds: (
-    pointTypeId: [number | undefined, number | undefined],
-  ) => void;
+  newPointCategoryTypeIds: {
+    parentTypeId: number | undefined;
+    typeId: number | undefined;
+  };
+  setNewPointCategoryTypeIds: (pointTypeId: {
+    parentTypeId: number | undefined;
+    typeId: number | undefined;
+  }) => void;
+  userPointTypes: any;
+  userPointTypesLoading: any;
 }
 
 const CornerMenu: React.FC<CornerMenuProps> = ({
   newPointCategoryTypeIds,
   setNewPointCategoryTypeIds,
+  userPointTypes,
+  userPointTypesLoading,
 }) => {
   const classes = useStyles();
   const User = useContext<UserContextProps>(UserContext);
@@ -83,14 +91,12 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
     }
   };
   const setSubmissionMode = (type: number, subType: number | undefined) => {
-    if (!Trail.newTrailPoint.type) {
-      Trail.setNewTrailPoint({
-        ...Trail.newTrailPoint,
-        type: type === 16 ? 'userIssue' : type === 17 ? 'userPoint' : undefined,
-      });
-      setNewPointCategoryTypeIds([type, subType]);
-      toggleDialMenu();
-    }
+    Trail.setNewTrailPoint({
+      ...Trail.newTrailPoint,
+      type,
+    });
+    setNewPointCategoryTypeIds({ parentTypeId: type, typeId: subType });
+    toggleDialMenu();
   };
   const [splashLegendOpen, setSplashLegendOpen] = useState(true);
   const openSplashLegend = () => setSplashLegendOpen(true);
@@ -159,24 +165,23 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
               User.loggedIn ? '' : classes.speedDialDisabled
             }`}
           >
-            <SpeedDialAction
-              icon={<AddLocationIcon />}
-              tooltipTitle="Add Asset"
-              tooltipOpen
-              onClick={() => setSubmissionMode(17, undefined)}
-            />
-            <SpeedDialAction
-              onClick={() => setSubmissionMode(16, 19)}
-              icon={<BugReportIcon />}
-              tooltipTitle="Report Damage"
-              tooltipOpen
-            />
-            <SpeedDialAction
-              onClick={() => setSubmissionMode(16, 18)}
-              icon={<WarningIcon />}
-              tooltipTitle="Report Hazard"
-              tooltipOpen
-            />
+            {!userPointTypesLoading &&
+              userPointTypes.types_by_pk.types.map((parentType: any) =>
+                parentType.types.map((type: any) => (
+                  <SpeedDialAction
+                    icon={
+                      parentType.name === 'issue' ? (
+                        <WarningIcon />
+                      ) : (
+                        <AddLocationIcon />
+                      )
+                    }
+                    tooltipTitle={type.name}
+                    tooltipOpen
+                    onClick={() => setSubmissionMode(parentType.id, type.id)}
+                  />
+                )),
+              )}
           </SpeedDial>
         ) : (
           <ClickAwayListener onClickAway={handleHideLoginTooltip}>
