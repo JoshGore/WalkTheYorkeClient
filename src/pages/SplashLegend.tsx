@@ -21,6 +21,8 @@ import marker from './app/map/icons/marker - legend.png';
 import toilet from './app/map/icons/Toilet - legend.png';
 import seat from './app/map/icons/Bench - legend.png';
 import infoSign from './app/map/icons/info_sign - legend.png';
+import userPoint from './app/map/icons/user_point_teardrop.png';
+import userIssue from './app/map/icons/user_issue_teardrop.png';
 
 const LegendEntry: React.FC<{
   interactive?: boolean;
@@ -153,6 +155,16 @@ const SplashLegend: React.FC<{
           symbol={shelterTeardrop}
           interactive
           description="Shelter"
+        />
+        <LegendEntry
+          symbol={userPoint}
+          interactive
+          description="Features Submitted by Users"
+        />
+        <LegendEntry
+          symbol={userIssue}
+          interactive
+          description="Problems Shared by Users"
         />
         <LegendEntry symbol={toilet} description="Toilet" />
         <LegendEntry symbol={seat} description="Seat" />
