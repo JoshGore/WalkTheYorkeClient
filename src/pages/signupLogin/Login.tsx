@@ -155,7 +155,7 @@ const Login: React.FC<LoginProps> = ({ setNewUser }) => {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleNewUser}>Sign Up</Button>
+        <Button onClick={handleNewUser}>Sign Up Instead</Button>
         <div style={{ position: 'relative', marginLeft: 'auto' }}>
           <Button color="primary" disabled={submitting} onClick={handleSubmit}>
             Submit
