@@ -26,6 +26,10 @@ const SignupLogin: React.FC = () => {
     User.setLoggedIn(true);
     User.setLoginMenuOpen(false);
   };
+  const handleError = () => {
+    console.log('handling user query error');
+    localStorage.removeItem('authToken');
+  };
   const { error: userLoadingError, data: userData } = useQuery(
     gql`
       query($userId: Int!) {
@@ -40,6 +44,7 @@ const SignupLogin: React.FC = () => {
       variables: { userId: User.userId },
       skip: !loadDetails || User.userId === undefined,
       onCompleted: setUserVariables,
+      onError: handleError,
     },
   );
   useEffect(() => {

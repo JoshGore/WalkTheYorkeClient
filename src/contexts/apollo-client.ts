@@ -40,12 +40,15 @@ const authLink = setContext((_, { headers }) => ({
 }));
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) console.log(graphQLErrors);
   if (graphQLErrors)
-    graphQLErrors.map(({ message, locations, path }) =>
+    graphQLErrors.map(({ message, locations, path }) => {
+      message === 'Authentication hook unauthorized this request' &&
+        localStorage.removeItem('authToken');
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-      ),
-    );
+      );
+    });
 
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
