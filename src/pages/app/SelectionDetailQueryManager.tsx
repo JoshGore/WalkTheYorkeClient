@@ -259,7 +259,8 @@ const SelectionDetailQueryManager: React.FC<{
       ? routeCommentsSubscription.routes_by_pk.route_comments
       : queryType() === 'point' &&
         !pointCommentsSubscriptionLoading &&
-        pointCommentsSubscription !== undefined
+        pointCommentsSubscription !== undefined &&
+        pointCommentsSubscription.points_by_pk
       ? pointCommentsSubscription.points_by_pk.point_comments
       : queryType() === 'userPoint' &&
         !userPointCommentsSubscriptionLoading &&
@@ -268,71 +269,71 @@ const SelectionDetailQueryManager: React.FC<{
       : [];
   const name = () =>
     queryType() === 'route'
-      ? !routeInfoLoading
+      ? !routeInfoLoading && routeInfo
         ? routeInfo!.routes_by_pk.name
         : undefined
       : queryType() === 'point'
-      ? !pointInfoLoading
+      ? !pointInfoLoading && pointInfo
         ? pointInfo!.points_by_pk.name
         : undefined
       : queryType() === 'userPoint'
-      ? !userPointInfoLoading
+      ? !userPointInfoLoading && userPointInfo
         ? userPointInfo!.user_points_by_pk.name
         : undefined
       : undefined;
   const shortName = () =>
     queryType() === 'route'
-      ? !routeInfoLoading
+      ? !routeInfoLoading && routeInfo
         ? routeInfo!.routes_by_pk.short_name
         : undefined
       : undefined;
   const description = () =>
     queryType() === 'route'
-      ? !routeInfoLoading
+      ? !routeInfoLoading && routeInfo
         ? routeInfo!.routes_by_pk.description
         : undefined
       : queryType() === 'point'
-      ? !pointInfoLoading
+      ? !pointInfoLoading && pointInfo
         ? pointInfo!.points_by_pk.description
         : undefined
       : queryType() === 'userPoint'
-      ? !userPointInfoLoading
+      ? !userPointInfoLoading && userPointInfo
         ? userPointInfo!.user_points_by_pk.description
         : undefined
       : undefined;
   const multimedia = () =>
     queryType() === 'route'
-      ? !routeInfoLoading
+      ? !routeInfoLoading && routeInfo
         ? routeInfo!.routes_by_pk.route_multimedia
         : undefined
       : queryType() === 'point'
-      ? !pointInfoLoading
+      ? !pointInfoLoading && routeInfo
         ? pointInfo!.points_by_pk.point_multimedia
         : undefined
       : undefined;
   const files = () =>
     queryType() === 'route'
-      ? !routeInfoLoading
+      ? !routeInfoLoading && routeInfo
         ? routeInfo!.routes_by_pk.route_files
         : undefined
       : undefined;
   const count = () =>
     queryType() === 'route'
-      ? !routeInfoLoading
+      ? !routeInfoLoading && routeInfo
         ? routeInfo!.reviews_aggregate.aggregate.count
         : undefined
       : queryType() === 'point'
-      ? !pointInfoLoading
+      ? !pointInfoLoading && pointInfo
         ? pointInfo!.reviews_aggregate.aggregate.count
         : undefined
       : undefined;
   const avgRating = () =>
     queryType() === 'route'
-      ? !routeInfoLoading
+      ? !routeInfoLoading && routeInfo
         ? routeInfo!.reviews_aggregate.aggregate.avg.rating
         : undefined
       : queryType() === 'point'
-      ? !pointInfoLoading
+      ? !pointInfoLoading && pointInfo
         ? pointInfo!.reviews_aggregate.aggregate.avg.rating
         : undefined
       : undefined;
