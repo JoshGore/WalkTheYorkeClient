@@ -110,6 +110,11 @@ const Signup: React.FC<SignupProps> = ({ setNewUser }) => {
       <DialogContent>
         <DialogContentText>
           Create an account to submit issues, reviews, and comments.
+          <br />
+          <b>
+            We have an intermittent issue with the login server - if login fails
+            refresh the page.
+          </b>
         </DialogContentText>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>

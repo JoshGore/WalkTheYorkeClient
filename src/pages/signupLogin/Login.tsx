@@ -116,6 +116,11 @@ const Login: React.FC<LoginProps> = ({ setNewUser }) => {
       <DialogContent>
         <DialogContentText>
           Sign in to submit issues, reviews, and comments.
+          <br />
+          <b>
+            We have an intermittent issue with the login server - if login fails
+            refresh the page.
+          </b>
         </DialogContentText>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
