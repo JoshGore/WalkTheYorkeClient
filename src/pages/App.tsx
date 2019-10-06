@@ -41,6 +41,12 @@ const App: React.FC = () => {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
     event.preventDefault();
+    TrailSelections.setTrailObject({
+      name: undefined,
+      shortName: undefined,
+      id: undefined,
+      type: undefined,
+    });
     TrailSelections.setTrailSection({ ...TrailSelections.trail });
   };
   const getCurrentSelectionName = () =>
