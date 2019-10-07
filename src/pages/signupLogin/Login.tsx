@@ -64,7 +64,7 @@ const Login: React.FC<LoginProps> = ({ setNewUser }) => {
   };
   const handleSubmit = () => {
     setSubmitting(true);
-    fetch('https://wty-hasura-auth-dev-2.herokuapp.com/login', {
+    fetch(`${process.env.REACT_APP_AUTHENTICATION_URL}/login`, {
       method: 'POST',
       body: JSON.stringify(values),
       headers: {

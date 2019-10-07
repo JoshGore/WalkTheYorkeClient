@@ -7,6 +7,7 @@ WalkTheYorkeBackend provides both a customised tile server (see https://github.c
 ```
 REACT_APP_CLIENT_HOSTNAME="host.com"
 REACT_APP_API_URL="https://api.hostname.com/v1/graphql"
+REACT_APP_AUTHENTICATION_URL="https://api.hostname.com/authentication"
 REACT_APP_TILES_URL="https://tiles.host.com/maps/trails/{z}/{x}/{y}.vector.pbf?"
 ```
 
