@@ -307,7 +307,7 @@ const SelectionDetailQueryManager: React.FC<{
         ? routeInfo!.routes_by_pk.route_multimedia
         : undefined
       : queryType() === 'point'
-      ? !pointInfoLoading && routeInfo
+      ? !pointInfoLoading && pointInfo
         ? pointInfo!.points_by_pk.point_multimedia
         : undefined
       : undefined;
