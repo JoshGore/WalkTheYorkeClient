@@ -109,7 +109,7 @@ const Map: React.FC = () => {
   useEffect(() => {
     if (Trail.trailObject.id === undefined)
       setSelectedFeatureLayerId({ layer: undefined, id: undefined });
-  });
+  }, [Trail.trailObject.id]);
   // needs to be in effect to ensure state is not stale
   useEffect(() => {
     // this function is extremely slow due to object spreading and stale props
