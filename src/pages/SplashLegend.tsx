@@ -190,6 +190,21 @@ const SplashLegend: React.FC<{
           this map. After exploring the map click the (i) icon to return to this
           screen and complete the survey. Thanks for your input!
         </Typography>
+        <Typography variant="h6">Information Sources</Typography>
+        <Typography variant="body2">
+          Trail descriptions and images have been sourced from&nbsp;
+          <Link href="https://yorkepeninsula.com.au/walk-the-yorke" target="_blank">
+            the Yorke Peninsula Tourism site
+          </Link>
+          .&nbsp;Trail Data has been provided by the&nbsp;
+          <Link href="https://yorke.sa.gov.au/" target="_blank">
+            Yorke Peninsula Council 
+          </Link>
+          .&nbsp; For more information about the trail, trail rules, and for paper maps please visit 
+          <Link href="https://www.visityorkepeninsula.com.au/walk-the-yorke" target="_blank">
+            https://www.visityorkepeninsula.com.au/walk-the-yorke
+          </Link>.
+         </Typography>
       </DialogContent>
     </Dialog>
   );
