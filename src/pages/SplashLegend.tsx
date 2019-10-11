@@ -170,26 +170,50 @@ const SplashLegend: React.FC<{
         <LegendEntry symbol={seat} description="Seat" />
         <LegendEntry symbol={infoSign} description="Info Sign" />
         <LegendEntry symbol={marker} description="Marker" />
-        <Typography variant="h6">The Research Project</Typography>
+        <Typography variant="h6">Offline Usage</Typography>
         <Typography variant="body2" gutterBottom>
-          We are researching effective cartography for tourism-focused
-          participatory applications and would love your input! The aim of this
-          project is to create a highly usable web map suitable for a range of
-          trail users, whilst also providing participatory functionality
-          allowing users to share otherwise-inaccessible information with both
-          other users and trail mangers. We would appreciate your feedback on
-          the design and interaction decisions we have made and your opinion on
-          suitability of this map. The map is still at the prototype stage so
-          there will be a few bugs.
+          GPX Files of the entire trail and of each stage are available from the
+          downloads menu. These can be used in a number of hiking apps.
+          Topographic maps can also be purchased from&nbsp;
+          <Link
+            href="https://www.visityorkepeninsula.com.au/walk-the-yorke"
+            target="_blank"
+          >
+            Yorke Peninsula Council
+          </Link>
+          &nbsp;offices in Maitland, Minlaton and Yorketown.
+        </Typography>
+        <Typography variant="h6">The Research Project</Typography>
+        <Typography variant="body2">
+          We have been developing a web map of the Walk the Yorke Trail and
+          would love your feedback! Our map is intended to be useful and usable
+          for all trail users. It also includes functions allowing you to add
+          comments, reviews, and share points with other trail users and for the
+          benefit of trail managers. We would appreciate your feedback on how
+          easy the map is to use and how effectively the design and
+          functionality of the map meets your needs. The map is still at the
+          prototype stage so please accept that there will be a few bugs, and
+          that trail information is incomplete.
         </Typography>
         <Typography variant="body2">
-          <Link href="https://www.surveymonkey.com/r/RQVKLBT" target="_blank">
+          <Link href="https://www.surveymonkey.com/r/RZ293MC" target="_blank">
             The survey (opens in new tab)
           </Link>
           &nbsp;contains several short tasks exploring the various features of
           this map. After exploring the map click the (i) icon to return to this
-          screen and complete the survey. Thanks for your input!
+          screen and complete the survey.
         </Typography>
+        <Typography variant="body2">
+          If you are part of the Yorke Peninsula Council, another organization
+          with direct links to the trail, or have specific knowledge in the
+          areas of cartography/GIS, tourism, or trail management please fill
+          out&nbsp;
+          <Link href="https://www.surveymonkey.com/r/RQVKLBT" target="_blank">
+            this survey (opens in new tab)
+          </Link>
+          &nbsp;instead.
+        </Typography>
+        <Typography variant="body2">Thanks for your input!</Typography>
         <Typography variant="h6">Information Sources</Typography>
         <Typography variant="body2">
           Trail descriptions and images have been sourced from&nbsp;
