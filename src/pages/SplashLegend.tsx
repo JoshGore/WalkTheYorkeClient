@@ -203,16 +203,6 @@ const SplashLegend: React.FC<{
           this map. After exploring the map click the (i) icon to return to this
           screen and complete the survey.
         </Typography>
-        <Typography variant="body2">
-          If you are part of the Yorke Peninsula Council, another organization
-          with direct links to the trail, or have specific knowledge in the
-          areas of cartography/GIS, tourism, or trail management please fill
-          out&nbsp;
-          <Link href="https://www.surveymonkey.com/r/RQVKLBT" target="_blank">
-            this survey (opens in new tab)
-          </Link>
-          &nbsp;instead.
-        </Typography>
         <Typography variant="body2">Thanks for your input!</Typography>
         <Typography variant="h6">Information Sources</Typography>
         <Typography variant="body2">
