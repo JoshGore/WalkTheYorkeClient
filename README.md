@@ -1,5 +1,7 @@
 # Web map front end for the Walk the Yorke Trail Research Project
+```
 npm start to build
+```
 
 consumes data served by backend defined in https://github.com/JoshGore/WalkTheYorkeBackend and schema recorded in https://github.com/JoshGore/WalkTheYorkeHasura.
 
