@@ -104,6 +104,7 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
   const openSplashLegend = () => setSplashLegendOpen(true);
   return (
     <div className={classes.container}>
+      {/*
       <div
         style={{
           display: 'inline-block',
@@ -124,6 +125,7 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
           Survey
         </Button>
       </div>
+         */}
       <div style={{ display: 'inline-block', verticalAlign: 'top', margin: 4 }}>
         <IconButton className={classes.button} onClick={handleLoginToggle}>
           <Avatar
