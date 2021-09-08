@@ -40,7 +40,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   submitComment,
   setShown,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles({});
   const [commentText, setCommentText] = useState('');
   const [isIssue, setIsIssue] = useState(false);
   const onSubmitSucessful = () => {

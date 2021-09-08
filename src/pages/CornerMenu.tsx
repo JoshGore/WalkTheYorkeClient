@@ -74,7 +74,7 @@ const CornerMenu: React.FC<CornerMenuProps> = ({
   userPointTypes,
   userPointTypesLoading,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles({});
   const User = useContext<UserContextProps>(UserContext);
   const Trail = useContext<TrailContextProps>(TrailContext);
   const handleLoginToggle = () => {

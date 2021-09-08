@@ -29,7 +29,7 @@ const Comments: React.FC<CommentsProps> = ({
   submitComment,
   loggedIn,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles({});
   return (
     <Grid className={classes.root} container>
       <Grid item xs={12}>

@@ -78,7 +78,7 @@ const NewPointMenu: React.FC<NewPointMenuProps> = ({
   userPointTypesLoading,
   userPointTypes,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles({});
   const Trail = useContext(TrailContext);
   const User = useContext(UserContext);
   const typeOptions = (userPointTypes: any[], typeId: number) => {

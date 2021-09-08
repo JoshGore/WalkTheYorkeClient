@@ -98,7 +98,7 @@ const MenuContainer: React.FunctionComponent<MenuProps> = ({
       ? setMenuMode('bottom')
       : setMenuMode('side');
   });
-  const classes = useStyles();
+  const classes = useStyles({});
   useLayoutEffect(() => {
     if (windowSize.innerHeight > windowSize.innerWidth) {
       setMenuMode('bottom');

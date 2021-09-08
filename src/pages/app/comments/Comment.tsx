@@ -76,7 +76,7 @@ const Comment: React.FC<CommentProps> = ({
   typeId,
 }) => {
   const [replyFormShown, setReplyFormShown] = useState(false);
-  const classes = useStyles();
+  const classes = useStyles({});
   const replyToComment = (event: React.MouseEvent) => {
     event.preventDefault();
     setReplyFormShown(true);

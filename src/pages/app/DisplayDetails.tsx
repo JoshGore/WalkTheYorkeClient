@@ -98,7 +98,7 @@ const BodyTextSkeleton: React.FC = () => (
 );
 
 const BodyText: React.FC<LoadingOrTextProps> = ({ loading, text }) => {
-  const classes = useStyles();
+  const classes = useStyles({});
   return loading ? (
     <BodyTextSkeleton />
   ) : (
@@ -135,7 +135,7 @@ const DisplayDetails: React.FC<BodyProps> = ({
   submitReview,
   user,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles({});
   return (
     <>
       <Carousel multimedia={multimedia} loading={loading} />
